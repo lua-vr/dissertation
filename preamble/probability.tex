@@ -1,0 +1,61 @@
+\makeatletter
+\newcommand\iid{i.i.d\@ifnextchar.{}{.\ }}
+\makeatother
+
+% measures
+\NewVariableClass\Measure[
+  define keys={
+    {tv}{command = \abs} % total variation
+  }
+]
+\NewObject\Measure\Leb{\operatorname{Leb}}
+\NewObject\Measure\Prob{\mathbb{P}}
+
+\NewObject\Fun\Emp{e}[
+  output=\Measure
+]
+
+\NewObject\Fun\PSum{S}[
+  upper={\xi},
+  define keys[1]={
+    {rv}{ clear upper, upper={#1} }
+  }
+]
+
+\NewObject\Fun\DProc{D}[
+  output=\Fun,
+  upper={\xi},
+  define keys[1]={
+    {rv}{ clear upper, upper={#1} }
+  }
+]
+
+% Weak convergence
+\newcommand{\weakto}{\Rightarrow}
+
+% Measures on a space
+\NewObject\SetFam\Meas{\mathcal{M}}
+
+% Conditional expectation
+\NewVariableClass\RandomVariable
+\NewObject\Notation{\CE}{\mathbb{E}}[
+  output=\RandomVariable,
+  set arg sep={\where}
+]
+
+%% Brownian motion
+
+% Skorokhod space
+\NewObject\SetFam\Sko{\mathbb{D}}
+
+% Wiener process space
+\newcommand{\WPS}{\Sko{[0,1]}}
+\newcommand{\CWPS}{\Cs{[0,1]}}
+
+% Measure of time function is positive
+\NewObject\Fun\pTime{\tau^+}
+
+% Wiener measure
+\newobject{wMeas}{W}
+\NewObject\Measure\WM{\gls{wMeas}}
+\NewDocumentCommand{\N}{O{0} O{1}}{\Measure{\mathcal{N}(#1, #2)}}

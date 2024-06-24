@@ -1,0 +1,53 @@
+\documentclass[main]{subfiles}
+
+\begin{document}
+
+\subsection*{Does the positive Schwarzian case has an absolutely continuous physical measure?}
+
+If the elevator hypothesis is not satisfied, then not always; let \(h\) be any \(C^2\) function with period 1. We define \(p_a(y) = y + ay(1 - y)\), which has a negative Schwarzian derivative whenever \(a \neq 0\), and \(g_a = p_a^{-1}\), which has a positive Schwarzian derivative under the same conditions. We want to find a function \(a \colon S^1 \to [-1,1]\) such that the graph of \(h\) is invariant under \(F(x,y) = (kx, g_{a(x)}(y))\), that is, \(g_{a(x)}(h(x)) = h(kx)\). This, in turn, is equivalent to \(h(x) = p_{a(x)}(h(kx)) = h(kx) + a(x)h(kx)(1 - h(kx))\). Solving, we obtain
+\begin{equation*}
+  a(x) = \frac{h(x) - h(kx)}{h(kx)(1 - h(kx))}
+\end{equation*}
+which lies in \([0,1]\) if \(h\) does not get too close to \(0\) or \(1\). An example is \(h(x) = \frac{1}{2} + \frac{1}{8}\cos(2 \pi x)\). Since \(h\) is an invariant graph for \(a\) defined this way, we know that \((\graf h)_*\Leb\) is the only physical measure of \(F\).
+
+In examples where there is a continuous invariant graph, the invariant graph of the invertible extension is never intermingled. Indeed, if \(U\) is an open set below the graph of \(F\), any sequence of preimages of a point in \(U\) converges to the lower circle (because of the negative Schwarzian of the fiber maps' inverses). In other words, every point in the open set \(\pi^{-1}(U)\) of the extension is in the lower basin of the inverse. Neither can the elevator hypothesis be satisfied, because if \(k^i x=x\) and \(f^i_x\) is strictly monotone in \((0,1)\), then \(f^i_x(h(x))=h(x)\), so \(h(x) \in \set{0,1}\), which would imply \(h \equiv 0\) or \(h \equiv 1\) because \(h\) is continuous and  \(\bigcup_{i = 1}^{\infty} F^{-i}(\set{x})\) is dense.
+
+\begin{question}
+  If the elevator hypothesis was satisfied, would the basins for \(\F[lift,inv]\) be intermingled, where \(\F[lift]\) is the invertible extension? Note that the proof for the \(x \mapsto kx\) map does not work here, particularly the part where we chose an inverse orbit \(\cdots \mapsto x_{-1} \mapsto x_{0}\) converging to one of the elevator periodic orbits, because the base map is now a bijection.
+\end{question}
+
+\subsection*{What if there are elevators?}
+\newcommand\ml{\mu_\ell}
+\newcommand\mla{\ml^a}
+\newcommand\mls{\ml^s}
+Then we can try to get somewhere. Let \(\ml\) be the limiting measure for \(F\).
+
+\begin{lemma}
+  If \(\eta\) is an invariant measure that projects down to the ergodic measure \(\mu\) on the base, then \(\eta\) is a convex combination of \(\nu_0\), \(\nu_1\) and \(\ml\).
+\end{lemma}
+
+\begin{corollary}
+  \(\ml\) is either absolutely continuous or singular with respect to Lebesgue.
+\end{corollary}
+
+\begin{proof}
+  By the Lebesgue decomposition theorem, we can write \(\ml = \mla + \mls\), where \(\mla \ll \Leb\) and \(\mls \perp \Leb\), and the invariance of \(\ml\) yields \(\mla + \mls = \F[pf]\mla + \F[pf]\mls\). Since \(F\) is a local diffeomorphism, for any measurable \(A\), \(\Leb(A)=0 \Leftrightarrow \Leb(F(A))=0 \Leftrightarrow \Leb(F^{-1}(A))=0\), so \(\Leb(A)=0\) implies \(\F[pf]\mla(A)=0\), therefore \(\F[pf]\mla \ll \Leb\). Similarly, choosing \(A\) such that \(\Leb(A)=0\) and \(\mls(A^\complement)=0\), then \(\Leb(F(A))=0\) and \(\F[pf]\mls(F(A)^\complement)=\mls(F^{-1}(F(A))^\complement) \leq \mls(A^\complement)=0\). By the uniqueness of the decomposition, \(\mls\) and \(\mla\) are invariant measures. They also project down to a multiple of the ergodic  measure on the base. Since \(\nu_0\) and \(\nu_1\) are singular, the lemma above applied to \(\mla\) implies that either \(\mla =0\) or \(\mla = \mls\).
+\end{proof}
+
+Below is the sketch of an idea that could work but I'm not sure.
+\begin{lemma}
+  If \(\ml\) is singular and \(\Lyap_{\mathcal{A}_0},\Lyap_{\mathcal{A}_1}>0\), then \(\supp \ml \subseteq S^1 \times (0,1)\).
+\end{lemma}
+This would contradict the presence of an elevator by an argument very similar to the intermingled basins. More precisely, if there is an elevator, any closed invariant set must contain at least one of the boundaries.
+
+% Now, I don't know if the hypothesis below is true, but I could not think of any counterexample. Since Ali mentioned the Avila-Viana invariance principle, which states something along those lines, perhaps it could be true.
+
+% \begin{hypothesis}
+%   Let \(\mu_\ell\) be the limiting measure for \(F\), and \(\set{\mu_\ell^x}_{x \in S^1}\) its disintegration along the the vertical segments of the cylinder. Then \(x \mapsto \mu_\ell^x\) is continuous.
+% \end{hypothesis}
+
+% Now, suppose \(\ml\) is singular. This means there is a set  \(A\) with \(\ml(A)=1\) but  \(\Leb(A)=0\). Since \(\ml\) is invariant and \(\F[pf]\Leb \ll \Leb\) (\(F\) is a local diffeomorphism), we may replace \(A\) by \(\limsup_{i \to \infty} F^{-i}(A)\), and now it's invariant and still satisfies the conditions above. Given \(\varepsilon>0\), let \(K \subseteq A\) be an invariant compact set with \(\ml(K)>1 - \varepsilon\).
+
+
+
+\end{document}

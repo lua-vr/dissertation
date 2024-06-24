@@ -1,0 +1,5 @@
+\newcommand\replicate[2]{%
+  \ifnum#1>0 #2%
+    \expandafter\replicate\expandafter{\number\numexpr#1-1}{#2}%
+  \fi
+}%

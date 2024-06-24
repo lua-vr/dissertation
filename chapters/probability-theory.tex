@@ -1,0 +1,190 @@
+\documentclass[../main]{subfiles}
+ 
+\begin{document}
+
+\chapter{Some categorical language}
+
+Perhaps the main charm of Category Theory is that of framing definitions and results throughout mathematics in a language that is both general and precise. For this reason I like to learn it as a hobby, and have chosen to state many of the results in these appendices using it. My goal is not to make the text harder to understand, but instead, to give a more conceptual point of view that (understandably) is not commonly found in the dynamical systems literature, but which I personally find interesting and rich. Some benefits from this approach will be scattered around the text. Among them, I can highlight the use formal diagrams (\emph{string diagrams}) to reason about probability models known as Markov processes (in \cref{undefined}).
+
+Nowadays category theory has made its way into many applied fields, most remarkably computer science in the form of programming languages.
+
+\chapter{Measure and probability}
+
+
+refs
+\begin{enumerate}
+  \item\fullcite{bogachevMeasureTheory2007}
+  \item\fullcite{andersenIntroductionMeasuresInfinite}
+\end{enumerate}
+
+\section{The category of probability spaces}
+
+\subsection{Products and limits}
+We can construct a product measure
+
+\section{Random variables}
+\subsection{Independence and distribution}
+\section{Weak convergence}
+
+\begin{theorem}[Portmanteau]\label{thm:portmanteau}
+  The following are equivalent:
+  \begin{enumerate}[i., left=0pt, topsep=3pt]
+    \item \(\mu_n \weakto \mu\);
+    \item \(\lim_{n \to \infty} \mu_n(\phi) = \mu(\phi)\) for all Lipschitz functions \(\phi\);
+    \item \(\liminf_{n \to \infty} \mu_n(U) \geq \mu(U)\) for all open sets \(U\);
+    \item \(\limsup_{n \to \infty} \mu_n(F) \leq \mu(F)\) for all closed sets \(F\);
+    \item \(\lim_{n \to \infty} \mu_n(A) \leq \mu(A)\) for all continuity sets \(A\) of the measure \(\mu\).
+  \end{enumerate}
+\end{theorem}
+
+\section{Ergodic theorems}
+\subsection{Hewitt-Savage zero-one law}
+
+\section{Brownian motion}
+\subsection{The space of càdlàg functions}
+
+The space \(\CWPS\) of continuous functions does not let us talk about processes that contain discontinuities, or even how discontinuous processes can converge in a suitable way to continuous ones. This is important in our setting to deal with the convergence of certain processes induced by discrete dynamics to the Brownian motion, which is continuous almost surely.
+
+For this, we shall introduce the space of \textit{càdlag} functions, or Skorohod space. This is the space of functions whose discontinuities are of the \textit{first kind}, that is, both lateral limits exist, and whose value at the point is equal to the right limit:
+\begin{equation*}
+  \Sko{[0,1]} = \set[par=\Big]{ f \colon [0,1] \to \RR \where \forall t, \lim_{s \to t^-}x(s) \text{ exists and} \lim_{s \to t^+}x(s) = x(t) }.
+\end{equation*}
+
+We want to put a metric on this space with the property that functions are close together if their values are close to each other uniformly, but also allowing small perturbations in the parametrization of time. 
+
+\begin{definition}[Skorohod topology]
+  Let \(\Lambda\) be the set of strictly increasing continuous functions from \([0,1]\) to itself. For \(f,g \in \WPS\), we define
+  \begin{equation*}
+    d(f,g) = \inf_{\lambda \in \Lambda} \max\set[par = \big]{ \lVert \lambda - \Id \rVert_{\infty}, \lVert f - g \circ \lambda \rVert_{\infty}}.
+  \end{equation*}
+\end{definition}
+The distance above defines a metric on \(\WPS\), whose topology is called the Skorohod topology. Since \(d(f,g) \leq \lVert f - g \rVert_{\infty}\), the Skorohod topology is coarser than the uniform topology.
+
+\begin{proposition}
+  The restriction of the Skorohod topology to \(\CWPS\) coincides with the uniform topology.
+\end{proposition}
+\begin{proof}
+  Since the Skorohod topology is coarser, it remains to show that if \(f, f_n \in \CWPS\) and \(d(f_n,f) \to 0\), then \(\lVert f_n - f \rVert_{\infty} \to 0\). But note
+  \begin{equation*}
+    \lVert f_n - f \rVert_{\infty} \leq \inf_{\lambda \in \Lambda} \sqpar{\lVert f_n - f \circ \lambda \rVert_{\infty} +  \lVert f \circ \lambda - f \rVert_{\infty}} \to 0
+  \end{equation*}
+  by the convergence assumption and uniform continuity of \(f\).
+\end{proof}
+
+\subsection{The Wiener measure and arcsine law}
+
+\todo{insert properties (and construction?) of the Wiener measure \(\WM \in \Meas[1](\WPS)\).}
+
+Let \(\pTime \colon \WPS \to \RR\) be the observable that returns the proportion of time its argument is positive, that is, \(\pTime{f} = \Leb \{ x \in [0,1] : f(x) > 0
+\}\).
+
+\begin{lemma}\label{lem:ptime-continuous}
+  \(\pTime\) is measurable and continuous in a full \(W\)-measure set.
+\end{lemma}
+
+\begin{proof}
+  \todo{adapt this to \(\WPS\)}
+  This is proved in~\cite[appendix M15]{billingsleyConvergenceProbabilityMeasures1999}. Since the normal distributions are non-atomic and for every \(t \in [0,1]\), \(W_t\) has normal distribution, \(W(\{ f \in \WPS : f(t) = 0 \}) = 0\) for all \(t\), so by Fubini, \(\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\) for \(W\)-almost every \(f\). It remains to check that \(\pTime\) is continuous at such points \(f \in W\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) uniformly, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere, so by the DCT the same is true of their respective integrals.
+\end{proof}
+
+\begin{theorem}[Arcsine law]\label{thm:arcsine-brownian}
+  For \(\alpha \in [0,1]\),
+  \[\pTime[spar,pf]W([0,\alpha]) = \frac{2}{\pi} \arcsin \sqrt{\alpha}.\]
+\end{theorem}
+
+\begin{theorem}[Forgery theorem]\label{thm:forgery}
+  If \(f \in \CWPS\) and \(f(0) = 0\), then every neighborhood of \(f\) has positive Wiener measure.
+\end{theorem}
+
+\subsection{Weak invariance principles}
+
+We will fix a probability space \((\Omega, \mathcal{F}, \Prob)\) for the rest of this section.
+Given a sequence \(\xi = (\xi_1,\xi_2,\dots)\) of random variables defined on \(\Omega\), we can define their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and a sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
+\[\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}},\]
+obtained by appropriately scaling the partial sums of the random variables up to some iterate \(n\).
+
+Remarkably, for many classes of sequences \(\xi\), their corresponding processes \(\DProc[n]\) converge in some way to the Brownian motion --- we denote by an \emph{invariance principle} a result of this form. Perhaps the best known invariance principle is the Donsker's theorem, which is a \emph{weak} invariance principle since it asserts convergence in the weak topology.
+
+\begin{theorem}[Donsker]\label{thm:donsker}
+  If \(\xi \subseteq L^2(\Prob)\) is a sequence of \iid{} variables with mean zero and variance \(1\), then the measures \(\DProc[n,spar,pf] \Prob\) converge weakly to the Wiener measure. In other words, for every measurable continuous function \(\varphi \colon \WPS \to \mathbb{R}\),
+  \[\int \varphi \circ \DProc[n] \;d\Prob \to \int \varphi \;dW.\]
+\end{theorem}
+
+The motivation for looking into invariance principles is that they allow transferring certain results from Brownian motions to the sequence of partial sums \(S^{\xi}_n\). In our case, the result we are interested in is the arcsine law, and since we know from \cref{lem:ptime-continuous} that \(\pTime\) is continuous a.e., weak convergence is enough:
+
+\begin{lemma}\label{lem:weak-arcsine}
+  Suppose \(\xi \subseteq L^2(\Prob)\) is such that \(\DProc[n,spar,pf]\Prob \weakto W\). Then the average of the time in which the random walk \(S_n^{\xi}\) is above \(M \in \RR\) converges to an arcsine distribution, in the sense that
+  \begin{equation*}
+    \lim_{n \to \infty}\Prob[par=auto]{\set[par=auto]{\omega \in \Omega \where \frac{1}{n} \#\set{ 1 \leq i \leq n \where S^{\xi}_n(\omega) > M } \leq \alpha}} = \frac{2}{\pi} \arcsin \sqrt{\alpha}.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Writing \(\pTime[n]{\omega} = \frac{1}{n} \#\set{ 1 \leq i \leq n \where S^{\xi}_n(\omega) > M }\), the left-hand side can be rewritten as \(\lim_{n \to \infty}\pTime[n,spar,pf]\Prob{[0,\alpha]}\). Set \(c_n = M/\sqrt{n}\), and note that
+  \[\pTime[n]{\omega} =\frac{1}{n} \#\set[par = auto]{ 1 \leq i \leq n \where \frac{S^{\xi}_i(\omega)}{\sqrt{n}} - \frac{M}{\sqrt{n}} >0 } = \pTime{\DProc[n,rv = \xi]{\omega} - c_n}.\]
+  Since by \cref{thm:arcsine-brownian} we know \(Z = \pTime[spar,pf]W\) is equivalent to the Lebesgue measure on \([0,1]\), intervals are continuity sets for it. By the weak convergence assumption and continuity of \(\pTime\), we know \(\Fun{\pTime \circ \DProc[n,rv = \xi]}[spar,pf]\Prob\weakto Z\), and since \(c_n \to 0\) (as a sequence in \(\WPS\)), in fact \(\Fun{\pTime \circ (\DProc[n,rv = \xi] - c_n)}[spar,pf]\Prob\weakto Z\). By Portmanteau, this means 
+  \[\lim_{n \to \infty}\pTime[n,spar,pf]\Prob{[0,\alpha]} = \lim_{n \to \infty}\Fun{\pTime \circ (\DProc[n,rv = \xi] - c_n)}[spar,pf]\Prob{[0,\alpha]} = \frac{2}{\pi}\arcsin \sqrt{\alpha}.\]
+\end{proof}
+
+\begin{lemma}\label{lem:avoid-compacts}
+  Under the same hypothesis as \cref{lem:weak-arcsine}, for all \(M \in \RR\) and for \(\Prob\)-almost every \(\omega \in \Omega\),
+  \begin{equation*}
+    \lim_{n \to \infty}\frac{1}{n} \#\set{ 1 \leq i \leq n \where S_i^{\xi}(\omega) \in[-M,M] } = 0.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Just like in the previous proof, write \(\tau_n(\omega) = \frac{1}{n}\# \set{1 \leq i \leq n : \where S_n^{\xi}(\omega) \in[-M,M] }\), and then note
+  \begin{equation*}
+    \tau_n(\omega) =\pTime(\DProc[n,rv = \xi]{\omega} + c_n) - \pTime(\DProc[n,rv = \xi]{\omega} - c_n).
+  \end{equation*}
+  where \(c_n = M/\sqrt{n}\). So
+  \begin{equation*}
+    \lim \int \tau_n \;d\Prob = \int \pTime \;dW -  \int \pTime \;dW = 0.
+  \end{equation*}
+  \todo{I haven't figured out how to continue from here, or if the statement is true. (I think it certainly is)}
+\end{proof}
+
+\subsubsection{Ergodic Martingale Differences}\label{sec:ergod-mart-diff}
+
+Donsker's theorem is far from being the most general result of its kind. In fact, it can be generalized to a weak invariance principle for ergodic martingale difference sequences, as stated below~\cite[see][theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
+
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is invariant by the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\).
+\end{definition}
+
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is ergodic for the left shift. 
+\end{definition}
+
+\begin{definition}
+  Every sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables generates a filtration \(\mathcal{F}_n = \sigma(\xi_1,\dots,\xi_n)\) of \(\mathcal{F}\). We say that \(\xi\) is a \emph{martingale difference sequence} if for all \(n\),
+  \begin{equation*}
+    \CE[\Prob]{\xi_{n}, \mathcal{F}_{n - 1}} = 0.
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}\label{thm:donsker-martingale}
+  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
+\end{theorem}
+
+\subsection{Reverse martingale difference sequences}
+
+In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^i)_{i \geq 0}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\), especially if \(f\) is not invertible. This process, however, cannot possibly be a martingale difference sequence unless \(\varphi = 0\) because \(\varphi \circ f^i\) is measurable for the \(\sigma\)-algebra \(f^{-i}(\mathcal{F})\), which is non-increasing. Nevertheless, if \(\mu\) is a stationary measure for \(f\), we can always look into the invertible extension to get an associated process which satisfy the martingale conditions.
+
+Consider the space \(\RR^{\NN}\) with the product \(\sigma\)-algebra \(\mathcal{H} = \mathcal{B}^{ \otimes \NN}\) and the measure \(\nu = \xi_* \mu\). This measure is invariant for the left shift \(\sigma \colon \RR^{\NN} \to \RR^{\NN}\) since \(\sigma \circ \xi = (\varphi \circ f^{i + 1})_{i \geq 0} = \sigma \circ f\), so \(\sigma_*\nu = (\xi \circ f)_*\mu = \nu\). Since \(\mathcal{H}\) coincides with the Borel \(\sigma\)-algebra, the construction of the invertible extension (see \cref{sec:invert-extens}) gives us a stationary measure \(\tilde \nu \in \Meas{\RR^{\ZZ}}\) for the invertible shift, which we shall call \(\tilde \sigma\), whose projection \(\pi_* \tilde \nu\) by \(\pi \colon \RR^{\ZZ} \to \RR^{\NN}\) is equal to \(\nu\). The measure \(\tilde \nu\) is ergodic if and only if \(\nu\) is.
+
+We can now consider the inverted process \(\tilde \xi = (\pi_{-i})_{i \geq 0}\) with respect to this new probability space \((\RR^{\ZZ}, \tilde \nu)\), and \(\tilde \xi\) will be a martingale difference sequence if % TODO notation  
+\begin{equation*}
+  \CE[\tilde \nu]{\pi_{-n}, \mathcal{B}_{ - n + 1}} = 0. 
+\end{equation*}
+Since \(\tilde \sigma\) is surjective, this is equivalent to
+\begin{equation*}
+  \CE[\tilde \nu]{\pi_{0}, \mathcal{B}_{1}} = 0,
+\end{equation*}
+which ultimately translates to \(\CE[\mu]{\varphi, f^{-1}(\mathcal{F})} = 0\). Whenever this happens, we say \(\xi\) is a \textit{reverse martingale difference sequence}. If \(\mu\) is ergodic for \(f\), since this implies that \(\tilde \xi\) is a stationary ergodic martingale difference sequence, we get \cref{thm:donsker-martingale} for \(\tilde \xi\). This, in turn, also implies the weak invariance principle for the original \(\xi\), since due to stationarity, \(\DProc[rv = \tilde \xi, n,spar, pf]\tilde \nu = (\DProc[rv = \tilde \xi, n] \circ \tilde \sigma^n)_*\tilde \nu = \DProc[n,rv = \xi, spar,pf]\mu\).
+
+\begin{corollary}\label{cor:donsker-martingale}
+  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic reverse martingale difference sequence for which \(\sigma = \lVert \xi_1 \rVert_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
+\end{corollary}
+
+\end{document}

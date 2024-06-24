@@ -1,0 +1,35 @@
+\documentclass[b5paper]{article}
+
+\usepackage{import}
+
+\makeatletter
+\newcommand\keeppath[2]{% #1=\input or \include. #2=file path and name
+  \begingroup
+  \ifx\input#1\relax \def\7{\noexpand\import}\else
+  \ifx\include#1\relax \def\7{\noexpand\includefrom}\else
+   \def\7{\noexpand#1}\fi\fi % probably should be error
+  \filename@parse{#2}% get \filename@area, \filename@base, \filename@ext
+  \edef\8{\7{\filename@area}{\filename@base %
+      \ifx\relax\filename@ext\else .\filename@ext\fi}}%
+  \expandafter\endgroup\8}
+\makeatother
+
+\keeppath\input{../../preamble}
+
+\begin{document}
+Here's why the item (iii) in prop 6.5 of~\cite{crovisierEmpiricalMeasuresPartially2020} cannot mean that the empirical measures
+\begin{equation*}
+  e_n(x) = \frac{1}{n}(\delta_{X_1(x)} + \cdots + \delta_{X_n(x)})
+\end{equation*}
+converge weakly to the Wiener measure \(W\), where
+\begin{equation*}
+  X_n(x)(t) = \frac{1}{\sqrt{\sigma \cdot n}} \int_0^{nt} \phi(A^{\floor{s}}(x)) \;ds.
+\end{equation*}
+By contradiction, suppose \(e_n(x) \weakto W\) for \(m\)-almost every \(x \in \mathbb{T}^{2}\). We already know that \((X_n)_*m \weakto W\) from the weak invariance principle. Let
+\begin{equation*}
+  U = \{ f \in C[0,1] : \lVert f \rVert_{\infty} < 1/10 \}
+\end{equation*}
+which is an open set. By the forgery theorem, \(W(U) > 0\).
+
+\printbibliography
+\end{document}

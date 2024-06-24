@@ -1,0 +1,32 @@
+\documentclass[main]{subfiles}
+
+\usepackage{hwemoji}
+
+\begin{document}
+
+\newcommand{\Oss}{\Sigma_2^+}
+
+\chapter*{\fontsize{50}{60} 🐈}
+
+Context: \(\mu \in \Meas{\Oss}\) is the measure on the base, \(\sigma \colon \Oss \to \Oss\) the one-sided shift, \(f_1,f_2 \colon I \to I\) orientation preserving, monotone diffeomorphisms of \(I = [0,1]\) and \(F(w,x) = (\sigma(w),f_{w_0}(x))\). Suppose the separating graph \(\xi \colon \Oss \to I\) exists, and that the Lyapunov exponents at the boundaries are negative.
+
+Let \(S = \supp (\graph\xi_* \mu)\). Note that there must exist \((w,y) \in S\) with \(y \notin \set{0,1}\), because \(\graph\xi_*\mu(\Oss \times \set{0,1}) = 0\). Let \(\omega \in \Oss\) with the property \(\set{f_w^{-i}(y)}_{i \in \mathbb{N}}\) is dense. By this, I mean
+\begin{equation*}
+  \set{ f_{\omega_n}^{-1} \circ f_{\omega_{n - 1}}^{-1} \circ \cdots \circ f_{\omega_0}^{-1}(y) \where n \in \mathbb{N} }[closure] = I.
+\end{equation*}
+This is possible because the non-resonant conditions holds if, and only if, it holds for \(f_1^{-1}, f_2^{-1}\) (a calculation checks this). The set \(S\) is invariant because \(F\) is open and non-singular. This means \(F^{-1}(S) \subseteq S\), so for all \(n \in \mathbb{N}\)
+\begin{equation*}
+  ((\omega_n, \omega_{n - 1},\dots,\omega_0, w_0, w_1,\dots), f_{\omega_n}^{-1} \circ f_{\omega_{n - 1}}^{-1} \circ \cdots \circ f_{\omega_0}^{-1}(y)) \in S.
+\end{equation*}
+The hypothesis on \(\omega\) then implies \(\pi_I(S)\) is dense in \(I\).
+
+Let \(C \times U\) be a product of a cylinder and an open set in \(I\). Let \(N\) be so big that \(\sigma^N(C) = \Oss\). Note  that \(F^N(C \times U) = \Oss \times V\), where \(V \subseteq I\) is open (\(F\) is open). In fact, if \(C = [A_0, \dots, A_N]\) then
+\begin{equation*}
+  V = \bigcup_{(a_0,\dots,a_N) \in (A_0, \dots, A_N)} f_{a_N} \circ \cdots \circ f_{a_0}(U).
+\end{equation*}
+Indeed, if \(w = (w_1,w_2\dots) \in \Oss\) and \(x = f_{a_N} \circ \cdots \circ f_{a_0}(y)\) where \(y \in U\), we have \[F^N((a_0,\dots,a_N,w_1,w_2,\dots),y) = (w,x)\]
+so \(\Oss \times V \subseteq F^N(C \times U)\). Conversely, if \((w,x) \in F^N(C \times U)\), then there are \(a \in C\) and \(y \in U\) such that \(\sigma^N(a) = w\) and \(f_a^N(y) = x\). In other words, \(f_{a_N} \circ \cdots \circ f_{a_0}(y) = x\), so \(x \in V\) and the equality is established.
+
+Thus, \(F^N(C \times U) \cap S \neq \varnothing\). Since \(S\) is invariant, this shows \(C \times U \cap S \neq \varnothing\).
+
+\end{document}

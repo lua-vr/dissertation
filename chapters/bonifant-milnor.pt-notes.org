@@ -1,0 +1,16 @@
+
+* bonifant-milnor.pt
+:PROPERTIES:
+:org-remark-file: bonifant-milnor.pt.tex
+:END:
+
+** (não necessariamente uniforme)
+:PROPERTIES:
+:org-remark-id: 7f74c346
+:org-remark-label: nil
+:org-remark-beg: 29880
+:org-remark-end: 29910
+:org-remark-link: [[file:bonifant-milnor.pt.tex::346]]
+:org-remark-original-text: (não necessariamente uniforme)
+:END:
+é verdade isso?

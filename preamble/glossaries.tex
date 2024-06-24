@@ -1,0 +1,12 @@
+\usepackage[noredefwarn, sort=use]{glossaries}
+\usepackage{glossary-mcols}
+\setglossarystyle{mcolindex}
+\renewcommand{\glspostdescription}{\dotfill}
+
+\newglossary[ob-glg]{objects}{ob-gls}{ob-glo}{Objects}
+\newcommand*{\newobject}[3][]{%
+  \newglossaryentry{#2}{type=objects,%
+    name={$#3$},text={#3},description={},#1}%
+}
+
+\makeglossaries

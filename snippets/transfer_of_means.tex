@@ -1,0 +1,108 @@
+\documentclass[b5paper]{memoir}
+
+\usepackage{import}
+
+\import{../}{preamble}
+
+\begin{document}
+
+% \begin{lemma}
+%   Suppose \((a_j)_j \in \{ 0,1 \}^{\NN}\) is such that \(\frac{1}{n}\sum_{j = 0}^{n - 1}a_j \to \gamma\) where \(\gamma \in (0,1)\). Then
+%   \[\liminf_n\frac{1}{n}\sum_{j = 0}^{n - 1}|a_j - a_{j - 1}| > 0.\]
+% \end{lemma}
+
+% \begin{proof}
+%   Write
+%   \begin{equation*}
+    
+%   \end{equation*}
+  
+%   If the limit infimum above were to equal zero, then there would be a subsequence \(n_k\) where
+%   \begin{equation*}
+%     \frac{1}{n_k} \sum_{j = 0}^{n_k - 1} \lvert a_j - a_{j - 1} \rvert \to 0
+%   \end{equation*}
+% \end{proof}
+
+\begin{hypothesis}[Very weak arcsine law]
+  There exists \(\Omega^+, \Omega^- \subseteq X\) of positive measure such that for every \(\xi \in \Omega^+\), there is some \(y_{\xi}^+ < 1\) with \(U(\xi,y_{\xi}^+) > 0\) and for every \(\xi \in \Omega^-\), there is some \(y_{\xi}^- > 0\) with \(L(\xi,y_{\xi}^-) < 1\).
+\end{hypothesis}
+
+\begin{hypothesis}[No accumulation in the middle]
+  There is a positive set of \((\xi,y) \in X \times I\) where the time averages
+  \begin{equation*}
+    \tau(K,n) = \frac{1}{n}\sum_{j = 0}^{n - 1} 1_K(f_{\xi}^{(j)}(y))
+  \end{equation*}
+  converge to zero for every compact \(K \Subset (0,1)\).
+\end{hypothesis}
+
+\begin{hypothesis}[Bounded steps]\label{h:bounded}
+  There exists \(\varepsilon_0 > 0\) and a compact \(K_0 \Subset (0,1)\) such that if \(m,n\) satisfy \(f_{\xi}^{(m)}(y) < \varepsilon_0\) and \(f_{\xi}^{(n)}(y) > 1 - \varepsilon_0\), then there is some \(k \in [m,n]\) for which \(f_{\xi}^{(k)}(y) \in K_0\). 
+
+  \ohno{can this be weakened in such a way it works with ``integrable'' steps? perhaps that it falls within \(K\) with positive probability? note that currently this \emph{really} assumes steps are bounded...}
+\end{hypothesis}
+
+\begin{lemma}
+  Assume \cref{h:bounded}, and suppose that \((\xi,y) \in X \times I\) is such that for every compact \(K \Subset (0,1)\), the time averages
+  \begin{equation*}
+    \tau(K,n) = \frac{1}{n}\sum_{j = 0}^{n - 1} 1_K(f_{\xi}^{(j)}(y))
+  \end{equation*}
+  converge to zero. Then \(L(\xi,y), U(\xi,y) \in \{ 0,1 \}\).
+\end{lemma}
+\begin{proof}
+  We will show the claim for the limit infimum, as the claim for the supremum is completely analogous.
+
+  Suppose there is some \(0 < \delta < \varepsilon_0\) such that \(L(\xi,y) \in (2\delta, 1 - 2\delta)\), and define \(K = [\delta,1 - \delta] \Subset (0,1)\). Let \(n_k\) be a subsequence with
+  \begin{equation*}
+    \inf_{k \to \infty}U_{n_k}(\xi,y) = L(\xi,y)
+  \end{equation*}
+  and define the sequences \((a_j)_{j \in \NN},(b_j)_{j \in \NN} \subseteq \{ 0,1 \}\) by
+  \[a_j =
+    \begin{cases}
+      1 & \text{if } f_{\xi}^{(j)}(y) \geq 1 - \delta\\
+      0 & \text{otherwise},
+    \end{cases}\qquad
+    b_j = 
+    \begin{cases}
+      0 & \text{if } f_{\xi}^{(j)}(y) \in K\\
+      1 & \text{otherwise}.
+    \end{cases}
+  \]
+  Since \(a_j + \delta \geq b_j f_{\xi}^{(j)}(y)\) and
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{1}{n} \lvert \{ j \in \{0,\dots,n - 1\} : f_{\xi}^{(j)}(y) \in K \} \rvert = 0,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \liminf_{k \to \infty}\frac{1}{n_k} \sum_{j = 0}^{n_k - 1}(a_j + \delta) \geq 
+    \lim_{k \to \infty}\frac{1}{n_k} \sum_{j = 0}^{n_k - 1}b_jf_{\xi}^{(j)}(y) = L(\xi,y).
+  \end{equation*}
+
+\end{proof}
+
+
+\ohno{OLD}
+
+\subsection{Sketch}
+\begin{lemma}
+  Suppose there is an absolutely continuous strictly increasing function \(\varphi \colon \I \to \mathbb{R}\) with \(U_{\varphi} \equiv \varphi(1)\) and \(L_{\varphi} \equiv \varphi(0)\). Then any continuous monotone function also has the same property.  
+\end{lemma}
+
+\begin{proof}
+  idea: take a subsequence with varphi Cesaro sum converging to sup. since functions are increasing, the average being close to sup means that most ys have to be as close as we like to 1 (due to Markov inequality). this in turn means that there is a subsequence of this subsequence such that the psi averages converge to 1.
+%   Let \(\psi\) be another function with the hypothesized properties. Note that WLOG we can assume \(\inf \psi = \inf \varphi = 0\) and \(\sup \psi = \sup \varphi = 1\), so it suffices to show \(U_{\psi} = 1\), as the conclusion \(L_{\psi} = 0\) follows analogously.
+
+%   Let \(\Omega\) be the full measure set where \(U_{\varphi} \equiv \sup \varphi\). Given \((x,y) \in \Omega\), take a sequence \(n_k \to \infty\) such that
+%   \begin{equation*}
+%     \lim_{k \to \infty}\frac{1}{n_k} \sum_{i = 0}^{n_k - 1} \varphi(\pi_2(F^i(x,y))) = 1
+%   \end{equation*}
+%   Since \(\psi\) is increasing, given \(\eta < 1\) we can write \(\psi ^{-1}((\eta, 1)) = (\delta, 1)\) for some \(\delta < 1\).
+\end{proof}
+
+\begin{lemma}
+  The function \(\gamma \colon \I \to \mathbb{R}\) is such that \(U_{\gamma} \equiv \infty\) and \(L_{\gamma} \equiv - \infty\).
+\end{lemma}
+\begin{proof}
+  idea: take locally constant function approximating
+\end{proof}
+
+\end{document}

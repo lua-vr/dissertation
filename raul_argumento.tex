@@ -1,0 +1,75 @@
+\documentclass[b5paper]{report}
+
+\input{preamble}
+
+\begin{document}
+
+Let \((X,\mathbb{P})\) be a probability space and \(F \colon X \times I \circlearrowleft\) a skew product defined by
+\[F(x,y) = (g(x),f_x(y))\]
+where \(g \colon X \circlearrowleft\) is a measure-preserving map.
+
+For a bounded function \(\varphi \colon I \to \mathbb{R}\), we denote
+\begin{equation*}
+  U_{\varphi}(x,y) = \limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}\varphi(\pi_2(F^i(x,y))).
+\end{equation*}
+Since \(\varphi\) is bounded, \(U_{\varphi}(x,y) = U_{\varphi}(F(x,y))\) everywhere. Indeed, since for any pair of sequences \((r_n)_n,(s_n)_n \subseteq \mathbb{R}\) we have
+\begin{equation*}
+  \lvert \limsup r_{n} - \limsup s_n \rvert \leq \limsup\, \lvert r_n - s_n \rvert,
+\end{equation*}
+we conclude that
+\begin{align*}
+  \lvert U_{\varphi}(x,y) - U_{\varphi}(F(x,y)) \rvert \le \limsup_{n \to \infty} \frac{1}{n} \lvert \varphi(y) - \varphi(\pi_2(F^n(x,y))) \rvert = 0.
+\end{align*}
+
+For a fixed bounded \(\varphi\), suppose the following is true:
+\begin{hypothesis}\label{h:1}
+  There exists a measurable function \(\ell \colon I \to \mathbb{R}\) and a family \(\{\Omega_y\}_{y \in I}\) of subsets of \(X\), each with full measure \(\mu(\Omega_y) = 1\), such that \(U_{\varphi}(x,y) = \ell(y)\) for all \(x \in \Omega_y\).
+\end{hypothesis}
+
+Even if \(U_{\varphi}\) is invariant for every point, it's not clear if \(\ell(f_x(y)) = \ell(y)\) a.e. (let alone for every \(y\)) because we're dealing with the set \(\{ (x,y) : g(x) \in \Omega_{f_{x}(y)} \}\) (which presumably could have small measure), so the argument of \cite{bonifantSchwarzianDerivativesCylinder2008} seems incomplete. If the pushforward of Lebesgue by the \(f_x\) are absolutely continuous to Lebesgue, however, we're good: 
+
+\begin{lemma}\label{l1}
+  Suppose \(f_xm \ll m\) for \(\mathbb{P}\)-a.e.\@ \(x \in X\). Then there exists a set \(\Omega \subseteq X \times I\) with full measure \((\mathbb{P}\otimes m)(\Omega) = 1\) where \(\ell(f_x(y)) = \ell(y)\) for all \((x,y) \in \Omega\).
+\end{lemma}
+
+\begin{proof}
+  Let \[\Omega = \{ (x,y) : x \in \Omega_y \land g(x) \in \Omega_{f_x(y)} \}.\] It's clear from the definition of the \(\{ \Omega_y \}_{y \in I}\), combined with the fact \(U_{\varphi}\) is invariant everywhere, that \(\ell(f_x(y)) = \ell(y)\) in the set \(\Omega\). Also,
+  \allowdisplaybreaks
+  \begin{align*}
+    (\mathbb{P} \otimes m)(\Omega^c) &\leq \underbrace{(\mathbb{P} \otimes m) (\{ (x,y) : x \notin \Omega_y \})}_{0\text{ by Fubini}} +\, (\mathbb{P} \otimes m)(\{ (x,y) : g(x) \notin \Omega_{f_x(y)} \})\\
+                 &=  \int_X m (\{ y : g(x) \notin \Omega_{f_x(y)} \}) \;d \mathbb{P}(x)\\
+                 &=  \int_X ((f_x)_*m) (\{ y : g(x) \notin \Omega_{y} \}) \;d \mathbb{P}(x).
+  \end{align*}
+  Since \(g_* \mathbb{P} = \mathbb{P}\), we have \[(\mathbb{P} \times m)(\{ (x,y) : g(x) \notin \Omega_y \}) =(\mathbb{P} \times m)(\{ (x,y) : x \notin \Omega_y \}) = 0.\]
+  By Fubini, the function \(x \mapsto m(\{ y : g(x) \notin \Omega_y \})\) is \(\mathbb{P}\)-a.e.\@ equal to zero. Then the hypothesis \((f_x)_*m \ll m\) implies that \(x \mapsto (f_x)_*m(\{ y : g(x) \notin \Omega_y \})\) is zero \(\mathbb{P}\)-a.e., so the integral above is zero.
+\end{proof}
+
+\begin{corollary}
+  If for \(\mathbb{P}\)-a.e. \(x \in X\) there is some \(\sigma\)-finite invariant measure \(\mu_x\) for \(f_x\) such that \(m \sim \mu_x\), then a set \(\Omega\) as in \cref{l1} exists.
+\end{corollary}
+
+\begin{proof}
+  By Radon-Nikodym, write \(m = w \mu_x\). Then \((f_x)_*m = (w \circ f_x)\mu_x \ll m\).
+\end{proof}
+
+Now we will see the assumptions of the lemma are satisfied on the zero-Schwarzian context of \cite{bonifantSchwarzianDerivativesCylinder2008}, where each \(f_x \colon I \circlearrowleft\) is an orientation-preserving diffeomorphism with zero Schwarzian derivative. Indeed, this condition means that there exists a measurable function \(p \colon X \to \mathbb{R}\) such that each \(f_x = \gamma ^{-1} \circ h_x \circ \gamma\) is conjugate to the translation \(h_x(t) = t + p(x)\) via the change of coordinates
+\begin{equation*}
+  \gamma(y) = \log y - \log (1 - y).
+\end{equation*}
+Since the Lebesgue measure \(m_{\mathbb{R}}\) on \(\mathbb{R}\) is invariant for translations, the measure \(\mu = \gamma ^{-1}_* m_{\mathbb{R}}\) is invariant for every \(f_x\). It's also \(\sigma\)-finite, because \(\gamma\) is a measurable bijection, and \(m \sim \mu\) because \(\gamma ^{-1}\) is a diffeomorphism onto \((0,1)\) (thus locally Lipschitz).
+
+The rest of the argument in \cite{bonifantSchwarzianDerivativesCylinder2008} is still true if \(\ell\) is invariant only in the full measure set \(\Omega\) (instead of all \((x,y)\) in a family of full-measure sets of \(x \in X\), indexed by \(y \in I\)). Note that the full conclusion of the Theorem 6.2 is also still true (for all \(y_0 \in (0,1)\)), because the function \(\ell\) is monotone.
+
+\printbibliography
+
+% Then we have the following:
+
+% \begin{lemma}
+%   Given \(\ell\), \(\{ \Omega_y \}_{y \in I}\) as in \cref{h:1}, there is another pair \(\tilde{\ell}, \{ \widetilde{\Omega}_y \}_{y \in I}\) that satisfies \cref{h:1} with the additional property that \(\tilde \ell(f_x(y)) = \tilde \ell(y)\) for all \(x \in \widetilde{\Omega}_y\).
+% \end{lemma}
+
+% \begin{proof}
+%   Define \(\tilde \ell(x) = U_{\ell}(x,y)\).
+% \end{proof}
+
+\end{document}

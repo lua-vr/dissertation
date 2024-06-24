@@ -1,0 +1,307 @@
+\documentclass[../main]{subfiles}
+
+\begin{document}
+
+\chapter{Schwarzian derivatives and cylinder maps}\label{cha:bonifant-milnor}
+
+In~\cite{bonifantSchwarzianDerivativesCylinder2008}, the authors constructed a family of skew product diffeomorphisms whose dynamic properties vary according to the Schwarzian derivative of the maps on the fibers. Depending on the sign of this derivative, the family either has intermingled basins, a physical measure whose basin has full Lebesgue measure, or historical behavior almost everywhere. During the first year, we sought to understand this family of examples well and answer some questions posed in the article.
+
+\section{Cross ratios and the Schwarzian derivative}
+
+Suppose we start with a field \(\mathbb{K}\) and, not being happy with the fact that we cannot divide by zero, decide to add a point at infinity; this gives us the \textit{projective line} \(P^1(\mathbb{K}) = \mathbb{K} \sqcup \{ \infty \}\), whose arithmetic operations are the same as those of \(\mathbb{K}\) except for the additional rules \(\frac{1}{0} = \infty\), \(\frac{1}{\infty} = 0\), \(x \cdot \infty = \infty\) if \(x \neq 0\), and \(x + \infty = \infty\) if \(x \neq \infty\).
+It's not possible to define such operations everywhere without introducing inconsistent rules, so the operations are partial --- we cannot multiply \(\infty \cdot 0\) or add \(\infty + \infty\).
+
+Our new space \(P^1(\mathbb{K})\) has an interesting property: given \(z \in P^1(\mathbb{K})\), we have three types of operations that we can apply to \(z\): translations \(z \mapsto z + x\), where \(x \in \mathbb{K}\), homotheties \(z \mapsto xz\) for \(x \in \mathbb{K} \setminus \{ 0 \}\), and the inverse \(z \mapsto 1/z\), which was not defined before if \(z = 0\), but now makes sense for every \(z\). These three families of actions, which are invertible, generate the \textit{group of homographies} with coefficients in \(\mathbb{K}\).
+
+A second way to construct \(P^1(\mathbb{K})\), which makes the role of the group of homographies as a symmetry group of this space even clearer, is to think of the space of ``formal fractions'', that is, pairs of numbers \((x,y)\), where \(x, y \in \mathbb{K}\) are not both zero, where we identify ``equivalent fractions'', in the sense that \((\lambda x, \lambda y) \sim (x, y)\) for every \(\lambda \in \mathbb{K} \setminus \{ 0 \}\). The quotient by this equivalence relation gives us \(P^1(\mathbb{K})\) as the space of lines passing through the origin of the vector space \(\mathbb{K}^2\), and the operations are like fraction operations: \((x,y) + (z,w) = (wx + yz, yw)\), \((x,y) \cdot (z,w) = (xz, yw)\), and \((x,y)^{-1} = (y,x)\). Despite being seemingly more complicated, the interesting fact about this construction is that it emphasizes how the symmetry group of the space \(\mathbb{K}^2\), the linear group \(\GL_2(\mathbb{K})\), naturally induces a symmetry group on the quotient, the projective group \(\PGL_2(\mathbb{K})\), which is precisely the group of homographies.
+
+This group is a quotient of \(\GL_2(\mathbb{K})\) by a subgroup of dimension \(1\), so it has dimension \(3\). Furthermore, it is \(3\)-transitive: given two sets of three distinct points in \(P^1(\mathbb{K})\), there exists an element \(g \in \PGL_2(\mathbb{K})\) that takes the first set to the second. But not only that, \(P^1(\mathbb{K})\) has three special points: \(0\), \(1\), and \(\infty\). Thus, given \(x_1,x_2, x_3 \in P^1(\mathbb{K})\) distinct, we can ask which \(g \in \PGL_2(\mathbb{K})\) such that \(g(x_1) = \infty\), \(g(x_2) = 0\), and \(g(x_3) = 1\). With some calculations, we arrive at
+\begin{equation*}
+  g(z) = \frac{(x_2 - z)(x_3 - x_1)}{(x_1 - z)(x_3 - x_2)}
+\end{equation*}
+The \emph{cross ratio} of four points \(x_{0},x_1,x_2,x_3\) is the value of \(g(x_0)\) for the element \(g\) of the homography group that sends \(x_1 \mapsto \infty\), \(x_2 \mapsto 0\), and \(x_3 \mapsto 1\).
+\begin{definition}[Cross ratio]
+  \begin{equation*}
+    \rho(x_0,x_1,x_2,x_3) = \frac{(x_2 - x_0)(x_3 - x_1)}{(x_1 - x_0)(x_3 - x_2)}
+  \end{equation*}
+\end{definition}
+
+\NewObject\IFunOp\SchD{\mathcal{S}}
+\begin{definition}
+
+  Let \(\f \colon I \to I'\) be a \(\Cs[d = 3]\) diffeomorphism between two intervals of the real line.
+  The \emph{Schwarzian derivative} of \(\f\) is the function
+  \begin{equation*}
+    \SchD\f = \frac{\f[der = 3]}{\f[der = 1]} - \frac{3}{2}\rpar*{\frac{\f[der = 2]}{\f[der = 1]}}^2.
+  \end{equation*}
+\end{definition}
+We shall write \(\SchD f \prec 0\) if there exists a dense open set \(U \subseteq I\) such that \(\SchD f(y) < 0\) for every \(y \in U\). Similarly, we write \(\SchD f \succ 0\) if there exists \(U \subseteq I\) open and dense such that \(\SchD f(y) > 0\) for every \(y \in U\).
+
+\begin{proposition}\label{prop:schwarzian}
+  The Schwarzian derivative has the following properties:
+  \begin{enumerate}
+    \item If \(\mathcal{S}f\) and \(\mathcal{S}g\) have the same sign, then \(\mathcal{S}(g \circ f)\) has the same sign.
+    \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
+    \item \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+    \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
+  \end{enumerate}
+\end{proposition}
+
+\begin{lemma}\label{lem:sch-cross-increase}
+  If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\) for all \(y_1 < y_2 < y_3 < y_{4}\).
+\end{lemma}
+
+\begin{lemma}\label{lem:bound-deriv-schwarz}
+  If \(f \colon I \to I\) preserves orientation and \(\SchD f \prec 0\), then \(f'(0)f'(1) < 1\).
+\end{lemma}
+
+Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas hold if \(\SchD f \succ 0\). For example, if \(\SchD f \succ 0\) then \(f\) decreases cross ratios and \(f'(0)f'(1) > 1\).
+
+%%% REVISED
+
+\section{Skew products}
+
+We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the boundaries of the ``cylinder'' \(X \times I\).
+Let \(\mathcal{B}_i = \mathcal{B}(\nu_i)\) be the basins of the respective measures.
+
+To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(F^n(x,y)\), that is, \(f_x^{n} = f_{g^{n - 1}(x)} \circ \cdots \circ f_x\).
+
+\begin{lemma}\label{lem:basin-segment}
+  If \((x, y_1) \in \mathcal{B}_0\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \leq y_1\). Similarly, if \((x, y_1) \in \mathcal{B}_1\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \geq y_1\).
+\end{lemma}
+
+\begin{proof}
+  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \mathcal{B}_0\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\nu_0\) and \(e_n(x,y_2) \to \nu_0\), by \nameref{thm:portmanteau}
+    \newcommand{\timeinU}{\frac{1}{n}\# \set{ 0 \leq i < n \where f_x^n(y_2) < \delta }}
+    \[\lim_{n \to \infty} e_n(x,y_2)(U) = \nu_0(U) = 1.\]
+    Define \(\tau_n = e_n(x,y_2)(U) = \timeinU\).
+    Note that if \(f_x^n(y_2) < \delta\), then \(f_x^n(y_1) < \delta\) since the diffeomorphisms preserve orientation. Thus,
+    \begin{align*}
+      \lvert e_n(x,y_1)(\varphi) - e_n(x,y_2)(\varphi) \rvert
+      &\leq \frac{1}{n}\sum_{i = 0}^{n - 1}\abs[\big]{\varphi(g^n(x),f_x^{n}(y_1)) - \varphi(g^n(x),f_x^{n}(y_2))}\\
+      &\leq \varepsilon \tau_n + 2 \lVert \varphi \rVert_{\infty} (1 - \tau_n).
+    \end{align*}
+    Since \(\tau_n \to 1\), there exists \(N\) such that \(n \geq N\) implies that the right side is less than \(2 \varepsilon\), hence both integrals on the left converge to \(\nu_0(\varphi)\).
+\end{proof}
+
+\subsection{Transversal Lyapunov exponents}
+
+To each point \((x,y)\) of either boundary \(\mathcal{A}_i\), for \(i \in \set{0,1}\), we can associate a number that expresses the average expansion rate of tangent vectors along the direction normal to the skew product boundary. This is a specific case of the general definition of Lyapunov exponents, whose existence is given by the Oseledets theorem.
+
+\begin{definition}[Transversal Lyapunov exponent]
+  \begin{equation*}
+    \Lyap_{\mathcal{A}_i}(x) = \lim_{n \to \infty}\frac{1}{n} \log \abs*{ \partial_y F^{n}(x,i) }.
+  \end{equation*}
+\end{definition}
+By the product rule, and noting that \(\set{0,1}\) are fixed points of the fiber diffeomorphisms, the right side of the equation above can be rewritten as
+\begin{equation*}
+  \lim_{n \to \infty}\frac{1}{n} \sum_{k = 0}^{n - 1} \log \abs*{\partial_y F(g^k(x),i)}
+  = \lim_{n \to \infty}\frac{1}{n} \sum_{k = 0}^{n - 1} \log f_{g^k(x)}'(i).
+\end{equation*}
+Thus, by the ergodicity of \(\mu\)  for \(g\) and the Birkhoff ergodic theorem,  for \(\mu\)-almost every \(x \in X\) it holds that
+\begin{equation}\label{eq:trav-lyap}
+  \Lyap_{\mathcal{A}_i}(x) = \int \log f_{x}'(i) \;d \mu(x),
+\end{equation}
+and we shall denote this common value by \(\Lyap(\mathcal{A}_i)\).
+
+The version of the statement below is slightly more general than the corresponding one in~\cite[lema A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
+\begin{lemma}\label{lem:lyap-basin-posmeas}
+  If the family \(\{ f_x' \}_{x \in X}\) is equicontinuous at \(i \in \{ 0,1 \}\) and \(\Lyap(\mathcal{A}_i) < 0\), then the basin of \(\mu \otimes \delta_i\) has positive \(\mu \otimes \Leb\) measure.  Conversely, if \(\Lyap(\mathcal{A}_i) > 0\), then the corresponding basin has null measure.
+\end{lemma}
+
+\begin{proof}
+  We will assume \(i = 0\). Let \(\varepsilon > 0\) be such that
+  \begin{equation*}
+    \int \log(f_x'(0) + \varepsilon) \;d\mu(x) < 0.
+  \end{equation*}
+  Let \(a(x) = \log(f_x'(0) + \varepsilon)\). By the Birkhoff ergodic theorem, for \(\mu\)-almost every \(x \in X\)
+  \begin{equation*}
+    \lim_{n \to \infty}\frac{1}{n}\sum_{k = 0}^{n - 1} a(g^k(x)) = 
+    \int a(x) \;d\mu(x) < 0,
+  \end{equation*}
+  which implies \(\lim_{n \to \infty}\sum_{k = 0}^{n - 1} a(g^k(x)) = -\infty\). This means that the function
+  \begin{equation*}
+    A(x) = \max_{n \geq 1}\sum_{k = 0}^{n - 1} a(g^k(x)) \geq 0
+  \end{equation*}
+  is well-defined in almost every \(x\).
+  
+  By equicontinuity, there is \(\delta>0\) such that \(0 \le y \le \delta\) implies \(f_x'(x) \le f'_x(0) + \varepsilon\) for all \(x \in X\). Thus, if \(y < \delta e^{-A(x)}\), we claim that
+  \begin{equation}\label{eq:max-ind}
+    f_x^n(y) \leq \exp\rpar*{\sum_{k = 0}^{n - 1}a(g^k(x)) - A(x)}\delta \leq \delta.
+  \end{equation}
+  is true by induction. Indeed, the \(n = 0\) case follows from the hypothesis on \(y\), and if~\eqref{eq:max-ind} is true for \(n\), then by the mean value theorem,
+  \begin{align*}
+    f_x^{n + 1}(y) &\leq \rpar[\Big]{\max f'_{g^{n}(x)}([0, f^n_x(y)])} f_x^n(y) \\
+                   &\leq (f'_{g^{n}(x)}(0) + \varepsilon)f_x^n(y)\\
+                   &\leq \exp\rpar*{a(g^{n}(x)) + \sum_{k = 0}^{n - 1}a(g^k(x)) - A(x)}\delta.
+  \end{align*}
+  Since \(\lim_{n \to \infty} \sum_{k = 0}^{n - 1}a(g^k(x)) = -\infty\), we have \(f_x^{n + 1}(y) \to 0\). Thus, if \(x \in \mathcal{B}(\mu)\) (which has full measure), then \(e_{n}(x,y) \weakto \nu_0\) whenever \(y \leq \delta e^{-A(x)}\).
+
+  \todo{WRITE THE CONVERSE} % TODO
+\end{proof}
+
+\begin{corollary}\label{cor:schwarz-basin-pos-meas}
+  If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) for \(\mu\)-almost every \(x \in X\), then \(\Lyap(\mathcal{A}_0) + \Lyap(\mathcal{A}_1) < 0\).
+  In particular, at least one of the basins has positive measure.
+\end{corollary}
+
+\begin{proof}
+  If suffices to integrate the logarithm of the inequality \(f_x'(0)f_x'(1) < 1\) from \cref{lem:bound-deriv-schwarz}, and then apply \cref{lem:lyap-basin-posmeas}.
+\end{proof}
+
+\subsection{Intermingled Basins}
+
+In this section only, we fix \(X = S^1\), \(\mu = \Leb\), and \(g \colon S^1 \to S^1\) the map \(g(x) = kx\). Furthermore, we require the following hypothesis to hold.
+
+\begin{hypothesis}[Elevators]\label{hip:elevators}
+  There exist fixed points \(x^-\) and \(x^+\) in \(S^1\) such that for every \(y \in (0,1)\), \(f_{x}(y) < y\) for \(x\) in a neighborhood of \(x^-\) and \(f_x(y) > y\) for \(x\) in a neighborhood of \(x^+\).
+\end{hypothesis}
+
+\begin{definition}
+  We say that two measurable subsets \(A, B\) are \textit{intermingled} with respect to a measure \(\nu\) if for every open set \(U\), \(\nu(A \cap U)\) and \(\nu(B \cap U)\) are strictly positive.
+\end{definition}
+
+\begin{theorem}\label{thm:intermingled}
+  Suppose \cref{hip:elevators} holds and both basins have positive measure. Then the basins \(\mathcal{B}_0\) and \(\mathcal{B}_1\) are intermingled for the Lebesgue measure on the cylinder.
+\end{theorem}
+
+\begin{proof}
+  By definition, the basins are strictly invariant sets. If we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) is analogous.
+
+  \begin{claim}
+    The support \(\supp \mu_0\) is such that \(F^{-1}(\supp \mu_0) \subseteq \supp \mu_0\).
+  \end{claim}
+  Indeed, if \(p \in F^{-1}(\supp \mu_0)\) and \(U\) is a neighborhood of \(p\), then since \(F\) is an open map, \(F(U)\) is a neighborhood of \(F(p) \in \supp \mu_0\), so \(\mu_0(F(U)) > 0\). Since \(F\) is Lipschitz, if \(\mu_0(U)\) were \(0\), then \(\mu_0(F(U)) = \Leb(F(U) \cap \mathcal{B}_0) = \Leb(F(U \cap \mathcal{B}_0)) = 0\), which is not the case, so \(\mu_0(U) > 0\).
+
+  \begin{claim}
+    There exists a point \((x_0,y_0) \in \supp \mu_0 \setminus X \times \{ 0 \}\).
+  \end{claim}
+  Indeed, \(\mu_0(\supp \mu_0) \geq \Leb(\mathcal{B}_0) > 0\), so \(\mu_0(\supp \mu_0 \setminus X \times \{ 0 \}) > 0\) and the set cannot be empty.
+
+  \begin{claim}
+    The endpoint \(\mathcal{A}_1\) of the cylinder is contained in \(\supp \mu_0\).
+  \end{claim}
+  Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) such that \(x_{ - n - 1} \in g^{-1}(\{ x_{-n} \})\) is the closest preimage of \(x_-\). Since \(x_-\) is a repelling fixed point, the construction implies that \(x_{-n} \to x_-\), so by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-1}(y_0) > y\). In particular,
+  \[y_{ - n} = f_{x_{-n}}^{-1} \circ \cdots \circ f_{x_{-1}}^{-1}(y_0)\]
+  is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, note that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
+  
+  \begin{claim}
+    Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is an interval \(\{ x \} \times [0,a_x]\).
+  \end{claim}
+  By \cref{lem:basin-segment}, \(\mathcal{B}_0\) is of the above form. To show that the support also has this property, we can take \(y < 1\) such that \((x,y) \in \supp \mu_0\) and show that if \(z < y\) then \((x,z) \in \supp \mu_0\).
+
+  Let \(U = B_{\varepsilon}(x,z)\) be a ball centered at \((x, z)\) of radius smaller than \(1 - y\), and \(V = B_{\varepsilon}(x,y)\). Note that \(V \cap \mathcal{B}_0 \subseteq (U \cap \mathcal{B}_0) + (0, y - z)\), and since \((x,y) \in \supp \mu_0\), \(\Leb(U \cap \mathcal{B}_0) \geq \Leb(V \cap \mathcal{B}_0) > 0\). This shows the claim.
+  
+  As \(\mathcal{A}_1\) is contained in the support, the last claim implies \(\supp \mu_0 = X \times I\).
+\end{proof}
+
+\begin{wrapstuff}[type=figure,width=.35\textwidth,height=5cm]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/intermingled}
+  \caption{Basins of \cref{ex:intermingled}.}
+\end{wrapstuff}
+
+\begin{example}\label{ex:intermingled}
+  Define \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\). If \(|a| < 1\), then \(q_a\) is a diffeomorphism of the interval \(I\). If \(F(x) = (3x, q_{p(x)}(y))\), then \(x^+ = 0\) and \(x^- = 1/2\) are fixed points of the map \(g(x) = 3x\) (where we identify \(S^1\) with \([0,1]\)) that satisfy \cref{hip:elevators}, because \(q_a(y) > y\) if \(a > 0\) and \(q_a(y) < y\) if \(a < 0\) for all \(y \in (0,1)\). Moreover, since \(q_a\) is a degree two polynomial, it has negative Schwarzian whenever \(a \neq 0\), and from the symmetry of \(p\) we see both basins of \(F(x,y) = (kx, q_{p(x)}(y))\) must have positive measure, because at least one of them has. So \(F\) displays intermingled basins. 
+\end{example}
+
+\subsection{Negative Schwarzian}
+
+The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008} without the hypothesis that both basins have positive measure. The question of whether this hypothesis could be removed was left open in the article, and the following proof shows that it is indeed unnecessary.
+
+\begin{theorem}\label{thm:neg-schwarz-sep-graph}
+  If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
+  \begin{equation*}
+    (x,y) \in \mathcal{B}_0 \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \mathcal{B}_1 \text{ whenever }y > \sigma(x).
+  \end{equation*}
+  Consequently, the union \(\mathcal{B}_0 \cup \mathcal{B}_1\) has total \(\mu \otimes \Leb\) measure.
+\end{theorem}
+
+\begin{proof}
+  We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that separate the basins in the following sense:
+  \begin{equation*}
+    \xi_0(x) = \sup \{ y \in I : y \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : y \in \mathcal{B}_1 \}.
+  \end{equation*}
+  By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\nu_0 = \mu \otimes \delta_0\) or to \(\nu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\nu_0\) or \(\nu_1\).
+  
+  It is sufficient to show that \(A = \{ x \in X : \xi_0(x) \neq \xi_1(x) \}\) has measure zero, since in this case we can define \(\sigma\) as the common value of the two functions. Suppose by contradiction that this set does not have measure zero. Since the \(f_x\) are bijective, \(A\) is an invariant set under \(g\), so the ergodicity of \(\mu\) implies that \(A\) has full measure.
+
+  Since we are under the hypotheses of \cref{cor:schwarz-basin-pos-meas}, we can assume without loss of generality that \(\Leb(\mathcal{A}_1) > 0\). By ergodicity, we also have \(\xi_1(x) < 1\) for \(\mu\)-almost every \(x \in X\). Thus, given \(k \in \NN\), there exists \(\delta_k < 1\) such that \(E_k = \{ x \in X : \xi_1(x) < \delta_k \}\) has measure \(\mu(E_k) > 1 - 1/k\). Applying the Birkhoff ergodic theorem to the functions \(1_{E_k}\), we obtain \(B \subseteq X\) of full measure such that for all \(x \in B\) and \(k\),
+  \begin{equation}\label{eq:time-small}
+    \lim_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where \xi_1(g^i(x)) < \delta_k} = \mu(E_{k}) > 1 - 1/k.
+  \end{equation}
+  
+  By the ergodicity of \(\mu\), there exists another set \(C \subseteq X\) of full measure whose empirical measures converge to \(\mu\), and since \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), there exists a set \(D\) of full measure such that \(\SchD f_{g^n(x)} \prec 0\) for all \(n \geq 0, x \in D\). Let \(x_0 \in A \cap B \cap C \cap D\) and \(y_0 \in (\xi_0(x), \xi_1(x))\), and let \(\nu \in \Meas{x,y} \setminus \{ \nu_0 \}\) be a limit point of the empirical measures different from \(\nu_0\). Note that since \(x_0 \in B\), necessarily \((\pi_X)_* \nu = \mu\), but since \(\nu \neq \nu_0\), it follows that \(\nu(X \times \{ 0 \}) < 1\). Thus, \(\supp \nu\) is not contained in \(X \times \{ 0 \}\), and there exists \(\varepsilon > 0\) such that \(U = X \times \interval[open left]{\varepsilon}{1}\) satisfies \(\nu(U) > 0\). Let \(k\) be such that \(\nu(U) > 1/k\), and \(n_j \to \infty\) such that \(\liminf_{j \to \infty} e_{n_j}(x_0,y_0)(U) > 1/k\).
+  In other words, we have
+  \begin{equation}\label{eq:time-big}
+    \liminf_{j \to \infty} \frac{1}{n_j} \# \set{ 0 \leq i < n_j \where f_{x_0}^i(y_0) > \varepsilon} > 1/k.
+  \end{equation}
+
+  Now, consider the sequence \(r_n = \rho(0, f_{x_0}^n(y_0), f_{x_0}^n(\xi_1(x_0)), 1)\), which is well-defined and positive since \(0 < f_{x_0}^n(y_0) < f_{x_0}^n(\xi_1(x_0)) < 1\) by the definition of the points. Note also that the graph of \(\xi_1\) is strictly invariant under \(F\), so \(f_{x_0}^n(\xi_1(x_0)) = \xi_1(g^n(x_0))\).
+
+  Since \(x \in D\), it follows by \cref{lem:sch-cross-increase} that \(r_n\) is an increasing sequence. On one hand, it is not possible for \(r_n \to \infty\), because from \cref{eq:time-small,eq:time-big} we know that there exist \(n \in \mathbb{N}\) arbitrarily large such that \(0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\). On the other hand, if \(r_n \to r < \infty\), then for each \(x \in X\) there exists a unique \(\xi(x)\) such that \(\rho(0, \xi(x), \xi_1(x), 1) = r\). In fact, a calculation shows that
+  \begin{equation*}
+    \xi(x) = \frac{\xi_1(x)}{r(1 - \xi_1(x)) + \xi_1(x)}.
+  \end{equation*}
+  Note that \(r_n \to r\) implies \(\lim_{n \to \infty} \lvert \xi(g^n(x_0)) - f_{x_0}^n(y_0) \rvert = 0\). Since we know that \(x_0\) is in the basin of \(\mu\), necessarily \(e_n(x_0,y_0)\weakto \eta\), where \(\eta = (\graph \xi)_* \mu\) and \((\graph \xi)(x) = (x, \xi(x))\). Thus, \(\eta\) is an invariant measure. But then,
+  \[\varphi(x,y) = \frac{\rho(0, y, \xi_1(x), 1)}{1 + \rho(0, y, \xi_1(x), 1)}\]
+  is an integrable function defined at \(\eta\)-almost every point, with the property that \(\varphi(F(x,y)) > \varphi(x,y)\) at \(\eta\)-almost every point. This is impossible, as it would imply \(\int \varphi \;d \eta < \int \varphi \circ F \;d\eta = \int \varphi \;d\eta\).
+\end{proof}
+
+\begin{example}
+  In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
+\end{example}
+
+\subsection{Positive Schwarzian}
+
+If \(f \colon M \to M\) is a diffeomorphism on a manifold, we say that an invariant measure \(\mu\) is \emph{asymptotic} with respect to a reference measure if the empirical measures of almost every point of the reference measure converges to \(\mu\). Intuitively, \(\mu\) describes the entire statistical behavior of the system, up to a set of zero volume.
+
+Since \cref{thm:neg-schwarz-sep-graph} does not require that both basins have positive measure, we also obtain a more general statement than the version in~\cite[Theorem 5.1]{bonifantSchwarzianDerivativesCylinder2008}, which requires both Lyapunov exponents to be positive. The proof below is also somewhat different, more similar to the proof of \cref{thm:neg-schwarz-sep-graph}.
+
+\begin{theorem}\label{thm:pos-schwarz-asymptotic}
+  If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has an asymptotic measure \(\nu\) with respect to \(\mu \otimes \Leb\). Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
+\end{theorem}
+
+The idea of the proof is to pass to the invertible extension of the system and observe that the inverses of the fiber maps have negative Schwarzian. By applying \cref{thm:neg-schwarz-sep-graph}, we obtain an invariant graph that separates the two basins of the inverse transformation. Since the orbits diverge from the graph for the inverse of the extension, they converge to the graph for the extension. Thus, the graph describes an asymptotic measure for the extension. The pushforward of this measure is the asymptotic measure for the original map.
+
+\begin{proof}
+  \newcommand{\ex}{\tilde x}
+  \newcommand{\eX}{\tilde X}
+  \newcommand{\emu}{\tilde \mu}
+  \newcommand{\enu}{\tilde \nu}
+  \newcommand{\eg}{\tilde g}
+  \newcommand{\eF}{\tilde F}
+  \newcommand{\ef}{\tilde f}
+  \newcommand{\eAu}{\tilde\mathcal{A}_1}
+  \newcommand{\eAl}{\tilde\mathcal{A}_0}
+  \newcommand{\eBu}{\tilde{\mathcal{B}}_1}
+  \newcommand{\eBl}{\tilde{\mathcal{B}}_0}
+
+  Let \((\eX, \eg, \emu)\) be the invertible extension of \((X, g, \mu)\), \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) the associated conjugation, and
+  \begin{equation*}
+    \eF(\ex, y) = (\eg(\ex), f_{\pi(\ex)}(y)).
+  \end{equation*}
+  Note that \(\eF^{-1}(x, y) = (\eg^{-1}(x), f_{\pi(\eg^{-1}(x))}^{-1}(y))\). Since \(\pi_* \emu = \mu\) and \(\eg_* \emu = \emu\), by \cref{prop:schwarzian} we have \(f_{\pi(\eg^{-1}(\ex))}^{-1} \prec 0\) for almost every \(\ex \in \eX\). Thus, we can apply \cref{thm:neg-schwarz-sep-graph} to \(F^{-1}\) and obtain a function \(\sigma \colon \eX \to I\) that separates the basins \(\eBu\) and \(\eBl\).
+
+  The hyperbolic metric (which coincides with the Hilbert metric) on \((0, 1)\) is given by \[d_H(r, s) = \log \lvert \rho(0, r, s, 1) \rvert.\]
+  This metric induces the usual topology of the interval.
+  Since maps with positive Schwarzian decrease cross-ratios, the condition \(\SchD f_x \succ 0\) means that \(f_x\) is a contraction (not necessarily uniform) for this metric.
+
+  Let \(A \subseteq \eX\) be a set of full \(\emu\) measure where \(\SchD f_{\pi(\eg^n(\ex))} \succ 0\) for all \(n \geq 0, \ex \in A\), and \(B \subseteq \eX\) another set of full measure where the empirical measures of \(\ex \in B\) converge to the ergodic measure \(\emu\). It follows that for all \(\ex \in A \cap B\) and \(y \in (0, 1)\), the limit \(r = \lim_{n \to \infty} d_H(f_{\pi(\ex)}^n(y), \sigma(\eg^n(\ex)))\) exists and is zero if and only if the orbit of \((\ex, y)\) converges in distance to the graph of \(\sigma\) under \(\eF\), which in turn implies \(e_n(\ex, y) \weakto \enu = (\graph \sigma)_* \emu\).
+
+  Suppose \(r > 0\). Then, as in the previous proof, there would exist another graph \(\xi\), different from \(\sigma\) almost everywhere, such that \(e_n(\ex, y) \weakto \eta = (\graph \xi)_* \emu\). Since \(\varphi(\ex, y) = d_H(y, \sigma(\ex))\) is such that \(\varphi(F(\ex, y)) < \varphi(\ex, y)\) whenever \((\ex, y) \in \graph \xi\) and \(\eta\) is an invariant measure for \(F\) with \(\eta(\graph \xi) = 1\), we reach a contradiction.
+
+  This shows that \(E = (A \cap B) \times (0, 1)\) is a set of full \(\emu \otimes \Leb\) measure such that \((\ex, y) \in E\) implies \(e_n(\ex, y) \weakto \enu\). Let \(\nu = \pi_* \enu \in \Meas{X \times I}\). The measure \(\nu\) is invariant, since
+  \[F_* \nu = (F \circ \pi)_* \enu = (\pi \circ \eF)_* \enu = \pi_*\enu = \nu.\]
+  Furthermore, the basin of \(\nu\) has full Lebesgue measure. In fact, if \(\varphi \in \Cs{X \times I}\), then \(\varphi \circ \pi \in \Cs{\eX \times I}\) and \(e_n(\pi(\ex), y)(\varphi) = e_n(\ex, y)(\varphi \circ \pi)\). Therefore, \(e_n(x, y) \to \nu\) if and only if \(e_n(\ex, y) \to \enu\) for any \(\ex \in \pi^{-1}(x)\), that is, \((\pi \times \Id)^{-1}(\mathcal{B}(\nu)) = \mathcal{B}(\enu)\). It follows that \((\mu \otimes \Leb)(\mathcal{B}(\nu)) = (\emu \otimes \Leb)(\mathcal{B}(\enu)) = 1\).
+\end{proof}
+
+\begin{remark}
+  The proofs of \cref{thm:neg-schwarz-sep-graph,thm:pos-schwarz-asymptotic} would carry out mostly unchanged if instead of assuming negative Schwarzian for the fiber maps, we assumed that one basin has positive measure and that for every \(x\) there is a metric \(d_x\) in \(I\), equivalent and uniformly stronger than the Euclidian metric, with the property that \(d_x(y_1,y_2) < d_{g(x)}(f_x(y_1),f_x(y_2))\). In the negative Schwarzian case, this metric is the hyperbolic metric.
+\end{remark}
+
+% \begin{remark}
+%   If \cref{hip:elevators} holds for \(F\) with positive Schwarzian, and if \(\Lyap{\mathcal{A}_i} > 0\) for both \(i = 0,1\), then the inverse \(\F[lift]^{-1}\) of the invertible extension has intermingled basins. The reason for this may seem a bit subtle, because in the argument of \cref{thm:intermingled} we explicitly use that the map is non invertible when choosing a pre-orbit that converges to the elevator. % actually, the f_\pi(x) WILL depend on the future, so this remark is bogus 😢
+% \end{remark}
+
+\end{document}

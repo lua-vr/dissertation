@@ -1,0 +1,61 @@
+\documentclass[b5paper]{article}
+
+\usepackage{import}
+
+\import{../../}{preamble}
+
+\begin{document}
+
+As in \cite{bonifantSchwarzianDerivativesCylinder2008}, let \((X,\mu)\) be a probability space and consider a skew product \(F\colon X^{\NN} \times \RR \circlearrowleft\) given by
+\begin{equation*}
+  F(\xi,y) = (\sigma(\xi), y + p(\xi_1))
+\end{equation*}
+for some \(p \in L^1(X) \setminus \{ 0 \}\) with average \(\int p \;d \mu = 0\). Denote by \(\Prob = \mu^{\otimes \NN}\) the Bernoulli measure on \(X^{\NN}\).
+
+\begin{lemma}[false lemma]
+  The map \(F\) is ergodic for the measure \(\Prob \otimes \Leb\).
+\end{lemma}
+
+The statement above is false. Using Hewitt-Savage we can show that any invariant \(A\) is such that \(A_y = \{ \xi : (\xi,y) \in A \}\) has measure \(0\) or \(1\) but this isn't enough. You may want to skip to the counterexample in red below.
+
+\begin{proof}
+  Let \(A \subseteq X^{\NN} \times \RR\) be a strictly invariant set. We claim that for fixed \(y\), the set \(A_{y} = \{ \xi : (\xi,y) \in A \} \subseteq X^{\NN}\) belong to the exchangeable \(\sigma\)-algebra of the projections \(\{ \pi_i \}_{i \in \mathbb{N}}\). Indeed, let \(\alpha_{i,j}(\xi_1,\dots,\xi_i,\dots,\xi_j,\dots) = (\xi_1,\dots,\xi_j,\dots,\xi_i,\dots)\) be the action on \(X^{\NN}\) of a transposition exchanging \(i \leftrightarrow j\), where \(i \leq j\), and observe that since \(A\) is invariant, we can write
+  \begin{align*}
+    A_{y} &= \{ \xi : F^j(\xi,y) \in A \}\\
+            &= \{ \xi : (\sigma^j(\xi), y + \cdots + p(\xi_i) + \cdots + p(\xi_j)) \in A \}\\
+            &= \{ \xi : (\sigma^j(\alpha_{i,j}(\xi)), y + \cdots + p(\xi_j) + \cdots + p(\xi_i)) \in A \}\\
+            &= \{ \xi : F^j(\alpha_{i,j}(\xi),y) \in A \} = \alpha_{i,j}(A_{y}).
+  \end{align*}
+  By Hewitt-Savage, this means \(\Prob(A_{y}) \in \{ 0,1 \}\).
+
+  Suppose \((\Prob \otimes \Leb) (A) > 0\). By Fubini,
+  \begin{equation*}
+    (\Prob \otimes \Leb) (A^{\complement}) = \int_{\RR} \Prob(A_{y}^{\complement}) \;d\Leb(y)
+    = \Leb(\{ y : \Prob(A_y) = 0 \}).
+  \end{equation*}
+  Let's denote by \(Z = \{ y : \Prob(A_{y}) = 0 \}\) and \(P = \{ y : \Prob(A_y) = 1 \}\). From the assumption above, we know \(\Leb(P) > 0\), and to conclude ergodicity, it suffices to show \(\Leb(Z) = 0\).
+
+  \ohno{Counterexample HERE}
+
+  This is the point where it's impossible to finish the argument (and where the fact that \(y\mapsto L(y)\) is increasing was crucial in \cite{bonifantSchwarzianDerivativesCylinder2008}).
+  Consider \(X = \{ -1,1 \}\), \(\mu = \frac{1}{2}(\delta_{-1} + \delta_1)\) and \(p(x) = x\) (as a real number, so the steps are either \(1\) or \(-1\)), and let
+  \begin{equation*}
+    A = \bigcup_{k \in \ZZ} X \times \left[k, k + \frac{1}{2}\right].
+  \end{equation*}
+  It's simple to see \(A\) is invariant, because
+  \begin{align*}
+    F ^{-1}(A)
+    &= \{ (\xi,y) : \xi_1 = 1, (\sigma(\xi), y + 1) \in A \} \cup  \{ (\xi,y) : \xi_1 = -1, (\sigma(\xi),y - 1) \in A \}\\
+    &= \{ (\xi,y) : \xi_1 = 1, \{y\} \in [0,1/2] \} \cup  \{ (\xi,y) : \xi_1 = -1, \{ y \} \in [0,1/2] \}\\
+    &= A.
+  \end{align*}
+  So I guess this is the reason that in \cite{crovisierEmpiricalMeasuresPartially2020} there are more hypothesis like \(\phi\) smooth with two fixed points such that \(\phi(p), \phi(q)\) are rationally independent... I think that in our case, just having something like
+  \begin{equation*}
+    \forall \varepsilon > 0, \mu(\{ x \in X : p(x) \in (-\varepsilon, \varepsilon) \}) > 0
+  \end{equation*}
+  should be enough?
+\end{proof}
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass[../main]{subfiles}
+ 
+\begin{document}
+
+\chapter{Ergodic theory and dynamics}
+
+\section{Categorical notions}
+The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves this structure. For instance, in topological dynamics \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
+
+These different notions can be encompassed by the notion of a \emph{monoid object} in a category. Following \cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. Let's recall that an usual monoid is like a group but without the inverse operation, that is, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
+\begin{enumerate}[i.]
+\item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
+\item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
+\end{enumerate}
+It's readily seen that given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category.
+
+To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
+
+This point of view also allows for situations in which the morphisms carry more structure than a single function from a set to itself satisfying some properties. A great example of this are Markov chains, whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both briefly with more details.
+
+\subsection{Some examples}
+\subsubsection{Category of Markov kernels}
+Sometimes, it's useful to model uncertainty in dynamics by having the maps send each point \(x \in X\) not to a point \(f(x) \in X\), but to a \emph{probability measure} \(f(x) \in \Meas[1]{X}\). The probability measure \(f(x)\) then encodes the distribution of expected outcomes given that we started in the state \(x\).
+
+It may not be so clear, however, how we can compose iterates of \(f\) and regard it as a dynamic on \(X\). Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have 
+\begin{equation*}
+  \Prob(f^2(x) = z) = \sum_{y \in X} \Prob(f(x) = y)\cdot \Prob(f(y) = z).
+\end{equation*}
+If we rewrite the above with a measure-theoretic language, we see that we ought to define
+\begin{equation*}
+  f^2(x)(E) = \int_X f(y)(E) \;d (f(x))\set{y}.
+\end{equation*}
+More generally, given \(f \colon X \to \Meas[1]{Y}\),  \(g \colon Y \to \Meas[1]{Z}\), we can define a ``composition''
+\begin{equation*}
+  (g \circ f)(x)(E) = \int_X g(y)(E)\;d(f(x))\set{y}
+\end{equation*}
+so that \(g \circ f \colon X \to \Meas[1]{Z}\).
+
+A map with type \(X \to \Meas[1]{Y}\) is called a \emph{Markov kernel} between the measurable spaces \(X\) and \(Y\). The category whose objects are measurable spaces and morphisms are Markov kernels, with compositions given by the rule above, will be called \(\Stoch\). We remark that the identity morphisms in this category are the Dirac masses \(\delta(x) = \delta_x \in \Meas[1]{X}\).
+
+An interesting aspect of this category is that ``deterministic'' measurable maps still live inside it --- given \(g \colon X \to Y\) a measurable function, \(f_g(x) = \delta_y\) is a Markov kernel. That is to say, this correspondence defines a (faithful) functor from the category \(\MeasC\) of measurable functions to \(\Stoch\). This means that dynamics in \(\Stoch\) can be seen a generalization of deterministic measurable systems, where we now also allow the maps to be stochastic.
+
+Another observation is that a probability measure \(\mu\) in a measurable space \(X\) can be represented in this category by a Markov kernel \(m \colon \set{\star} \to \Meas[1]{X}\), where \(\set{\star}\) is a measurable space with one element. Namely, we set \(m(\star) = \mu\).
+
+\subsubsection{Iterated function systems}
+
+\subsection{Invariant states}
+
+Given categories \(\cC, \cD\), a \emph{cone} of a functor \(F \colon \cD \to \cC\) is defined as an object \(C \in \cC\) and a natural transformation \(T \colon \Delta(C) \Rightarrow F\), where \(\Delta(C) \colon \cD \to \cC\) is the constant functor at the identity of \(C\). In the case we are interested, \(\cD = M\) is a monoid and \(F\) is given by the dynamics. This means a cone is given as an object \(C \in \cC\) and a morphism \(c \colon C \to X\) with the property that for every \(m \in M\),
+\begin{center}
+  \begin{tikzcd}
+    &\arrow[dl, "c", swap]C\arrow[dr, "c"]& \\[-10pt]
+    X\arrow[rr,"m"] && X
+  \end{tikzcd}
+\end{center}
+commutes. 
+
+A cone \((C, c)\) is \emph{universal} for \(M \to \cC\) if it is a limit of the above diagram, that is, for every other cone \((D, d)\), there is a unique arrow \(D \to C\) so that
+\begin{center}
+  \begin{tikzcd}
+    &\arrow[ddl, "d", swap]D\arrow[d,dashed]\arrow[ddr, "d"]& \\
+    &\arrow[dl]C\arrow[dr]& \\[-15pt]
+    X\arrow[rr,"m"] && X
+  \end{tikzcd}
+\end{center}
+commutes. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
+
+\begin{example}
+  Let \(f \colon X \to X\) be any function from a set to itself. Like in a previous example, this will define a dynamical system in \(\SetC\) over the monoid \(\NNZ\), mapping \(n \in \NNZ\) to the iterate \(f^n\). If \(x \in X\) is a fixed point of \(f\), then we get a cone by defining \(C = \set{x}\) and picking the morphism \(c \colon C \to X\) to be the inclusion. Since \(x\) is a fixed point, it's clear that the associated diagram will commute. Conversely, if \((C,c)\) is a cone and \(\star \in C\), then the commutativity will mean \(c(\star)\) is a fixed point for \(f\).
+
+  The \emph{universal} cone for \(f\), then, will correspond to the set of all fixed points (which may be empty) paired with the set inclusion. Any other cone will map uniquely to this set, by matching each of its points with the corresponding fixed point for \(f\).
+\end{example}
+
+\begin{example}
+  Let \(f \colon X \to \Meas[1]{X}\) be a \emph{Markov kernel} from a measurable set to itself. Then, examples of cones for the associated system in \(\Stoch\) over \(\NNZ\) are \emph{stationary measures} \(m \colon \set{\star} \to \Meas[1]{X}\), that is, measures with the property that 
+  \begin{equation*}
+    (f \circ m)(\star) =  \int_X f(x) \;d\mu\set{x} = \mu,
+  \end{equation*}
+  where \(\mu = m(\star)\).
+\end{example}
+
+\subsection{Extensions}
+\subsection{The invertible extension}\label{sec:invert-extens}
+
+\subsubsection{A failure of existence}
+
+
+\section{Ergodic theorems}
+
+Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in \cites[32]{przytyckiConformalFractalsErgodic2010}[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP, and the code is currently available at \url{https://github.com/lucasvreis/BirkhoffErgodicThm}.}.
+
+\begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
+  Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
+  \begin{equation*}
+    \frac{1}{n}\sum_{i = 0}^{n - 1} \phi (f^i(x)) \to \CE[\mu]{\phi, \mathcal{I}}(x),
+  \end{equation*}
+  where \(\mathcal{I}\) is the sub-\(\sigma\)-algebra of (strictly) invariant sets.
+\end{theorem}
+
+\begin{proof}
+  Let \[F_n(x)= \max_{1 \le k \le n} \sum_{i = 0}^{k} \phi(f^i(x)).\]
+
+  \begin{claim}
+    \(F_{n + 1} = \phi + \max\set{0, F_n \circ f}\).
+  \end{claim}
+  To see this, note that \(\sum_{i = 0}^{k} \phi \circ f^i = \phi + \sum_{i = 0}^{k - 1} \phi \circ f^{i + 1}\), so
+  \[F_{n + 1}
+    = \phi + \max_{1 \le k \le n + 1}\sum_{i = 0}^{k - 1} \phi \circ f^{i + 1}
+    = \phi + \max\set[par = \Big]{0,\max_{1 \le k \le n}\sum_{i = 0}^{k} \phi \circ f^{i + 1}}
+    = \phi + \max \set{0,F_n \circ f}.
+  \]
+
+  \begin{claim}
+    \(F_{n + 1} - F_n \circ f = \phi - \min\set{0, F_n \circ f}\).
+  \end{claim}
+  This claim follows from the previous one by rewriting
+  \begin{align*}
+    F_{n + 1} + \min\set{0, F_n \circ f} = \phi + \max\set{0, F_n \circ f} + \min\set{0, F_n \circ f} = \phi + F_n \circ f.
+  \end{align*}
+  Two very useful corollaries of the claim are that for each \(x \in X\), \(F_{n + 1}(x) - F_n(f(x))\) is a non-increasing sequence (because \(F_n(f(x))\) is non-decreasing by definition), and that if \(F_n(f(x)) \to \infty\), then the sequence will converge monotonically to \(\phi(x)\).
+
+  Now, we define the set
+  \begin{equation*}
+    S = \set[par = auto]{x \in X \where F_n(x) \to + \infty}.
+  \end{equation*}
+  The first observation is that \(S \in \mathcal{I}\), because it's measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
+  \begin{equation}\label{eq:1}
+    0 \le \int_S F_{n + 1} - F_n\;d\mu = \int_S F_{n + 1} - F_n \circ f\;d\mu \to \int_S \phi\;d\mu
+  \end{equation}
+  which means \(\int_S \phi\;d\mu \ge 0\).
+
+  The second observation is that if \(x \notin S\), then \((F_n(x))_n\) is bounded above, so
+  \begin{equation}\label{eq:2}
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le \limsup_{n \to \infty} \frac{1}{n}F_n(x) \le 0.
+  \end{equation}
+  Putting the two together, we conclude that if \(\phi\) is such that \(\CE{\phi, \mathcal{I}} < 0\) almost everywhere, then by  \cref{eq:1} and the fact \(S \in \mathcal{I}\), the set \(S\) has measure zero, so  \cref{eq:2} is valid almost everywhere.
+
+  The theorem then follows by noticing that for  any \(\varepsilon > 0\), if we replace \(\phi\) by \(\tilde{\phi} = \phi - {\CE{\phi,\mathcal{I}}} - \varepsilon\), then \(\CE{\tilde{\phi}, \mathcal{I}} < 0\), so
+  \begin{equation*}
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \tilde\phi(f^i(x))
+    = \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) - \CE{\phi,\mathcal{I}} - \varepsilon \le 0.
+  \end{equation*}
+  If we combine this with the analogous inequality for \(-\phi\), we get
+  \begin{equation*}
+    \CE{\phi,\mathcal{I}} - \varepsilon \le \liminf_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le 
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le  \CE{\phi,\mathcal{I}} + \varepsilon
+  \end{equation*}
+  and the result follows by letting \(\varepsilon \to 0\).
+\end{proof}
+
+\section{Empirical measures}
+
+\begin{proposition}\label{prop:limiting-measures}
+  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
+  \begin{equation*}
+    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
+  \end{equation*}
+  form a compact connected subset of the invariant measures.
+\end{proposition}
+
+\NewObject\Measure\vnu{\mu}
+
+\begin{proof}
+  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
+  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
+  \begin{equation*}
+    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
+  \end{equation*}
+  which is a metric inducing the weak* topology on the set of probability measures. Since it's a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
+  Indeed,
+  \begin{align*}
+    d(\Emp[n](x), \Emp[n + 1](x))
+    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
+    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
+  \end{align*}
+\end{proof}
+
+\section{Skew products}
+
+\end{document}

@@ -1,0 +1,119 @@
+\documentclass[a4paper,11pt,oneside]{memoir}
+
+\usepackage{subfiles}
+\usepackage{titlesec}
+
+\usepackage[brazilian]{babel}
+\usepackage{csquotes}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{wrapstuff}
+
+\usepackage{amsmath}
+
+\input{preamble/bibliography}
+\input{preamble/glossaries}
+\usepackage{amsthm,thmtools}
+\usepackage{hyperref,cleveref}
+\newcommand{\crefpairconjunction}{ e~}
+
+% \crefformat{hypothesis}{#2hypothesis~#1#3}
+\declaretheorem[name = Teorema, refname={teorema, teoremas}]{theorem}
+\declaretheorem[name = Lema, refname={lema, lemas}, sibling=theorem]{lemma}
+\declaretheorem[name = Corolário, refname={corolário, corolários}, sibling=theorem]{corollary}
+\declaretheorem[name = Proposição, refname={proposição, proposições}, sibling=theorem]{proposition}
+\declaretheorem[style=definition, name=Definição]{definition}
+\declaretheorem[style=definition, name = Exemplo, refname={exemplo, exemplos}]{example}
+\declaretheorem[style=definition, name=Hipótese]{hypothesis}
+\declaretheorem[style=definition, name=Questão]{question}
+\declaretheorem[style=remark, name = Observação]{remark}
+\newcounter{claim}[theorem]
+\newenvironment{claim}{\stepcounter{claim}{\endlist\noindent{}Afirmação \theclaim:}}{\endlist}
+
+\usepackage{xcolor}
+% \usepackage[tt=false]{libertine}
+% \usepackage[libertine]{newtxmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage[shortlabels]{enumitem}
+
+\input{preamble/tikz}
+\input{preamble/macros}
+
+\makeatletter
+\RenewDocumentCommand{\nameref}{s}{\IfBooleanTF{#1}{\@namerefstar}{\T@nameref}}
+\makeatother
+
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\huge}
+
+\begin{document}
+
+\begin{titlingpage}
+  \begin{center}
+    \vspace*{0cm}
+    {
+      \Large
+      Relatório científico anual
+    }
+    \vfill
+    {
+      \huge
+      Medidas empíricas em sistemas dinâmicos\\[4cm]
+    }
+    {
+      \large
+      Processo FAPESP N\textordmasculine{} 2023/03954-7\\[1cm]
+      
+      Período de vigência: 01/06/2023 a 31/03/2025
+
+      Período coberto pelo relatório: 01/06/2023 a 10/05/2024\\
+    }
+    \vfill
+    \today
+  \end{center}
+\end{titlingpage}
+
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+\chapter{Resumo}
+Neste projeto vamos estudar medidas empíricas em sistemas dinâmicos suaves. Essencialmente, aprofundaremos em dois fenômenos. Primeiro vamos analisar sistemas que possuem medidas físicas com bacias entrelaçadas. Em seguida vamos provar existência de sistemas dinâmicos com comportamento não-estatístico na fronteira dos sistemas que possuem medidas com bacias entrelaçadas. 
+
+\subfileinclude{chapters/bonifant-milnor.pt}
+
+\chapter{Plano de atividades}
+Para o próximo período, planejamos seguir investigando como os princípios de invariância fracos se aplicam a dinâmicas, gerando comportamento histórico, e escrever uma síntese da aplicabilidade desses resultados com diferentes exemplos. Um pouco mais especificamente, um dos casos em que isso vale é quando a função dos ``passos'' \(p \colon X \to \RR\) pode ser decomposta em \(L^2(\mu)\) como a soma de um martingale e um cobordo, e podemos citar mapas expansores e sistemas Anosov como dinâmicas em que vários observáveis podem ser decompostos assim (por exemplo \cite{vianaStochasticDynamicsDeterministic2021}), o que seria interessante entender.
+
+Em colaboração com o aluno de pós-doutorado Douglas Coates, também estamos vendo como a presença de uma distribuição limite para o tempo médio de visita a certos conjuntos, como é o caso da Lei do Arco-seno, se traduz em uma distribuição limite das medidas empíricas e alguns outros fatos interessantes, o que pode se tornar uma publicação.
+
+% Outra direção que planejamos explorar 
+
+Durante o período de 22 de julho a 9 de agosto de 2024, acontecerá o evento ``School and Workshop on Dynamical Systems'' no ICTP, para o qual me inscrevi e pretendo apresentar o trabalho atual. A escola e o workshop vão contar com vários palestrantes importantes, alguns com trabalhos relacionados a este projeto.
+
+\chapter{Participação em evento científico}
+Não houve participação em eventos que demandassem apresentação de trabalhos.
+
+\section{1st School of Advanced Studies}
+Evento realizado em Fortaleza/CE, na UFC, entre 3 e 12 de janeiro de 2024. Dois minicursos, cada um com um total de 8h:
+\begin{enumerate}
+  \item Divisible convex sets and Anosov flows in low regularity, lectured by Carlos Matheus (CNRS / École Polytechnique, France).
+  \item Introduction to partially hyperbolic dynamics, lectured by Rafael Potrie (Universidad de la República, Uruguay).
+\end{enumerate}
+
+\section{Programa de Verão - IMPA}
+
+Participei do programa de verão do IMPA, localizado no Rio de Janeiro/RJ, entre os dias 12 de janeiro e 30 de março.
+
+\begin{enumerate}
+  \item Curso ``Análise Funcional'', nível Doutorado, ministrado pelo professor Bruno Braga (IMPA) com carga horária de 48 horas.
+  \item Minicurso ``Uma introdução às Álgebras de Operadores através de Grupoides'', Alcides Buss (UFSC).
+\end{enumerate}
+\chapter{Trabalhos publicados ou submetidos}
+Não houveram trabalhos publicados ou submetidos no período.
+
+\printbibliography
+
+\end{document}

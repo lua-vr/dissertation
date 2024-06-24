@@ -1,0 +1,334 @@
+\documentclass[../main]{subfiles}
+ 
+\begin{document}
+
+\chapter{Historical behavior}\label{cha:historical-behavior}
+
+Ergodic theory tries to find order in chaos by hoping that even if a dynamical system looks complicated, its statistical properties are well behaved. But what if the statistics don't even exist for most points? This phenomenon is what is called \emph{non-statistical}, or \emph{historical} behavior.
+
+\section{Martingale-coboundary decomposition}
+
+\todo{rewrite this section for ergodic processes in general, I think it will be less confusing later (see the remark in the next theorem)}
+
+% Even though \cref{thm:donsker} requires the random variables to be independent, we can still reach similar conclusions by requiring them to be co-homologous
+
+The key idea for applying \cref{thm:donsker-martingale} in a dynamical system \((X,\mathcal{F},\mu,f)\), where \(\mu\) is a \(f\)-invariant probability, is finding a sub-\(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\varphi \in L^2(\mu)\) can be decomposed as a sum
+\begin{equation}\label{eq:coboundary}
+  \varphi = \varphi_0 + \phi \circ f - \phi
+\end{equation}
+such that \(\phi \in L^2(\mu)\), \(\varphi_0\) is \(\mathcal{G}\)-measurable and \(\eta = (\varphi_0 \circ f^{i - 1})_{i \geq 1}\) is a reversed martingale difference sequence with respect to \((f^{-i}(\mathcal{G}))\). Indeed, this allows the transference of the weak invariant principle for the original \(\varphi\): let \(\xi = \rpar{\varphi \circ f^{i - 1}}_{i \geq 1}\), and notice that
+\begin{equation*}
+  \PSum[n,rv = \xi] = \PSum[n,rv = \eta] + \phi \circ f^n - \phi,
+\end{equation*}
+so
+\begin{equation*}
+  \DProc[n,rv=\xi]{x}{t}
+  = \frac{\PSum[\floor{nt},rv=\xi]{x}}{\sqrt{n}} = \DProc[n,rv=\eta]{x}{t} + \frac{1}{\sqrt{n}} \big(\phi \circ f^{\floor{nt}} - \phi\big)(x).
+\end{equation*}
+It suffices to show that for \(\mu\)-almost every \(x\), the second term in the sum converges uniformly to zero (as a function of \(t\)). Given \(\varepsilon > 0\), we look at the sets \(B_n = \{ x :(\phi ^2 \circ f^n)(x) \geq n \varepsilon \}\). Since
+\begin{equation*}
+  \sum_{n = 1}^{\infty}\mu(B_n) = \sum_{n = 1}^{\infty}\mu(\set{\phi^2 \geq n \varepsilon}) = \int \floor{\phi^2/ \varepsilon} \;d\mu \leq \frac{1}{\varepsilon} \lVert \phi \rVert_2^2,
+\end{equation*}
+by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the intersection over \(k\) of the sets \(\liminf_{n \to \infty}B_n^{\complement}\) for \(\varepsilon = 1/k\), we get a full-measure set \(G\) with the property that for every \(x \in G\) and \(\varepsilon > 0\), there exists \(N\) such that \(n \geq N\) implies \(\frac{1}{\sqrt{n}}|\phi(f^n(x))| \leq \varepsilon\). Now, let \(M \geq N\) be big enough so that \(n \geq M\) implies \(\frac{1}{\sqrt{n}}|\phi(f^i(x))| \leq \varepsilon\) for all \(0 \leq i \leq N\). So for \(n \geq M\),
+\begin{equation*}
+  \sup_{t \in [0,1]}\frac{1}{\sqrt{n}} \big\lvert\phi \circ f^{\floor{nt}} - \phi\big\rvert(x) \leq 
+  \max_{0 \leq i \leq N}\frac{|\phi \circ f^{i}(x)|}{\sqrt{n}} + 
+  \max_{N \leq i \le n}\frac{|\phi \circ f^{i}(x)|}{\sqrt{i}} 
+  \leq 2\varepsilon
+\end{equation*}
+as desired.
+
+\subsubsection{Existence of martingale-coboundary decomposition}
+From now on, we assume that \(\mu\) is an ergodic measure for \(f\).
+
+\begin{theorem}\label{thm:decomposition-existence}
+  Suppose \(\varphi \in L^2(\mu)\) and \(\mathcal{F}_j = f ^{-j}(\mathcal{F})\) are such that
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{\varphi, \mathcal{F}_j} \rVert_2 < \infty.
+  \end{equation*}
+  Then a decomposition as in \cref{eq:coboundary} exists. Moreover, this implies that
+  \begin{equation*}
+    \int \varphi \;d\mu = \int \varphi_0 \;d\mu = 0
+  \end{equation*}
+  and that the series in
+  \begin{equation*}
+    \sigma ^2 = \lVert \varphi_0 \rVert^2_2 = \lVert \varphi \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int \varphi \cdot \varphi \circ f^n \;d\mu
+  \end{equation*}
+  converges absolutely. By the preceding arguments, if \(\varphi_0 \neq 0\) then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
+\end{theorem}
+
+\begin{proof}
+  \newcommand{\pp}{\phi^+}
+  \newcommand{\pn}{\phi^-}
+  We begin by writing \(\phi= \pn + \pp\), where \(\pp = \CE[\mu]{\phi, \mathcal{G}_0}\).
+  
+  \todo{write}
+\end{proof}
+
+\begin{remark}
+  If \(\varphi\) was a coboundary \(\varphi = \phi \circ f - \phi\) to begin with, then it is clear that \(\PSum[n,rv = \xi] = \phi \circ f^n - \phi\), so the iterates of the skew product \(F(x,y) = (f(x), y + \varphi(x))\) satisfy
+  \begin{equation*}
+    F^n(x_0,y_0) = (f^n(x_0), \phi(f^n(x_0)) - \phi(x_0) + y_0) \subseteq \graph(\psi)
+  \end{equation*}
+  and are thus contained in the graph of \(\psi\), where \(\psi(x) = \phi(x) - \phi(x_0) + y_0\). In particular, \(F\) is not ergodic for \(\mu \otimes \Leb\).
+\end{remark}
+
+\begin{corollary}\label{cor:decay-implies-summable}
+  Suppose \(\varphi\) is such that there exists a summable sequence \(c_n > 0\) satisfying
+  \begin{equation*}
+    \int (\psi \circ f^n) \varphi \;d\mu \leq \lVert \psi \rVert_2c_n
+  \end{equation*}
+  for all \(\psi \in L^2(\mathcal{G})\), where \(\mathcal{G}\) is as in \cref{thm:decomposition-existence}. Then
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \lVert \CE{\varphi, f^{-n}(\mathcal{G})} \rVert_2 < \infty.
+  \end{equation*}
+\end{corollary}
+
+\begin{remark}
+  The book~\cite{vianaStochasticDynamicsDeterministic2021} proves this condition is satisfied for smooth expanding maps, Hölder-continuous \(\varphi\) and \(\mathcal{G} = \mathcal{F}\), so this includes the \(f(x) = kx\) maps. The second condition is trivial when \(\mathcal{G} = \mathcal{F}\).
+\end{remark}
+\begin{remark}
+  More generally,~\cite{vianaStochasticDynamicsDeterministic2021} also shows the decomposition~\eqref{eq:coboundary} exists for uniformly hyperbolic \(f\) and Hölder \(\varphi\), also by showing that a sum like in \cref{thm:decomposition-existence} converges due to decay of correlations, then uses this to show the central limit theorem (but I have not read the proof). In this case, \(\mathcal{G}\) has something to do with the attractor and the second condition follows from Hölder somehow.
+\end{remark}
+
+\ohno{the examples in the \citeauthor{billingsleyConvergenceProbabilityMeasures1999} book are worth checking. They include both the \(kx\) maps (hmm... I guess B-M didn't see it?) and the Gauss map.}
+
+\section{Historical behavior for skew products}
+
+\NewObject\Fun\Mu{\mu}
+
+Let \((X,\mu)\) be a Borel probability space, where \(X\) is compact and metrizable, and \(F \colon X \times I \to X \times I\) a skew product of the form
+\begin{equation*}
+  F(x,y) = (g(x),f_x(y))
+\end{equation*}
+where \(g \colon X \to X\) is ergodic and measure-preserving. Suppose there is a homeomorphism \(\gamma \colon I \to \RR[closure]\) and a measurable function \(p \colon X \to \RR\) satisfying \(t_{x} \circ \gamma = \gamma \circ f_x\) for all \(x \in X\), where \(t_x(y) = y + p(x)\) is the translation by \(p(x)\). 
+\[
+  \begin{tikzcd}
+    I \arrow[d, "\gamma"]\arrow[r, "f_{x}"] & I \arrow[d, "\gamma"]\\
+    \RR[closure] \arrow[r,"t_{x}"] & \RR[closure]
+  \end{tikzcd}
+\]
+Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamma(1) = +\infty\) and \(\gamma\left(\frac{1}{2}\right) = 0\).
+
+\begin{theorem}\label{thm:wip-historical}
+  If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i - 1})_{i \geq 1}\), then \(F\) has historical behavior. In fact, for \(\mu\)-almost every \(x \in X\) and every \(y \in (0,1)\),
+  \begin{equation}\label{eq:emp-closure}
+    \set{e_n(x,y)}[n \in \NN, '] = [\delta_-, \delta_+]
+  \end{equation}
+  where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak* topology.
+\end{theorem}
+
+\begin{proof}
+  Fix \(\delta \in (0,1)\), and define
+  \begin{align*}
+    T(x,y) &= \limsup_{n \to \infty}\frac{1}{n}\# \set{ 0 \leq i < n \where f^{(i)}_x(y) > \delta }\\
+           &= \limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}1_{(M_y,\infty)}(\PSum[i](x))
+  \end{align*}
+  where \(M_y = \gamma(\delta) - \gamma(y)\).
+  Let \(E\) be the full \(\mu\)-measure set given by \cref{lem:avoid-compacts}.
+  \begin{claim}
+    \(T(x,y_1) = T(x,y_2)\) for all \(x \in E\), \(y_1,y_2 \in (0,1)\).
+  \end{claim}
+  Indeed, set \(M = \max \{ \abs{M_{y_1}},\abs{M_{y_2}}\}\) and let
+  \(G = \set{ i : \abs{\PSum[i,rv = \xi](x)} > M}\).
+  Since \(1_{(M_{y_1},\infty)}(t) = 1_{(M_{y_2},\infty)}(t)\) whenever \(\lvert t \rvert > M\), for all \(i \in G\), \[1_{(M_{y_1},\infty)}(\PSum[i](x)) =  1_{(M_{y_2},\infty)}(\PSum[i](x)).\]
+  So
+  \begin{align*}
+    \lvert T(x,y_1) - T(x,y_2) \rvert
+    &\leq \limsup_{n \to \infty} \frac{1}{n} \sum_{i = 0}^{n - 1} \lvert 1_{(M_{y_1},\infty)}(\PSum[i](x)) -  1_{(M_{y_2},\infty)}(\PSum[i](x)) \rvert\\
+    &\le \limsup_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where i \notin G} = 0.
+  \end{align*}
+  This proves the claim. Since \(T\) is invariant by \(F\), for any \(x \in g^{-1}(E)\),
+  \begin{equation*}
+    T(x,y) = T(g(x), f_x(y)) = T(g(x),y).
+  \end{equation*}
+  By ergodicity, there is a full measure set \(\H \subseteq X\) and \(t \in [0,1]\) for which \(T(x,y) = t\) for all \(x \in \H\), \(y \in (0,1)\).
+
+  We can use the arcsine law to evaluate this constant. Given \(\varepsilon > 0\), fix some \(y \in (0,1)\) and define 
+
+  \begin{equation*}
+    E_n = \set[par = auto]{x \in X \where \frac{1}{n} \#\set{0 \leq i < n \where \PSum[i](x) > M_y} > 1 - \varepsilon}.
+  \end{equation*}
+  By the \cref{lem:weak-arcsine}, we know \(\lim_{n}\mu(E_n) = Z([1 - \varepsilon, 1]) > 0\), so
+  \begin{equation*}
+    \mu(\limsup_{n \to \infty} E_n) \geq \limsup_{n \to \infty} \mu(E_n) > 0.
+  \end{equation*}
+  This means there exists \(x_0 \in \H \cap \limsup E_n\), and since
+  \begin{equation*}
+    \limsup_{n \to \infty}E_n = \set{x \in X \where T(x,y) > 1 - \varepsilon}
+  \end{equation*}
+  we have \(t = T(x_0,y) > 1 - \varepsilon\). But \(\varepsilon > 0\) is arbitrary, so \(T(x,y) = 1\) for every \(x \in \H\) and \(y \in (0,1)\).
+
+  So far, we started with \(\delta \in (0,1)\) and showed that for 
+  \begin{equation*}
+    T_{\delta}(x,y) = \limsup_{n \to \infty}\frac{1}{n}\# \set{ 0 \leq i < n \where f^{(i)}_x(y) > \delta },
+  \end{equation*}
+  there is \(\H_{\delta} \subseteq X\) with \(\mu(\H_{\delta}) = 1\) such that for \(x \in \H_{\delta}\), \(y \in (0,1)\), \(\H_{\delta}(x,y) = 1\). But note that for fixed \(x,y\), the function \(\delta \mapsto T_{\delta}(x,y)\) is monotone. With this observation, it's easy to see that if we define
+  \begin{equation*}
+    \H = \bigcap_{i = 1}^{\infty} \H_{1/i} \cap \H_{1 - 1/i},
+  \end{equation*}
+  then \(\mu(F) = 1\) and \(T_{\delta}(x,y) = 1\) for all \(x \in \H\) and \(y, \delta \in (0,1)\).
+
+  In particular, this implies that if \(x \in \H\) and \(y \in (0,1)\), then for any \(\delta \in (0,1)\), letting \(U_n = \set{0 \leq i < n \where f_x^{(i)}(y) > \delta}\), the limit supremum of the \(y\) coordinate satisfies
+  \[\limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) \geq \limsup_{n \to \infty}\frac{1}{n} \sum_{i \in U_n}\delta = \delta,\]
+  so the left-hand side is equal to 1. The proof we have so far works analogously for the time averages of the iterates in which \(f^{(i)}_x(y) < \delta\), and by doing so we get
+  \[\liminf_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) = 0.\]
+  Note that those are time averages of the continuous bounded function \(\pi_2 \colon X \times I \to \mathbb{R}\), so historical behavior is proved.
+  
+  We now focus on \cref{eq:emp-closure}.
+  By Birkhoff, we can fix a full measure set \(\S \subseteq X\) such that for all \(x \in \S\) and \(\varphi \in \Cs{X}\),
+  \begin{equation*}
+    \frac{1}{n} \sum_{i = 0}^{n - 1}\varphi(g^i(x)) \to \int_X \varphi \;d\mu.
+  \end{equation*}
+  Given \(x\) in the full measure set \(\H \cap \S\) and \(y \in (0,1)\), we construct an increasing sequence \((n^-_k)_k \subseteq \NN\) inductively, letting \(n^-_0 = 1\) and \(n^-_{k + 1} > n^+_k\) be any integer satisfying
+  \[
+    \frac{1}{n^-_k}\#\set{ 0 \leq i < n^-_k \where f^{(i)}_x(y) < 1/k } > 1 - 1/k.
+  \]
+  Analogously, we can pick an increasing sequence \((n^+_k)_k \subseteq \NN\) for which
+  \[
+    \frac{1}{n^+_k}\#\set{ 0 \leq i < n^+_k \where f^{(i)}_x(y) >1 - 1/k } > 1 - 1/k.
+  \]
+
+  \begin{claim}
+    \[e_{n^-_k}(x,y) \weakto \delta_- \quad\text{ and }\quad e_{n^+_k}(x,y) \weakto \delta_+.\]
+  \end{claim}
+  We only show the first convergence, since the second is analogous.
+
+  Let \(\phi \in \Cs{X \times I}\) and \(\varepsilon > 0\). Since \(\phi\) is uniformly continuous, there is some \(k_1\) for which
+  \begin{equation*}
+    \sup\set[par = \big]{\abs{\phi(x,1) - \phi(x, s)} : x \in X, s \in [0,1/k_1]} < \varepsilon.
+  \end{equation*}
+  Let \(D = \set{i \where f^{(i)}_x(y) < 1/k_1}\), and let \(N\) be big enough so that for \(k \geq N\),
+  \begin{equation*}
+    \abs[\Bigg]{\frac{1}{n_k^-} \sum_{i = 0}^{n_k^- - 1}\phi(F^i(x,0)) - \int_X \phi(z,0) \;d\mu(z)} < \varepsilon
+  \end{equation*}
+  (which is possible since \(x \in \S\) and \(\varphi(x) = \phi(x,0)\) is continuous), and
+  \[\frac{1}{n_k^-}\# \set{ 0 \leq i < n_k^- \where i \notin D } < \varepsilon / \lVert \phi \rVert_{\infty},\]
+  so we can estimate
+  \begin{align*}
+    \abs{e_{n_k^-}(x,y)(\phi) &- \delta_-(\phi)}\\
+    &=
+    \abs[\Bigg]{
+    \frac{1}{n_k^-}\sum_{i = 0}^{n_k^- - 1} \phi(F^i(x,y))
+      -
+      \int_X \phi(z,0) \;d\mu(z)
+      }\\
+    &\leq
+      \abs[\Bigg]{
+      \frac{1}{n_k^-}\sum_{i = 0}^{n_k^- - 1} \phi(F^i(x,y))
+      -
+        \frac{1}{n_k^-}\sum_{i = 0}^{n_k^- - 1} \phi(F^i(x,0))
+      } + \varepsilon
+    \\
+    &\le
+      \frac{1}{n^-_k}
+      \sum_{\substack{0 \leq i < n_k^- \\[1pt] i \in D}}
+    \abs*{\phi(F^i(x,y)) - \phi(F^i(x,0))}
+    +  \frac{2}{n^-_k}\sum_{\substack{0 \leq i < n^-_k \\[1pt] i \notin D}} \lVert \phi \rVert_{\infty} + \varepsilon\\
+    &\le
+      \frac{1}{n^-_k}
+      \sum_{\substack{0 \leq i < n_k^- \\[1pt] i \in D}}
+    \abs*{\phi(F^i(x,y)) - \phi(F^i(x,0))} + 3\varepsilon\\
+    &\leq \varepsilon + 3\varepsilon = 4\varepsilon.
+  \end{align*}
+  This completes the proof of the claim. To finish the proof of~\eqref{eq:emp-closure}, we first show the following.
+
+  \begin{claim}
+    If \(\eta \in \Meas{x,y}\), then \(\supp \eta \subseteq X \times \{ 0, 1 \}\) and \(\eta \in [\delta_0,\delta_1]\).
+  \end{claim}
+
+  We use \cref{lem:avoid-compacts} again for this. Let \(\Emp[n_k]{x,y} \weakto \eta\) be a limit point, \(x_0 \in X\) and \(y_0 \in (0,1)\), so there is a neighborhood \(\U\) of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). By the lemma, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \nameref{thm:portmanteau}
+  \begin{equation*}
+    \eta(\U) \leq \liminf_{k \to \infty} \Emp[n_k]{x,y}(\U) = 0.
+  \end{equation*}
+  This shows \((x_0,y_0) \notin \supp \eta\).
+
+  We know \(\eta\) is a limiting measure for \(x\), so it's invariant by \(F\), and the fact \(x \in X\) implies \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), and since \(\delta_{ - },\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
+
+  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to note that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and since it contains both \(\delta_-\) and \(\delta_+\), it must be the whole segment.
+\end{proof}
+
+\begin{remark}[A different proof]
+  Another way to show \(\delta_-, \delta_+ \in \Meas{x}\) for \(x\) in a full measure set \(\H\) is as follows: let \(\delta > 0\) and \(p_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(p_{\delta}(0) = 0\) and \(p(t) > 1 + \delta\) for \(t > \delta\).
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{../figures/p-delta}
+    \caption{The function \(p_\delta\)}\label{fig:p-delta-plot}
+  \end{figure}
+  Let \(U_{\delta} = B_{\delta}(p_{\delta})\). By the \nameref{thm:forgery} we know \(W(U_{\delta}) > 0\), so by \cref{thm:portmanteau}
+  \begin{equation*}
+    \liminf_{n \to \infty}(\DProc[n,spar,pf]\mu)(U_{\delta}) \geq \sigma W(U_{\delta}) > 0.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    S_{\delta} = \limsup_{n \to \infty}\, \DProc[n,spar,inv]{U_{\delta}} \subseteq X
+  \end{equation*}
+  has positive measure. This set is also invariant for \(g\) because
+  \begin{align*}
+    g^{-1}(S_{\delta})
+    &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
+    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - p_{\delta}(t)} <\delta }\\
+    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
+    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta } = S_{\delta}.
+  \end{align*}
+  Therefore \(\mu(S_{\delta}) = 1\). Now, note that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
+  \begin{align*}
+    \#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \geq (1 - \delta)n_k^{+}.
+  \end{align*}
+  Analogously, there is \(n_k^- \to \infty\) such that for every \(k\),
+  \begin{align*}
+    \#\set[par = auto]{ 0 \leq i < n_k^- \where S_{i}^{\xi}(x) < -\sqrt{\textstyle n^-_k} } \geq (1 - \delta)n_k^{-}.
+  \end{align*}
+  Both can be used just as in the previous proof.
+\end{remark}
+
+\begin{theorem}
+  Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
+  \begin{equation}\label{eq:emp-convergence}
+    \Emp[n,spar,pf]{\mu\otimes \delta_y} \weakto \delta_*Z
+  \end{equation}
+  where \(Z\) is the arcsine measure on \([0,1]\) and \(\delta(\lambda) = \lambda\delta_- + (1 - \lambda)\delta_+\).
+\end{theorem}
+
+\begin{proof}
+  Let \(F \subseteq \Meas{X \times I}\) be a closed set, and let \(I = \delta([a,b]) = F \cap [\delta_-,\delta_+]\).
+
+  Idea: first, show that in \(I\) we get the desired statistics; then, show that in \(F \setminus I\) the times converge to zero.
+\end{proof}
+
+% \begin{theorem}
+%   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
+%   \begin{equation}
+%     \F[upper = n, pf]{\Leb \otimes \delta_y} \weakto \frac{1}{2} (\delta_- + \delta_+).
+%   \end{equation}
+% \end{theorem}
+
+% \begin{proof}
+%   There is no loss of generality in assuming \(y = 0\).
+%   Let \(\varphi \in \Cs{X \times I}\) and \(\varepsilon > 0\). From uniform continuity, there is \(M > 0\) for which \(\abs{\varphi(x, y) - \varphi(x,0)} < \varepsilon\) for all \(y < \gamma ^{-1}(-M)\) and \(\abs{\varphi(x, y) - \varphi(x,1)} < \varepsilon\) for all \(y > \gamma ^{-1}(M)\).
+
+%   The evaluation functions \(\ev_t \colon \WPS \to \RR\) given by \(\ev_t(f) = f(t)\) are continuous \(W\)-almost everywhere, since \(W\) gives full measure to the set of continuous functions. By definition of the Wiener measure, \((\ev_t)_* W = \N[0][t]\), so the previous observation yields \((\ev_1 \circ \DProc[n])_* \mu \weakto \N[0][1]\). Let \(N\) for which \(n \geq N\) implies
+%   \begin{equation*}
+%     \N[0][1]\rpar*{\sqpar*{-\frac{M}{\sqrt{n}},\frac{M}{\sqrt{n}}}} \leq \varepsilon.
+%   \end{equation*}
+% \end{proof}
+
+\begin{question}
+  Is the statement above true for \(\lambda \otimes \delta_y\) if \(\lambda \ll \mu\)?
+\end{question}
+
+\begin{question}
+  Douglas question: is there a measure \(\nu \in [\delta_0,\delta_1]\) such that \((F^n)_* \eta \to \nu\) for ``nice'' \(\eta\) absolutely continuous with respect to \(\mu \otimes m\)?
+\end{question}
+
+% \subsection{Questions, observations}
+
+% \begin{question}
+%   Do the ``steps'' need to be \(\varphi \in L^2\) for historical behavior? The invariance principle \emph{does} need \(L^2\) otherwise it can't even be stated. But if \(\psi \leq \varphi\) and the dynamics with steps \(\psi\) has historical behavior, won't bigger jumps mean the sums for \(\varphi\) spend similar time above/below zero? 
+% \end{question}
+
+\ifSubfilesClassLoaded{
+    \printbibliography
+}{}
+
+\end{document}
