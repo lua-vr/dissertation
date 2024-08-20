@@ -86,10 +86,9 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
 % TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
 
 \subsubsection{A failure of existence}
-Seja \(X = S^1\) com a \(\sigma\)-álgebra de borel \(\mathcal{B}\) e \(f \colon X \to X\) uma rotação irracional. Seja \(E\) um conjunto que contém exatamente um ponto de cada órbita de \(f\). Como \(f\) é uma bijeção que preserva a medida de Lebesgue, \(E_n = f^n(E)\) são disjuntos e têm a mesma medida exterior. Em particular, \(E_n\) não podem ser mensuráveis, logo \(m^*(E) > 0\).
+Let \(X = S^1\) with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon s^1 \to S^1\) an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = S^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
-Agora, uma pequena construção geral: se \(K\) for um subconjunto de medida exterior positiva e \(\mathcal{E} = \sigma(\{ K \} \cup \mathcal{B})\), definindo \(\mu^* \colon 2^X \to [0,1]\) por \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
-uma conta simples mostra que \(\mu^*\) é realmente uma medida exterior de probabilidade, e se restringe a uma medida \(\mu\) em \(\mathcal{E}\). Também não é complicado mostrar que \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Seja \(\mathcal{C}_K\) o completamento por \(\mu^*\) da \(\sigma\)-álgebra \(\mathcal{E}\).
+If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as  \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\] then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
 
 Vamos aplicar a construção acima para \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note que \(E \cap K = \varnothing\), logo \(\mu^*(E) = 0\) e \(E \in \mathcal{C}_K\). Assim, \(f^{-1}(K) = E \cup K\) também é mensurável. Isso mostra que para todo \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) é mensurável, logo \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
 
@@ -226,3 +225,7 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
 \end{example}
 
 \end{document}
+
+\section{Entropy}
+
+\section{Invariance Principle}

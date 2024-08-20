@@ -1,0 +1,90 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{proposition}[Portmanteau]\label{thm:portmanteau}
+  The following are equivalent:
+  \begin{enumerate}[i., left=0pt, topsep=3pt]
+    \item \(\mu_n \weakto \mu\);
+    \item \(\lim_{n \to \infty} \mu_n(\phi) = \mu(\phi)\) for all Lipschitz functions \(\phi\);
+    \item \(\liminf_{n \to \infty} \mu_n(U) \geq \mu(U)\) for all open sets \(U\);
+    \item \(\limsup_{n \to \infty} \mu_n(F) \leq \mu(F)\) for all closed sets \(F\);
+    \item \(\lim_{n \to \infty} \mu_n(A) \leq \mu(A)\) for all continuity sets \(A\) of the measure \(\mu\).
+  \end{enumerate}
+\end{proposition}
+
+\begin{lemma}\label{lem:sch-cross-increase}
+  If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\) for all \(y_1 < y_2 < y_3 < y_{4}\).
+\end{lemma}
+
+\begin{lemma}
+  If \(f \colon I \to I\) preserves orientation and \(\SchD f \prec 0\), then \(f'(0)f'(1) < 1\).
+\end{lemma}
+
+\begin{corollary}\label{cor:schwarz-basin-pos-meas}
+  If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) for \(\mu\)-almost every \(x \in X\), then \(\Lyap(\mathcal{A}_0) + \Lyap(\mathcal{A}_1) < 0\).
+  In particular, at least one of the basins has positive measure.
+\end{corollary}
+
+\begin{lemma}\label{lem:basin-segment}
+  If \((x, y_1) \in \mathcal{B}_0\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \leq y_1\). Similarly, if \((x, y_1) \in \mathcal{B}_1\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \geq y_1\).
+\end{lemma}
+
+\begin{proof}
+  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \mathcal{B}_0\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\nu_0\) and \(e_n(x,y_2) \to \nu_0\), by \nameref{thm:portmanteau}
+    \newcommand{\timeinU}{\frac{1}{n}\# \set{ 0 \leq i < n \where f_x^n(y_2) < \delta }}
+    \[\lim_{n \to \infty} e_n(x,y_2)(U) = \nu_0(U) = 1.\]
+    Define \(\tau_n = e_n(x,y_2)(U) = \timeinU\).
+    Note that if \(f_x^n(y_2) < \delta\), then \(f_x^n(y_1) < \delta\) since the diffeomorphisms preserve orientation. Thus,
+    \begin{align*}
+      \lvert e_n(x,y_1)(\varphi) - e_n(x,y_2)(\varphi) \rvert
+      &\leq \frac{1}{n}\sum_{i = 0}^{n - 1}\abs[\big]{\varphi(g^n(x),f_x^{n}(y_1)) - \varphi(g^n(x),f_x^{n}(y_2))}\\
+      &\leq \varepsilon \tau_n + 2 \lVert \varphi \rVert_{\infty} (1 - \tau_n).
+    \end{align*}
+    Since \(\tau_n \to 1\), there exists \(N\) such that \(n \geq N\) implies that the right side is less than \(2 \varepsilon\), hence both integrals on the left converge to \(\nu_0(\varphi)\).
+\end{proof}
+
+\begin{theorem}\label{thm:neg-schwarz-sep-graph}
+  Suppose \((x,y) \mapsto \SchD f_x(y)\) is continuous and there is a metric \(d \colon I \times I \to \mathbb{R}\) on \(I\) that satisfies:
+  \begin{enumerate}
+  \item \(d\) generates the usual topology on \(I\);
+  \item \(d\) is uniformly stronger than the Euclidian metric, meaning that \(d(x_n,y_n) \to 0\) implies \(\abs{x_n - y_n} \to 0\);
+  \item the map \(F\) is expanding for \(d\) in the interior of almost every fiber, meaning that for \(\mu\)-almost every \(x \in X\) and for all \(y_1,y_2 \in (0,1)\) with \(y_1 \neq y_2\), we have \(d(f_x(y_1),f_x(y_2)) > d(y_1,y_2)\).
+  \end{enumerate}
+  If at least one of the basins has positive Lebesgue measure, then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
+  \begin{equation*}
+    (x,y) \in \mathcal{B}_0 \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \mathcal{B}_1 \text{ whenever }y > \sigma(x).
+  \end{equation*}
+  Consequently, the union \(\mathcal{B}_0 \cup \mathcal{B}_1\) has total \(\mu \otimes \Leb\) measure.
+\end{theorem}
+
+\begin{proof}
+  We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that separate the basins in the following sense:
+  \begin{equation*}
+    \xi_0(x) = \sup \{ y \in I : y \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : y \in \mathcal{B}_1 \}.
+  \end{equation*}
+  By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\nu_0 = \mu \otimes \delta_0\) or to \(\nu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\nu_0\) or \(\nu_1\).
+  
+  It is sufficient to show that \(A = \{ x \in X : \xi_0(x) \neq \xi_1(x) \}\) has measure zero, since in this case we can define \(\sigma\) as the common value of the two functions. Suppose by contradiction that this set does not have measure zero. Since the \(f_x\) are bijective, \(A\) is an invariant set under \(g\), so the ergodicity of \(\mu\) implies that \(A\) has full measure.
+
+  From the assumption, we can assume without loss of generality that \(\Leb(\mathcal{A}_1) > 0\), so by ergodicity, we also have \(\xi_1(x) < 1\) for \(\mu\)-almost every \(x \in X\). Thus, given \(k \in \NN\), there exists \(\delta_k < 1\) such that \(E_k = \{ x \in X : \xi_1(x) < \delta_k \}\) has measure \(\mu(E_k) > 1 - 1/k\). Applying the Birkhoff ergodic theorem to the functions \(1_{E_k}\), we obtain \(B \subseteq X\) of full measure such that for all \(x \in B\) and \(k\),
+  \begin{equation}\label{eq:time-small}
+    \lim_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where \xi_1(g^i(x)) < \delta_k} = \mu(E_{k}) > 1 - 1/k.
+  \end{equation}
+  
+  By the ergodicity of \(\mu\), there exists another set \(C \subseteq X\) of full measure whose empirical measures converge to \(\mu\), and since \(f_x\) is expanding for \(d\) almost everywhere in \(x \in X\), there exists a set \(D\) of full measure such that \(f_x\) is expanding for \(d\) for all \(n \geq 0\) and \(x \in D\). Let \(x_0 \in A \cap B \cap C \cap D\) and \(y_0 \in (\xi_0(x_0), \xi_1(x_0))\), and let \(\nu \in \Meas{x_0,y_0} \setminus \{ \nu_0 \}\) be a limit point of the empirical measures different from \(\nu_0\). Note that since \(x_0 \in B\), necessarily \((\pi_X)_* \nu = \mu\), but since \(\nu \neq \nu_0\), it follows that \(\nu(X \times \{ 0 \}) < 1\). Thus, \(\supp \nu\) is not contained in \(X \times \{ 0 \}\), and there exists \(\varepsilon > 0\) such that \(U = X \times \interval[open left]{\varepsilon}{1}\) satisfies \(\nu(U) > 0\). Let \(k\) be such that \(\nu(U) > 1/k\), and \(n_j \to \infty\) such that \(\liminf_{j \to \infty} e_{n_j}(x_0,y_0)(U) > 1/k\).
+  In other words, we have
+  \begin{equation}\label{eq:time-big}
+    \liminf_{j \to \infty} \frac{1}{n_j} \# \set{ 0 \leq i < n_j \where f_{x_0}^i(y_0) > \varepsilon} > 1/k.
+  \end{equation}
+
+  Now, consider the sequence \(r_n = d(f_{x_0}^n(y_0), f_{x_0}^n(\xi_1(x_0)))\), which is well-defined and strictly positive since \(0 < f_{x_0}^n(y_0) < f_{x_0}^n(\xi_1(x_0)) < 1\) by the definition of the points. Note also that the graph of \(\xi_1\) is strictly invariant under \(F\), so \(f_{x_0}^n(\xi_1(x_0)) = \xi_1(g^n(x_0))\).
+
+  Since \(x_0 \in D\), it follows by \cref{lem:sch-cross-increase} that \(r_n\) is an increasing sequence. On one hand, it is not possible for \(r_n \to \infty\), because from \cref{eq:time-small,eq:time-big} we know that there exist \(n \in \mathbb{N}\) arbitrarily large such that \(0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\). On the other hand, if \(r_n \to r < \infty\), then for each \(x \in X\) there exists a unique \(\xi(x)\) such that \(\rho(0, \xi(x), \xi_1(x), 1) = r\). In fact, a calculation shows that
+  \begin{equation*}
+    \xi(x) = \frac{\xi_1(x)}{r(1 - \xi_1(x)) + \xi_1(x)}.
+  \end{equation*}
+  Note that \(r_n \to r\) implies \(\lim_{n \to \infty} \lvert \xi(g^n(x_0)) - f_{x_0}^n(y_0) \rvert = 0\). Since we know that \(x_0\) is in the basin of \(\mu\), necessarily \(e_n(x_0,y_0)\weakto \eta\), where \(\eta = (\graph \xi)_* \mu\) and \((\graph \xi)(x) = (x, \xi(x))\). Thus, \(\eta\) is an invariant measure. But then,
+  \[\varphi(x,y) = \frac{\rho(0, y, \xi_1(x), 1)}{1 + \rho(0, y, \xi_1(x), 1)}\]
+  is an integrable function defined at \(\eta\)-almost every point, with the property that \(\varphi(F(x,y)) > \varphi(x,y)\) at \(\eta\)-almost every point. This is impossible, as it would imply \(\int \varphi \;d \eta < \int \varphi \circ F \;d\eta = \int \varphi \;d\eta\).
+\end{proof}
+\end{document}
