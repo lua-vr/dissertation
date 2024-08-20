@@ -296,11 +296,8 @@ The idea of the proof is to pass to the invertible extension of the system and o
   Furthermore, the basin of \(\nu\) has full Lebesgue measure. In fact, if \(\varphi \in \Cs{X \times I}\), then \(\varphi \circ \pi \in \Cs{\eX \times I}\) and \(e_n(\pi(\ex), y)(\varphi) = e_n(\ex, y)(\varphi \circ \pi)\). Therefore, \(e_n(x, y) \to \nu\) if and only if \(e_n(\ex, y) \to \enu\) for any \(\ex \in \pi^{-1}(x)\), that is, \((\pi \times \Id)^{-1}(\mathcal{B}(\nu)) = \mathcal{B}(\enu)\). It follows that \((\mu \otimes \Leb)(\mathcal{B}(\nu)) = (\emu \otimes \Leb)(\mathcal{B}(\enu)) = 1\).
 \end{proof}
 
-\begin{remark}
-  The proofs of \cref{thm:neg-schwarz-sep-graph,thm:pos-schwarz-asymptotic} would carry out mostly unchanged if instead of assuming negative Schwarzian for the fiber maps, we assumed that one basin has positive measure and that for every \(x\) there is a metric \(d_x\) in \(I\), equivalent and uniformly stronger than the Euclidian metric, with the property that \(d_x(y_1,y_2) < d_{g(x)}(f_x(y_1),f_x(y_2))\). In the negative Schwarzian case, this metric is the hyperbolic metric.
-\end{remark}
-
 % TODO: Ali's argument probably works?
+% TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples
 
 % \begin{remark}
 %   If \cref{hip:elevators} holds for \(F\) with positive Schwarzian, and if \(\Lyap{\mathcal{A}_i} > 0\) for both \(i = 0,1\), then the inverse \(\F[lift]^{-1}\) of the invertible extension has intermingled basins. The reason for this may seem a bit subtle, because in the argument of \cref{thm:intermingled} we explicitly use that the map is non invertible when choosing a pre-orbit that converges to the elevator. % actually, the f_\pi(x) WILL depend on the future, so this remark is bogus 😢
