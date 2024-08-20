@@ -72,7 +72,7 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
 \end{example}
 
 \begin{example}
-  Let \(f \colon X \to \Meas[1]{X}\) be a \emph{Markov kernel} from a measurable set to itself. Then, examples of cones for the associated system in \(\Stoch\) over \(\NNZ\) are \emph{stationary measures} \(m \colon \set{\star} \to \Meas[1]{X}\), that is, measures with the property that 
+  Let \(f \colon X \to \Meas[1]{X}\) be a \emph{Markov kernel} from a measurable set to itself. Examples of cones for the associated system in \(\Stoch\) over \(\NNZ\) are \emph{stationary measures} \(m \colon \set{\star} \to \Meas[1]{X}\), that is, measures with the property that 
   \begin{equation*}
     (f \circ m)(\star) =  \int_X f(x) \;d\mu\set{x} = \mu,
   \end{equation*}
@@ -82,7 +82,50 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
 \subsection{Extensions}
 \subsection{The invertible extension}\label{sec:invert-extens}
 
+\subsubsection{Solenoid}
+% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
+
 \subsubsection{A failure of existence}
+Let \(X = S^1\) with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon s^1 \to S^1\) an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = S^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
+
+If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as  \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\] then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
+
+Vamos aplicar a construção acima para \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note que \(E \cap K = \varnothing\), logo \(\mu^*(E) = 0\) e \(E \in \mathcal{C}_K\). Assim, \(f^{-1}(K) = E \cup K\) também é mensurável. Isso mostra que para todo \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) é mensurável, logo \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
+
+Agora, para qualquer \(A \in \mathcal{C}_K\), podemos escrever \(A = B \cup Z\) com \(B \in \mathcal{E}\) e \(\mu^*(Z) = 0\); assim, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note que
+\begin{equation*}
+  \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
+\end{equation*}
+portanto \(f^{-1}(\mathcal{C}_K) \subseteq \mathcal{C}_K\).
+
+A mesma conta mostra que \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) para todo \(A \subseteq X\). Assim, se \(A\) for mensurável,
+\begin{equation*}
+  1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
+\end{equation*}
+logo \(f_*\mu = \mu\) em \(\mathcal{C}_K\).
+
+Considere \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) o limite inverso de \((X,f,\mathcal{C}_K)\), munido da restrição da \(\sigma\)-álgebra produto. Note que \(\tilde f\colon \Sigma \to \Sigma\) dada por
+\[
+\tilde f((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots,x_{-1},x_0,f(x_0))
+\]
+é invertível e mensurável, pois
+\[
+\tilde f([A_{-k},\dots,A_0] \cap \Sigma) = [A_{-k},\dots,A_0,X] \cap \Sigma.
+\]
+Para cada \(n \in \ZZ_{ \leq 0}\), seja \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suponha que exista \(\tilde \mu\) uma medida em \(\Sigma\) tal que \(\pi_*\tilde \mu = \mu\), em que \(\pi((x_i)_{i \leq 0}) = x_0\). Então
+\begin{equation*}
+  \tilde \mu(K_n) = \tilde \mu(\tilde{f}^n(\pi ^{-1}(K))) = \mu(K) = 1
+\end{equation*}
+para todo \(n\). Por outro lado, como \(f\) é invertível,
+\begin{align*}
+  \bigcap_{n \leq 0}K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
+    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.\\
+\end{align*}
+Mas esse conjunto é vazio, pois 
+\begin{equation*}
+    \{ x : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty}f^n(K) = \limsup_k E_k =  \varnothing.
+\end{equation*}
+Isso contradiz a "continuidade no vazio" de medidas finitas.
 
 
 \section{Ergodic theorems}
@@ -182,3 +225,7 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
 \end{example}
 
 \end{document}
+
+\section{Entropy}
+
+\section{Invariance Principle}

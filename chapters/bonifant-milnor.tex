@@ -4,7 +4,7 @@
 
 \chapter{Schwarzian derivatives and cylinder maps}\label{cha:bonifant-milnor}
 
-In~\cite{bonifantSchwarzianDerivativesCylinder2008}, the authors constructed a family of skew product diffeomorphisms whose dynamic properties vary according to the Schwarzian derivative of the maps on the fibers. Depending on the sign of this derivative, the family either has intermingled basins, a physical measure whose basin has full Lebesgue measure, or historical behavior almost everywhere. During the first year, we sought to understand this family of examples well and answer some questions posed in the article.
+In~\cite{bonifantSchwarzianDerivativesCylinder2008}, the authors constructed a family of skew product diffeomorphisms whose dynamic properties vary according to the Schwarzian derivative of the maps on the fibers. Depending on the sign of this derivative, the map either has intermingled basins, a physical measure whose basin has full Lebesgue measure, or historical behavior.
 
 \section{Cross ratios and the Schwarzian derivative}
 
@@ -154,16 +154,35 @@ The version of the statement below is slightly more general than the correspondi
 In this section only, we fix \(X = S^1\), \(\mu = \Leb\), and \(g \colon S^1 \to S^1\) the map \(g(x) = kx\). Furthermore, we require the following hypothesis to hold.
 
 \begin{hypothesis}[Elevators]\label{hip:elevators}
-  There exist fixed points \(x^-\) and \(x^+\) in \(S^1\) such that for every \(y \in (0,1)\), \(f_{x}(y) < y\) for \(x\) in a neighborhood of \(x^-\) and \(f_x(y) > y\) for \(x\) in a neighborhood of \(x^+\).
+  There exist two fixed points \(x^-\) and \(x^+\) in \(X\) whose unstable manifolds are dense, and such that for every  \(y \in (0,1)\), \(f_{x^-}(y) <  y\) and \(f_{x^+}(y) > y\).
 \end{hypothesis}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.6\textwidth]{../figures/elevators.png}
+  \caption{Elevators (TODO: make my own figure)}
+  \label{fig:elevators}
+\end{figure}
+
+\begin{theorem}
+  Suppose \cref{hip:elevators} holds. Then, any closed strictly invariant set  \(K \subseteq X \times I\) with at least one point \((x,y) \in K\) such that \(y \in (0,1)\) contains both boundaries \(X \times \set{0,1}\).
+\end{theorem}
+
+\begin{proof}
+  By symmetry, it is enough to show  \(\mathcal{A}_1 \subseteq K\). Let \((x,y) \in K\) be the point in the statement. 
+
+  Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) such that \(x_{ - n - 1} \in g^{-1}(\{ x_{-n} \})\) is the closest preimage of \(x_-\). Since \(x_-\) is a repelling fixed point, the construction implies that \(x_{-n} \to x_-\), so by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-1}(y_0) > y\). In particular,
+  \[y_{ - n} = f_{x_{-n}}^{-1} \circ \cdots \circ f_{x_{-1}}^{-1}(y_0)\]
+  is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, note that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
+\end{proof}
 
 \begin{definition}
   We say that two measurable subsets \(A, B\) are \textit{intermingled} with respect to a measure \(\nu\) if for every open set \(U\), \(\nu(A \cap U)\) and \(\nu(B \cap U)\) are strictly positive.
 \end{definition}
 
-\begin{theorem}\label{thm:intermingled}
+\begin{corollary}\label{cor:intermingled}
   Suppose \cref{hip:elevators} holds and both basins have positive measure. Then the basins \(\mathcal{B}_0\) and \(\mathcal{B}_1\) are intermingled for the Lebesgue measure on the cylinder.
-\end{theorem}
+\end{corollary}
 
 \begin{proof}
   By definition, the basins are strictly invariant sets. If we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) is analogous.
@@ -195,11 +214,11 @@ In this section only, we fix \(X = S^1\), \(\mu = \Leb\), and \(g \colon S^1 \to
   As \(\mathcal{A}_1\) is contained in the support, the last claim implies \(\supp \mu_0 = X \times I\).
 \end{proof}
 
-\begin{wrapstuff}[type=figure,width=.35\textwidth,height=5cm]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.9\linewidth]{../figures/intermingled}
+  \includegraphics[width=0.35\textwidth]{../figures/intermingled}
   \caption{Basins of \cref{ex:intermingled}.}
-\end{wrapstuff}
+\end{figure}
 
 \begin{example}\label{ex:intermingled}
   Define \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\). If \(|a| < 1\), then \(q_a\) is a diffeomorphism of the interval \(I\). If \(F(x) = (3x, q_{p(x)}(y))\), then \(x^+ = 0\) and \(x^- = 1/2\) are fixed points of the map \(g(x) = 3x\) (where we identify \(S^1\) with \([0,1]\)) that satisfy \cref{hip:elevators}, because \(q_a(y) > y\) if \(a > 0\) and \(q_a(y) < y\) if \(a < 0\) for all \(y \in (0,1)\). Moreover, since \(q_a\) is a degree two polynomial, it has negative Schwarzian whenever \(a \neq 0\), and from the symmetry of \(p\) we see both basins of \(F(x,y) = (kx, q_{p(x)}(y))\) must have positive measure, because at least one of them has. So \(F\) displays intermingled basins. 
@@ -210,6 +229,9 @@ In this section only, we fix \(X = S^1\), \(\mu = \Leb\), and \(g \colon S^1 \to
 The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008} without the hypothesis that both basins have positive measure. The question of whether this hypothesis could be removed was left open in the article, and the following proof shows that it is indeed unnecessary.
 
 \begin{theorem}\label{thm:neg-schwarz-sep-graph}
+  If there exists a function \(r \colon I \times I \to \mathbb{R}\)
+  such that \[r(y_1,y_2) < r(f_x(y_1),f_x(y_2))\] for every \(y_1 < y_2\) and \(\mu\)-almost every \(x \in X\),
+  
   If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
   \begin{equation*}
     (x,y) \in \mathcal{B}_0 \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \mathcal{B}_1 \text{ whenever }y > \sigma(x).
@@ -301,6 +323,7 @@ The idea of the proof is to pass to the invertible extension of the system and o
 \end{remark}
 
 % TODO: Ali's argument probably works?
+% TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples
 
 % \begin{remark}
 %   If \cref{hip:elevators} holds for \(F\) with positive Schwarzian, and if \(\Lyap{\mathcal{A}_i} > 0\) for both \(i = 0,1\), then the inverse \(\F[lift]^{-1}\) of the invertible extension has intermingled basins. The reason for this may seem a bit subtle, because in the argument of \cref{thm:intermingled} we explicitly use that the map is non invertible when choosing a pre-orbit that converges to the elevator. % actually, the f_\pi(x) WILL depend on the future, so this remark is bogus 😢
