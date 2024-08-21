@@ -23,11 +23,11 @@
 \input{preamble/theorems}
 
 \usepackage{xcolor}
-\usepackage{sansmathfonts}
-\renewcommand{\familydefault}{\sfdefault}
-% \usepackage[tt=false]{libertine}
-% \usepackage[libertine]{newtxmath}
-\usepackage{amssymb}
+% \usepackage{sansmathfonts}
+% \renewcommand{\familydefault}{\sfdefault}
+\usepackage[tt=false]{libertine}
+\usepackage[libertine]{newtxmath}
+% \usepackage{amssymb}
 \usepackage{microtype}
 \usepackage[shortlabels]{enumitem}
 
@@ -39,6 +39,10 @@
 \makeatother
 
 \begin{document}
+
+\begin{dedication}
+  À todos aqueles que seguem lutando por um mundo mais humano e justo.
+\end{dedication}
 
 \frontmatter
 
@@ -52,13 +56,14 @@
 
 \mainmatter
 \subfileinclude{chapters/introduction}
+\subfileinclude{chapters/ergodic-theory}
 \subfileinclude{chapters/bonifant-milnor}
 \subfileinclude{chapters/historical}
 \subfileinclude{chapters/invariance-principle}
 
 \appendix
+\subfileinclude{chapters/category-theory}
 \subfileinclude{chapters/probability-theory}
-\subfileinclude{chapters/ergodic-theory}
 
 \printglossaries
 \printbibliography

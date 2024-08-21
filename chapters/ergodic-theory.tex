@@ -4,15 +4,15 @@
 
 \chapter{Ergodic theory and dynamics}
 
-\section{Categorical notions}
+\section{A categorical zoo}
 The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves this structure. For instance, in topological dynamics \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
 
-These different notions can be encompassed by the notion of a \emph{monoid object} in a category. Following \cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. Let's recall that an usual monoid is like a group but without the inverse operation, that is, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
+A very flexible way to encompass these different notions is a \emph{monoid object} in a category. Following \cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
 \begin{enumerate}[i.]
 \item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
 \item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
 \end{enumerate}
-It's readily seen that given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category.
+Given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category.
 
 To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
 
@@ -79,7 +79,7 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
   where \(\mu = m(\star)\).
 \end{example}
 
-\subsection{Extensions}
+\section{Extensions (a simplifying lens)}
 \subsection{The invertible extension}\label{sec:invert-extens}
 
 \subsubsection{Solenoid}
@@ -126,6 +126,16 @@ Mas esse conjunto é vazio, pois
     \{ x : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty}f^n(K) = \limsup_k E_k =  \varnothing.
 \end{equation*}
 Isso contradiz a "continuidade no vazio" de medidas finitas.
+
+\section{Skew products and cocycles}
+
+
+\begin{example}[Iterated function system]
+  % TODO: write
+\end{example}
+
+\subsection{Lyapunov exponents}
+
 
 
 \section{Ergodic theorems}
@@ -218,14 +228,45 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
   \end{align*}
 \end{proof}
 
-\section{Cocycles and skew products}
+\section{Partitions}
+A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize the set of subsets is the object of our attentions.
 
-\begin{example}[Iterated function system]
-  % TODO: write
-\end{example}
+\subsection{Lattice structure}
+The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation
+\begin{equation*}
+  \pP \vee \pQ = \set{ P \cap Q \where P \in \pP, Q \in \pQ}
+\end{equation*}
+that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition finer than both \(\pP\) and \(\pQ\)). There is also a \emph{meet} operation \(\pP \wedge \pQ\), giving the greatest lower bound, but it is less straightforward to construct: on the union \(\pP[eqc] \cup \pQ[eqc]\), we say \(P\) and \(Q\) are related if they overlap, that is, \(P \cap Q \neq \varnothing\), and taking the transitive closure we get an equivalence relation. The elements of \(\pP \wedge \pQ\), then, are precisely the unions of sets in the same equivalence class under this relation. The meet operation will not be used in the text that follows, though.
 
-\end{document}
+\subsection{A measured interlude}
+In a measure space, it is often useful to relax the notions of equality and order on the partitions so that zero measure sets are disregarded. This is done in the obvious way, namely by saying \(\pP \preceq \pQ\) if for all \(Q \in \pQ[eqc]\), there is a \(P \in \pP[eqc]\) such that \(Q \setminus P\) has zero measure. Going a bit further, the partitions themselves may be allowed to cover only a total measure subset of the space, and their elements could overlap on zero measure sets. Again ---  always in the obvious way, and we shall henceforward hide the petty details in the hopes the reader is able to extrapolate them.
+
+\section{Disintegrating measures}
+
+In the Calculus  course, we learn that it's most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional lines.
+Then we go to the probability course, and the lecturer talks about conditional expectations and the whole philosophy of Bayes of taking probabilities conditioned to some event. It may not seem at first that this has anything to do with the aforementioned theorem in the Calculus course, at least not until we take the Ergodic theory course and we learn about measures and disintegrations.
+
+While Fubini remains true for product measures, in general the problem of decomposing an arbitrary measure into a family of measures defined in smaller subsets is not as straightforward. Neither is straightforward to see how could one talk about the probability of an event conditioned to another event of \emph{zero probability}, even though in practice this happens very often. 
+Both situations are instances of the general problem the disintegration of measures solves: given a measure \(\mu\) and a partition \(\pP\) of the space \(\cms\), we want to find a family of measures \(\{\mu_x\}_{x \in \cms}\), each \(\mu_x\) giving full measure to \(\pP{x}\), with the property that \(\mu(E) = \int \mu_x(E) \,d\mu (x)\).
+
+\subsection{Measurability}
+
+\begin{lemma}
+  The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable.
+\end{lemma}
+
+\begin{corollary}
+  Any partition \(\pP\) of \(\cms\) whose elements are closed is measurable.
+\end{corollary}
+\begin{proof}
+  Under the hypothesis, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\). With this metric,  \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. Consequently, the partition \(\bot\) of points of \(\pP[eqc]\) is measurable, thus so is its preimage \(\pP\).
+\end{proof}
 
 \section{Entropy}
 
-\section{Invariance Principle}
+\subsection{Topological entropy}
+\subsection{Measure-theoretic entropy}
+
+\section{Pesin entropy formula (tying things together)}
+
+\end{document}

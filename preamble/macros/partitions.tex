@@ -1,0 +1,11 @@
+\NewVariableClass\Partition[
+  define keys={
+    {eqc}{command={\overline}} % set of equivalence classes
+  }
+]
+
+\newcommand{\partition}[1]{\mathcal{#1}}
+\NewObject\Partition\pP{\partition{P}}
+\NewObject\Partition\pQ{\partition{Q}}
+
+\NewObject\Set\pof{\mathbf{P}}

@@ -3,7 +3,7 @@
 \usepackage{interval}
 \intervalconfig{soft open fences}
 
-\input{preamble/utils}
+\input{preamble/macros/utils}
 
 \newcommand\ohno[1]{\textcolor{violet}{#1}}
 \newcommand\todo[1]{\textcolor{purple}{#1}}
@@ -11,7 +11,7 @@
 \renewcommand\complement{\mathsf{c}}
 
 \newenvironment{dedication}
-{\vspace{3ex}\begin{quotation}\begin{flushright}\begin{em}}
+{\vspace*{5cm}\begin{quotation}\begin{flushright}\begin{em}}
 {\par\end{em}\end{flushright}\end{quotation}}
 
 % Delimiters
@@ -44,53 +44,6 @@
 \NewObject\IFun\f{f}
 \NewVariableClass\IFunOp[output=\IFun]
 
-% set
-\NewVariableClass\Set[
-  define keys={
-    {int}{command = \mathring},
-    {closure}{command = \overline},
-    {c}{upper = \complement},
-    {quot}{ command = {\widetilde} },
-  }
-]
-\NewObject\Set\U{U}
-\NewObject\Set\E{E}
-\NewObject\Set\X{X}
-\DeclareObject\Set\H{H}
-\DeclareObject\Set\S{S}
-\NewObject\Set\I{I}
-\NewObject\Set\NN{\mathbb{N}}
-\NewObject\Set\NNZ{\mathbb{Z}_{\ge 0}}
-\NewObject\Set\ZZ{\mathbb{Z}}
-\NewObject\Set\QQ{\mathbb{Q}}
-\NewObject\Set\RR{\mathbb{R}}
-
-% family of sets
-\NewVariableClass\SetFam[output=\Set]
-%% continuous functions
-\NewObject\SetFam\Cs{C}
-
-% Notations
-\NewVariableClass\Notation{}
-
-\newcommand\wherecommand [1]{%
-  \nonscript\:%
-  #1\vert
-  \allowbreak
-  \nonscript\:%
-  \mathopen{}%
-}
-
-\NewObject\Notation\where{\wherecommand{\SemantexDelimiterSize}}
-\NewObject\Notation\set[
-  output=\Set,
-  left par=\lbrace, right par=\rbrace,
-  % pre arg={\.}, post arg={\.},
-  % adds \, inside {...} , as recommended by D. Knuth
-  arg keyval=false,
-  % this turns off all keyval syntax in the argument
-]
-
 \DeclareMathOperator{\Id}{id}
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\graph}{graph}
@@ -101,5 +54,8 @@
 \DeclareMathOperator{\PGL}{PGL}
 \newcommand{\simdiff}{\mathbin{\triangle}}
 
-\input{preamble/probability}
-\input{preamble/category}
+\input{preamble/macros/sets}
+\input{preamble/macros/probability}
+\input{preamble/macros/category}
+\input{preamble/macros/foliations}
+\input{preamble/macros/partitions}
