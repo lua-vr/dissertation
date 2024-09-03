@@ -79,55 +79,59 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
   where \(\mu = m(\star)\).
 \end{example}
 
-\section{Extensions (a simplifying lens)}
+\section{Extensions}
+
+\todo{references for the section \cite{einsiedlerErgodicTheoryView2011}}
+
+Extensions are ways to see one dynamic inside another one.
+
 \subsection{The invertible extension}\label{sec:invert-extens}
 
 \subsubsection{Solenoid}
 % TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
 
 \subsubsection{A failure of existence}
-Let \(X = S^1\) with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon s^1 \to S^1\) an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = S^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
+Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
 If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as  \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\] then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
 
-Vamos aplicar a construção acima para \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note que \(E \cap K = \varnothing\), logo \(\mu^*(E) = 0\) e \(E \in \mathcal{C}_K\). Assim, \(f^{-1}(K) = E \cup K\) também é mensurável. Isso mostra que para todo \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) é mensurável, logo \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
+Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
 
-Agora, para qualquer \(A \in \mathcal{C}_K\), podemos escrever \(A = B \cup Z\) com \(B \in \mathcal{E}\) e \(\mu^*(Z) = 0\); assim, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note que
+Now, for any \(A \in \mathcal{C}_K\), we can write \(A = B \cup Z\) with \(B \in \mathcal{E}\) and \(\mu^*(Z) = 0\); thus, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note that
 \begin{equation*}
   \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
 \end{equation*}
-portanto \(f^{-1}(\mathcal{C}_K) \subseteq \mathcal{C}_K\).
+therefore \(f^{-1}(\mathcal{C}_K) \subset \mathcal{C}_K\).
 
-A mesma conta mostra que \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) para todo \(A \subseteq X\). Assim, se \(A\) for mensurável,
+The same calculation shows that \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) for any \(A \subseteq X\). Thus, if \(A\) is measurable,
 \begin{equation*}
   1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
 \end{equation*}
-logo \(f_*\mu = \mu\) em \(\mathcal{C}_K\).
+so \(f_*\mu = \mu\) on \(\mathcal{C}_K\).
 
-Considere \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) o limite inverso de \((X,f,\mathcal{C}_K)\), munido da restrição da \(\sigma\)-álgebra produto. Note que \(\tilde f\colon \Sigma \to \Sigma\) dada por
+Consider \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) as the inverse limit of \((X,f,\mathcal{C}_K)\), endowed with the restriction of the product \(\sigma\)-algebra. Note that \(\tilde{f} \colon \Sigma \to \Sigma\) given by
 \[
-\tilde f((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots,x_{-1},x_0,f(x_0))
+\tilde{f}((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots, x_{-1}, x_0, f(x_0))
 \]
-é invertível e mensurável, pois
+is invertible and measurable, since
 \[
-\tilde f([A_{-k},\dots,A_0] \cap \Sigma) = [A_{-k},\dots,A_0,X] \cap \Sigma.
+\tilde{f}([A_{-k}, \dots, A_0] \cap \Sigma) = [A_{-k}, \dots, A_0, X] \cap \Sigma.
 \]
-Para cada \(n \in \ZZ_{ \leq 0}\), seja \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suponha que exista \(\tilde \mu\) uma medida em \(\Sigma\) tal que \(\pi_*\tilde \mu = \mu\), em que \(\pi((x_i)_{i \leq 0}) = x_0\). Então
+For each \(n \in \ZZ_{\leq 0}\), let \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suppose there exists \(\tilde{\mu}\), a measure on \(\Sigma\) such that \(\pi_* \tilde{\mu} = \mu\), where \(\pi((x_i)_{i \leq 0}) = x_0\). Then
 \begin{equation*}
-  \tilde \mu(K_n) = \tilde \mu(\tilde{f}^n(\pi ^{-1}(K))) = \mu(K) = 1
+  \tilde{\mu}(K_n) = \tilde{\mu}(\tilde{f}^n(\pi^{-1}(K))) = \mu(K) = 1
 \end{equation*}
-para todo \(n\). Por outro lado, como \(f\) é invertível,
+for every \(n\). On the other hand, since \(f\) is invertible,
 \begin{align*}
-  \bigcap_{n \leq 0}K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
-    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.\\
+  \bigcap_{n \leq 0} K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
+    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.
 \end{align*}
-Mas esse conjunto é vazio, pois 
+But this set is empty because
 \begin{equation*}
-    \{ x : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty}f^n(K) = \limsup_k E_k =  \varnothing.
+    \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
 \end{equation*}
-Isso contradiz a "continuidade no vazio" de medidas finitas.
 
-\section{Skew products and cocycles}
+\section{Cocycles and skew products}
 
 
 \begin{example}[Iterated function system]
@@ -243,7 +247,7 @@ In a measure space, it is often useful to relax the notions of equality and orde
 
 \section{Disintegrating measures}
 
-In the Calculus  course, we learn that it's most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional lines.
+In the Calculus  course, we learn that it's most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional subsets.
 Then we go to the probability course, and the lecturer talks about conditional expectations and the whole philosophy of Bayes of taking probabilities conditioned to some event. It may not seem at first that this has anything to do with the aforementioned theorem in the Calculus course, at least not until we take the Ergodic theory course and we learn about measures and disintegrations.
 
 While Fubini remains true for product measures, in general the problem of decomposing an arbitrary measure into a family of measures defined in smaller subsets is not as straightforward. Neither is straightforward to see how could one talk about the probability of an event conditioned to another event of \emph{zero probability}, even though in practice this happens very often. 
@@ -254,6 +258,10 @@ Both situations are instances of the general problem the disintegration of measu
 \begin{lemma}
   The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable.
 \end{lemma}
+\begin{proof}
+  Let \(\set{U_i}_{i \in \NN}\)
+  foo
+\end{proof}
 
 \begin{corollary}
   Any partition \(\pP\) of \(\cms\) whose elements are closed is measurable.
