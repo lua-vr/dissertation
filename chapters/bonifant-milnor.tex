@@ -84,7 +84,7 @@ To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(
     Since \(\tau_n \to 1\), there exists \(N\) such that \(n \geq N\) implies that the right side is less than \(2 \varepsilon\), hence both integrals on the left converge to \(\nu_0(\varphi)\).
 \end{proof}
 
-\subsection{Transversal Lyapunov exponents}
+\section{Transversal Lyapunov exponents}
 
 To each point \((x,y)\) of either boundary \(\mathcal{A}_i\), for \(i \in \set{0,1}\), we can associate a number that expresses the average expansion rate of tangent vectors along the direction normal to the skew product boundary. This is a specific case of the general definition of Lyapunov exponents, whose existence is given by the Oseledets theorem.
 
@@ -149,7 +149,7 @@ The version of the statement below is slightly more general than the correspondi
   If suffices to integrate the logarithm of the inequality \(f_x'(0)f_x'(1) < 1\) from \cref{lem:bound-deriv-schwarz}, and then apply \cref{lem:lyap-basin-posmeas}.
 \end{proof}
 
-\subsection{Intermingled basins}
+\section{Intermingled basins}
 
 In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \circl^1 \to \circl^1\) the map \(g(x) = kx\). Furthermore, we require the following hypothesis to hold.
 
@@ -164,8 +164,8 @@ In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \c
   \label{fig:elevators}
 \end{figure}
 
-\begin{theorem}
-  Suppose \cref{hip:elevators} holds. Then, any closed strictly invariant set  \(K \subseteq X \times I\) with at least one point \((x,y) \in K\) such that \(y \in (0,1)\) contains both boundaries \(X \times \set{0,1}\).
+\begin{theorem}\label{thm:inv-closed-contains-boundary}
+  Suppose \cref{hip:elevators} holds. Then, any closed backwards-invariant set  \(K \subseteq X \times I\) with at least one point \((x,y) \in K\) such that \(y \in (0,1)\) contains both boundaries \(X \times \set{0,1}\).
 \end{theorem}
 
 \begin{proof}
@@ -188,7 +188,7 @@ In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \c
   By definition, the basins are strictly invariant sets. If we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) is analogous.
 
   \begin{claim}
-    The support \(\supp \mu_0\) is such that \(F^{-1}(\supp \mu_0) \subseteq \supp \mu_0\).
+    The support \(\supp \mu_0\) is backwards-invariant.
   \end{claim}
   Indeed, if \(p \in F^{-1}(\supp \mu_0)\) and \(U\) is a neighborhood of \(p\), then since \(F\) is an open map, \(F(U)\) is a neighborhood of \(F(p) \in \supp \mu_0\), so \(\mu_0(F(U)) > 0\). Since \(F\) is Lipschitz, if \(\mu_0(U)\) were \(0\), then \(\mu_0(F(U)) = \Leb(F(U) \cap \mathcal{B}_0) = \Leb(F(U \cap \mathcal{B}_0)) = 0\), which is not the case, so \(\mu_0(U) > 0\).
 
@@ -198,40 +198,29 @@ In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \c
   Indeed, \(\mu_0(\supp \mu_0) \geq \Leb(\mathcal{B}_0) > 0\), so \(\mu_0(\supp \mu_0 \setminus X \times \{ 0 \}) > 0\) and the set cannot be empty.
 
   \begin{claim}
-    The endpoint \(\mathcal{A}_1\) of the cylinder is contained in \(\supp \mu_0\).
-  \end{claim}
-  Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) such that \(x_{ - n - 1} \in g^{-1}(\{ x_{-n} \})\) is the closest preimage of \(x_-\). Since \(x_-\) is a repelling fixed point, the construction implies that \(x_{-n} \to x_-\), so by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-1}(y_0) > y\). In particular,
-  \[y_{ - n} = f_{x_{-n}}^{-1} \circ \cdots \circ f_{x_{-1}}^{-1}(y_0)\]
-  is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, note that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
-  
-  \begin{claim}
-    Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is an interval \(\{ x \} \times [0,a_x]\).
+    Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is a segment \(\{ x \} \times [0,a_x]\).
   \end{claim}
   By \cref{lem:basin-segment}, \(\mathcal{B}_0\) is of the above form. To show that the support also has this property, we can take \(y < 1\) such that \((x,y) \in \supp \mu_0\) and show that if \(z < y\) then \((x,z) \in \supp \mu_0\).
-
   Let \(U = B_{\varepsilon}(x,z)\) be a ball centered at \((x, z)\) of radius smaller than \(1 - y\), and \(V = B_{\varepsilon}(x,y)\). Note that \(V \cap \mathcal{B}_0 \subseteq (U \cap \mathcal{B}_0) + (0, y - z)\), and since \((x,y) \in \supp \mu_0\), \(\Leb(U \cap \mathcal{B}_0) \geq \Leb(V \cap \mathcal{B}_0) > 0\). This shows the claim.
-  
-  As \(\mathcal{A}_1\) is contained in the support, the last claim implies \(\supp \mu_0 = X \times I\).
+
+  Now, by the first two claims and \cref{thm:inv-closed-contains-boundary}, \(\supp \mu_0\) contains both boundaries. By the last claim, it is composed of vertical segments, so it must be equal to \(X \times I\).
 \end{proof}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.35\textwidth]{../figures/intermingled}
-  \caption{Basins of \cref{ex:intermingled}.}
+  \caption{Simulated picture of the basins of \cref{ex:intermingled}. It should not be taken too seriously, as it is evidently not possible to draw intermingled sets.}
 \end{figure}
 
 \begin{example}\label{ex:intermingled}
   Define \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\). If \(|a| < 1\), then \(q_a\) is a diffeomorphism of the interval \(I\). If \(F(x) = (3x, q_{p(x)}(y))\), then \(x^+ = 0\) and \(x^- = 1/2\) are fixed points of the map \(g(x) = 3x\) (where we identify \(S^1\) with \([0,1]\)) that satisfy \cref{hip:elevators}, because \(q_a(y) > y\) if \(a > 0\) and \(q_a(y) < y\) if \(a < 0\) for all \(y \in (0,1)\). Moreover, since \(q_a\) is a degree two polynomial, it has negative Schwarzian whenever \(a \neq 0\), and from the symmetry of \(p\) we see both basins of \(F(x,y) = (kx, q_{p(x)}(y))\) must have positive measure, because at least one of them has. So \(F\) displays intermingled basins. 
 \end{example}
 
-\subsection{Negative Schwarzian}
+\section{Negative Schwarzian}
 
 The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008} without the hypothesis that both basins have positive measure. The question of whether this hypothesis could be removed was left open in the article, and the following proof shows that it is indeed unnecessary.
 
 \begin{theorem}\label{thm:neg-schwarz-sep-graph}
-  If there exists a function \(r \colon I \times I \to \mathbb{R}\)
-  such that \[r(y_1,y_2) < r(f_x(y_1),f_x(y_2))\] for every \(y_1 < y_2\) and \(\mu\)-almost every \(x \in X\),
-  
   If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
   \begin{equation*}
     (x,y) \in \mathcal{B}_0 \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \mathcal{B}_1 \text{ whenever }y > \sigma(x).
@@ -274,7 +263,18 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
-\subsection{Positive Schwarzian}
+\subsection{Application: two random maps}
+In~\cite{gharaeiRandomIntervalDiffeomorphisms2016}, the authors study some dynamical properties that are very similar to the ones considered in~\cite{bonifantSchwarzianDerivativesCylinder2008}, but for two random diffeomorphisms of the interval which are chosen \iid at random. Here we show that their proof of the existence of an invariant graph \parencite[Theorem 3.1]{gharaeiRandomIntervalDiffeomorphisms2016}, which spans several pages and relies on advanced results, can be considerably simplified using the ideas above.
+
+Consider \(X = \set{+,-}[upper = \NN]\) and \(f_+, f_- \in \Diff[C^2]{I}\) diffeomorphisms preserving orientation such that \(f_+(y) > y\) and \(f_-(y) < y\) for all \(y \in (0,1)\).
+
+
+
+We first notice that we can always find 
+
+The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR \to \RR/\ZZ = \circl[upper = 1]\) via some homeomorphism \(h \colon \RR \to \I[int]\) such that \(\pi = p \circ h\)~\parencite[for instance,][Proposition 1.37]{hatcherAlgebraicTopology2002}.
+
+\section{Positive Schwarzian}
 
 If \(f \colon M \to M\) is a diffeomorphism on a manifold, we say that an invariant measure \(\mu\) is \emph{asymptotic} with respect to a reference measure if the empirical measures of almost every point of the reference measure converges to \(\mu\). Intuitively, \(\mu\) describes the entire statistical behavior of the system, up to a set of zero volume.
 
