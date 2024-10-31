@@ -4,7 +4,6 @@
 
 \chapter{Schwarzian derivatives and cylinder maps}\label{cha:bonifant-milnor}
 
-In~\cite{bonifantSchwarzianDerivativesCylinder2008}, the authors constructed a family of skew product diffeomorphisms whose dynamic properties vary according to the Schwarzian derivative of the maps on the fibers. Depending on the sign of this derivative, the map either has intermingled basins, a physical measure whose basin has full Lebesgue measure, or historical behavior.
 
 \section{Cross ratios and the Schwarzian derivative}
 
@@ -151,11 +150,27 @@ The version of the statement below is slightly more general than the correspondi
 
 \section{Intermingled basins}
 
-In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \circl^1 \to \circl^1\) the map \(g(x) = kx\). Furthermore, we require the following hypothesis to hold.
+The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors  constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume \cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though,  this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. Clearly, this implies both basins are dense in the surface, and therefore not continuity sets.
 
+
+In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(\mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
+\begin{equation*}
+  \Lyap(\mathcal{A}_i) = \int \log f_{x}'(i) \;d \mu(x)
+\end{equation*}
+for \(i = 0,1\) are both negative, then both basins have positive volume. Assuming this, the main property that produces the intermingled phenomenon is the following hypothesis.
 \begin{hypothesis}[Elevators]\label{hip:elevators}
   There exist two fixed points \(x^-\) and \(x^+\) in \(X\) whose unstable manifolds are dense, and such that for every  \(y \in (0,1)\), \(f_{x^-}(y) <  y\) and \(f_{x^+}(y) > y\).
 \end{hypothesis}
+
+
+
+
+
+
+
+
+In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \circl^1 \to \circl^1\) the map \(g(x) = kx\). Furthermore, we require the following hypothesis to hold.
+
 
 \begin{figure}[h]
   \centering
