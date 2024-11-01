@@ -5,7 +5,7 @@
 \chapter{Ergodic theory and dynamics}
 
 \section{A categorical zoo}
-The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves this structure. For instance, in topological dynamics \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
+The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
 
 A very flexible way to encompass these different notions is a \emph{monoid object} in a category. Following \cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
 \begin{enumerate}[i.]
@@ -206,6 +206,23 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
 \end{proof}
 
 \section{Empirical measures}
+Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures} \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\] encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\):
+\begin{equation*}
+  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
+\end{equation*}
+and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature \textit{empirical}.
+
+The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. One of the motivating problems of the field is the \textit{Ergodic Hypothesis}, formulated by the Austrian physicist Ludwig Boltzmann to give mathematical justification to the kinetic theory of gases \cite{vianaFoundationsErgodicTheory2016}.
+
+
+
+
+
+
+% It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotical distribution of the orbit. Reciprocally,
+For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\Basin{\mu} \subseteq X\) of points with this property is called the \textbf{basin} of the measure \(\mu\).
+
+It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \textbf{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.
 
 \begin{proposition}\label{prop:limiting-measures}
   Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures

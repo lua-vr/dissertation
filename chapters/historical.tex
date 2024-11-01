@@ -279,22 +279,35 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \begin{align*}
     \#\set[par = auto]{ 0 \leq i < n_k^- \where S_{i}^{\xi}(x) < -\sqrt{\textstyle n^-_k} } \geq (1 - \delta)n_k^{-}.
   \end{align*}
-  Both can be used just as in the previous proof.
+  Both can be used as in the previous proof.
 \end{remark}
 
-\begin{theorem}
-  Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
-  \begin{equation}\label{eq:emp-convergence}
-    \Emp[n,spar,pf]{\mu\otimes \delta_y} \weakto \delta_*Z
-  \end{equation}
-  where \(Z\) is the arcsine measure on \([0,1]\) and \(\delta(\lambda) = \lambda\delta_- + (1 - \lambda)\delta_+\).
-\end{theorem}
+% \begin{theorem}
+%   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
+%   \begin{equation}\label{eq:emp-convergence}
+%     \Emp[n,spar,pf]{\mu\otimes \delta_y} \weakto \delta_*Z
+%   \end{equation}
+%   where \(Z\) is the arcsine measure on \([0,1]\) and \(\delta(\lambda) = \lambda\delta_- + (1 - \lambda)\delta_+\).
+% \end{theorem}
 
-\begin{proof}
-  Let \(F \subseteq \Meas{X \times I}\) be a closed set, and let \(I = \delta([a,b]) = F \cap [\delta_-,\delta_+]\).
+% \begin{proof}
+%   Let \(F \subseteq \Meas{X \times I}\) be a closed set, and let \(I = \delta([a,b]) = F \cap [\delta_-,\delta_+]\).
 
-  Idea: first, show that in \(I\) we get the desired statistics; then, show that in \(F \setminus I\) the times converge to zero.
-\end{proof}
+%   Idea: first, show that in \(I\) we get the desired statistics; then, show that in \(F \setminus I\) the times converge to zero.
+% \end{proof}
+
+\subsection{Corollary: north-south maps}
+
+Consider some diffeomorphisms \(f_1, f_2, \dots, f_n \in \Diff[C^2]{I}\) preserving the orientation of the interval that commute with each other.
+
+such that \(f_+(y) > y\) and \(f_-(y) < y\) for all \(y \in (0,1)\).
+
+
+
+We first notice that we can always find 
+
+The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR \to \RR/\ZZ = \circl[upper = 1]\) via some homeomorphism \(h \colon \RR \to \I[int]\) such that \(\pi = p \circ h\)~\parencite[for instance,][Proposition 1.37]{hatcherAlgebraicTopology2002}.
+
 
 % \begin{theorem}
 %   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),

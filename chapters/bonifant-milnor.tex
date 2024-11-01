@@ -191,10 +191,6 @@ In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \c
   is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, notice that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
 \end{proof}
 
-\begin{definition}
-  We say that two measurable subsets \(A, B\) are \textit{intermingled} with respect to a measure \(\nu\) if for every open set \(U\), \(\nu(A \cap U)\) and \(\nu(B \cap U)\) are strictly positive.
-\end{definition}
-
 \begin{corollary}\label{cor:intermingled}
   Suppose \cref{hip:elevators} holds and both basins have positive measure. Then the basins \(\mathcal{B}_0\) and \(\mathcal{B}_1\) are intermingled for the Lebesgue measure on the cylinder.
 \end{corollary}
@@ -224,7 +220,7 @@ In this section only, we fix \(X = \circl^1\), \(\mu = \Leb\), and \(g \colon \c
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.35\textwidth]{../figures/intermingled}
-  \caption{Simulated picture of the basins of \cref{ex:intermingled}. It should not be taken too seriously, as it is evidently not possible to draw intermingled sets.}
+  \caption{Picture of the basins of \cref{ex:intermingled}. It should not be taken too seriously, as it is evidently not possible to draw intermingled sets.}
 \end{figure}
 
 \begin{example}\label{ex:intermingled}
@@ -278,16 +274,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
-\subsection{Application: two random maps}
-In~\cite{gharaeiRandomIntervalDiffeomorphisms2016}, the authors study some dynamical properties that are very similar to the ones considered in~\cite{bonifantSchwarzianDerivativesCylinder2008}, but for two random diffeomorphisms of the interval which are chosen \iid at random. Here we show that their proof of the existence of an invariant graph \parencite[Theorem 3.1]{gharaeiRandomIntervalDiffeomorphisms2016}, which spans several pages and relies on advanced results, can be considerably simplified using the ideas above.
-
-Consider \(X = \set{+,-}[upper = \NN]\) and \(f_+, f_- \in \Diff[C^2]{I}\) diffeomorphisms preserving orientation such that \(f_+(y) > y\) and \(f_-(y) < y\) for all \(y \in (0,1)\).
-
-
-
-We first notice that we can always find 
-
-The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR \to \RR/\ZZ = \circl[upper = 1]\) via some homeomorphism \(h \colon \RR \to \I[int]\) such that \(\pi = p \circ h\)~\parencite[for instance,][Proposition 1.37]{hatcherAlgebraicTopology2002}.
+\subsection{Application: expanding maps on the real line}
 
 \section{Positive Schwarzian}
 
@@ -314,7 +301,7 @@ The idea of the proof is to pass to the invertible extension of the system and o
   \newcommand{\eBu}{\tilde{\mathcal{B}}_1}
   \newcommand{\eBl}{\tilde{\mathcal{B}}_0}
 
-  Let \((\eX, \eg, \emu)\) be the invertible extension of \((X, g, \mu)\), \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) the associated conjugation, and
+  Let \((\eX, \eg, \emu)\) be the invertible extension of \((X, g, \mu)\), \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) the associated conjugation, and \(\eF \colon \eX \times I \to \eX \times I\) given by
   \begin{equation*}
     \eF(\ex, y) = (\eg(\ex), f_{\pi(\ex)}(y)).
   \end{equation*}
@@ -324,7 +311,7 @@ The idea of the proof is to pass to the invertible extension of the system and o
   This metric induces the usual topology of the interval.
   Since maps with positive Schwarzian decrease cross-ratios, the condition \(\SchD f_x \succ 0\) means that \(f_x\) is a contraction (not necessarily uniform) for this metric.
 
-  Let \(A \subseteq \eX\) be a set of full \(\emu\) measure where \(\SchD f_{\pi(\eg^n(\ex))} \succ 0\) for all \(n \geq 0, \ex \in A\), and \(B \subseteq \eX\) another set of full measure where the empirical measures of \(\ex \in B\) converge to the ergodic measure \(\emu\). It follows that for all \(\ex \in A \cap B\) and \(y \in (0, 1)\), the limit \(r = \lim_{n \to \infty} d_H(f_{\pi(\ex)}^n(y), \sigma(\eg^n(\ex)))\) exists and is zero if and only if the orbit of \((\ex, y)\) converges in distance to the graph of \(\sigma\) under \(\eF\), which in turn implies \(e_n(\ex, y) \weakto \enu = (\graph \sigma)_* \emu\).
+  Let \(A \subseteq \eX\) be a set of full \(\emu\) measure where \(\SchD f_{\pi(\eg^n(\ex))} \succ 0\) for all \(n \geq 0, \ex \in A\), and \(B \subseteq \eX\) be another set of full measure where the empirical measures of \(\ex \in B\) converge to the ergodic measure \(\emu\). It follows that for all \(\ex \in A \cap B\) and \(y \in (0, 1)\), the limit \(r = \lim_{n \to \infty} d_H(f_{\pi(\ex)}^n(y), \sigma(\eg^n(\ex)))\) exists and is zero if and only if the orbit of \((\ex, y)\) converges in distance to the graph of \(\sigma\) under \(\eF\), which in turn implies that \(e_n(\ex, y) \weakto \enu = (\graph \sigma)_* \emu\).
 
   Suppose \(r > 0\). Then, as in the previous proof, there would exist another graph \(\xi\), different from \(\sigma\) almost everywhere, such that \(e_n(\ex, y) \weakto \eta = (\graph \xi)_* \emu\). Since \(\varphi(\ex, y) = d_H(y, \sigma(\ex))\) is such that \(\varphi(F(\ex, y)) < \varphi(\ex, y)\) whenever \((\ex, y) \in \graph \xi\) and \(\eta\) is an invariant measure for \(F\) with \(\eta(\graph \xi) = 1\), we reach a contradiction.
 
