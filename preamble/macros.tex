@@ -30,13 +30,17 @@
     {pf}{ lower = {*} },
     {lift}{ command = {\widetilde} },
     {inv}{ upper = {-1} }
-  }
+  },
+  define keys[1]={
+    {res}{ right return ,symbol put right ={|}, lower ={#1} },
+  },
 ]
 \NewObject\Fun\g{g}
 \NewObject\Fun\F{F}
 
 % interval functions
 \NewVariableClass\IFun[
+  parent=\Fun,
   define keys[1]={
     {dder}{ upper ={(#1)} },
     {der}{ upper ={\replicate{#1}{{\prime}}} },
