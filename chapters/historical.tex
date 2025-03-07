@@ -8,15 +8,13 @@ Ergodic theory tries to find order in chaos by hoping that even if a dynamical s
 
 \section{Martingale-coboundary decomposition}
 
-\todo{rewrite this section for ergodic processes in general, I think it will be less confusing later (see the remark in the next theorem)}
-
 % Even though \cref{thm:donsker} requires the random variables to be independent, we can still reach similar conclusions by requiring them to be co-homologous
 
 The key idea for applying \cref{thm:donsker-martingale} in a dynamical system \((X,\mathcal{F},\mu,f)\), where \(\mu\) is a \(f\)-invariant probability, is finding a sub-\(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\varphi \in L^2(\mu)\) can be decomposed as a sum
 \begin{equation}\label{eq:coboundary}
   \varphi = \varphi_0 + \phi \circ f - \phi
 \end{equation}
-such that \(\phi \in L^2(\mu)\), \(\varphi_0\) is \(\mathcal{G}\)-measurable and \(\eta = (\varphi_0 \circ f^{i - 1})_{i \geq 1}\) is a reversed martingale difference sequence with respect to \((f^{-i}(\mathcal{G}))\). Indeed, this allows the transference of the weak invariant principle for the original \(\varphi\): let \(\xi = \rpar{\varphi \circ f^{i - 1}}_{i \geq 1}\), and notice that
+such that \(\phi \in L^2(\mu)\), \(\varphi_0\) is \(\mathcal{G}\)-measurable and \(\eta = (\varphi_0 \circ f^{i - 1})_{i \geq 1}\) is a reversed martingale difference sequence. Indeed, this allows the transference of the weak invariant principle for the original \(\varphi\): let \(\xi = \rpar{\varphi \circ f^{i - 1}}_{i \geq 1}\), and notice that
 \begin{equation*}
   \PSum[n,rv = \xi] = \PSum[n,rv = \eta] + \phi \circ f^n - \phi,
 \end{equation*}
@@ -142,7 +140,7 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \begin{equation*}
     T(x,y) = T(g(x), f_x(y)) = T(g(x),y).
   \end{equation*}
-  By ergodicity, there is a full measure set \(\H \subseteq X\) and \(t \in [0,1]\) for which \(T(x,y) = t\) for all \(x \in \H\), \(y \in (0,1)\).
+  By ergodicity, there is a full measure set \(\sH \subseteq X\) and \(t \in [0,1]\) for which \(T(x,y) = t\) for all \(x \in \sH\), \(y \in (0,1)\).
 
   We can use the arcsine law to evaluate this constant. Given \(\varepsilon > 0\), fix some \(y \in (0,1)\) and define 
 
@@ -153,34 +151,34 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \begin{equation*}
     \mu(\limsup_{n \to \infty} E_n) \geq \limsup_{n \to \infty} \mu(E_n) > 0.
   \end{equation*}
-  This means there exists \(x_0 \in \H \cap \limsup E_n\), and since
+  This means there exists \(x_0 \in \sH \cap \limsup E_n\), and since
   \begin{equation*}
     \limsup_{n \to \infty}E_n = \set{x \in X \where T(x,y) > 1 - \varepsilon}
   \end{equation*}
-  we have \(t = T(x_0,y) > 1 - \varepsilon\). But \(\varepsilon > 0\) is arbitrary, so \(T(x,y) = 1\) for every \(x \in \H\) and \(y \in (0,1)\).
+  we have \(t = T(x_0,y) > 1 - \varepsilon\). But \(\varepsilon > 0\) is arbitrary, so \(T(x,y) = 1\) for every \(x \in \sH\) and \(y \in (0,1)\).
 
   So far, we started with \(\delta \in (0,1)\) and showed that for 
   \begin{equation*}
     T_{\delta}(x,y) = \limsup_{n \to \infty}\frac{1}{n}\# \set{ 0 \leq i < n \where f^{(i)}_x(y) > \delta },
   \end{equation*}
-  there is \(\H_{\delta} \subseteq X\) with \(\mu(\H_{\delta}) = 1\) such that for \(x \in \H_{\delta}\), \(y \in (0,1)\), \(\H_{\delta}(x,y) = 1\). But note that for fixed \(x,y\), the function \(\delta \mapsto T_{\delta}(x,y)\) is monotone. With this observation, it's easy to see that if we define
+  there is \(\sH_{\delta} \subseteq X\) with \(\mu(\sH_{\delta}) = 1\) such that for \(x \in \sH_{\delta}\), \(y \in (0,1)\), \(\sH_{\delta}(x,y) = 1\). But note that for fixed \(x,y\), the function \(\delta \mapsto T_{\delta}(x,y)\) is monotone. With this observation, it's easy to see that if we define
   \begin{equation*}
-    \H = \bigcap_{i = 1}^{\infty} \H_{1/i} \cap \H_{1 - 1/i},
+    \sH = \bigcap_{i = 1}^{\infty} \sH_{1/i} \cap \sH_{1 - 1/i},
   \end{equation*}
-  then \(\mu(F) = 1\) and \(T_{\delta}(x,y) = 1\) for all \(x \in \H\) and \(y, \delta \in (0,1)\).
+  then \(\mu(F) = 1\) and \(T_{\delta}(x,y) = 1\) for all \(x \in \sH\) and \(y, \delta \in (0,1)\).
 
-  In particular, this implies that if \(x \in \H\) and \(y \in (0,1)\), then for any \(\delta \in (0,1)\), letting \(U_n = \set{0 \leq i < n \where f_x^{(i)}(y) > \delta}\), the limit supremum of the \(y\) coordinate satisfies
+  In particular, this implies that if \(x \in \sH\) and \(y \in (0,1)\), then for any \(\delta \in (0,1)\), letting \(U_n = \set{0 \leq i < n \where f_x^{(i)}(y) > \delta}\), the limit supremum of the \(y\) coordinate satisfies
   \[\limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) \geq \limsup_{n \to \infty}\frac{1}{n} \sum_{i \in U_n}\delta = \delta,\]
   so the left-hand side is equal to 1. The proof we have so far works analogously for the time averages of the iterates in which \(f^{(i)}_x(y) < \delta\), and by doing so we get
   \[\liminf_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) = 0.\]
   Note that those are time averages of the continuous bounded function \(\pi_2 \colon X \times I \to \mathbb{R}\), so historical behavior is proved.
   
   We now focus on \cref{eq:emp-closure}.
-  By Birkhoff, we can fix a full measure set \(\S \subseteq X\) such that for all \(x \in \S\) and \(\varphi \in \Cs{X}\),
+  By Birkhoff, we can fix a full measure set \(\sS \subseteq X\) such that for all \(x \in \sS\) and \(\varphi \in \Cs{X}\),
   \begin{equation*}
     \frac{1}{n} \sum_{i = 0}^{n - 1}\varphi(g^i(x)) \to \int_X \varphi \;d\mu.
   \end{equation*}
-  Given \(x\) in the full measure set \(\H \cap \S\) and \(y \in (0,1)\), we construct an increasing sequence \((n^-_k)_k \subseteq \NN\) inductively, letting \(n^-_0 = 1\) and \(n^-_{k + 1} > n^+_k\) be any integer satisfying
+  Given \(x\) in the full measure set \(\sH \cap \sS\) and \(y \in (0,1)\), we construct an increasing sequence \((n^-_k)_k \subseteq \NN\) inductively, letting \(n^-_0 = 1\) and \(n^-_{k + 1} > n^+_k\) be any integer satisfying
   \[
     \frac{1}{n^-_k}\#\set{ 0 \leq i < n^-_k \where f^{(i)}_x(y) < 1/k } > 1 - 1/k.
   \]
@@ -202,7 +200,7 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \begin{equation*}
     \abs[\Bigg]{\frac{1}{n_k^-} \sum_{i = 0}^{n_k^- - 1}\phi(F^i(x,0)) - \int_X \phi(z,0) \;d\mu(z)} < \varepsilon
   \end{equation*}
-  (which is possible since \(x \in \S\) and \(\varphi(x) = \phi(x,0)\) is continuous), and
+  (which is possible since \(x \in \sS\) and \(\varphi(x) = \phi(x,0)\) is continuous), and
   \[\frac{1}{n_k^-}\# \set{ 0 \leq i < n_k^- \where i \notin D } < \varepsilon / \lVert \phi \rVert_{\infty},\]
   so we can estimate
   \begin{align*}
@@ -249,7 +247,7 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
 \end{proof}
 
 \begin{remark}[A different proof]
-  Another way to show \(\delta_-, \delta_+ \in \Meas{x}\) for \(x\) in a full measure set \(\H\) is as follows: let \(\delta > 0\) and \(p_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(p_{\delta}(0) = 0\) and \(p(t) > 1 + \delta\) for \(t > \delta\).
+  Another way to show \(\delta_-, \delta_+ \in \Meas{x}\) for \(x\) in a full measure set \(\sH\) is as follows: let \(\delta > 0\) and \(p_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(p_{\delta}(0) = 0\) and \(p(t) > 1 + \delta\) for \(t > \delta\).
   \begin{figure}[h]
     \centering
     \includegraphics[width=5cm]{../figures/p-delta}
@@ -326,19 +324,6 @@ The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR 
 %   \end{equation*}
 % \end{proof}
 
-\begin{question}
-  Is the statement above true for \(\lambda \otimes \delta_y\) if \(\lambda \ll \mu\)?
-\end{question}
-
-\begin{question}
-  Douglas question: is there a measure \(\nu \in [\delta_0,\delta_1]\) such that \((F^n)_* \eta \to \nu\) for ``nice'' \(\eta\) absolutely continuous with respect to \(\mu \otimes m\)?
-\end{question}
-
-% \subsection{Questions, observations}
-
-% \begin{question}
-%   Do the ``steps'' need to be \(\varphi \in L^2\) for historical behavior? The invariance principle \emph{does} need \(L^2\) otherwise it can't even be stated. But if \(\psi \leq \varphi\) and the dynamics with steps \(\psi\) has historical behavior, won't bigger jumps mean the sums for \(\varphi\) spend similar time above/below zero? 
-% \end{question}
 
 \ifSubfilesClassLoaded{
     \printbibliography

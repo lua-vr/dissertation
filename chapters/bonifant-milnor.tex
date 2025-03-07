@@ -4,6 +4,7 @@
 
 \chapter{Schwarzian derivatives and cylinder maps}\label{cha:bonifant-milnor}
 
+In this chapter, we follow the exposition by \textcite{bonifantSchwarzianDerivativesCylinder2008} on a family of endomorphisms of a cylinder.
 
 \section{Cross ratios and the Schwarzian derivative}
 
@@ -36,23 +37,105 @@ The \emph{cross ratio} of four points \(x_{0},x_1,x_2,x_3\) is the value of \(g(
 \end{definition}
 We shall write \(\SchD f \prec 0\) if there exists a dense open set \(U \subseteq I\) such that \(\SchD f(y) < 0\) for every \(y \in U\). Similarly, we write \(\SchD f \succ 0\) if there exists \(U \subseteq I\) open and dense such that \(\SchD f(y) > 0\) for every \(y \in U\).
 
+The Schwarzian derivative has some important properties that we highlight in the Proposition below, vide \cite[Proposition B.1]{bonifantSchwarzianDerivativesCylinder2008}.
+
 \begin{proposition}\label{prop:schwarzian}
   The Schwarzian derivative has the following properties:
   \begin{enumerate}
-    \item If \(\mathcal{S}f\) and \(\mathcal{S}g\) have the same sign, then \(\mathcal{S}(g \circ f)\) has the same sign.
-    \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
-    \item \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
-    \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
+  \item If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then 
+  \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
+  \item \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+  \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
   \end{enumerate}
 \end{proposition}
+
+\begin{proof}\hfill
+  \NewObject\IFun\fg{f \circ g}
+  \begin{enumerate}
+  \item We have
+    \begin{equation*}
+      \SchD{\fg} = \frac{\fg[spar, der = 3]}{\fg[spar, der = 1]} - \frac{3}{2}\rpar*{\frac{\fg[spar, der = 2]}{\fg[spar, der = 1]}}^2.
+    \end{equation*}
+    By the Faà di Bruno's formula~\cite[479]{tortoliniAnnaliDiScienze1855} in its combinatorial form,
+    \begin{equation*}
+      {(f\circ g)^{(n)}(x)=\sum _{\pi \in \Pi }f^{(\left|\pi \right|)}(g(x))\cdot \prod _{B\in \pi }g^{(\left|B\right|)}(x)}
+    \end{equation*}
+    where the sum is taken over the set \(\Pi\) of all partitions of \(\set{1,\dots,n}\), and \(B \in \pi\) means \(B\) is an element of the partition \(\pi\) (therefore, a subset of \(\set{1,\dots,n}\)).
+
+    Specializing Faà di Bruno's formula to \(n = 1, 2, 3\), we have
+    \begin{gather*}
+      (f \circ g)' = (f' \circ g) \cdot g'\\
+      (f \circ g)'' = (f'' \circ g) \cdot (g')^2 + (f' \circ g) \cdot g''\\
+      \fg[spar, der = 3] = (\f[der = 3] \circ g) \cdot (g')^3 + 3(f'' \circ g) \cdot g'' \cdot g' + (f' \circ g) \cdot \IFun{g}[der = 3]
+    \end{gather*}
+    and thus 
+    \begin{equation}\label{sch-comp}
+      \begin{aligned}[b]
+        \SchD{\fg} &=
+                     \begin{multlined}[t]
+                       \frac{(\f[der = 3] \circ g) \cdot (g')^3 + 3(f'' \circ g) \cdot g'' \cdot g' + (f' \circ g) \cdot \IFun{g}[der = 3]}{(f' \circ g) \cdot g'}\\ - \frac{3}{2}\rpar*{\frac{(f'' \circ g) \cdot (g')^2 + (f' \circ g) \cdot g''}{(f' \circ g) \cdot g'}}^2
+                     \end{multlined} \\
+                   &=
+                     \frac{(\f[der = 3] \circ g) \cdot (g')^2}{f' \circ g} + 
+                     3\frac{(f'' \circ g) \cdot g''}{f' \circ g} + 
+                     \frac{\IFun{g}[der = 3]}{g'}
+                     - \frac{3}{2}\rpar*{\frac{(f'' \circ g) \cdot g'}{f' \circ g} +
+                     \frac{g''}{g'}}^2\\
+                   &=\rpar*{
+                     \frac{\f[der = 3] \circ g}{f' \circ g}
+                     - \frac{3}{2}\rpar*{\frac{f'' \circ g}{f' \circ g}}^2}\cdot (g')^2 + 
+                     \frac{\IFun{g}[der = 3]}{g'}
+                     - \frac{3}{2}\rpar*{\frac{g''}{g'}}^2\\
+                   &= (\SchD f) \circ g \cdot (g')^2 + \SchD g.
+      \end{aligned}
+    \end{equation}
+    Since \(g\) is a diffeomorphism, \(g'(x) \neq 0\) for all \(x \in I\), and therefore \((g')^2 > 0\). In particular, \(g\) is a homeomorphism, so that if \(\SchD f(x) > 0\) for all \(x\) the open dense set \(U\), and \(\SchD g(x) > 0\) in the open dense set \(V\), then \(\SchD{f \circ g} > 0\) in the open dense set \(g^{-1}(U) \cap V\). 
+  \item Applying \cref{sch-comp} to \(\Id = f^{-1} \circ f\), we see that
+    \begin{equation*}
+      0 = \SchD{\Id} = (\SchD f^{-1}) \circ f \cdot (f')^2 + \SchD f,
+    \end{equation*}
+    and by the same argument of the paragraph above, we conclude \(\SchD f \prec 0 \iff \SchD f^{-1} \succ 0\).
+    \item Since \(f\) is a diffeomorphism between intervals, either \(f' > 0\) or \(f' < 0\). As a first step, assume \(f' > 0\). Taking the second derivative of \(\varphi(y) = 1/ \sqrt{f'(y)} = f'(y)^{-1/2}\),
+    \begin{equation*}
+    \varphi'' = \rpar*{-\frac{1}{2}\rpar{f'}^{-3/2}\cdot{\f''}}' =
+    \frac{3}{4}(f')^{-5/2}\cdot (f'')^2 - \frac{1}{2}(f')^{-3/2}\cdot \f[der = 3].
+    \end{equation*}
+    Thus
+    \begin{equation}
+      2{\varphi''}/{\varphi} = 
+      \frac{3}{2}(f')^{-4/2}\cdot (f'')^2 - (f')^{-2/2}\cdot \f[der = 3] =\frac{3}{2}\rpar*{\frac{\f[der = 2]}{\f[der = 1]}}^2 - \frac{\f[der = 3]}{\f[der = 1]}  = - \SchD f.\label{sch-rel}
+    \end{equation}
+    From this, and noticing that \(\varphi > 0\), we see that if \(\SchD f(x) < 0\) if and only if \(\varphi''(x) > 0\). A \(C^2\) function \(\varphi : I \to \RR\) will be strictly convex if and only if  \(\varphi'' \ge 0\) and \(\varphi''\) does not vanish on any open interval,
+    so \(\SchD f \prec 0\) implies that \(\phi''\) is positive in an open dense set, thus strictly convex. Reciprocally, if \(\varphi\) is strictly convex, then the set \(\set{x \where \varphi''(x) > 0} = \set{x \where \SchD f(x) < 0}\) is open and its complement does not contain any open interval, and therefore is dense.
+
+    If \(f' < 0\), we define \(g \colon I \to - I'\), \(g(y) = - f(y)\), so that \(g' > 0\) and we fall back to the previous case. The argument is finished by noticing that \(\SchD g =  \SchD f\) and \(1/ \sqrt{\abs{f'}} = 1/\sqrt{\abs{g'}}\).
+  \item From \cref{sch-rel}, we see that \(\SchD f \equiv 0 \iff \varphi'' \equiv 0\). This, in turn, is equivalent to \(\varphi\) being linear, say \(\varphi(y) = cy + d\). We thus have
+    \begin{equation*}
+      f'(y) = \frac{1}{(cy + d)^2}.
+    \end{equation*}
+    Integrating both sides, by the Fundamental Theorem of Calculus we have
+    \begin{equation*}
+      f(y) - f(a) = \int_a^y \frac{1}{(ct + d)^2} \;dt = \frac{1}{c}\rpar*{\frac{1}{ca + d} - \frac{1}{cy + d}} = \frac{y - a}{c(ca + d)y + d(ca + d)}
+    \end{equation*}
+    which is a fractional linear transformation, as desired.
+  \end{enumerate}
+\end{proof}
 
 \begin{lemma}\label{lem:sch-cross-increase}
   If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\) for all \(y_1 < y_2 < y_3 < y_{4}\).
 \end{lemma}
 
+\begin{proof}
+  Suppose \(\SchD f \prec 0\). Given \(y_1 < y_2 < y_3 < y_{4}\), let \(\varphi\) be the linear fractional transformation that sends \(f(y_1)\) to \(y_1\), \(f(y_2)\) to \(y_2\) and \(f(y_4)\) to \(y_4\). Since fractional linear transformations preserve cross-ratios, \(\varphi()\)
+\end{proof}
+
 \begin{lemma}\label{lem:bound-deriv-schwarz}
   If \(f \colon I \to I\) preserves orientation and \(\SchD f \prec 0\), then \(f'(0)f'(1) < 1\).
 \end{lemma}
+
+\begin{proof}
+  
+\end{proof}
 
 Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas hold if \(\SchD f \succ 0\). For example, if \(\SchD f \succ 0\) then \(f\) decreases cross ratios and \(f'(0)f'(1) > 1\).
 
@@ -60,7 +143,7 @@ Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas ho
 
 \section{Skew products}
 
-We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the boundaries of the ``cylinder'' \(X \times I\).
+We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the ``caps'' of \(X \times I\).
 Let \(\mathcal{B}_i = \mathcal{B}(\nu_i)\) be the basins of the respective measures.
 
 To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(F^n(x,y)\), that is, \(f_x^{n} = f_{g^{n - 1}(x)} \circ \cdots \circ f_x\).
@@ -145,6 +228,8 @@ The version of the statement below is slightly more general than the correspondi
 \end{corollary}
 
 \begin{proof}
+  
+  
   If suffices to integrate the logarithm of the inequality \(f_x'(0)f_x'(1) < 1\) from \cref{lem:bound-deriv-schwarz}, and then apply \cref{lem:lyap-basin-posmeas}.
 \end{proof}
 
@@ -152,32 +237,18 @@ The version of the statement below is slightly more general than the correspondi
 
 The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors  constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume \cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though,  this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. Clearly, this implies both basins are dense in the surface, and therefore not continuity sets.
 
+\todo{Refer to discussion in \cite{bonattiDynamicsUniformHyperbolicity2005}}
 
-In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(\mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
+In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
 \begin{equation*}
   \Lyap(\mathcal{A}_i) = \int \log f_{x}'(i) \;d \mu(x)
 \end{equation*}
 for \(i = 0,1\) are both negative, then both basins have positive volume. Assuming this, the main property that will produce the intermingled phenomenon is the following hypothesis.
-\begin{hypothesis}[Elevators]\label{hip:elevators}
-  There exists two fixed points \(x^-\) and \(x^+\) in \(X\) such that for every  \(y \in (0,1)\), \(f_{x^-}(y) <  y\) and \(f_{x^+}(y) > y\), We also assume that either their stable sets are dense, or alternatively, in order to also deal with the case of an expanding endomorphism (where the stable set is a point), we require that \(\bigcup_{i = 1}^{\infty} f^{-i}(\set{x^-})\), \(\bigcup_{i = 1}^{\infty} f^{-i}(\set{x^+})\) are both dense in \(X\).
+\begin{hypothesis}\label{hip:elevators}
+  There exists two periodic points \(x^+\) and \(x^-\) in \(X\), of periods \(n^+, n^-\), such that for every  \(y \in (0,1)\), \(f_{x^+}^{n^+}(y) > y\) and \(f_{x^-}^{n^-}(y) < y\).
 \end{hypothesis}
 
-Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) follows by symmetry. The result will follow from the following series of lemmas. 
-
-\begin{lemma}
-  We have \(\set{x^-} \times I \subseteq \supp \mu_0\).
-\end{lemma}
-
-\begin{proof}
-  Let \(y \in (0,1)\) and \(U\) be an open set around \((x^-,y)\).
-
-  
-  If we define \(h(x) = \sup \set{y \in I \where (x,y) \in \mathcal{B}_0}\), by \cref{lem:basin-segment} we know \[\set{x} \times \interval[open right]{0}{h(x)} \subseteq \mathcal{B}_0 \cap (\set{x} \times I).\]
-  Also note that \(\mathcal{B}_0\) is \(F\)-invariant and \(f_x(0) = 0\) for all \(x\), so \(\set{x \in X \where h(x) = 0}\) is \(g\)-invariant. Since by assumption \(\mathcal{B}_0\) has positive measure, \(h\) must be positive \(\mu\)-almost everywhere, so for any open set \(U \times \interval[open right]{0}{b}\),
-  \[\Leb{U \times \interval[open right]{0}{b} \cap \mathcal{B}_0} = \int_U \min \set{h(x), b}\;d\mu(x) > 0.\]
-\end{proof}
-
-
+Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) follows by symmetry. First, we shall collect some lemmas. 
 
 \begin{lemma}
   Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is a segment \(\{ x \} \times [0,a_x]\).
@@ -186,16 +257,6 @@ Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), t
   By \cref{lem:basin-segment}, \(\mathcal{B}_0\) is of the above form. Since we know that the support of a measure is closed, we can take \(y < 1\) such that \((x,y) \in \supp \mu_0\) and show that if \(z < y\) then \((x,z) \in \supp \mu_0\).
   Let \(U = B_{\varepsilon}(x,z)\) be a ball centered at \((x, z)\) of radius smaller than \(1 - y\), and \(V = B_{\varepsilon}(x,y)\). Note that
   \[V \cap \mathcal{B}_0 \subseteq \set{(u,v + y - z) \where (u,v) \in U \cap \mathcal{B}_0},\] so since \((x,y) \in \supp \mu_0\), and \(\Leb\) is invariant by vertical translations, \(\Leb(U \cap \mathcal{B}_0) \geq \Leb(V \cap \mathcal{B}_0) > 0\).
-\end{proof}
-
-\begin{lemma}
-  We have \(X \times \set{0} \subseteq \supp \mu_0\).
-\end{lemma}
-
-\begin{proof}
-  If we define \(h(x) = \sup \set{y \in I \where (x,y) \in \mathcal{B}_0}\), by \cref{lem:basin-segment} we know \[\set{x} \times \interval[open right]{0}{h(x)} \subseteq \mathcal{B}_0 \cap (\set{x} \times I).\]
-  Also note that \(\mathcal{B}_0\) is \(F\)-invariant and \(f_x(0) = 0\) for all \(x\), so \(\set{x \in X \where h(x) = 0}\) is \(g\)-invariant. Since by assumption \(\mathcal{B}_0\) has positive measure, \(h\) must be positive \(\mu\)-almost everywhere, so for any open set \(U \times \interval[open right]{0}{b}\),
-  \[\Leb{U \times \interval[open right]{0}{b} \cap \mathcal{B}_0} = \int_U \min \set{h(x), b}\;d\mu(x) > 0.\]
 \end{proof}
 
 \begin{lemma}
@@ -304,8 +365,6 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 \begin{example}
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
-
-\subsection{Application: expanding maps on the real line}
 
 \section{Positive Schwarzian}
 

@@ -7,7 +7,7 @@
 \section{A categorical zoo}
 The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
 
-A very flexible way to encompass these different notions is a \emph{monoid object} in a category. Following \cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
+A very flexible way to encompass these different notions is a \emph{monoid object} in a category. Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
 \begin{enumerate}[i.]
 \item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
 \item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
@@ -30,7 +30,7 @@ If we rewrite the above with a measure-theoretic language, we see that we ought 
 \begin{equation*}
   f^2(x)(E) = \int_X f(y)(E) \;d (f(x))\set{y}.
 \end{equation*}
-More generally, given \(f \colon X \to \Meas[1]{Y}\),  \(g \colon Y \to \Meas[1]{Z}\), we can define a ``composition''
+More generally, given \(f \colon X \to \Meas[1]{Y}\),  \(g \colon Y \to \Meas[1]{Z}\), we can define a kernel composition by
 \begin{equation*}
   (g \circ f)(x)(E) = \int_X g(y)(E)\;d(f(x))\set{y}
 \end{equation*}
@@ -81,7 +81,7 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
 
 \section{Extensions}
 
-\todo{references for the section \cite{einsiedlerErgodicTheoryView2011}}
+\todo{references for the section~\cite{einsiedlerErgodicTheoryView2011}}
 
 Extensions are ways to see one dynamic inside another one.
 
@@ -140,11 +140,47 @@ But this set is empty because
 
 \subsection{Lyapunov exponents}
 
+\section{Empirical measures}
+Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures} \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\] encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
+\begin{equation*}
+  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
+\end{equation*}
+and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature empirical.
+The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. 
 
+It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotical distribution of the orbit. Reciprocally,
+For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
+
+It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.
+
+\begin{proposition}\label{prop:limiting-measures}
+  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
+  \begin{equation*}
+    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
+  \end{equation*}
+  form a compact connected subset of the invariant measures.
+\end{proposition}
+
+\NewObject\Measure\vnu{\mu}
+
+\begin{proof}
+  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
+  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
+  \begin{equation*}
+    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
+  \end{equation*}
+  which is a metric inducing the weak* topology on the set of probability measures. Since it's a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
+  Indeed,
+  \begin{align*}
+    d(\Emp[n](x), \Emp[n + 1](x))
+    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
+    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
+  \end{align*}
+\end{proof}
 
 \section{Ergodic theorems}
 
-Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in \cites[32]{przytyckiConformalFractalsErgodic2010}[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP, and the code is currently available at \url{https://github.com/lucasvreis/BirkhoffErgodicThm}.}.
+Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP, and the code is currently available at \url{https://github.com/soficshift/pointwise-birkhoff}.}.
 
 \begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
   Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
@@ -205,62 +241,23 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
   and the result follows by letting \(\varepsilon \to 0\).
 \end{proof}
 
-\section{Empirical measures}
-Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures} \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\] encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\):
-\begin{equation*}
-  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
-\end{equation*}
-and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature \textit{empirical}.
-
-The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. One of the motivating problems of the field is the \textit{Ergodic Hypothesis}, formulated by the Austrian physicist Ludwig Boltzmann to give mathematical justification to the kinetic theory of gases \cite{vianaFoundationsErgodicTheory2016}.
-
-
-
-
-
-
-% It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotical distribution of the orbit. Reciprocally,
-For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\Basin{\mu} \subseteq X\) of points with this property is called the \textbf{basin} of the measure \(\mu\).
-
-It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \textbf{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.
-
-\begin{proposition}\label{prop:limiting-measures}
-  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
-  \begin{equation*}
-    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
-  \end{equation*}
-  form a compact connected subset of the invariant measures.
-\end{proposition}
-
-\NewObject\Measure\vnu{\mu}
-
-\begin{proof}
-  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
-  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
-  \begin{equation*}
-    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
-  \end{equation*}
-  which is a metric inducing the weak* topology on the set of probability measures. Since it's a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
-  Indeed,
-  \begin{align*}
-    d(\Emp[n](x), \Emp[n + 1](x))
-    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
-    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
-  \end{align*}
-\end{proof}
-
 \section{Partitions}
-A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize the set of subsets is the object of our attentions.
+A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize that the set of subsets is the object of our attentions.
 
 \subsection{Lattice structure}
-The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation
+The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation defined by
 \begin{equation*}
-  \pP \vee \pQ = \set{ P \cap Q \where P \in \pP, Q \in \pQ}
+  (\pP \vee \pQ)(x) = \pP(x) \cap \pQ(x)
 \end{equation*}
-that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition finer than both \(\pP\) and \(\pQ\)). There is also a \emph{meet} operation \(\pP \wedge \pQ\), giving the greatest lower bound, but it is less straightforward to construct: on the union \(\pP[eqc] \cup \pQ[eqc]\), we say \(P\) and \(Q\) are related if they overlap, that is, \(P \cap Q \neq \varnothing\), and taking the transitive closure we get an equivalence relation. The elements of \(\pP \wedge \pQ\), then, are precisely the unions of sets in the same equivalence class under this relation. The meet operation will not be used in the text that follows, though.
+that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition finer than both \(\pP\) and \(\pQ\)). There is also a \emph{meet} operation \(\pP \wedge \pQ\), giving the greatest lower bound, but it is less straightforward to construct: on the union \(\pP[eqc] \cup \pQ[eqc]\), we say \(P\) and \(Q\) are related if they overlap, that is, \(P \cap Q \neq \varnothing\), and taking the transitive closure we get an equivalence relation. The elements of \(\pP \wedge \pQ\), then, are precisely the unions of sets in the same equivalence class under this relation. The meet operation will not be used in the following text, though.
+
+The partitions \(\pof{\aset}\) form, in fact, a \emph{complete} lattice, meaning that all subsets \(P \subseteq \pof{\aset}\) have both a least upper bound \(\bigvee_{\pP \in P}\pP \in \pof{\aset}\) and a greatest lower bound \(\bigwedge_{\pP \in P}\pP \in \pof{\aset}\). Their construction is very similar to their binary versions: the join can be defined as \(\left( \bigvee_{\pP \in P}\pP \right)(x) = \bigcap_{\pP \in P}\pP(x)\), and we can use the join to define the meet as
+\begin{equation*}
+  \bigwedge_{\pP \in P}\pP = \bigvee_{\substack{\pQ \text{ is an upper}\\\text{bound for }P}}\pQ.
+\end{equation*}
 
 \subsection{A measured interlude}
-In a measure space, it is often useful to relax the notions of equality and order on the partitions so that zero measure sets are disregarded. This is done in the obvious way, namely by saying \(\pP \preceq \pQ\) if for all \(Q \in \pQ[eqc]\), there is a \(P \in \pP[eqc]\) such that \(Q \setminus P\) has zero measure. Going a bit further, the partitions themselves may be allowed to cover only a total measure subset of the space, and their elements could overlap on zero measure sets. Again ---  always in the obvious way, and we shall henceforward hide the petty details in the hopes the reader is able to extrapolate them.
+In a measure space, it is often useful to relax the notions of equality and order on the partitions so that zero measure sets are disregarded. This is done in the obvious way, namely by saying \(\pP \preceq \pQ\) if for all \(Q \in \pQ[eqc]\), there is a \(P \in \pP[eqc]\) such that \(Q \setminus P\) has zero measure. Going a bit further, the partitions themselves may be allowed to cover only a total measure subset of the space, and their elements could overlap on zero measure sets. Again ---  always in the most natural way, and we shall henceforward hide the petty details in the hopes the reader is able to extrapolate them.
 
 \section{Disintegrating measures}
 
@@ -270,28 +267,74 @@ Then we go to the probability course, and the lecturer talks about conditional e
 While Fubini remains true for product measures, in general the problem of decomposing an arbitrary measure into a family of measures defined in smaller subsets is not as straightforward. Neither is straightforward to see how could one talk about the probability of an event conditioned to another event of \emph{zero probability}, even though in practice this happens very often. 
 Both situations are instances of the general problem the disintegration of measures solves: given a measure \(\mu\) and a partition \(\pP\) of the space \(\cms\), we want to find a family of measures \(\{\mu_x\}_{x \in \cms}\), each \(\mu_x\) giving full measure to \(\pP{x}\), with the property that \(\mu(E) = \int \mu_x(E) \,d\mu (x)\).
 
+\begin{definition}[Disintegration]
+  A \emph{disintegration} of a measure \(\mu \in \Meas{X}\) with respect to a partition \(\mathcal{P}\) is a family \(\{\mu_x\}_{x \in \cms} \subseteq \Meas{X}\) such that  for every measurable set \(E \subseteq X\), 
+  \begin{enumerate}
+  \item \(\mu_x(\mathcal{P}(x)) = 1\) for \(\mu\)-almost every \(x\);\label{disintegration:full-measure-ae}
+  \item the map \(x \mapsto \mu_x(E)\) is measurable;
+  \item \(\mu(E) = \int \mu_x(E) \,d\mu (x)\).
+  \end{enumerate}
+\end{definition}
+
+\subsection{Uniqueness}
+
 \subsection{Measurability}
 
-\begin{lemma}
-  The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable.
-\end{lemma}
+Not all partitions are created equal. Some may be pathological enough that there may be no hope in disintegrating over them. In fact, such partitions appear very \emph{naturally} in dynamics, namely as the orbits of points of many maps with an invariant measure.
+
+\begin{example}\label{eg:nonmeas-partition}
+  Suppose \(f \colon X \to X\) is invertible and \(\mu\) is an invariant measure for \(f\) such that \(\mu(X \setminus \Per{f}) > 0\). Then, the partition \(\Orbit[f] \colon X \to 2^X\) of two-sided orbits of \(f\) is such that \(\mu\) does not admit a disintegration with respect to \(\Orbit[f]\).
+\end{example}
+
 \begin{proof}
-  Let \(\set{U_i}_{i \in \NN}\)
-  foo
+  Suppose that such disintegration \(\{\mu_x\}_{x \in \cms}\) exists. We claim that \(\{f_*\mu_x\}_{x \in \cms}\) is also a disintegration.
+  Indeed, all \(\Orbit[f]{x}\) are invariant, so we have
+  \[(f_*\mu_x)(\Orbit[f]{x}) = \mu_x(\f[inv]{\Orbit[f]{x}}) = \mu_x(\Orbit[f]{x}) = 1\]
+  for \almostevery \(x\), and similarly, we have that \(x \mapsto (f_*\mu_x)(E) = \mu_x(\f[inv]{E})\) is measurable, and \(\mu(E) = \mu(\f[inv]{E}) = \int f_*\mu_x(E) \,d\mu (x)\). By uniqueness, this implies that \(f_*\mu_x = \mu_x\) almost everywhere.
+
+  By \cref{disintegration:full-measure-ae}, the hypothesis and the paragraph above, we can find some \(x \notin \Per{f}\) such that \(f_*\mu_x = \mu_x\) and \(\mu_x(\Orbit[f](x)) = 1\). But this is impossible: since \(\Orbit[f](x)\) is infinite and \(\mu_x(\{f^k(x)\}) = \mu_x(\{x\})\) for every \(k\),
+  \begin{equation*}
+    1 = \mu_x(\Orbit[f]{x}) = \sum_{k \in \ZZ} \mu_x(\{f^k(x)\}) = \sum_{k \in \ZZ} \mu_x(\{x\}) \in \{0, \infty\}.
+  \end{equation*}
 \end{proof}
 
-\begin{corollary}
-  Any partition \(\pP\) of \(\cms\) whose elements are closed is measurable.
-\end{corollary}
+\begin{remark}
+  A very basic instance of \cref{eg:nonmeas-partition} would be with \(X = S^1\), \(f \colon S^1 \to S^1\) an irrational rotation, and \(\mu\) the unique ergodic measure, because \(f\) has no periodic points.
+\end{remark}
+
+\begin{remark}
+  The \cref{eg:nonmeas-partition} also shows that it is not sufficient that the \emph{elements} of the partition are measurable sets. In the remark above, the orbits are countable sets of points in the circle, and thus are Lebesgue (or even Borel) measurable, and yet the partition does not admit a disintegration.
+\end{remark}
+
+The right notion of a ``well-behaved'' partition with respect to disintegrations will turn out to be the notion of \emph{measurable partitions}.
+
+\begin{definition}
+  A partition \(\mathcal{P}\) is said to be \emph{measurable} if there is a sequence \(\mathcal{P}_1, \mathcal{P}_2,\dots\) of partitions, all of which composed of a countable number of measurable sets, such that \(\mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\).
+\end{definition}
+
+\begin{example}
+  The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
+\end{example}
 \begin{proof}
-  Under the hypothesis, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\). With this metric,  \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. Consequently, the partition \(\bot\) of points of \(\pP[eqc]\) is measurable, thus so is its preimage \(\pP\).
+  Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(P \in \mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable, and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \bot\).
 \end{proof}
+
+\begin{example}
+  Any partition \(\pP\) of \(\cms\) whose elements are closed is measurable.
+\end{example}
+\begin{proof}
+  Under the hypothesis, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the previous example, the partition \(\bot\) of points of \(\pP[eqc]\) is measurable, thus so is its preimage by the measurable function \(\pP\).
+\end{proof}
+
+\subsection{Construction of conditional measures}
+
+
 
 \section{Entropy}
 
 \subsection{Topological entropy}
 \subsection{Measure-theoretic entropy}
 
-\section{Pesin entropy formula (tying things together)}
+\subsection{Pesin entropy formula}
 
 \end{document}

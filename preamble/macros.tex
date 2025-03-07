@@ -16,50 +16,12 @@
 {\par\end{em}\end{flushright}\end{quotation}}
 
 % Delimiters
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\sqpar}{[}{]}
 \DeclarePairedDelimiter{\rpar}{(}{)}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\fractional}{\{}{\}}
 
-% observables
-\NewVariableClass\Fun[
-  define keys={
-    {pf}{ lower = {*} },
-    {lift}{ command = {\widetilde} },
-    {inv}{ upper = {-1} }
-  },
-  define keys[1]={
-    {res}{ right return ,symbol put right ={|}, lower ={#1} },
-  },
-]
-\NewObject\Fun\g{g}
-\NewObject\Fun\F{F}
-
-% interval functions
-\NewVariableClass\IFun[
-  parent=\Fun,
-  define keys[1]={
-    {dder}{ upper ={(#1)} },
-    {der}{ upper ={\replicate{#1}{{\prime}}} },
-  },
-]
-\NewObject\IFun\f{f}
-\NewVariableClass\IFunOp[output=\IFun]
-
-\DeclareMathOperator{\Id}{id}
-\DeclareMathOperator{\ev}{ev}
-\DeclareMathOperator{\graph}{graph}
-\DeclareMathOperator{\graf}{graf}
-\DeclareMathOperator{\supp}{supp}
-\DeclareMathOperator{\Lyap}{Lyap}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\PGL}{PGL}
-\newcommand{\simdiff}{\mathbin{\triangle}}
-
-\input{preamble/macros/sets}
 \input{preamble/macros/probability}
 \input{preamble/macros/category}
 \input{preamble/macros/foliations}

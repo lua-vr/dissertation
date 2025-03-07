@@ -10,7 +10,7 @@ refs
   \item\fullcite{andersenIntroductionMeasuresInfinite}
 \end{enumerate}
 
-\section{The category of probability spaces}
+\section{Probability spaces}
 
 \subsection{Products and limits}
 We can construct a product measure
@@ -26,7 +26,7 @@ We can construct a product measure
     \item \(\lim_{n \to \infty} \mu_n(\phi) = \mu(\phi)\) for all Lipschitz functions \(\phi\);
     \item \(\liminf_{n \to \infty} \mu_n(U) \geq \mu(U)\) for all open sets \(U\);
     \item \(\limsup_{n \to \infty} \mu_n(F) \leq \mu(F)\) for all closed sets \(F\);
-    \item \(\lim_{n \to \infty} \mu_n(A) \leq \mu(A)\) for all continuity sets \(A\) of the measure \(\mu\).
+    \item \(\lim_{n \to \infty} \mu_n(A) = \mu(A)\) for all continuity sets \(A\) of the measure \(\mu\).
   \end{enumerate}
 \end{theorem}
 
@@ -103,7 +103,7 @@ Remarkably, for many classes of sequences \(\xi\), their corresponding processes
   \[\int \varphi \circ \DProc[n] \;d\Prob \to \int \varphi \;dW.\]
 \end{theorem}
 
-The motivation for looking into invariance principles is that they allow transferring certain results from Brownian motions to the sequence of partial sums \(S^{\xi}_n\). In our case, the result we are interested in is the arcsine law, and since we know from \cref{lem:ptime-continuous} that \(\pTime\) is continuous a.e., weak convergence is enough:
+The motivation for looking into invariance principles is that they allow transferring certain results from Brownian motions to the sequence of partial sums \(S^{\xi}_n\). In our case, the result we are interested in is the arcsine law. We know from \cref{lem:ptime-continuous} that \(\pTime\) is continuous a.e., so weak convergence is enough to transfer its conclusions:
 
 \begin{lemma}\label{lem:weak-arcsine}
   Suppose \(\xi \subseteq L^2(\Prob)\) is such that \(\DProc[n,spar,pf]\Prob \weakto W\). Then the average of the time in which the random walk \(S_n^{\xi}\) is above \(M \in \RR\) converges to an arcsine distribution, in the sense that
@@ -134,27 +134,46 @@ The motivation for looking into invariance principles is that they allow transfe
   \begin{equation*}
     \lim \int \tau_n \;d\Prob = \int \pTime \;dW -  \int \pTime \;dW = 0.
   \end{equation*}
-  \todo{I haven't figured out how to continue from here, or if the statement is true. (I think it certainly is)}
+  \todo{Finish!!}
 \end{proof}
 
 \subsubsection{Ergodic Martingale Differences}\label{sec:ergod-mart-diff}
 
-Donsker's theorem is far from being the most general result of its kind. In fact, it can be generalized to a weak invariance principle for ergodic martingale difference sequences, as stated below~\cite[see][theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
+Donsker's theorem is far from being the most general result of its kind, and in our case, we are interested in a generalization of such weak invariance principle for ergodic martingale difference sequences. Intuitively, these are sequences that behave as the time-one steps of a martigale, in the sense that even with information about the previous steps the expected value of the next step is still zero.
 
 \begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is invariant by the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\).
-\end{definition}
-
-\begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is ergodic for the left shift. 
-\end{definition}
-
-\begin{definition}
-  Every sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables generates a filtration \(\mathcal{F}_n = \sigma(\xi_1,\dots,\xi_n)\) of \(\mathcal{F}\). We say that \(\xi\) is a \emph{martingale difference sequence} if for all \(n\),
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
   \begin{equation*}
-    \CE[\Prob]{\xi_{n}, \mathcal{F}_{n - 1}} = 0.
+    \CE[\Prob]{\xi_{n}, {\sigma(\xi_1,\dots,\xi_{n - 1})}} = 0.
   \end{equation*}
 \end{definition}
+
+\subsubsection{Stationarity and two-sided processes}
+
+In the previous definition we considered an one-sided sequence of random variables. As it is often the case in ergodic theory, the sequences we shall be dealing with will have the additional property of \emph{stationarity}, which amounts to some sort of time-invariance. This property will also allow us to lift one-sided sequences of variables to two-sided ones, that is, sequences \((\dots,\xi_{-1},\xi_0,\xi_1,\dots)\) with indices in \(\ZZ\), due to the existence of invertible extensions as exposed in~\cref{sec:invert-extens} (which ultimately boils down to the Kolmogorov Extension Theorem).
+
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). Similarly, we can define stationarity for two-sided sequences by replacing \(\NN\) by \(\ZZ\) in the definition.
+\end{definition}
+
+\begin{lemma}
+  Every  stationary one-sided ergodic martingale difference sequence \(\xi\) is associated to a two-sided stationary ergodic martingale difference sequence \(\zeta\) with the same marginal distributions on positive indices. That is, if \(\pi \colon Y^{\ZZ}\to Y^{\NN}\) is defined by \(\pi(\dots x_{-1},x_0,x_1,\dots) = (x_1,x_2,\dots)\), we have \((\pi \circ \zeta)_*\Prob = \xi_*\Prob\).
+\end{lemma}
+
+\begin{remark}
+  Test
+\end{remark}
+
+
+\subsubsection{Invariance principle for ergodic sequences}
+
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
+\end{definition}
+
+
+
+The next result can be found in~\cite[theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{theorem}\label{thm:donsker-martingale}
   If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
@@ -162,22 +181,24 @@ Donsker's theorem is far from being the most general result of its kind. In fact
 
 \subsection{Reverse martingale difference sequences}
 
-In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^i)_{i \geq 0}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\), especially if \(f\) is not invertible. This process, however, cannot possibly be a martingale difference sequence unless \(\varphi = 0\) because \(\varphi \circ f^i\) is measurable for the \(\sigma\)-algebra \(f^{-i}(\mathcal{F})\), which is non-increasing. Nevertheless, if \(\mu\) is a stationary measure for \(f\), we can always look into the invertible extension to get an associated process which satisfy the martingale conditions.
+In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\). This process, however, cannot possibly be a martingale difference sequence unless \(\varphi \equiv 0\), because \(\varphi \circ f^n\) is measurable for the \(\sigma\)-algebra \(f^{-n}(\mathcal{F})\), which is non-increasing due to measurability of \(f\). In other words, we always have \(\CE[\mu]{\varphi \circ f^{n}, {\sigma(\varphi, \dots, \varphi \circ f^{n - 1})}} = \varphi \circ f^{n} \neq 0\) in general. This motivates the following definition.
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be a \textit{reverse martingale difference sequence} if for all \(n\),
+  \[\CE[\Prob]{\xi_n, {\sigma(\xi_{n + 1}, \xi_{n + 2}, \dots)}} = 0.\]
+\end{definition}
 
-Consider the space \(\RR^{\NN}\) with the product \(\sigma\)-algebra \(\mathcal{H} = \mathcal{B}^{ \otimes \NN}\) and the measure \(\nu = \xi_* \mu\). This measure is invariant for the left shift \(\sigma \colon \RR^{\NN} \to \RR^{\NN}\) since \(\sigma \circ \xi = (\varphi \circ f^{i + 1})_{i \geq 0} = \sigma \circ f\), so \(\sigma_*\nu = (\xi \circ f)_*\mu = \nu\). Since \(\mathcal{H}\) coincides with the Borel \(\sigma\)-algebra, the construction of the invertible extension (see \cref{sec:invert-extens}) gives us a stationary measure \(\tilde \nu \in \Meas{\RR^{\ZZ}}\) for the invertible shift, which we shall call \(\tilde \sigma\), whose projection \(\pi_* \tilde \nu\) by \(\pi \colon \RR^{\ZZ} \to \RR^{\NN}\) is equal to \(\nu\). The measure \(\tilde \nu\) is ergodic if and only if \(\nu\) is.
-
-We can now consider the inverted process \(\tilde \xi = (\pi_{-i})_{i \geq 0}\) with respect to this new probability space \((\RR^{\ZZ}, \tilde \nu)\), and \(\tilde \xi\) will be a martingale difference sequence if % TODO notation  
-\begin{equation*}
-  \CE[\tilde \nu]{\pi_{-n}, \mathcal{B}_{ - n + 1}} = 0. 
-\end{equation*}
-Since \(\tilde \sigma\) is surjective, this is equivalent to
-\begin{equation*}
-  \CE[\tilde \nu]{\pi_{0}, \mathcal{B}_{1}} = 0,
-\end{equation*}
-which ultimately translates to \(\CE[\mu]{\varphi, f^{-1}(\mathcal{F})} = 0\). Whenever this happens, we say \(\xi\) is a \textit{reverse martingale difference sequence}. If \(\mu\) is ergodic for \(f\), since this implies that \(\tilde \xi\) is a stationary ergodic martingale difference sequence, we get \cref{thm:donsker-martingale} for \(\tilde \xi\). This, in turn, also implies the weak invariance principle for the original \(\xi\), since due to stationarity, \(\DProc[rv = \tilde \xi, n,spar, pf]\tilde \nu = (\DProc[rv = \tilde \xi, n] \circ \tilde \sigma^n)_*\tilde \nu = \DProc[n,rv = \xi, spar,pf]\mu\).
+In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) and \(\Prob = \mu\) an invariant measure for \(f\)), results for martingale difference sequences can be stated dually for reverse martingale difference sequences. The following discussion expands on comments and text present in~\cite[Appendix M22 and Section 19]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{corollary}\label{cor:donsker-martingale}
-  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic reverse martingale difference sequence for which \(\sigma = \lVert \xi_1 \rVert_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
+  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic reverse martingale difference sequence for \(\mathcal{G}_1 \supseteq \mathcal{G}_2 \supseteq \cdots \) for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
 \end{corollary}
+
+\begin{proof}
+  Consider the space \(\RR^{\NN}\) with the product \(\sigma\)-algebra \(\mathcal{H} = \mathcal{B}^{ \otimes \NN}\) and the measure \(\nu = \xi_* \Prob\). This measure is invariant by the left shift \(\sigma \colon \RR^{\NN} \to \RR^{\NN}\) by the definition of stationarity. Since \(\mathcal{H}\) coincides with the Borel \(\sigma\)-algebra, the construction of the invertible extension (see \cref{sec:invert-extens}) gives us a stationary measure \(\tilde \nu \in \Meas{\RR^{\ZZ}}\) for the invertible shift, which we shall call \(\tilde \sigma \colon \RR^{\ZZ} \to \RR^{\ZZ}\), whose projection \(\pi_* \tilde \nu\) by \(\pi \colon \RR^{\ZZ} \to \RR^{\NN}\) is equal to \(\nu\). The measure \(\tilde \nu\) is also ergodic for the invertible shift, since \(\nu\) is.
+
+  We now construct an (usual) martingale difference sequence on this space. Let \(\mathcal{F}_n = \pi^{-1}(\mathcal{G}_n)\)
+  \todo{Finish!!}
+\end{proof}
+
 
 \end{document}
