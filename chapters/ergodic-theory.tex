@@ -316,18 +316,18 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
   A partition \(\mathcal{P}\) is said to be \emph{measurable} if there is a sequence \(\mathcal{P}_1, \mathcal{P}_2,\dots\) of partitions, all of which composed of a countable number of measurable sets, such that \(\mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\).
 \end{definition}
 
-\begin{example}
+\begin{example}\label{eg:point-partition-meas}
   The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
-  Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(P \in \mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable, and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \bot\).
+  Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(P \in \mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable by definition, and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \bot\).
 \end{proof}
 
 \begin{example}
-  Any partition \(\pP\) of \(\cms\) whose elements are closed is measurable.
+  Any partition \(\pP\) of a compact metric space \(X\) whose elements are closed is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
-  Under the hypothesis, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the previous example, the partition \(\bot\) of points of \(\pP[eqc]\) is measurable, thus so is its preimage by the measurable function \(\pP\).
+  Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (this is the Hausdorff metric, which we detail in \cref{sec:hausdorff}). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\bot\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
 \end{proof}
 
 \subsection{Construction of conditional measures}
