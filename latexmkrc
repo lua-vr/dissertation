@@ -4,6 +4,8 @@ $aux_dir = ".tex-aux";
 $bibtex_use = 1;
 $ENV{'TEXINPUTS'}='./packages//:';
 
+system("mkdir -p $aux_dir/chapters;");
+
 set_tex_cmds( '-synctex=1 %O %S' );
 
 add_cus_dep('glo', 'gls', 0, 'makeglossaries');
