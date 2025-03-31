@@ -1,0 +1,73 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+PS: left shift \(\sigma((x_i)_{i \in \NN}) = (x_{i + 1})_{i \in \NN}\).
+
+\begin{definition}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). Similarly, we can define stationarity for two-sided sequences by replacing \(\NN\) by \(\ZZ\) in the definition.
+\end{definition}
+PS: sequência \iid é estacionária e ergódica.
+
+PS: se \(\xi = (\xi_1,\xi_2\dots)\) é uma sequência estacionária com valores em \(\RR\), então pela definição acima, \(\mu = \xi_*\Prob \in \Meas{\RR^{\NN}}\) é invariante pra \(f = \sigma : \RR^{\NN} \to \RR^{\NN}\), então pode aplicar o teorema abaixo pra \(\phi = \pi_1\), onde \(\pi_1((x_i)_i) = x_1\), e assim obtemos que \(\frac{1}{n}\sum_{i = 0}^{\infty} \xi_i\) converge \(\Prob\)-qtp.  
+
+Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in \cites[32]{przytyckiConformalFractalsErgodic2010}[136]{katokIntroductionModernTheory1995}.
+
+\begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
+  Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
+  \begin{equation*}
+    \frac{1}{n}\sum_{i = 0}^{n - 1} \phi (f^i(x)) \to \CE[\mu]{\phi, \mathcal{I}}(x),
+  \end{equation*}
+  where \(\mathcal{I}\) is the sub-\(\sigma\)-algebra of (strictly) invariant sets.
+\end{theorem}
+
+\begin{proof}
+  Let \[F_n(x)= \max_{1 \le k \le n} \sum_{i = 0}^{k} \phi(f^i(x)).\]
+
+  \begin{claim}
+    \(F_{n + 1} = \phi + \max\set{0, F_n \circ f}\).
+  \end{claim}
+  To see this, note that \(\sum_{i = 0}^{k} \phi \circ f^i = \phi + \sum_{i = 0}^{k - 1} \phi \circ f^{i + 1}\), so
+  \[F_{n + 1}
+    = \phi + \max_{1 \le k \le n + 1}\sum_{i = 0}^{k - 1} \phi \circ f^{i + 1}
+    = \phi + \max\set[par = \Big]{0,\max_{1 \le k \le n}\sum_{i = 0}^{k} \phi \circ f^{i + 1}}
+    = \phi + \max \set{0,F_n \circ f}.
+  \]
+
+  \begin{claim}
+    \(F_{n + 1} - F_n \circ f = \phi - \min\set{0, F_n \circ f}\).
+  \end{claim}
+  This claim follows from the previous one by rewriting
+  \begin{align*}
+    F_{n + 1} + \min\set{0, F_n \circ f} = \phi + \max\set{0, F_n \circ f} + \min\set{0, F_n \circ f} = \phi + F_n \circ f.
+  \end{align*}
+  Two very useful corollaries of the claim are that for each \(x \in X\), \(F_{n + 1}(x) - F_n(f(x))\) is a non-increasing sequence (because \(F_n(f(x))\) is non-decreasing by definition), and that if \(F_n(f(x)) \to \infty\), then the sequence will converge monotonically to \(\phi(x)\).
+
+  Now, we define the set
+  \begin{equation*}
+    S = \set[par = auto]{x \in X \where F_n(x) \to + \infty}.
+  \end{equation*}
+  The first observation is that \(S \in \mathcal{I}\), because it's measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
+  \begin{equation}\label{eq:1}
+    0 \le \int_S F_{n + 1} - F_n\;d\mu = \int_S F_{n + 1} - F_n \circ f\;d\mu \to \int_S \phi\;d\mu
+  \end{equation}
+  which means \(\int_S \phi\;d\mu \ge 0\).
+
+  The second observation is that if \(x \notin S\), then \((F_n(x))_n\) is bounded above, so
+  \begin{equation}\label{eq:2}
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le \limsup_{n \to \infty} \frac{1}{n}F_n(x) \le 0.
+  \end{equation}
+  Putting the two together, we conclude that if \(\phi\) is such that \(\CE{\phi, \mathcal{I}} < 0\) almost everywhere, then by  \cref{eq:1} and the fact \(S \in \mathcal{I}\), the set \(S\) has measure zero, so  \cref{eq:2} is valid almost everywhere.
+
+  The theorem then follows by noticing that for  any \(\varepsilon > 0\), if we replace \(\phi\) by \(\tilde{\phi} = \phi - {\CE{\phi,\mathcal{I}}} - \varepsilon\), then \(\CE{\tilde{\phi}, \mathcal{I}} < 0\), so
+  \begin{equation*}
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \tilde\phi(f^i(x))
+    = \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) - \CE{\phi,\mathcal{I}} - \varepsilon \le 0.
+  \end{equation*}
+  If we combine this with the analogous inequality for \(-\phi\), we get
+  \begin{equation*}
+    \CE{\phi,\mathcal{I}} - \varepsilon \le \liminf_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le 
+    \limsup_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)) \le  \CE{\phi,\mathcal{I}} + \varepsilon
+  \end{equation*}
+  and the result follows by letting \(\varepsilon \to 0\).
+\end{proof}
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\usetikzlibrary{perspective}
+\[
+\begin{tikzpicture}[3d view={0}{0}, fill opacity=0.4, p/.style=red!50, s/.style=blue!80, scale=2]
+    \coordinate (v1)  at (-0.872223,  0.000025,  0.756677);
+    \coordinate (v2)  at ( 0.872223, -0.000025, -0.756677);
+    \coordinate (v3)  at (-0.007764, -0.430019, -1.000845);
+    \coordinate (v4)  at (-0.289239, -0.995927, -0.333373);
+    \coordinate (v5)  at (-0.989742, -0.429991, -0.148953);
+    \coordinate (v6)  at (-0.708268,  0.135918, -0.816426);
+    \coordinate (v7)  at (-0.420571,  0.880190, -0.484822);
+    \coordinate (v8)  at (-0.485632,  0.874143,  0.432091);
+    \coordinate (v9)  at ( 0.431284,  0.868068,  0.497113);
+    \coordinate (v10) at ( 0.496345,  0.874115, -0.419801);
+    \coordinate (v11) at ( 0.709810,  0.115738,  0.818195);
+    \coordinate (v12) at ( 0.002408, -0.444109,  0.994700);
+    \coordinate (v13) at ( 0.276984, -1.003985,  0.319313);
+    \coordinate (v14) at ( 0.984385, -0.444138,  0.142808);
+   
+    \fill[s] (v3) -- (v4) -- (v5) -- (v6) -- cycle;
+    \fill[s] (v11) -- (v12) -- (v13) -- (v14) -- cycle;
+    \fill[p] (v13) -- (v12) -- (v1) -- (v5) -- (v4) -- cycle;
+    \fill[p] (v14) -- (v13) -- (v4) -- (v3) -- (v2) -- cycle;
+   
+    \fill[p] (v10) -- (v9) -- (v11) -- (v14) -- (v2) -- cycle;
+    \fill[p] (v6) -- (v5) -- (v1) -- (v8) -- (v7) -- cycle;
+    \fill[p] (v9) -- (v8) -- (v1) -- (v12) -- (v11) -- cycle;
+    \fill[p] (v3) -- (v6) -- (v7) -- (v10) -- (v2) -- cycle;
+    \fill[s] (v7) -- (v8) -- (v9) -- (v10) -- cycle;
+
+    \foreach \i in {1,...,14} {\filldraw[opacity=1] (v\i) circle (0.5pt) node (n\i) {};}
+    
+    \draw (n6) -- (n3);
+    \draw (n3) -- (n4);
+    \draw (n4) -- (n5);
+    \draw (n5) -- (n6);
+
+    \draw (n10) -- (n7);
+    \draw (n7) -- (n8);
+    \draw (n8) -- (n9);
+    \draw (n9) -- (n10);
+    
+    \path[->] (n14) edge [bend right] (n11);
+    \path[->] (n14) edge [bend left] (n11);
+    \draw (n11) -- (n12);
+    \draw (n12) -- (n13);
+    \draw (n13) -- (n14);
+    
+    \draw (n2) -- (n3);
+    \draw (n6) -- (n7);
+    \draw (n10) -- (n2);
+    \draw (n5) -- (n1);
+    \draw (n1) -- (n8);
+    \draw (n4) -- (n13);
+    \draw (n12) -- (n1);
+    \draw (n2) -- (n14);
+    \draw (n11) -- (n9);
+\end{tikzpicture}
+\]
+
+\end{document}
