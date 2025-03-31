@@ -48,7 +48,6 @@ _region_.*
 latex.out/
 .tex-aux/
 
-.dir-locals.el
 auto
 
 ## Auxiliary and intermediate files from other packages:
