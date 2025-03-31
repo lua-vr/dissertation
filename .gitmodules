@@ -1,0 +1,4 @@
+[submodule "packages"]
+	path = packages
+	url = https://github.com/soficshift/meus-pacotes/
+	branch = main
