@@ -16,7 +16,7 @@ Given such a monoid \(M\), the category composed of a single object \(\bigstar\)
 
 To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
 
-This point of view also allows for situations in which the morphisms carry more structure than a single function from a set to itself satisfying some properties. A great example of this are Markov chains, whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both briefly with more details.
+This point of view also allows for situations in which the morphisms carry more structure than a single function from a set to itself satisfying some properties. A great example of this are Markov chains, whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both with more details.
 
 \subsection{Some examples}
 \subsubsection{Category of Markov kernels}
@@ -47,22 +47,22 @@ Another observation is that a probability measure \(\mu\) in a measurable space 
 \subsection{Invariant states}
 
 Given categories \(\cC, \cD\), a \emph{cone} of a functor \(F \colon \cD \to \cC\) is defined as an object \(C \in \cC\) and a natural transformation \(T \colon \Delta(C) \Rightarrow F\), where \(\Delta(C) \colon \cD \to \cC\) is the constant functor at the identity of \(C\). In the case we are interested, \(\cD = M\) is a monoid and \(F\) is given by the dynamics. This means a cone is given as an object \(C \in \cC\) and a morphism \(c \colon C \to X\) with the property that for every \(m \in M\),
-\begin{center}
+\[
   \begin{tikzcd}
     &\arrow[dl, "c", swap]C\arrow[dr, "c"]& \\[-10pt]
     X\arrow[rr,"m"] && X
   \end{tikzcd}
-\end{center}
+\]
 commutes. 
 
 A cone \((C, c)\) is \emph{universal} for \(M \to \cC\) if it is a limit of the above diagram, that is, for every other cone \((D, d)\), there is a unique arrow \(D \to C\) so that
-\begin{center}
+\[
   \begin{tikzcd}
     &\arrow[ddl, "d", swap]D\arrow[d,dashed]\arrow[ddr, "d"]& \\
     &\arrow[dl]C\arrow[dr]& \\[-15pt]
     X\arrow[rr,"m"] && X
   \end{tikzcd}
-\end{center}
+\]
 commutes. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
 
 \begin{example}
@@ -93,7 +93,9 @@ Extensions are ways to see one dynamic inside another one.
 \subsubsection{A failure of existence}
 Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
-If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as  \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\] then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
+If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
+\[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
+then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
 
 Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
 
@@ -141,14 +143,16 @@ But this set is empty because
 \subsection{Lyapunov exponents}
 
 \section{Empirical measures}
-Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures} \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\] encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
+Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
+\[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
+encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
 \begin{equation*}
   \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
 \end{equation*}
 and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature empirical.
 The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. 
 
-It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotical distribution of the orbit. Reciprocally,
+It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotic distribution of the orbit. Reciprocally,
 For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
 
 It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.

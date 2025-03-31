@@ -95,8 +95,8 @@ The Schwarzian derivative has some important properties that we highlight in the
     and by the same argument of the paragraph above, we conclude \(\SchD f \prec 0 \iff \SchD f^{-1} \succ 0\).
     \item Since \(f\) is a diffeomorphism between intervals, either \(f' > 0\) or \(f' < 0\). As a first step, assume \(f' > 0\). Taking the second derivative of \(\varphi(y) = 1/ \sqrt{f'(y)} = f'(y)^{-1/2}\),
     \begin{equation*}
-    \varphi'' = \rpar*{-\frac{1}{2}\rpar{f'}^{-3/2}\cdot{\f''}}' =
-    \frac{3}{4}(f')^{-5/2}\cdot (f'')^2 - \frac{1}{2}(f')^{-3/2}\cdot \f[der = 3].
+      \varphi'' = \rpar*{-\frac{1}{2}\rpar{f'}^{-3/2}\cdot{\f''}}' =
+      \frac{3}{4}(f')^{-5/2}\cdot (f'')^2 - \frac{1}{2}(f')^{-3/2}\cdot \f[der = 3].
     \end{equation*}
     Thus
     \begin{equation}
@@ -235,7 +235,7 @@ The version of the statement below is slightly more general than the correspondi
 
 The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors  constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume \cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though,  this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. Clearly, this implies both basins are dense in the surface, and therefore not continuity sets.
 
-\todo{Refer to discussion in \cite{bonattiDynamicsUniformHyperbolicity2005}}
+\todo{Refer to discussion in~\cite{bonattiDynamicsUniformHyperbolicity2005}}
 
 In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
 \begin{equation*}

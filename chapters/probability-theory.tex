@@ -12,6 +12,8 @@ refs
 
 \section{Probability spaces}
 
+\subsection{The Kolmogorov Extension Theorem}
+
 \subsection{Products and limits}
 We can construct a product measure
 
@@ -38,7 +40,7 @@ We can construct a product measure
 
 The space \(\CWPS\) of continuous functions does not let us talk about processes that contain discontinuities, or even how discontinuous processes can converge in a suitable way to continuous ones. This is important in our setting to deal with the convergence of certain processes induced by discrete dynamics to the Brownian motion, which is continuous almost surely.
 
-For this, we shall introduce the space of \textit{càdlag} functions, or Skorohod space. This is the space of functions whose discontinuities are of the \textit{first kind}, that is, both lateral limits exist, and whose value at the point is equal to the right limit:
+For this, we shall introduce the space of \textit{càdlàg} functions, or Skorohod space. This is the space of functions whose discontinuities are of the \textit{first kind}, that is, both lateral limits exist, and whose value at the point is equal to the right limit:
 \begin{equation*}
   \Sko{[0,1]} = \set[par=\Big]{ f \colon [0,1] \to \RR \where \forall t, \lim_{s \to t^-}x(s) \text{ exists and} \lim_{s \to t^+}x(s) = x(t) }.
 \end{equation*}
@@ -91,8 +93,7 @@ Let \(\pTime \colon \WPS \to \RR\) be the observable that returns the proportion
 
 \subsection{Weak invariance principles}
 
-We will fix a probability space \((\Omega, \mathcal{F}, \Prob)\) for the rest of this section.
-Given a sequence \(\xi = (\xi_1,\xi_2,\dots)\) of random variables defined on \(\Omega\), we can define their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and a sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
+We will fix a probability space \((\Omega, \mathcal{F}, \Prob)\) for the rest of this section. Given a sequence \(\xi = (\xi_1,\xi_2,\dots)\) of random variables defined on \(\Omega\), we can define their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and a sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
 \[\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}},\]
 obtained by appropriately scaling the partial sums of the random variables up to some iterate \(n\).
 
@@ -103,7 +104,7 @@ Remarkably, for many classes of sequences \(\xi\), their corresponding processes
   \[\int \varphi \circ \DProc[n] \;d\Prob \to \int \varphi \;dW.\]
 \end{theorem}
 
-The motivation for looking into invariance principles is that they allow transferring certain results from Brownian motions to the sequence of partial sums \(S^{\xi}_n\). In our case, the result we are interested in is the arcsine law. We know from \cref{lem:ptime-continuous} that \(\pTime\) is continuous a.e., so weak convergence is enough to transfer its conclusions:
+The motivation for looking into invariance principles is that they allow transferring certain results from Brownian motions to the sequence of partial sums \(S^{\xi}_n\). In our case, the result we are interested in is the arcsine law. We know from \cref{lem:ptime-continuous} that \(\pTime\) is continuous \almostevery, so weak convergence is enough to transfer its conclusions:
 
 \begin{lemma}\label{lem:weak-arcsine}
   Suppose \(\xi \subseteq L^2(\Prob)\) is such that \(\DProc[n,spar,pf]\Prob \weakto W\). Then the average of the time in which the random walk \(S_n^{\xi}\) is above \(M \in \RR\) converges to an arcsine distribution, in the sense that
@@ -139,7 +140,7 @@ The motivation for looking into invariance principles is that they allow transfe
 
 \subsubsection{Ergodic Martingale Differences}\label{sec:ergod-mart-diff}
 
-Donsker's theorem is far from being the most general result of its kind, and in our case, we are interested in a generalization of such weak invariance principle for ergodic martingale difference sequences. Intuitively, these are sequences that behave as the time-one steps of a martigale, in the sense that even with information about the previous steps the expected value of the next step is still zero.
+Donsker's theorem is far from being the most general result of its kind, and in our case, we are interested in a generalization of such weak invariance principle for ergodic martingale difference sequences. Intuitively, these are sequences that behave as the time-one steps of a martingale, in the sense that even with information about the previous steps the expected value of the next step is still zero.
 
 \begin{definition}
   A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
