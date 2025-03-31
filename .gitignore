@@ -20,7 +20,7 @@ _region_.*
 *.xdv
 *-converted-to.*
 # these rules might exclude image files for figures etc.
-# *.ps
+*.out.ps
 # *.eps
 # *.pdf
 
@@ -122,7 +122,8 @@ acs-*.bib
 *.sls
 
 # uncomment this for glossaries-extra (will ignore makeindex's style files!)
-# *.ist
+*.ist
+*.ob-glo
 
 # gnuplot
 *.gnuplot
