@@ -40,7 +40,7 @@ The Schwarzian derivative has some important properties that we highlight in the
 \begin{proposition}\label{prop:schwarzian}
   The Schwarzian derivative has the following properties:
   \begin{enumerate}
-  \item If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then 
+  \item\label{prop:schwarzian:item:1} If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD{g}\).
   \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
   \item \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
   \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
@@ -87,7 +87,7 @@ The Schwarzian derivative has some important properties that we highlight in the
                    &= (\SchD f) \circ g \cdot (g')^2 + \SchD g.
       \end{aligned}
     \end{equation}
-    Since \(g\) is a diffeomorphism, \(g'(x) \neq 0\) for all \(x \in I\), and therefore \((g')^2 > 0\). In particular, \(g\) is a homeomorphism, so that if \(\SchD f(x) > 0\) for all \(x\) the open dense set \(U\), and \(\SchD g(x) > 0\) in the open dense set \(V\), then \(\SchD{f \circ g} > 0\) in the open dense set \(g^{-1}(U) \cap V\). 
+    Since \(g\) is a diffeomorphism, \(g'(x) \neq 0\) for all \(x \in I\), and therefore \((g')^2 > 0\). In particular, \(g\) is a homeomorphism, so that if \(\SchD f(x) > 0\) for all \(x\) the open dense set \(U\), and \(\SchD g(x) > 0\) in the open dense set \(V\), then \(\SchD{f \circ g} > 0\) in the open dense set \(g^{-1}(U) \cap V\). Similarly, from \cref{sch-comp} we see that if \(\SchD f \equiv 0\), then the first term is zero, therefore \(\SchD{f \circ g} = \SchD g\).
   \item Applying \cref{sch-comp} to \(\Id = f^{-1} \circ f\), we see that
     \begin{equation*}
       0 = \SchD{\Id} = (\SchD f^{-1}) \circ f \cdot (f')^2 + \SchD f,
@@ -119,12 +119,16 @@ The Schwarzian derivative has some important properties that we highlight in the
   \end{enumerate}
 \end{proof}
 
+\begin{lemma}\label{lem:sch-fixed-pts}
+  If \(f \colon I \to I'\) is \(C^3\) and \(\SchD f \prec 0\), then \(f\) has at point three fixed points. When it has three fixed points, the middle one is strictly repelling and the other two are strictly attracting.
+\end{lemma}
+
 \begin{lemma}\label{lem:sch-cross-increase}
   If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\) for all \(y_1 < y_2 < y_3 < y_{4}\).
 \end{lemma}
 
 \begin{proof}
-  Suppose \(\SchD f \prec 0\). Given \(y_1 < y_2 < y_3 < y_{4}\), let \(\varphi\) be the linear fractional transformation that sends \(f(y_1)\) to \(y_1\), \(f(y_2)\) to \(y_2\) and \(f(y_4)\) to \(y_4\). Since fractional linear transformations preserve cross-ratios, \(\varphi()\)
+  Given \(y_1 < y_2 < y_3 < y_{4}\), let \(\varphi\) be the linear fractional transformation that sends \(f(y_1)\) to \(y_1\), \(f(y_2)\) to \(y_2\) and \(f(y_4)\) to \(y_4\). Since from \cref{prop:schwarzian}, we have that \(\SchD{\varphi \circ f} = \SchD f\), and we know fractional linear transformations also preserve cross-ratios, without loss of generality we may assume that \(f\) itself fixes \(y_1,y_2\) and \(y_4\). Now, by \cref{lem:sch-fixed-pts}, \(f(y) > y\) on the interval \(\interval[open]{y_2}{y_4}\), and therefore \(f(y_3) > y_3\). It thus follows easily by the definition of cross-ratios that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\).
 \end{proof}
 
 \begin{lemma}\label{lem:bound-deriv-schwarz}
