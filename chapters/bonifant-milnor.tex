@@ -120,8 +120,14 @@ The Schwarzian derivative has some important properties that we highlight in the
 \end{proof}
 
 \begin{lemma}\label{lem:sch-fixed-pts}
-  If \(f \colon I \to I'\) is \(C^3\) and \(\SchD f \prec 0\), then \(f\) has at point three fixed points. When it has three fixed points, the middle one is strictly repelling and the other two are strictly attracting.
+  If \(f \colon I \to I'\) is \(C^3\) and \(\SchD f \prec 0\), then \(f\) has at most three fixed points. When it has three fixed points, the middle one is strictly repelling and the other two are strictly attracting.
 \end{lemma}
+
+\begin{proof}
+  Suppose \(f\) had four fixed points \(y_1 < y_2 < y_3 < y_4\). By the Mean Value Theorem, in each of the three open intervals \((y_i,y_{i + 1})\), for \(i = 1,2,3\), we would have a point  \(c_i \in (y_i,y_{i + 1})\) where \(f'(c_i) = 1\). But this is impossible, since by \cref{prop:schwarzian:item:3} \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is \emph{strictly} convex, which would imply \(\varphi(c_2) > \varphi(c_1) = \varphi(c_3) = 1\).
+
+  Now, suppose there are exactly three fixed points \(y_1 < y_2 < y_3\). By the same reasoning, there are two points \(c_1 \in (y_1,y_2)\) and \(c_2 \in (y_2, y_3)\) where \(\varphi(c_1) = \varphi(c_2) = 1\). Knowing that \(\varphi\) is strictly convex, this implies \(\varphi(y_2) > 1\) and \(\varphi(y_1), \varphi(y_3) < 1\), and therefore \(\abs{f'(y_2)} < 1\) and \(\abs{f'(y_1)},\abs{f'(y_3)} > 1\).
+\end{proof}
 
 \begin{lemma}\label{lem:sch-cross-increase}
   If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \(\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\) for all \(y_1 < y_2 < y_3 < y_{4}\).
