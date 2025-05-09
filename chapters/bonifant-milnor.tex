@@ -40,9 +40,12 @@ The Schwarzian derivative has some important properties that we highlight in the
 \begin{proposition}\label{prop:schwarzian}
   The Schwarzian derivative has the following properties:
   \begin{enumerate}
-  \item\label{prop:schwarzian:item:1} If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD{g}\).
+  \item\label{prop:schwarzian:item:1}
+    The Schwarzian is a second-order derivation~\cite{ovsienkoSchwarzianDerivative}
+    
+    If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
   \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
-  \item \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+  \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
   \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
   \end{enumerate}
 \end{proposition}
@@ -124,7 +127,7 @@ The Schwarzian derivative has some important properties that we highlight in the
 \end{lemma}
 
 \begin{proof}
-  Suppose \(f\) had four fixed points \(y_1 < y_2 < y_3 < y_4\). By the Mean Value Theorem, in each of the three open intervals \((y_i,y_{i + 1})\), for \(i = 1,2,3\), we would have a point  \(c_i \in (y_i,y_{i + 1})\) where \(f'(c_i) = 1\). But this is impossible, since by \cref{prop:schwarzian:item:3} \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is \emph{strictly} convex, which would imply \(\varphi(c_2) > \varphi(c_1) = \varphi(c_3) = 1\).
+  Suppose \(f\) had four fixed points \(y_1 < y_2 < y_3 < y_4\). By the Mean Value Theorem, in each of the three open intervals \((y_i,y_{i + 1})\), for \(i = 1,2,3\), we would have a point  \(c_i \in (y_i,y_{i + 1})\) where \(f'(c_i) = 1\). But this is impossible, since by \cref{prop:schwarzian:item:3} \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex, which would imply \(\varphi(c_2) < \varphi(c_1) = \varphi(c_3) = 1\).
 
   Now, suppose there are exactly three fixed points \(y_1 < y_2 < y_3\). By the same reasoning, there are two points \(c_1 \in (y_1,y_2)\) and \(c_2 \in (y_2, y_3)\) where \(\varphi(c_1) = \varphi(c_2) = 1\). Knowing that \(\varphi\) is strictly convex, this implies \(\varphi(y_2) > 1\) and \(\varphi(y_1), \varphi(y_3) < 1\), and therefore \(\abs{f'(y_2)} < 1\) and \(\abs{f'(y_1)},\abs{f'(y_3)} > 1\).
 \end{proof}
@@ -138,11 +141,17 @@ The Schwarzian derivative has some important properties that we highlight in the
 \end{proof}
 
 \begin{lemma}\label{lem:bound-deriv-schwarz}
-  If \(f \colon I \to I\) preserves orientation and \(\SchD f \prec 0\), then \(f'(0)f'(1) < 1\).
+  If \(f \colon I \to I\) is a diffeomorphism that preserves orientation and \(\SchD f \prec 0\), where \(I = [a,b]\), then \(f'(a)f'(b) < 1\).
 \end{lemma}
 
 \begin{proof}
-  
+  Let's consider the case where \(f'(a) = f'(b)\) first. If we had \(f'(a)^2 = f'(b)^2 = f'(a)f'(b) \ge 1\), then \(\varphi(a) = \varphi(b) \le 1\) which by strict convexity of \(\varphi\) implies \(\varphi|_{(a,b)} < 1\). This, in turn, means that \(f'|_{(a,b)} < 1\), which (by the mean value theorem) is not possible for a diffeomorphism that sends an interval to itself.
+
+  The general case is shown by noticing that if we define the function \(g = r \circ f \circ r \colon I \to I\), where \(r(x) = a + b - x\) (and thus \(g\) is the reflection of \(f\) along the anti-diagonal), then \(g'(a) = f'(b)\) and \(g'(b) = f'(a)\). By the chain rule,
+  \begin{equation*}
+    (f \circ g)'(a) = (f \circ g)'(b) = f'(a)f'(b),
+  \end{equation*}
+  and by \cref{prop:schwarzian:item:1}, \(\SchD{f \circ g} \prec 0\) because \(\SchD{r} \equiv 0\) and thus \(\SchD{g} = \SchD{f} \circ r \prec 0\).
 \end{proof}
 
 Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas hold if \(\SchD f \succ 0\). For example, if \(\SchD f \succ 0\) then \(f\) decreases cross ratios and \(f'(0)f'(1) > 1\).
@@ -151,7 +160,7 @@ Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas ho
 
 \section{Skew products}
 
-We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the ``caps'' of \(X \times I\).
+We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the upper and lower ``boundaries'' of \(X \times I\).
 Let \(\mathcal{B}_i = \mathcal{B}(\nu_i)\) be the basins of the respective measures.
 
 To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(F^n(x,y)\), that is, \(f_x^{n} = f_{g^{n - 1}(x)} \circ \cdots \circ f_x\).
@@ -236,8 +245,6 @@ The version of the statement below is slightly more general than the correspondi
 \end{corollary}
 
 \begin{proof}
-  
-  
   If suffices to integrate the logarithm of the inequality \(f_x'(0)f_x'(1) < 1\) from \cref{lem:bound-deriv-schwarz}, and then apply \cref{lem:lyap-basin-posmeas}.
 \end{proof}
 

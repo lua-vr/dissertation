@@ -21,7 +21,7 @@ We can construct a product measure
 \subsection{Independence and distribution}
 \section{Weak convergence}
 
-\begin{theorem}[Portmanteau]\label{thm:portmanteau}
+\begin{proposition}[Portmanteau]\label{thm:portmanteau}
   The following are equivalent:
   \begin{enumerate}[i., left=0pt, topsep=3pt]
     \item \(\mu_n \weakto \mu\);
@@ -30,7 +30,7 @@ We can construct a product measure
     \item \(\limsup_{n \to \infty} \mu_n(F) \leq \mu(F)\) for all closed sets \(F\);
     \item \(\lim_{n \to \infty} \mu_n(A) = \mu(A)\) for all continuity sets \(A\) of the measure \(\mu\).
   \end{enumerate}
-\end{theorem}
+\end{proposition}
 
 \section{Ergodic theorems}
 \subsection{Hewitt-Savage zero-one law}
@@ -197,7 +197,9 @@ In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ 
 \begin{proof}
   Consider the space \(\RR^{\NN}\) with the product \(\sigma\)-algebra \(\mathcal{H} = \mathcal{B}^{ \otimes \NN}\) and the measure \(\nu = \xi_* \Prob\). This measure is invariant by the left shift \(\sigma \colon \RR^{\NN} \to \RR^{\NN}\) by the definition of stationarity. Since \(\mathcal{H}\) coincides with the Borel \(\sigma\)-algebra, the construction of the invertible extension (see \cref{sec:invert-extens}) gives us a stationary measure \(\tilde \nu \in \Meas{\RR^{\ZZ}}\) for the invertible shift, which we shall call \(\tilde \sigma \colon \RR^{\ZZ} \to \RR^{\ZZ}\), whose projection \(\pi_* \tilde \nu\) by \(\pi \colon \RR^{\ZZ} \to \RR^{\NN}\) is equal to \(\nu\). The measure \(\tilde \nu\) is also ergodic for the invertible shift, since \(\nu\) is.
 
-  We now construct an (usual) martingale difference sequence on this space. Let \(\mathcal{F}_n = \pi^{-1}(\mathcal{G}_n)\)
+  We now construct an (usual) martingale difference sequence on this space. Let \(\mathcal{F}_n = \pi^{-1}(\mathcal{G}_n)\).
+
+  
   \todo{Finish!!}
 \end{proof}
 

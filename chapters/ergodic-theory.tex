@@ -165,8 +165,6 @@ It may happen that the set of points whose empirical measures do not converge is
   form a compact connected subset of the invariant measures.
 \end{proposition}
 
-\NewObject\Measure\vnu{\mu}
-
 \begin{proof}
   The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
   Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
@@ -195,7 +193,8 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
 \end{theorem}
 
 \begin{proof}
-  Let \[F_n(x)= \max_{1 \le k \le n} \sum_{i = 0}^{k} \phi(f^i(x)).\]
+  Let
+  \[F_n(x)= \max_{1 \le k \le n} \sum_{i = 0}^{k} \phi(f^i(x)).\]
 
   \begin{claim}
     \(F_{n + 1} = \phi + \max\set{0, F_n \circ f}\).
