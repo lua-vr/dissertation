@@ -11,9 +11,9 @@
 \newcommand\rem[1]{\textcolor{yellow}{\textbf{ps.} #1}}
 \renewcommand\complement{\mathsf{c}}
 
-\newenvironment{dedication}
+\NewDocumentEnvironment{dedication}{O{}}
 {\vspace*{5cm}\begin{quotation}\begin{flushright}\begin{em}}
-{\par\end{em}\end{flushright}\end{quotation}}
+{\end{em}\par{}\vspace*{5em}{\small #1}\end{flushright}\end{quotation}}
 
 % Delimiters
 \DeclarePairedDelimiter{\sqpar}{[}{]}
