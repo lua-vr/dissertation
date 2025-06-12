@@ -5,9 +5,12 @@
 \chapter{Ergodic theory and dynamics}
 
 \section{A categorical zoo}
-The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving.
+The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving. But it's also of equal interest to the field to look at more versatile settings, perhaps ones in which there are multiple maps --- or perhaps, ones in which the maps do not send send each given state to a single next state, but to a set, or distribution, of future possibilities.
 
-A very flexible way to encompass these different notions is a \emph{monoid object} in a category. Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
+Of course, we could have a separate definition for each (and that's usually what we do). But it's also fun to see how general we can make a reasonable definition that still conveys what most such systems are. One interesting way to do that, which nicely bundles in a single notion the totality of the examples above, is the one of a \emph{monoid object} in a category. 
+
+Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
+ 
 \begin{enumerate}[i.]
 \item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
 \item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
@@ -16,16 +19,16 @@ Given such a monoid \(M\), the category composed of a single object \(\bigstar\)
 
 To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
 
-This point of view also allows for situations in which the morphisms carry more structure than a single function from a set to itself satisfying some properties. A great example of this are Markov chains, whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both with more details.
+This point of view also allows for situations in which the morphisms carry more structure than functions \(X \to X\) satisfying some properties. A \textit{Markov chain},
+
+whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both with more details.
 
 \subsection{Some examples}
 \subsubsection{Category of Markov kernels}
 Sometimes, it's useful to model uncertainty in dynamics by having the maps send each point \(x \in X\) not to a point \(f(x) \in X\), but to a \emph{probability measure} \(f(x) \in \Meas[1]{X}\). The probability measure \(f(x)\) then encodes the distribution of expected outcomes given that we started in the state \(x\).
 
-It may not be so clear, however, how we can compose iterates of \(f\) and regard it as a dynamic on \(X\). Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have 
-\begin{equation*}
-  \Prob(f^2(x) = z) = \sum_{y \in X} \Prob(f(x) = y)\cdot \Prob(f(y) = z).
-\end{equation*}
+It may not be so clear, however, how we can compose iterates of \(f\) and regard it as a dynamic on \(X\). Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have
+\[\displaystyle\Prob(f^2(x) = z) = \sum_{y \in X} \Prob(f(x) = y)\cdot \Prob(f(y) = z).\]
 If we rewrite the above with a measure-theoretic language, we see that we ought to define
 \begin{equation*}
   f^2(x)(E) = \int_X f(y)(E) \;d (f(x))\set{y}.
@@ -91,6 +94,8 @@ Extensions are ways to see one dynamic inside another one.
 % TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
 
 \subsubsection{A failure of existence}
+\cite{przytyckiConformalFractalsErgodic2010}
+
 Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
 If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
@@ -182,7 +187,7 @@ It may happen that the set of points whose empirical measures do not converge is
 
 \section{Ergodic theorems}
 
-Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP, and the code is currently available at \url{https://github.com/soficshift/pointwise-birkhoff}.}.
+Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/estradilua/pointwise-birkhoff} and has been submited to the communitary Mathlib library.}.
 
 \begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
   Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
