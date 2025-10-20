@@ -13,11 +13,18 @@
 
 \subsection{The Kolmogorov Extension Theorem}
 
-\subsection{Products and limits}
+The following theorem is known as the \emph{Kolmogorov Extension Theorem}, as quoted from~\cite[theorem 7.7.1]{bogachevMeasureTheory2007}.
+
+\begin{theorem}
+  Suppose that for every finite set $\Lambda \subset T$, we are given a probability measure $\mu_{\Lambda}$ on  $(\Omega_{\Lambda}, \mathcal{B}_{\Lambda})$  such that the following consistency condition is fulfilled: if $\Lambda_1 \subset \Lambda_2$, then the image of the measure $\mu_{\Lambda_2}$ under the natural projection from $\Omega_{\Lambda_2}$ to $\Omega_{\Lambda_1}$ coincides with $\mu_{\Lambda_1}$. Suppose that for every $t \in T$, the measure $\mu_t$ on $\mathcal{B}_t$ possesses an approximating compact class $\mathcal{K}_t \subset \mathcal{B}_t$. Then, there exists a probability measure $\mu$ on the measurable space $\left(\Omega:=\prod_{t \in T} \Omega_t, \mathcal{B}:=\bigotimes_{t \in T} \mathcal{B}_t\right)$ such that the image of $\mu$ under the natural projection from $\Omega$ to $\Omega_{\Lambda}$ is $\mu_{\Lambda}$ for each finite set $\Lambda \subset T$.
+\end{theorem}
+
+\subsection{Products and projective limits}
 We can construct a product measure
 
 \section{Random variables}
-\subsection{Independence and distribution}
+\todo{define random variables and independence neatly}
+
 \section{Weak convergence}
 
 \begin{proposition}[Portmanteau]\label{thm:portmanteau}
@@ -35,9 +42,18 @@ We can construct a product measure
 \subsection{Hewitt-Savage zero-one law}
 
 \section{Brownian motion}
+
+The rigorous mathematical foundation of Brownian motion was laid by Norbert Wiener in 1923, who constructed Brownian motion as a measure on the space of continuous functions. This construction is why the Brownian motion is often called the Wiener process, and defined as the \emph{Wiener measure}. 
+
+\begin{definition}
+  The Wiener measure is the unique probability measure on \(()\)
+\end{definition}
+
+\todo{insert properties (and construction?) of the Wiener measure \(\WM \in \Meas[1](\WPS)\).}
+
 \subsection{The space of càdlàg functions}
 
-The space \(\CWPS\) of continuous functions does not let us talk about processes that contain discontinuities, or even how discontinuous processes can converge in a suitable way to continuous ones. This is important in our setting to deal with the convergence of certain processes induced by discrete dynamics to the Brownian motion, which is continuous almost surely.
+The space \(\CWPS\) of continuous functions does not let us talk about processes that contain discontinuities, or even about how discontinuous processes can converge in a suitable way to continuous ones. This is important in our setting to deal with the convergence of certain processes induced by discrete dynamics, which consist of step functions, to the Brownian motion, which is continuous almost surely.
 
 For this, we shall introduce the space of \textit{càdlàg} functions, or Skorohod space. This is the space of functions whose discontinuities are of the \textit{first kind}, that is, both lateral limits exist, and whose value at the point is equal to the right limit:
 \begin{equation*}
@@ -48,9 +64,9 @@ We want to put a metric on this space with the property that functions are close
 
 \begin{definition}[Skorohod topology]
   Let \(\Lambda\) be the set of strictly increasing continuous functions from \([0,1]\) to itself. For \(f,g \in \WPS\), we define
-  \begin{equation*}
+  \begin{equation}\label{eq:sko-metric}
     d(f,g) = \inf_{\lambda \in \Lambda} \max\set[par = \big]{ \lVert \lambda - \Id \rVert_{\infty}, \lVert f - g \circ \lambda \rVert_{\infty}}.
-  \end{equation*}
+  \end{equation}
 \end{definition}
 The distance above defines a metric on \(\WPS\), whose topology is called the Skorohod topology. Since \(d(f,g) \leq \lVert f - g \rVert_{\infty}\), the Skorohod topology is coarser than the uniform topology.
 
@@ -62,23 +78,42 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
   \begin{equation*}
     \lVert f_n - f \rVert_{\infty} \leq \inf_{\lambda \in \Lambda} \sqpar{\lVert f_n - f \circ \lambda \rVert_{\infty} +  \lVert f \circ \lambda - f \rVert_{\infty}} \to 0
   \end{equation*}
-  by the convergence assumption and uniform continuity of \(f\).
+  by the triangle inequality, convergence assumption and uniform continuity of \(f\).
 \end{proof}
 
-\subsection{The Wiener measure and arcsine law}
+\begin{proposition}\label{prop:sko-conv-pointwise}
+  If \(f_n \to f\) in the Skorohod topology, then \(f_n(x) \to f(x)\) for all \(x\) in a set \(E\) whose complement is at most countable.
+\end{proposition}
 
-\todo{insert properties (and construction?) of the Wiener measure \(\WM \in \Meas[1](\WPS)\).}
+\begin{proof}
+  Since \(f \in \WPS\), the set of discontinuities of \(f\) is at most countable\footnote{Proof: let \(t\) be a discontinuity point of \(f\), and let \(U\) be a neighborhood of \(t\) where the value of the function is close to the lateral limits at \(t\). Then, \(f\) is continuous at \(U \setminus \set{t}\), which is open, and therefore contains a rational point \(q_t\). With some care, this will define an injection from discontinuity points to rationals.}. Let \(E\) be a cocountable set such that \(f|_E\) is continuous, and let \(x \in E\) and \(\varepsilon > 0\). Pick \(\delta\) so that \(\abs{x - y} < \delta\) implies \(\abs{f(x) - f(y)} < \varepsilon\), and let \(N\) be big enough so that \(n \ge N\) implies \(d(f,f_n) < \min\set{\delta, \varepsilon}/2\). If \(n \ge N\), and if we pick a \(\lambda \in \Lambda\) that makes the right side of \cref{eq:sko-metric} \(\min\set{\delta, \varepsilon}/2\)-close to the infimum, then
+  \begin{align*}
+    \abs{f(x) - f_n(x)} &\le \abs{f(x) - f \circ \lambda ^{-1}(x)} + \abs{f \circ \lambda ^{-1}(x) - f_n(x)}\\
+                        &\le  \varepsilon + \norm{f - f_n \circ \lambda}_{\infty} \le 2\varepsilon,
+  \end{align*}
+  because \(\abs{\lambda ^{-1}(x) - x} \le \norm{\lambda - \Id}_{\infty} < \delta\).
 
-Let \(\pTime \colon \WPS \to \RR\) be the observable that returns the proportion of time its argument is positive, that is, \(\pTime{f} = \Leb \{ x \in [0,1] : f(x) > 0
-\}\).
+  
+\end{proof}
+
+\subsection{The arcsine law}
+
+\begin{definition}
+  We shall denote by \(\pTime \colon \WPS \to \RR\) the observable that returns the proportion of time its function argument is positive, that is,
+  \[\pTime{f} = \Leb \{ x \in [0,1] : f(x) > 0 \} = \int_{[0,1]} 1_{(0,\infty)} \circ f\;d\Leb.\]
+\end{definition}
+
 
 \begin{lemma}\label{lem:ptime-continuous}
   \(\pTime\) is measurable and continuous in a full \(W\)-measure set.
 \end{lemma}
 
 \begin{proof}
-  \todo{adapt this to \(\WPS\)}
-  This is proved in~\cite[appendix M15]{billingsleyConvergenceProbabilityMeasures1999}. Since the normal distributions are non-atomic and for every \(t \in [0,1]\), \(W_t\) has normal distribution, \(W(\{ f \in \WPS : f(t) = 0 \}) = 0\) for all \(t\), so by Fubini, \(\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\) for \(W\)-almost every \(f\). It remains to check that \(\pTime\) is continuous at such points \(f \in W\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) uniformly, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere, so by the DCT the same is true of their respective integrals.
+  This is proved in~\cite[appendix M15]{billingsleyConvergenceProbabilityMeasures1999}. Since the normal distributions are non-atomic and \(W_t\) has normal distribution for every \(t \in [0,1]\), we have that \[W(\{ f \in \WPS : f(t) = 0 \}) = 0\] for all \(t\). Therefore, by Fubini, \(\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\) for \(W\)-almost every \(f\). It remains to check that \(\pTime\) is continuous at such points \(f \in W\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) in the Skorohod space, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere by \cref{prop:sko-conv-pointwise}. By the dominated convergence theorem,
+  \begin{equation*}
+    \pTime{f} =  \int_{[0,1]} 1_{(0,\infty)} \circ f \;d\Leb = \lim_{n \to \infty}
+    \int_{[0,1]} 1_{(0,\infty)} \circ f_n \;d\Leb = \lim_{n \to \infty} \pTime{f_n}.
+  \end{equation*}
 \end{proof}
 
 \begin{theorem}[Arcsine law]\label{thm:arcsine-brownian}
@@ -139,7 +174,7 @@ The motivation for looking into invariance principles is that they allow transfe
 
 \subsubsection{Ergodic Martingale Differences}\label{sec:ergod-mart-diff}
 
-Donsker's theorem is far from being the most general result of its kind, and in our case, we are interested in a generalization of such weak invariance principle for ergodic martingale difference sequences. Intuitively, these are sequences that behave as the time-one steps of a martingale, in the sense that even with information about the previous steps the expected value of the next step is still zero.
+Donsker's theorem is not the most general result of its kind. In our case, we are interested in a version of the weak invariance principle for ergodic martingale difference sequences. Intuitively, these are the sequences that behave as the time-one steps of a martingale, in the sense that even if the value of some previous steps are known, the expected value of the next step is still zero.
 
 \begin{definition}
   A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
@@ -150,7 +185,14 @@ Donsker's theorem is far from being the most general result of its kind, and in 
 
 \subsubsection{Stationarity and two-sided processes}
 
-In the previous definition we considered an one-sided sequence of random variables. As it is often the case in ergodic theory, the sequences we shall be dealing with will have the additional property of \emph{stationarity}, which amounts to some sort of time-invariance. This property will also allow us to lift one-sided sequences of variables to two-sided ones, that is, sequences \((\dots,\xi_{-1},\xi_0,\xi_1,\dots)\) with indices in \(\ZZ\), due to the existence of invertible extensions as exposed in~\cref{sec:invert-extens} (which ultimately boils down to the Kolmogorov Extension Theorem).
+In the previous definition we considered an one-sided sequence of random variables. As is often the case in ergodic theory, the sequences we shall be dealing with have the additional property of \emph{stationarity}, which is a sort of time-invariance. This property will also allow us to lift one-sided sequences of variables to two-sided ones, that is, sequences \((\dots,\xi_{-1},\xi_0,\xi_1,\dots)\) with indices in \(\ZZ\), due to the existence of the invertible extensions exposed in~\cref{sec:invert-extens}.
+
+\begin{definition}\todo{AAA}
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
+  \begin{equation*}
+    \CE[\Prob]{\xi_{n}, {\sigma(\dots,\xi_1,\dots,\xi_{n - 1})}} = 0.
+  \end{equation*}
+\end{definition}
 
 \begin{definition}
   A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). Similarly, we can define stationarity for two-sided sequences by replacing \(\NN\) by \(\ZZ\) in the definition.
@@ -160,9 +202,9 @@ In the previous definition we considered an one-sided sequence of random variabl
   Every  stationary one-sided ergodic martingale difference sequence \(\xi\) is associated to a two-sided stationary ergodic martingale difference sequence \(\zeta\) with the same marginal distributions on positive indices. That is, if \(\pi \colon Y^{\ZZ}\to Y^{\NN}\) is defined by \(\pi(\dots x_{-1},x_0,x_1,\dots) = (x_1,x_2,\dots)\), we have \((\pi \circ \zeta)_*\Prob = \xi_*\Prob\).
 \end{lemma}
 
-\begin{remark}
-  Test
-\end{remark}
+\begin{proof}
+  \todo{write}
+\end{proof}
 
 
 \subsubsection{Invariance principle for ergodic sequences}
@@ -171,13 +213,15 @@ In the previous definition we considered an one-sided sequence of random variabl
   A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
 \end{definition}
 
-
-
 The next result can be found in~\cite[theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{theorem}\label{thm:donsker-martingale}
   If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
 \end{theorem}
+
+\begin{proof}
+  \todo{the idea here is to... . For a complete proof, see the aforementioned reference.}
+\end{proof}
 
 \subsection{Reverse martingale difference sequences}
 
@@ -190,7 +234,7 @@ In ergodic dynamics, the processes we usually care about are the values \(\xi = 
 In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) and \(\Prob = \mu\) an invariant measure for \(f\)), results for martingale difference sequences can be stated dually for reverse martingale difference sequences. The following discussion expands on comments and text present in~\cite[Appendix M22 and Section 19]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{corollary}\label{cor:donsker-martingale}
-  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic reverse martingale difference sequence for \(\mathcal{G}_1 \supseteq \mathcal{G}_2 \supseteq \cdots \) for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
+  If \(\xi \in L^2(\Prob)^{\NN}\) is a stationary ergodic reverse martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
 \end{corollary}
 
 \begin{proof}

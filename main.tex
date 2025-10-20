@@ -6,10 +6,19 @@
 \usepackage{titlesec}
 
 \title{Empirical measures in dynamical systems}
+\author{Lua Viana Reis}
 
 \usepackage[margin=3cm]{geometry}
 
 \maxtocdepth{subsection}
+
+\usepackage{csquotes}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{microtype}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{randomwalk}
 
 \usepackage{dinamica}
 \usepackage{teoremas}
@@ -20,12 +29,6 @@
 \input{preamble/tikz}
 \input{preamble/macros}
 
-\usepackage{csquotes}
-\usepackage[hidelinks]{hyperref}
-\usepackage{cleveref}
-\usepackage{bookmark}
-\usepackage{microtype}
-\usepackage[shortlabels]{enumitem}
 
 \makeatletter
 \RenewDocumentCommand{\nameref}{s}{\IfBooleanTF{#1}{\@namerefstar}{\T@nameref}}
@@ -39,36 +42,22 @@
 
 \frontmatter
   
-\begin{dedication}[--- Maria, \enquote{Unstable Orbits in the Space of Lies} (Greg Egan).]
+\begin{dedication}[Maria, \enquote{Unstable Orbits in the Space of Lies} (Greg Egan).]
   \enquote{Everyone else has an attractor --- why can't we have one of our own? Stranger than all the rest. Look at it: it's the most beautiful thing on the map.}
 \end{dedication}
 
+% \begin{dedication}[Gilberto Gil]
+%   \enquote{Se você cair não tenha medo \\
+%     o mundo é fundo\\
+%     e quem chega no fundo encontra porta\\
+%     no fim de tudo}
+% \end{dedication}
+
 \pagebreak
 
-  \setlength\parskip{10pt}
-  \vspace*{2cm}
-  à Emily, Violeta e Verônica, por serem tão legais comigo em um momento tão difícil. esta dissertação não seria possível, e talvez eu não estivesse mais em uma universidade, se não fosse por vocês.
-
-  aos colegas dessa jornada que se permitiram ser, e se tornaram importantes para mim. Caio, Zheng, Pedro, Henrique, Bella, Narçiçeği e Cris, foi fundamental conhecer vocês.
-
-  aos amigos inimigos do Dirichlet, queridos colegas graduandos e agora quase-doutores mestres. Guido, Lucas, Chico e Gabs, tenra história e longa vida à inamizade anti-Dirichletiana.
-
-  à Chico, que além de iniamigo, alma extremamente carismática e exímio matemático, é a pessoa mais próxima que compartilha comigo uma vida com DM1. não tem como negar que sua existência me faz me sentir mais confortável nessa pele.
-
-  à comunidade online de pessoas com DM1, que me ajudaram a ver o que é possível ser quando ser parecia impossível. ao projeto de software livre dessa mesma comunidade pelo pâncreas artificial com o qual escrevi a dissertação.
-
-  ao grupinho de lésbicas da minha turma do ensino médio por me mostrarem onde eu pertencia, mesmo que ainda não soubesse percencer. guardo memórias de vocês.
-
-  à João, por ter aturado minhas piores versões e ainda ter sido um amigo tão bom e leal durante uma adolescência esquisita. te amo, amigo.
-
-  à minha prima Isa por uma frase que ressoou profundamente comigo, e por ser a melhor prima Isa que eu poderia imaginar e querer.
-
-  ao meu psicólogo Guilherme, cuja pessoa e habilidade são coisa rara. tive muita sorte em te encontrar, e você foi fundamental para eu me manter bem.
-
-  ao meu orientador, Ali, por se deixar fascinar pela matemática e seus mais puros mistérios e ainda contaminar seus alunos com este fascínio. obrigada por todo o apoio, por todas as oportunidades, e por compreender quando eu não estava podendo produzir.
-
-  aos meus pais, por motivos que não cabem aqui.
-
+  % \setlength\parskip{10pt}
+  % \vspace*{2cm}
+  
 \pagebreak
 
 \tableofcontents

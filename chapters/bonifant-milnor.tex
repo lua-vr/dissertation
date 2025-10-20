@@ -35,7 +35,7 @@ The \emph{cross ratio} of four points \(x_{0},x_1,x_2,x_3\) is the value of \(g(
 \end{definition}
 We shall write \(\SchD f \prec 0\) if there exists a dense open set \(U \subseteq I\) such that \(\SchD f(y) < 0\) for every \(y \in U\). Similarly, we write \(\SchD f \succ 0\) if there exists \(U \subseteq I\) open and dense such that \(\SchD f(y) > 0\) for every \(y \in U\).
 
-The Schwarzian derivative has some important properties that we highlight in the Proposition below, vide \cite[Proposition B.1]{bonifantSchwarzianDerivativesCylinder2008}.
+The Schwarzian derivative has some important properties that we highlight in the Proposition below, as described in~\cite[Proposition B.1]{bonifantSchwarzianDerivativesCylinder2008}.
 
 \begin{proposition}\label{prop:schwarzian}
   The Schwarzian derivative has the following properties:
@@ -57,7 +57,7 @@ The Schwarzian derivative has some important properties that we highlight in the
     \begin{equation*}
       \SchD{\fg} = \frac{\fg[spar, der = 3]}{\fg[spar, der = 1]} - \frac{3}{2}\rpar*{\frac{\fg[spar, der = 2]}{\fg[spar, der = 1]}}^2.
     \end{equation*}
-    By the Faà di Bruno's formula~\cite[479]{tortoliniAnnaliDiScienze1855} in its combinatorial form,
+    By the Faà di Bruno's (beautiful) formula~\cite[479]{tortoliniAnnaliDiScienze1855} in its combinatorial form,
     \begin{equation*}
       {(f\circ g)^{(n)}(x)=\sum _{\pi \in \Pi }f^{(\left|\pi \right|)}(g(x))\cdot \prod _{B\in \pi }g^{(\left|B\right|)}(x)}
     \end{equation*}
@@ -160,6 +160,8 @@ Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas ho
 
 \section{Skew products}
 
+\todo{move things to the skew product section under extensions}
+
 We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the upper and lower ``boundaries'' of \(X \times I\).
 Let \(\mathcal{B}_i = \mathcal{B}(\nu_i)\) be the basins of the respective measures.
 
@@ -186,6 +188,7 @@ To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(
 \section{Transversal Lyapunov exponents}
 
 To each point \((x,y)\) of either boundary \(\mathcal{A}_i\), for \(i \in \set{0,1}\), we can associate a number that expresses the average expansion rate of tangent vectors along the direction normal to the skew product boundary. This is a specific case of the general definition of Lyapunov exponents, whose existence is given by the Oseledets theorem.
+\todo{make the link to \cref{sec:lyapunov-exponents}}
 
 \begin{definition}[Transversal Lyapunov exponent]
   \begin{equation*}
@@ -250,15 +253,16 @@ The version of the statement below is slightly more general than the correspondi
 
 \section{Intermingled basins}
 
-The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors  constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume \cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though,  this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. Clearly, this implies both basins are dense in the surface, and therefore not continuity sets.
+The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
 
 \todo{Refer to discussion in~\cite{bonattiDynamicsUniformHyperbolicity2005}}
 
-In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
+In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continuous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
 \begin{equation*}
   \Lyap(\mathcal{A}_i) = \int \log f_{x}'(i) \;d \mu(x)
 \end{equation*}
 for \(i = 0,1\) are both negative, then both basins have positive volume. Assuming this, the main property that will produce the intermingled phenomenon is the following hypothesis.
+
 \begin{hypothesis}\label{hip:elevators}
   There exists two periodic points \(x^+\) and \(x^-\) in \(X\), of periods \(n^+, n^-\), such that for every  \(y \in (0,1)\), \(f_{x^+}^{n^+}(y) > y\) and \(f_{x^-}^{n^-}(y) < y\).
 \end{hypothesis}
@@ -286,9 +290,7 @@ Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), t
   \(\supp \mu_0 = X \times I\).
 \end{corollary}
 
-\begin{proof}
-  Since \(\supp \mu_0\) is closed and by hypothesis, \(F^n(x^-,y) \to (x^-,0)\) for all \(y \in (0,1)\), then \(\set{0} \times I \subseteq \supp \mu_0\).
-\end{proof}
+\todo{WRITE this}
 
 \begin{proof}
   By symmetry, it is enough to show  \(\mathcal{A}_1 \subseteq K\). Let \((x,y) \in K\) be the point in the statement. 
@@ -327,16 +329,16 @@ Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), t
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.35\textwidth]{../figures/intermingled}
-  \caption{Picture of the basins of \cref{ex:intermingled}. It should not be taken too seriously, as it is evidently not possible to draw intermingled sets.}
+  \caption{Picture of the basins from \cref{ex:intermingled}.}
 \end{figure}
 
 \begin{example}\label{ex:intermingled}
-  Define \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\). If \(|a| < 1\), then \(q_a\) is a diffeomorphism of the interval \(I\). If \(F(x) = (3x, q_{p(x)}(y))\), then \(x^+ = 0\) and \(x^- = 1/2\) are fixed points of the map \(g(x) = 3x\) (where we identify \(S^1\) with \([0,1]\)) that satisfy \cref{hip:elevators}, because \(q_a(y) > y\) if \(a > 0\) and \(q_a(y) < y\) if \(a < 0\) for all \(y \in (0,1)\). Moreover, since \(q_a\) is a degree two polynomial, it has negative Schwarzian whenever \(a \neq 0\), and from the symmetry of \(p\) we see both basins of \(F(x,y) = (kx, q_{p(x)}(y))\) must have positive measure, because at least one of them has. So \(F\) displays intermingled basins. 
+  Define \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\). If \(|a| < 1\), then \(q_a\) is a diffeomorphism of the interval \(I\). If \(F(x) = (3x, q_{p(x)}(y))\), then \(x^+ = 0\) and \(x^- = 1/2\) are fixed points of the map \(g(x) = 3x\) (where we identify \(S^1\) with \([0,1]\)) that satisfy \cref{hip:elevators}, because \(q_a(y) > y\) if \(a > 0\) and \(q_a(y) < y\) if \(a < 0\) for all \(y \in (0,1)\). Moreover, since \(q_a\) is a degree two polynomial, it has negative Schwarzian whenever \(a \neq 0\), and from the symmetry of \(p\) we see both basins of \(F(x,y) = (kx, q_{p(x)}(y))\) must have positive measure, because at least one of them has. So \(F\) displays intermingled basins.
 \end{example}
 
 \section{Negative Schwarzian}
 
-The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008} without the hypothesis that both basins have positive measure. The question of whether this hypothesis could be removed was left open in the article, and the following proof shows that it is indeed unnecessary.
+The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008}, but without the hypothesis that both basins have positive measure. The question of whether this hypothesis could be removed was left open in the article, and our proof below confirms that it is unnecessary.
 
 \begin{theorem}\label{thm:neg-schwarz-sep-graph}
   If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
@@ -349,7 +351,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 \begin{proof}
   We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that separate the basins in the following sense:
   \begin{equation*}
-    \xi_0(x) = \sup \{ y \in I : y \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : y \in \mathcal{B}_1 \}.
+    \xi_0(x) = \sup \{ y \in I : (x,y) \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \mathcal{B}_1 \}.
   \end{equation*}
   By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\nu_0 = \mu \otimes \delta_0\) or to \(\nu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\nu_0\) or \(\nu_1\).
   
@@ -383,12 +385,14 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 
 \section{Positive Schwarzian}
 
+\todo{the paragraph below conflicts, or should be moved to, the section which defines the empirical measures, as it's not clear whether it concerns an asymptotic measure for each point, or a single one for almost every point. If necessary, adjust the theorem statement.}
+
 If \(f \colon M \to M\) is a diffeomorphism on a manifold, we say that an invariant measure \(\mu\) is \emph{asymptotic} with respect to a reference measure if the empirical measures of almost every point of the reference measure converges to \(\mu\). Intuitively, \(\mu\) describes the entire statistical behavior of the system, up to a set of zero volume.
 
 Since \cref{thm:neg-schwarz-sep-graph} does not require that both basins have positive measure, we also obtain a more general statement than the version in~\cite[Theorem 5.1]{bonifantSchwarzianDerivativesCylinder2008}, which requires both Lyapunov exponents to be positive. The proof below is also somewhat different, more similar to the proof of \cref{thm:neg-schwarz-sep-graph}.
 
 \begin{theorem}\label{thm:pos-schwarz-asymptotic}
-  If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has an asymptotic measure \(\nu\) with respect to \(\mu \otimes \Leb\). Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
+  If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
 \end{theorem}
 
 The idea of the proof is to pass to the invertible extension of the system and observe that the inverses of the fiber maps have negative Schwarzian. By applying \cref{thm:neg-schwarz-sep-graph}, we obtain an invariant graph that separates the two basins of the inverse transformation. Since the orbits diverge from the graph for the inverse of the extension, they converge to the graph for the extension. Thus, the graph describes an asymptotic measure for the extension. The pushforward of this measure is the asymptotic measure for the original map.

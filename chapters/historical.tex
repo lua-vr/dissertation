@@ -4,7 +4,38 @@
 
 \chapter{Historical behavior}\label{cha:historical-behavior}
 
-Ergodic theory tries to find order in chaos by hoping that even if a dynamical system looks complicated, its statistical properties are well behaved. But what if the statistics don't even exist for most points? This phenomenon is what is called \emph{non-statistical}, or \emph{historical} behavior.
+Ergodic theory tries to find order in chaos by showing that even if a dynamical system looks complicated, the statistical properties of its orbits are often well behaved. But what if the statistics don't even exist for most orbits? When this happens for all orbits starting in a set of positive reference measure, the phenomenon is known as \emph{non-statistical}, or \emph{historical} behavior.
+
+More precisely, by existence of statistics, we mean the weak convergence of the empirical measures \(\Emp[n]{x} \weakto \mu\) to an asymptotic measure \(\mu\). To say that \((\Emp[n]{x})_n\) does not converge, therefore, is equivalent (in the compact setting) to the existence of a continuous observable \(\varphi \colon X \to \RR\) such that
+\begin{equation}\label{eq:3}
+  \lim_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \varphi(f^i(x))
+\end{equation}
+does not exist.\footnote{The fact we don't need to quantify over measures that could be limits here is a consequence of \cref{cor:conv_of_exists}.} We then say that a diffeomorphism \(f\) of a compact manifold presents historical behavior if \(\Emp[n]{x}[spar, n]\) does not converge for \(x\) in a set of positive Lebesgue measure.
+
+\section{History}
+The ``historical'' terminology was introduced by Ruelle in~\cite{ruelleHistoricalBehaviourSmooth2001}, suggesting that for \cref{eq:3} not to converge, the sequence must keep ``changing its mind'' as \(n\) goes to infinity, and therefore has some sort of history. For instance, in the absence of external forces like human activity, we could expect that general patterns in climate would follow some predictable statistics, while with climate change we see that such statistics are not consistent along history. In the article, Ruelle recognized the problem of \textit{nonrecurrent} behavior of orbits as going against the expectation that recurrent behavior is generic in the space of diffeomorphisms, and presented the open problem of finding whether historical behavior can exist in a persistent manner, making some physical justifications for this possibility. He cites the theory of spin glasses, where the time evolution of the system is akin to a random walk in a random potential: a particle stays arbitrarily large amounts of time exploring some valley in the potential before eventually crossing the barrier to another valley, in such a way that time averages like \cref{eq:3} do not exist. As we shall see in this chapter, we can indeed produce historical behavior by constructing a diffeomorphism whose orbits behave like random walks, albeit not necessarily persistently.
+
+Later, Floris Takens exposed the problem again in~\cite{takensOrbitsHistoricBehaviour2008}, giving some promising examples that were known at the time and also making some remarks about generiticity of points without asymptotic measures. For this reason and his work in related matters, the open question also became known as \textit{Taken's Last Problem}.
+
+\begin{example}[Logistic family]
+   The family of interval maps \(f_a(x) = ax(1 - x)\), for \(0 < a \le 4\), is known as the logistic family, and is one of the earliest examples where historical behavior is present abundantly: in~\cite{hofbauerQuadraticMapsAsymptotic1990}, the authors showed that for an uncountable number of parameters \(a\), Lebesgue almost every orbit in \([0,1]\) has no asymptotic measure.
+\end{example}
+
+\todo{figure}
+
+\begin{example}[Bowen's eye]
+  Another example was given by Bowen, although it's also not persistent. 
+\end{example}
+
+\todo{figure}
+
+
+\subsection{Genericity of historical orbits}
+\label{sec:genericity}
+
+\todo{\cite{carvalhoGenericityHistoricBehavior2021}}
+
+
 
 \section{Martingale-coboundary decomposition}
 
@@ -260,9 +291,9 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \begin{align*}
     g^{-1}(S_{\delta})
     &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
-    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - p_{\delta}(t)} <\delta }\\
-    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
-    &= \set[par = auto]{x \in X \where \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta } = S_{\delta}.
+    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - p_{\delta}(t)} <\delta }\\
+    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
+    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta } = S_{\delta}.
   \end{align*}
   Therefore \(\mu(S_{\delta}) = 1\). Now, note that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
   \begin{align*}
@@ -274,6 +305,10 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
   \end{align*}
   Both can be used as in the previous proof.
 \end{remark}
+
+\section{Recent developments}
+
+  \todo{Conclude explaining the recent work of Kiriri, Soma, Vargas et al.}
 
 % \begin{theorem}
 %   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
@@ -289,17 +324,14 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
 %   Idea: first, show that in \(I\) we get the desired statistics; then, show that in \(F \setminus I\) the times converge to zero.
 % \end{proof}
 
-\subsection{Corollary: north-south maps}
+% \subsection{Corollary: north-south maps}
 
-Consider some diffeomorphisms \(f_1, f_2, \dots, f_n \in \Diff[C^2]{I}\) preserving the orientation of the interval that commute with each other.
+% Consider some diffeomorphisms \(f_1, f_2, \dots, f_n \in \Diff[C^2]{I}\) preserving the orientation of the interval that commute with each other.
 
-such that \(f_+(y) > y\) and \(f_-(y) < y\) for all \(y \in (0,1)\).
+% such that \(f_+(y) > y\) and \(f_-(y) < y\) for all \(y \in (0,1)\).
+% We first notice that we can always find 
 
-
-
-We first notice that we can always find 
-
-The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR \to \RR/\ZZ = \circl[upper = 1]\) via some homeomorphism \(h \colon \RR \to \I[int]\) such that \(\pi = p \circ h\)~\parencite[for instance,][Proposition 1.37]{hatcherAlgebraicTopology2002}.
+% The covering map \(p\) is isomorphic to the usual covering map \(\pi \colon \RR \to \RR/\ZZ = \circl[upper = 1]\) via some homeomorphism \(h \colon \RR \to \I[int]\) such that \(\pi = p \circ h\)~\parencite[for instance,][Proposition 1.37]{hatcherAlgebraicTopology2002}.
 
 
 % \begin{theorem}

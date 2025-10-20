@@ -5,9 +5,9 @@
 \chapter{Ergodic theory and dynamics}
 
 \section{A categorical zoo}
-The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving. But it's also of equal interest to the field to look at more versatile settings, perhaps ones in which there are multiple maps --- or perhaps, ones in which the maps do not send send each given state to a single next state, but to a set, or distribution, of future possibilities.
+The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving. But it is also of equal interest to the field to look at more versatile settings, like the ones in which there are multiple maps --- or perhaps, the ones in which the maps do not send send each given state to a single next state, but to a set, or distribution, of future possibilities.
 
-Of course, we could have a separate definition for each (and that's usually what we do). But it's also fun to see how general we can make a reasonable definition that still conveys what most such systems are. One interesting way to do that, which nicely bundles in a single notion the totality of the examples above, is the one of a \emph{monoid object} in a category. 
+Of course, we could have a separate definition for each (and that is usually what we do). But it is also fun to see how general we can make a reasonable definition that still conveys what most such systems are. One interesting way to do that, which nicely bundles in a single notion the totality of the examples above, is the one of a \emph{monoid object} in a category. 
 
 Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid object in a category \(\cC\) as a functor \(M \to \cC\), where \(M\) is \emph{monoid}, that is, a category with a single object. An usual monoid is just a group without the inverse operation, namely, a set \(M\) endowed with a special identity element \(1_M\) and a multiplication \((a,b) \in X \times X \mapsto a \cdot b \in X\) satisfying
  
@@ -15,16 +15,20 @@ Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid o
 \item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
 \item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
 \end{enumerate}
-Given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category.
+Given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category. Conversely, any (small) category with a single object \(\bigstar\) can be seen as a monoid, by taking the carrier set to be the set \(M = \Hom(\bigstar, \bigstar)\) and the product, to be the composition. Let's see how many familiar examples to the practitioners of dynamics fit neatly in this definition.
 
+\subsection{Examples}
+
+\subsubsection{One map}
+The simplest example is that of a set \(X\) and a map \(f \colon X \to X\).
+
+This fits the categorical definition by taking \(\cC = \mathbf{Set}\) and \(M = \mathbb{N}\) (the natural numbers under addition, which forms a monoid). The functor \(F \colon M \to \mathbf{Set}\) sends the single object \(\bigstar\) of \(M\) to \(X\), and each morphism \(n \in \mathbb{N} = \Hom(\bigstar, \bigstar)\) to the \(n\)-fold composition \(f^n = f \circ f \circ \cdots \circ f\) (with \(f^0 = \mathrm{id}_X\)). The functor axioms ensure that \(F(0) = \mathrm{id}_X\) and \(F(n + m) = F(n) \circ F(m) = f^n \circ f^m = f^{n+m}\), which is precisely the monoid homomorphism property.
+
+
+\subsubsection{Two maps}
 To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
 
-This point of view also allows for situations in which the morphisms carry more structure than functions \(X \to X\) satisfying some properties. A \textit{Markov chain},
-
-whose time evolution does not map points to points but to distributions. Another example is the action of an iterated function system on closed subsets of a compact metric space, whose time evolution maps points to a closed subset --- namely, the set of places where it could be if we pick one of the maps at random. Below, we will describe both with more details.
-
-\subsection{Some examples}
-\subsubsection{Category of Markov kernels}
+\subsubsection{Markov kernels}
 Sometimes, it's useful to model uncertainty in dynamics by having the maps send each point \(x \in X\) not to a point \(f(x) \in X\), but to a \emph{probability measure} \(f(x) \in \Meas[1]{X}\). The probability measure \(f(x)\) then encodes the distribution of expected outcomes given that we started in the state \(x\).
 
 It may not be so clear, however, how we can compose iterates of \(f\) and regard it as a dynamic on \(X\). Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have
@@ -84,14 +88,117 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
 
 \section{Extensions}
 
-\todo{references for the section~\cite{einsiedlerErgodicTheoryView2011}}
+We can relate different dynamical systems by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\).
 
-Extensions are ways to see one dynamic inside another one.
+\begin{definition} Let $(X, \mathcal{B}_X, \mu, T)$ and $(Y,\mathcal{B}_Y, \nu, S)$ be measure-preserving transformations. 
+  $(Y,\mathcal{B}_Y, \nu, S)$ is a \textbf{factor} of $(X, \mathcal{B}_X, \mu, T)$ if there exists a measure-preserving map $\phi: X \to Y$ such that 
+  \[
+    \begin{tikzcd}
+      X \arrow[r, "T"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
+      Y \arrow[r, "S"] & Y
+    \end{tikzcd}
+  \]
+  commutes, that is,
+  $$ \phi \circ T(x) = S \circ \phi (x),\,\,\, \forall x \in X.$$    
+\end{definition}
+  
+
+\begin{example}
+  Every system admits a trivial extension:
+  \[
+    \begin{tikzcd}
+      X \arrow[r, "f"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
+      \{ \star \} \arrow[r, "\text{id}"] & \{ \star \}
+    \end{tikzcd}
+  \]
+\end{example}
+
+
+``A factor of a measure-preserving system determines uniquely, and is uniquely determined by, an invariant sub-$\sigma$-algebra''
+
+\begin{itemize}
+\item $\mathcal{A} \subset \mathcal{B}_X$, with $T^{-1}(\mathcal{A}) = \mathcal{A}$(mod $\mu$)
+\end{itemize}
+
+In the previous example, the  sub-\(\sigma\)-algebra with respect to the extension is \(\{ \varnothing, X \}\).
+
+\begin{lemma}
+  Let $(X, \mathcal{B}_X, \mu, T)$ and $(Y,\mathcal{B}_Y, \nu, S)$ be invertible systems, and let $\phi:X \to Y$ be a factor map. 
+  Then $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \subset \mathcal{B}_X$ is an invariant sub-$\sigma$-algebra.
+\end{lemma}
+
+\begin{theorem}
+    Let $(X, \mathcal{B}_X, \mu, T)$ be a measure-preserving Borel probability system. 
+    Suppose there is $\mathcal{A}$ a sub-$\sigma$-algebra $T-$invariant. 
+    Then there is a measure-preserving system $(Y,\mathcal{B}_Y, \nu, S)$ on a Borel probability space and a factor map $\phi:X \to Y$ with $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y)$ (mod $\mu$). 
+\end{theorem}
+
+\begin{itemize}
+    \item $Y = \mathcal{M}(X)$
+    \item $S : Y \to S$ defined by $S(\eta) = T_* \eta$
+    \item $\phi:X \to Y$ defined by $\phi(x) = \mu_{x}^{\mathcal{A}}$
+    \item $\nu = \phi_* \mu$
+\end{itemize}
+
+
+Consider the system $\mathcal{X} = (X, \mathcal{B}_X, \mu, T)$ such that
+\begin{itemize}
+\item $X = \mathbb T^2$;
+\item $\mathcal{B}_X = \mathcal{B} \times \mathcal{B}$, where $\mathcal{B}$ is the Borel $\sigma$-algebra of $\mathbb T$;
+\item $T: \mathbb T^2 \to \mathbb T^2$ defined by $T(x,y) = (x + \alpha, y+x)$, with $\alpha$ irrational;
+\item $m_X = m \times m$, where $m$ is the Lebesgue measure in $\mathbb T$.
+\end{itemize}
+
+\begin{frame}{Example of extension}
+  The system $\mathcal{Y} = (Y,\mathcal{B}_Y, \nu, S)$ defined by
+  \begin{itemize}
+  \item $Y = \mathbb T$;
+  \item $\mathcal{B}_Y = \mathcal{B}$;
+  \item $S: \mathbb T \to \mathbb T$ defined by $S(x) = (x + \alpha)$;
+  \item $m_Y = m$.
+  \end{itemize}
+  is a factor of $\mathcal{X}$.
+
+  In fact, consider the projection $\pi:X \to Y$ such that $\pi(x,y) = x$, so 
+  % \[
+  %   \begin{tikzcd}
+  %     \mathbb T^2 \arrow[r, "T"] \arrow[d, "\pi"] & \mathbb T^2 \arrow[d, "\pi"] \\
+  %     \mathbb T \arrow[r, "S"] & \mathbb T
+  %   \end{tikzcd}
+  % \]
+
+  $\pi_* m_x = m = m_y$ and $\pi^{-1}(A) = A \times \mathbb T \in \mathcal{B_X}$ for all $A \in \mathcal{B_Y}$  
+\end{frame}
+
+
+\begin{lemma}
+  Suppose \(p \colon (X, f) \to (Y, g)\) is an extension. Then, if \(\mu \in \Meas[f]{X}\) is ergodic for \(f\) then \(p_*\mu \in \Meas[g]{Y}\) is ergodic for \(g\).
+\end{lemma}
+
+\begin{proof}
+  Suppose \(A \subseteq Y\) is measurable and invariant for \(g\). Then, \(p^{-1}(A)\) is an invariant set for \(f\), because \[f^{-1}(p^{-1}(A)) = p^{-1}(g^{-1}(A)) = p^{-1}(A).\]
+  Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) = 0\).
+\end{proof}
+
 
 \subsection{The invertible extension}\label{sec:invert-extens}
 
-\subsubsection{Solenoid}
-% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
+\begin{equation}
+  \begin{tikzcd}[column sep = tiny]
+    {(\widetilde{X}, \tilde{f})} \\
+     & {(Y,g)} \\
+    {(X,f)}
+    \arrow["\exists! h"', dashed, from=2-2, to=1-1]
+    \arrow["\pi"', from=1-1, to=3-1]
+    \arrow["p", from=2-2, to=3-1]
+  \end{tikzcd}
+\end{equation}
+
+% \cite[pp. 20]{einsiedlerErgodicTheoryView2011} 
+
+\begin{theorem}
+  Let \((X,\mathcal{B},\mu,T)\) be a measure-preserving system on a Borel space.
+\end{theorem}
 
 \subsubsection{A failure of existence}
 \cite{przytyckiConformalFractalsErgodic2010}
@@ -138,16 +245,34 @@ But this set is empty because
     \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
 \end{equation*}
 
+\subsection{Constructing the invertible extension}
+
+\subsection{The solenoid}
+\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025} \cite{anderssonNonuniformlyHyperbolicEndomorphisms2024}}
+% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
+
 \section{Cocycles and skew products}
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXMgWSJdLFswLDEsIlgiXSxbMSwwLCJYIFxcdGltZXMgWSJdLFsxLDEsIlgiXSxbMCwxLCJcXHBpX1giXSxbMiwzLCJcXHBpX1giXSxbMSwzLCJmIiwxXSxbMCwyXV0=
+\[\begin{tikzcd}
+	{X \times Y} & {X \times Y} \\
+	X & X
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\pi_X}", from=1-1, to=2-1]
+	\arrow["{\pi_X}", from=1-2, to=2-2]
+	\arrow["f"{description}, from=2-1, to=2-2]
+\end{tikzcd}\]
 
 
 \begin{example}[Iterated function system]
   % TODO: write
 \end{example}
 
-\subsection{Lyapunov exponents}
+\subsection{Lyapunov exponents}\label{sec:lyapunov-exponents}
 
 \section{Empirical measures}
+\todo{Improve this, this is the main concept of the dissertation, so it deserves more love.}
+
 Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
 \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
 encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
@@ -159,6 +284,8 @@ The direct relation to Birkhoff averages also highlights these objects as having
 
 It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotic distribution of the orbit. Reciprocally,
 For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
+
+\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
 
 It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.
 
@@ -176,7 +303,7 @@ It may happen that the set of points whose empirical measures do not converge is
   \begin{equation*}
     d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
   \end{equation*}
-  which is a metric inducing the weak* topology on the set of probability measures. Since it's a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
+  which is a metric inducing the weak* topology on the set of probability measures (see~\ref{prop:weak-star-metrizable}). Since it is a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
   Indeed,
   \begin{align*}
     d(\Emp[n](x), \Emp[n + 1](x))
@@ -187,7 +314,7 @@ It may happen that the set of points whose empirical measures do not converge is
 
 \section{Ergodic theorems}
 
-Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/estradilua/pointwise-birkhoff} and has been submited to the communitary Mathlib library.}.
+Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/lua-vr/pointwise-birkhoff}. It is in the process of being upstreamed to the Mathlib library.}.
 
 \begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
   Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
@@ -253,24 +380,28 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
 A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize that the set of subsets is the object of our attentions.
 
 \subsection{Lattice structure}
-The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation defined by
+The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the partial order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation defined by
 \begin{equation*}
   (\pP \vee \pQ)(x) = \pP(x) \cap \pQ(x)
 \end{equation*}
-that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition finer than both \(\pP\) and \(\pQ\)). There is also a \emph{meet} operation \(\pP \wedge \pQ\), giving the greatest lower bound, but it is less straightforward to construct: on the union \(\pP[eqc] \cup \pQ[eqc]\), we say \(P\) and \(Q\) are related if they overlap, that is, \(P \cap Q \neq \varnothing\), and taking the transitive closure we get an equivalence relation. The elements of \(\pP \wedge \pQ\), then, are precisely the unions of sets in the same equivalence class under this relation. The meet operation will not be used in the following text, though.
-
-The partitions \(\pof{\aset}\) form, in fact, a \emph{complete} lattice, meaning that all subsets \(P \subseteq \pof{\aset}\) have both a least upper bound \(\bigvee_{\pP \in P}\pP \in \pof{\aset}\) and a greatest lower bound \(\bigwedge_{\pP \in P}\pP \in \pof{\aset}\). Their construction is very similar to their binary versions: the join can be defined as \(\left( \bigvee_{\pP \in P}\pP \right)(x) = \bigcap_{\pP \in P}\pP(x)\), and we can use the join to define the meet as
+that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition finer than both \(\pP\) and \(\pQ\)). There is also a \emph{meet} operation \(\pP \wedge \pQ\), giving the greatest lower bound, which is less straightforward to construct: on the union \(\pP[eqc] \cup \pQ[eqc]\), we say \(P\) and \(Q\) are related if they overlap, that is, \(P \cap Q \neq \varnothing\), and by taking the transitive closure of this relation we get an equivalence relation on the set \(\pP[eqc] \cup \pQ[eqc]\). The elements of \(\pP \wedge \pQ\), then, are precisely the unions of sets in the same equivalence class:
 \begin{equation*}
-  \bigwedge_{\pP \in P}\pP = \bigvee_{\substack{\pQ \text{ is an upper}\\\text{bound for }P}}\pQ.
+  \pP \wedge \pQ =  \set[par = \Big]{ \bigcup_{S \in [P]} S \where{} [P] \in \pP[eqc] \cup \pQ[eqc] / \sim}.
 \end{equation*}
+\newcommand{\sfP}{\textsf{P}}
+The partitions \(\pof{\aset}\) form, in fact, a \emph{complete} lattice, meaning that all subsets \(\sfP \subseteq \pof{\aset}\) have both a least upper bound \(\bigvee_{\pP \in \sfP}\pP \in \pof{\aset}\) and a greatest lower bound \(\bigwedge_{\pP \in \sfP}\pP \in \pof{\aset}\). Their construction is very similar to their binary versions: the join can be defined as \(\left( \bigvee_{\pP \in \sfP}\pP \right)(x) = \bigcap_{\pP \in \sfP}\pP(x)\), and we can use the join to define the meet as
+\begin{equation*}
+  \bigwedge_{\pP \in \sfP}\pP = \bigvee_{\substack{\pQ \text{ is an upper}\\\text{bound for }\sfP}}\pQ.
+\end{equation*}
+In the case of  \(\sfP = \set{\pP, \pQ}\), they reduce to the binary operations of the paragraph above.
 
-\subsection{A measured interlude}
-In a measure space, it is often useful to relax the notions of equality and order on the partitions so that zero measure sets are disregarded. This is done in the obvious way, namely by saying \(\pP \preceq \pQ\) if for all \(Q \in \pQ[eqc]\), there is a \(P \in \pP[eqc]\) such that \(Q \setminus P\) has zero measure. Going a bit further, the partitions themselves may be allowed to cover only a total measure subset of the space, and their elements could overlap on zero measure sets. Again ---  always in the most natural way, and we shall henceforward hide the petty details in the hopes the reader is able to extrapolate them.
+\subsection{An interlude of zero measure}
+In a measure space, it is often useful to relax the notions of equality and order on the partitions so that zero measure sets are disregarded. This is done in the obvious way, namely by saying \(\pP \preceq \pQ\) if for all \(Q \in \pQ[eqc]\), there is a \(P \in \pP[eqc]\) such that \(Q \setminus P\) has zero measure. Going a bit further, the partitions themselves may be allowed to cover only a total measure subset of the space, and their elements could overlap on zero measure sets and still be regarded as disjoint. Formally, the idea here is to quotient the subsets by the almost-surely equality relation, and notice that the usual binary operators on the sets lift to well-defined operators on the quotient.
 
-\section{Disintegrating measures}
+\section{Disintegrations}
 
 In the Calculus  course, we learn that it's most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional subsets.
-Then we go to the probability course, and the lecturer talks about conditional expectations and the whole philosophy of Bayes of taking probabilities conditioned to some event. It may not seem at first that this has anything to do with the aforementioned theorem in the Calculus course, at least not until we take the Ergodic theory course and we learn about measures and disintegrations.
+Then we go to the probability course, and the lecturer talks about conditional expectations and the whole philosophy of Bayes of taking probabilities conditioned to some event. It may not seem at first that this has anything to do with the aforementioned theorem in the Calculus course, at least not until we take the Ergodic theory course and learn about measures and disintegrations.
 
 While Fubini remains true for product measures, in general the problem of decomposing an arbitrary measure into a family of measures defined in smaller subsets is not as straightforward. Neither is straightforward to see how could one talk about the probability of an event conditioned to another event of \emph{zero probability}, even though in practice this happens very often. 
 Both situations are instances of the general problem the disintegration of measures solves: given a measure \(\mu\) and a partition \(\pP\) of the space \(\cms\), we want to find a family of measures \(\{\mu_x\}_{x \in \cms}\), each \(\mu_x\) giving full measure to \(\pP{x}\), with the property that \(\mu(E) = \int \mu_x(E) \,d\mu (x)\).
@@ -288,7 +419,7 @@ Both situations are instances of the general problem the disintegration of measu
 
 \subsection{Measurability}
 
-Not all partitions are created equal. Some may be pathological enough that there may be no hope in disintegrating over them. In fact, such partitions appear very \emph{naturally} in dynamics, namely as the orbits of points of many maps with an invariant measure.
+Not all partitions are created equal. Some may be pathological enough that there may be no hope in disintegrating over them. In fact, such partitions appear \emph{very commonly} in dynamics. A prime example is the partition consisting of orbits of a map without too many periodic points.
 
 \begin{example}\label{eg:nonmeas-partition}
   Suppose \(f \colon X \to X\) is invertible and \(\mu\) is an invariant measure for \(f\) such that \(\mu(X \setminus \Per{f}) > 0\). Then, the partition \(\Orbit[f] \colon X \to 2^X\) of two-sided orbits of \(f\) is such that \(\mu\) does not admit a disintegration with respect to \(\Orbit[f]\).
@@ -321,7 +452,7 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
 \end{definition}
 
 \begin{example}\label{eg:point-partition-meas}
-  The partition \(\bot\) of all points of a compact metric space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
+  The partition \(\bot\) of all points of a second-countable \(T_1\) topological space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
   Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(P \in \mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable by definition, and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \bot\).
