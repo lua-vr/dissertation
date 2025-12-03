@@ -2,16 +2,25 @@
  
 \begin{document}
 
-\chapter{Some categorical toys}
+\chapter{A categorical lens}
 
 
-\section{Limits and colimits}
+\section{A category}
 
+A \emph{category} \(\Cat{C}\) consists of a collection of \emph{objects} \(\Ob{C}\), and for each pair of objects \(A,B \in \Ob{C}\), there is a collection of \emph{morphisms} \(\Hom{C}(A,B)\), also called arrows, that possess the following properties:
 
+\begin{enumerate}
+\item given \(A,B,C \in \Ob{C}\), there exists an operation
+  \[
+    \circ : \Hom{C}(A,B) \times \Hom{C}(B,C) \to \Hom{C}(A,C)
+  \]
+  called categorical composition (note that it does not need to be the composition of functions). If \(f : A \to B\) and \(g : B \to C\), we write \(g \circ f := {\circ}(f,g)\). The composition function must be associative; that is, if \(h \in \Hom{C}(C,D)\), then \((h \circ g) \circ f = h \circ (g \circ f)\);
+\item for every \(A \in \Ob{C}\), there exists an identity morphism \(1_A \in \Hom{C}(A,A)\), and for all \(f,g \in \Hom{C}\) with \(\dom{f} = \cod{g} = A\), it holds that \(f \circ 1_A = f\) and \(1_A \circ g = g\).
+\end{enumerate}
+   
+\section{Functors}
+\section{Natural transformations}
+\section{Limits and colimits}\label{sec:limits-colimits}
 
-
-% Perhaps the main charm of Category Theory is that of framing definitions and results throughout mathematics in a language that is both general and precise. For this reason I like to learn it as a hobby, and have chosen to state many of the results in these appendices using it. My goal is not to make the text harder to understand, but instead, to give a more conceptual point of view that (understandably) is not commonly found in the dynamical systems literature, but which I personally find interesting and rich. Some benefits from this approach will be scattered around the text. Among them, I can highlight the use formal diagrams (\emph{string diagrams}) to reason about probability models known as Markov processes (in \cref{undefined}).
-
-% Nowadays category theory has made its way into many applied fields, most remarkably computer science in the form of programming languages.
 
 \end{document}

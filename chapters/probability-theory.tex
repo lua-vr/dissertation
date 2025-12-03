@@ -107,6 +107,8 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 
 \begin{proposition}\label{prop:sko-conv-pointwise}
   If \(f_n \to f\) in the Skorohod topology, then \(f_n(x) \to f(x)\) for all \(x\) in a set \(E\) whose complement is at most countable.
+
+  \todo{This is not necessary for \cref{lem:ptime-continuous} because we can take \(E\) to be a subset of continuous functions there. The continuous functions \(\CWPS\) are closed in \(\WPS\). This could be removed.}
 \end{proposition}
 
 \begin{proof}
@@ -133,7 +135,7 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 \end{lemma}
 
 \begin{proof}
-  Since the normal distributions are non-atomic and \(W_t\) has normal distribution for every \(t \in [0,1]\), we have that \[W(\{ f \in \WPS : f(t) = 0 \}) = 0\] for all \(t\). Therefore, by Fubini, \(\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\) for \(W\)-almost every \(f\). It remains to check that \(\pTime\) is continuous at such points \(f \in W\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) in the Skorohod space, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere by \cref{prop:sko-conv-pointwise}. By the dominated convergence theorem,
+  Since the normal distributions are non-atomic and \(W_t\) has normal distribution for every \(t \in \interval[open left]{0}{1}\), we have that \[W(\{ f \in \WPS : f(t) = 0 \}) = 0\] for all \(t \in \interval[open left]{0}{1}\). Therefore, by Fubini, \[\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\] for all \(f\) in a set \(E \subseteq \WPS\) of full \(W\)-measure. It remains to check that \(\pTime\) is continuous at such points \(f \in E\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) in the Skorohod space, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere by \cref{prop:sko-conv-pointwise}. By the dominated convergence theorem,
   \begin{equation*}
     \pTime{f} =  \int_{[0,1]} 1_{(0,\infty)} \circ f \;d\Leb = \lim_{n \to \infty}
     \int_{[0,1]} 1_{(0,\infty)} \circ f_n \;d\Leb = \lim_{n \to \infty} \pTime{f_n}.
@@ -149,12 +151,12 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
   See~\cite{billingsleyConvergenceProbabilityMeasures1999}. \todo{Find number of the theorem.}
 \end{proof}
 
-\begin{theorem}[Forgery theorem]\label{thm:forgery}
-  If \(f \in \CWPS\) and \(f(0) = 0\), then every neighborhood of \(f\) has positive Wiener measure.
+\begin{theorem}[Forgery Theorem, or Support Theorem]\label{thm:forgery}
+  If \(f \in \CWPS\) and \(f(0) = 0\), then every neighborhood of \(f\) has positive Wiener measure. Note that by \cref{prop:skorohod-uniform}, this is true for neighborhoods both in the uniform and in the Skorohod topologies.
 \end{theorem}
 
 \begin{proof}
-  See~\cite{billingsleyConvergenceProbabilityMeasures1999}. \todo{Find number of the theorem.}
+  See, for instance,~\cite{peresAnswerWienerMeasure2022}. This is known as the Stroock-Varadhan Support Theorem or Lévy's Forgery Theorem.
 \end{proof}
 
 \subsection{Weak invariance principles}

@@ -5,7 +5,7 @@
 \chapter{Ergodic theory and dynamics}
 
 \section{A categorical zoo}
-The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) or a family thereof, which preserves the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving. But it is also of equal interest to the field to look at more versatile settings, like the ones in which there are multiple maps --- or perhaps, the ones in which the maps do not send send each given state to a single next state, but to a set, or distribution, of future possibilities.
+The starting point of the field of dynamical systems is a space \(X\), endowed with some structure, along with some notion of ``time evolution'', which could be a map \(X \to X\) preserving the said structure. For instance, in topological dynamics, \(X\) is usually a topological space and the time evolution is given by a continuous map, while in ergodic theory the space is endowed with the structure of a measure and the maps are measure-preserving. But it is also of equal interest to the field to look at more versatile settings, like the ones in which there are multiple maps --- or perhaps, the ones in which the maps do not send send each given state to a single next state, but to a set, or distribution, of future possibilities.
 
 Of course, we could have a separate definition for each (and that is usually what we do). But it is also fun to see how general we can make a reasonable definition that still conveys what most such systems are. One interesting way to do that, which nicely bundles in a single notion the totality of the examples above, is the one of a \emph{monoid object} in a category. 
 
@@ -15,23 +15,22 @@ Following~\cite{mossCategorytheoreticProofErgodic2023}, we can define a monoid o
 \item \(1_M \cdot a = a = a \cdot 1_M\) for all \(a \in M\);
 \item \((a \cdot b) \cdot c = a \cdot (b \cdot c)\) for all \(a, b, c \in M\).
 \end{enumerate}
-Given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category. Conversely, any (small) category with a single object \(\bigstar\) can be seen as a monoid, by taking the carrier set to be the set \(M = \Hom(\bigstar, \bigstar)\) and the product, to be the composition. Let's see how many familiar examples to the practitioners of dynamics fit neatly in this definition.
+Given such a monoid \(M\), the category composed of a single object \(\bigstar\), set of morphisms \(\Hom{}(\bigstar, \bigstar) = M\) and composition given by the monoid multiplication will satisfy the definition of a category. Conversely, any (small) category with a single object \(\bigstar\) can be seen as a monoid, by taking the carrier set to be the set \(M = \Hom{}(\bigstar, \bigstar)\) and the product, to be the composition. Let's see how many familiar examples of dynamics fit neatly in this definition.
 
 \subsection{Examples}
 
 \subsubsection{One map}
 The simplest example is that of a set \(X\) and a map \(f \colon X \to X\).
-
-This fits the categorical definition by taking \(\cC = \mathbf{Set}\) and \(M = \mathbb{N}\) (the natural numbers under addition, which forms a monoid). The functor \(F \colon M \to \mathbf{Set}\) sends the single object \(\bigstar\) of \(M\) to \(X\), and each morphism \(n \in \mathbb{N} = \Hom(\bigstar, \bigstar)\) to the \(n\)-fold composition \(f^n = f \circ f \circ \cdots \circ f\) (with \(f^0 = \mathrm{id}_X\)). The functor axioms ensure that \(F(0) = \mathrm{id}_X\) and \(F(n + m) = F(n) \circ F(m) = f^n \circ f^m = f^{n+m}\), which is precisely the monoid homomorphism property.
+This fits the categorical definition by taking \(\cC = \mathbf{Set}\) and \(M = \mathbb{N}\) (the natural numbers under addition, which forms a monoid). The functor \(F \colon M \to \mathbf{Set}\) sends the single object \(\bigstar\) of \(M\) to \(X\), and each morphism \(n \in \mathbb{N} = \Hom{}(\bigstar, \bigstar)\) to the \(n\)-fold composition \(f^n = f \circ f \circ \cdots \circ f\) (with \(f^0 = \mathrm{id}_X\)). The functor axioms ensure that \(F(0) = \mathrm{id}_X\) and \(F(n + m) = F(n) \circ F(m) = f^n \circ f^m = f^{n+m}\), which is precisely the monoid homomorphism property.
 
 
 \subsubsection{Two maps}
-To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps, e.g., \(abba\) is sent  to \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
+To illustrate the definition, if \(f_a,f_b \colon X \to X\) are two measure-preserving maps, then the associated monoid is the one-object category for the free monoid with two generators \(\set{a,b}\), and the functor sends \(\bigstar\) to the object \(X\) and words to the compositions of \(f_a\) and \(f_b\) in the category of measure-preserving maps. For instance, the word \(abba\) is sent to the map \(f_a \circ f_b \circ f_b \circ f_a \colon X \to X\).
 
 \subsubsection{Markov kernels}
-Sometimes, it's useful to model uncertainty in dynamics by having the maps send each point \(x \in X\) not to a point \(f(x) \in X\), but to a \emph{probability measure} \(f(x) \in \Meas[1]{X}\). The probability measure \(f(x)\) then encodes the distribution of expected outcomes given that we started in the state \(x\).
+Another example is that of Markov kernels, or Markov chains. Often, it is useful to model stochastic dynamics by having the maps send each point \(x \in X\) not to a point \(f(x) \in X\), but to a \emph{probability measure} \(f(x) \in \Meas[1]{X}\). The probability measure \(f(x)\) then encodes the distribution of expected outcomes given that we started in the state \(x\).
 
-It may not be so clear, however, how we can compose iterates of \(f\) and regard it as a dynamic on \(X\). Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have
+How we can compose iterates of \(f\) and regard it as a dynamic on \(X\)? Semantically, we want the iterates to encode the distribution of expected outcomes after \(n\) steps given that the system started at the point \(x\). To work it out, we can start with the case where \(X\) is finite, so any \(f(x)\in \Meas[1]{X}\) is completely determined by some transition probabilities \(\Prob(f(x) = y) \coloneqq f(x)(\set{y})\). Then, supposing that the probability of first making the transition \(x \mapsto y\) and then \(y \mapsto z\) is \(\Prob(f(x) = y)\cdot \Prob(f(y) = z)\), we should have
 \[\displaystyle\Prob(f^2(x) = z) = \sum_{y \in X} \Prob(f(x) = y)\cdot \Prob(f(y) = z).\]
 If we rewrite the above with a measure-theoretic language, we see that we ought to define
 \begin{equation*}
@@ -45,15 +44,45 @@ so that \(g \circ f \colon X \to \Meas[1]{Z}\).
 
 A map with type \(X \to \Meas[1]{Y}\) is called a \emph{Markov kernel} between the measurable spaces \(X\) and \(Y\). The category whose objects are measurable spaces and morphisms are Markov kernels, with compositions given by the rule above, will be called \(\Stoch\). We remark that the identity morphisms in this category are the Dirac masses \(\delta(x) = \delta_x \in \Meas[1]{X}\).
 
-An interesting aspect of this category is that ``deterministic'' measurable maps still live inside it --- given \(g \colon X \to Y\) a measurable function, \(f_g(x) = \delta_y\) is a Markov kernel. That is to say, this correspondence defines a (faithful) functor from the category \(\MeasC\) of measurable functions to \(\Stoch\). This means that dynamics in \(\Stoch\) can be seen a generalization of deterministic measurable systems, where we now also allow the maps to be stochastic.
+An interesting aspect of this category is that deterministic measurable maps still live inside it --- given \(g \colon X \to Y\) a measurable function, \(f_g(x) = \delta_y\) is a Markov kernel. That is to say, this correspondence defines a (faithful) functor from the category \(\MeasC\) of measurable functions to \(\Stoch\). This means that dynamics in \(\Stoch\) can be seen a generalization of deterministic measurable systems, where we now also allow the maps to be stochastic.
 
 Another observation is that a probability measure \(\mu\) in a measurable space \(X\) can be represented in this category by a Markov kernel \(m \colon \set{\star} \to \Meas[1]{X}\), where \(\set{\star}\) is a measurable space with one element. Namely, we set \(m(\star) = \mu\).
 
-\subsubsection{Iterated function systems}
+% \subsubsection{Iterated function systems}\label{def:hausdorff-metric}
 
-\subsection{Invariant states}
+% Iterated functions systems are a way of constructing self-similar sets, better known as fractals. For that, we start with a complete metric space \(X\) and a finite set of contraction mappings \(\set{f_1,\dots,f_n} \subseteq X \to X\), where each \(f_i \colon X \to X\) is a contraction. The idea is to consider all the possibilities where a point \(x \in X\) could land: the union \(\bigcup_{1 \le i \le n}\set{f_i(x)}\) of all images. It is similar, in spirit, to the example of Markov Kernels above, but we consider the possibilities as a \emph{closed set}, instead of a measure.
 
-Given categories \(\cC, \cD\), a \emph{cone} of a functor \(F \colon \cD \to \cC\) is defined as an object \(C \in \cC\) and a natural transformation \(T \colon \Delta(C) \Rightarrow F\), where \(\Delta(C) \colon \cD \to \cC\) is the constant functor at the identity of \(C\). In the case we are interested, \(\cD = M\) is a monoid and \(F\) is given by the dynamics. This means a cone is given as an object \(C \in \cC\) and a morphism \(c \colon C \to X\) with the property that for every \(m \in M\),
+% How would the composition work, in this case? In other words, what category are we thinking about when we consider iterates of the function system? To answer that, define the \emph{Hutchinson operator} \(F\): let \(A \subseteq X\) be a compact set, and let
+% \begin{equation*}
+%   F(A) = \bigcup_{1 \le i \le n} \set{f_i(A)}.
+% \end{equation*}
+% This set is a finite union of compact sets, so \(F(A)\) is compact. This defines a function \(F \colon \mathcal{K}(X) \to \mathcal{K}(X)\) on the set \(\mathcal{K}(X) \subseteq 2^{\cms}\) of nonempty compact subsets of \(X\). In fact, we shall endow \(\mathcal{K}(X)\) with the metric space structure given by
+% \begin{equation*}
+%   d_H(A,B) = \max \set[par = \big]{  \sup_{a \in A} d(a, B), \sup_{b \in B} d(A, b)},
+% \end{equation*}
+% which is called the Hausdorff metric.
+
+% % \begin{lemma}
+% %   Let \(U \subseteq X\) be open. Then, the set \(\set{K \in \mathcal{K}(X) \where K \subseteq U}\) is an open subset of \(\mathcal{K}(X)\).
+% % \end{lemma}
+
+% We can show \(F\) is also a contraction in this metric: we have, for \(A\) and \(B\) nonempty compact sets, 
+% \begin{align*}
+%   \sup_{a \in F(A)}d(a, F(B))
+%   &= \sup\set[par = \bigg]{d(a, F(B)) \where a \in \bigcup_{1 \le i \le n} f_i(A)}\\
+%   &\le \max_{1 \le i \le n} \sup\set{d(f_i(a), F(B)) \where a \in A}\\
+%   &\le \max_{1 \le i \le n} \sup\set{d(f_i(a), f_i(B)) \where a \in A}\\
+%   &\le \lambda \sup\set{d(a, B) \where a \in A} \le \lambda d_H(A,B),
+% \end{align*}
+% where \(\lambda\) is the largest Lipschitz constant of the \(f_i\). Exchanging the roles of \(A\) and \(B\), we get \(d_H(F(A), F(B)) \le \lambda d_H(A,B)\), so \(F\) is a contraction with the same constant \(\lambda\).
+
+% \todo{remove after complete}
+
+\subsection{Invariant states and observables}
+
+Two important concepts in the study of dynamical systems are the notions of invariant states and invariant observables. In~\cite{mossCategorytheoreticProofErgodic2023}, a systematic treatment of those objects is suggested using the categorical language which we have been developing here.
+
+A \emph{cone} over a functor \(F \colon \cD \to \cC\) is defined as an object \(C \in \cC\) and a natural transformation \(T \colon \Delta_C \Rightarrow F\), where \(\Delta_C \colon \cD \to \cC\) is the constant functor at the identity of \(C\). In the case we are interested, \(\cD = M\) is a monoid and \(F\) is given by the dynamics. This means a cone is given as an object \(C \in \cC\) and a morphism \(c \colon C \to X\) with the property that for every \(m \in M\),
 \[
   \begin{tikzcd}
     &\arrow[dl, "c", swap]C\arrow[dr, "c"]& \\[-10pt]
@@ -70,12 +99,12 @@ A cone \((C, c)\) is \emph{universal} for \(M \to \cC\) if it is a limit of the 
     X\arrow[rr,"m"] && X
   \end{tikzcd}
 \]
-commutes. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
+commutes. If a cone is to be seen as a collection of invariant states, then the universal cone is the biggest of them. As we shall see in \cref{sec:limits-colimits}, a universal cone is a special case of a \emph{limit}. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
 
 \begin{example}
-  Let \(f \colon X \to X\) be any function from a set to itself. Like in a previous example, this will define a dynamical system in \(\SetC\) over the monoid \(\NNZ\), mapping \(n \in \NNZ\) to the iterate \(f^n\). If \(x \in X\) is a fixed point of \(f\), then we get a cone by defining \(C = \set{x}\) and picking the morphism \(c \colon C \to X\) to be the inclusion. Since \(x\) is a fixed point, it's clear that the associated diagram will commute. Conversely, if \((C,c)\) is a cone and \(\star \in C\), then the commutativity will mean \(c(\star)\) is a fixed point for \(f\).
+  Let \(f \colon X \to X\) be any function from a set to itself. Like in previous example, this will define a dynamical system in \(\SetC\) over the monoid \(\NNZ\), mapping \(n \in \NNZ\) to the iterate \(f^n\). If \(x \in X\) is a fixed point of \(f\), then we get a cone by defining \(C = \set{x}\) and picking the morphism \(c \colon C \to X\) to be the inclusion. Since \(x\) is a fixed point, it's clear that the associated diagram will commute. Conversely, if \((C,c)\) is a cone and \(x \in C\), then the commutativity of the triangle means \(f(c(x)) = c(x)\), and therefore \(c(x) \in X\) is a fixed point for \(f\).
 
-  The \emph{universal} cone for \(f\), then, will correspond to the set of all fixed points (which may be empty) paired with the set inclusion. Any other cone will map uniquely to this set, by matching each of its points with the corresponding fixed point for \(f\).
+  In this case, the \emph{universal} cone for \(f\), then, will correspond to the set \(\Fix{f}\) of all fixed points (which may be empty) paired with the set inclusion \(\Fix{f} \hookrightarrow X\). Any other cone will map uniquely to this set, by matching each of its points with the corresponding fixed point in \(\Fix{f}\).
 \end{example}
 
 \begin{example}
@@ -83,236 +112,26 @@ commutes. Since categorical limits are unique, if a universal cone exists, it is
   \begin{equation*}
     (f \circ m)(\star) =  \int_X f(x) \;d\mu\set{x} = \mu,
   \end{equation*}
-  where \(\mu = m(\star)\).
-\end{example}
-
-\section{Extensions}
-
-We can relate different dynamical systems by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\).
-
-\begin{definition} Let $(X, \mathcal{B}_X, \mu, T)$ and $(Y,\mathcal{B}_Y, \nu, S)$ be measure-preserving transformations. 
-  $(Y,\mathcal{B}_Y, \nu, S)$ is a \textbf{factor} of $(X, \mathcal{B}_X, \mu, T)$ if there exists a measure-preserving map $\phi: X \to Y$ such that 
+  where \(\mu = m(\star)\). In other words, the following diagram commutes in the category \(\Stoch\):
   \[
     \begin{tikzcd}
-      X \arrow[r, "T"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
-      Y \arrow[r, "S"] & Y
+      &\arrow[dl, "m", swap]\{\star\}\arrow[dr, "m"]& \\[-10pt]
+      X\arrow[rr,"f"] && X
     \end{tikzcd}
   \]
-  commutes, that is,
-  $$ \phi \circ T(x) = S \circ \phi (x),\,\,\, \forall x \in X.$$    
-\end{definition}
-  
+\end{example}
+
+More generally, a kernel \(g \colon Y \to \Meas[1]{X}\) will define a cone if for every \(y \in Y\), \(g(y) \in \Meas[1]{X}\) is invariant. As we shall see later, if \(X\) is a Borel space and \(f\) comes from a deterministic map (that is, every \(f(x)\) is a Dirac mass), then the universal cone exists and is given by what is called the \emph{ergodic decomposition}.
 
 \begin{example}
-  Every system admits a trivial extension:
-  \[
-    \begin{tikzcd}
-      X \arrow[r, "f"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
-      \{ \star \} \arrow[r, "\text{id}"] & \{ \star \}
-    \end{tikzcd}
-  \]
+  \todo{For an iterated function system of contractions, the universal cone is the Hutchinson attractor. It is the map sending \(\star\) to the compact set \(A = \lim_{n \to \infty} H^i(x)\), which is independent of our starting point \(x\).}
 \end{example}
 
+\section{Ergodic theory and ergodicity}
 
-``A factor of a measure-preserving system determines uniquely, and is uniquely determined by, an invariant sub-$\sigma$-algebra''
+\subsection{Ergodic theorems}
 
-\begin{itemize}
-\item $\mathcal{A} \subset \mathcal{B}_X$, with $T^{-1}(\mathcal{A}) = \mathcal{A}$(mod $\mu$)
-\end{itemize}
-
-In the previous example, the  sub-\(\sigma\)-algebra with respect to the extension is \(\{ \varnothing, X \}\).
-
-\begin{lemma}
-  Let $(X, \mathcal{B}_X, \mu, T)$ and $(Y,\mathcal{B}_Y, \nu, S)$ be invertible systems, and let $\phi:X \to Y$ be a factor map. 
-  Then $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \subset \mathcal{B}_X$ is an invariant sub-$\sigma$-algebra.
-\end{lemma}
-
-\begin{theorem}
-    Let $(X, \mathcal{B}_X, \mu, T)$ be a measure-preserving Borel probability system. 
-    Suppose there is $\mathcal{A}$ a sub-$\sigma$-algebra $T-$invariant. 
-    Then there is a measure-preserving system $(Y,\mathcal{B}_Y, \nu, S)$ on a Borel probability space and a factor map $\phi:X \to Y$ with $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y)$ (mod $\mu$). 
-\end{theorem}
-
-\begin{itemize}
-    \item $Y = \mathcal{M}(X)$
-    \item $S : Y \to S$ defined by $S(\eta) = T_* \eta$
-    \item $\phi:X \to Y$ defined by $\phi(x) = \mu_{x}^{\mathcal{A}}$
-    \item $\nu = \phi_* \mu$
-\end{itemize}
-
-
-Consider the system $\mathcal{X} = (X, \mathcal{B}_X, \mu, T)$ such that
-\begin{itemize}
-\item $X = \mathbb T^2$;
-\item $\mathcal{B}_X = \mathcal{B} \times \mathcal{B}$, where $\mathcal{B}$ is the Borel $\sigma$-algebra of $\mathbb T$;
-\item $T: \mathbb T^2 \to \mathbb T^2$ defined by $T(x,y) = (x + \alpha, y+x)$, with $\alpha$ irrational;
-\item $m_X = m \times m$, where $m$ is the Lebesgue measure in $\mathbb T$.
-\end{itemize}
-
-\begin{frame}{Example of extension}
-  The system $\mathcal{Y} = (Y,\mathcal{B}_Y, \nu, S)$ defined by
-  \begin{itemize}
-  \item $Y = \mathbb T$;
-  \item $\mathcal{B}_Y = \mathcal{B}$;
-  \item $S: \mathbb T \to \mathbb T$ defined by $S(x) = (x + \alpha)$;
-  \item $m_Y = m$.
-  \end{itemize}
-  is a factor of $\mathcal{X}$.
-
-  In fact, consider the projection $\pi:X \to Y$ such that $\pi(x,y) = x$, so 
-  % \[
-  %   \begin{tikzcd}
-  %     \mathbb T^2 \arrow[r, "T"] \arrow[d, "\pi"] & \mathbb T^2 \arrow[d, "\pi"] \\
-  %     \mathbb T \arrow[r, "S"] & \mathbb T
-  %   \end{tikzcd}
-  % \]
-
-  $\pi_* m_x = m = m_y$ and $\pi^{-1}(A) = A \times \mathbb T \in \mathcal{B_X}$ for all $A \in \mathcal{B_Y}$  
-\end{frame}
-
-
-\begin{lemma}
-  Suppose \(p \colon (X, f) \to (Y, g)\) is an extension. Then, if \(\mu \in \Meas[f]{X}\) is ergodic for \(f\) then \(p_*\mu \in \Meas[g]{Y}\) is ergodic for \(g\).
-\end{lemma}
-
-\begin{proof}
-  Suppose \(A \subseteq Y\) is measurable and invariant for \(g\). Then, \(p^{-1}(A)\) is an invariant set for \(f\), because \[f^{-1}(p^{-1}(A)) = p^{-1}(g^{-1}(A)) = p^{-1}(A).\]
-  Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) = 0\).
-\end{proof}
-
-
-\subsection{The invertible extension}\label{sec:invert-extens}
-
-\begin{equation}
-  \begin{tikzcd}[column sep = tiny]
-    {(\widetilde{X}, \tilde{f})} \\
-     & {(Y,g)} \\
-    {(X,f)}
-    \arrow["\exists! h"', dashed, from=2-2, to=1-1]
-    \arrow["\pi"', from=1-1, to=3-1]
-    \arrow["p", from=2-2, to=3-1]
-  \end{tikzcd}
-\end{equation}
-
-% \cite[pp. 20]{einsiedlerErgodicTheoryView2011} 
-
-\begin{theorem}
-  Let \((X,\mathcal{B},\mu,T)\) be a measure-preserving system on a Borel space.
-\end{theorem}
-
-\subsubsection{A failure of existence}
-\cite{przytyckiConformalFractalsErgodic2010}
-
-Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
-
-If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
-\[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
-then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
-
-Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
-
-Now, for any \(A \in \mathcal{C}_K\), we can write \(A = B \cup Z\) with \(B \in \mathcal{E}\) and \(\mu^*(Z) = 0\); thus, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note that
-\begin{equation*}
-  \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
-\end{equation*}
-therefore \(f^{-1}(\mathcal{C}_K) \subset \mathcal{C}_K\).
-
-The same calculation shows that \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) for any \(A \subseteq X\). Thus, if \(A\) is measurable,
-\begin{equation*}
-  1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
-\end{equation*}
-so \(f_*\mu = \mu\) on \(\mathcal{C}_K\).
-
-Consider \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) as the inverse limit of \((X,f,\mathcal{C}_K)\), endowed with the restriction of the product \(\sigma\)-algebra. Note that \(\tilde{f} \colon \Sigma \to \Sigma\) given by
-\[
-\tilde{f}((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots, x_{-1}, x_0, f(x_0))
-\]
-is invertible and measurable, since
-\[
-\tilde{f}([A_{-k}, \dots, A_0] \cap \Sigma) = [A_{-k}, \dots, A_0, X] \cap \Sigma.
-\]
-For each \(n \in \ZZ_{\leq 0}\), let \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suppose there exists \(\tilde{\mu}\), a measure on \(\Sigma\) such that \(\pi_* \tilde{\mu} = \mu\), where \(\pi((x_i)_{i \leq 0}) = x_0\). Then
-\begin{equation*}
-  \tilde{\mu}(K_n) = \tilde{\mu}(\tilde{f}^n(\pi^{-1}(K))) = \mu(K) = 1
-\end{equation*}
-for every \(n\). On the other hand, since \(f\) is invertible,
-\begin{align*}
-  \bigcap_{n \leq 0} K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
-    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.
-\end{align*}
-But this set is empty because
-\begin{equation*}
-    \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
-\end{equation*}
-
-\subsection{Constructing the invertible extension}
-
-\subsection{The solenoid}
-\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025} \cite{anderssonNonuniformlyHyperbolicEndomorphisms2024}}
-% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
-
-\section{Cocycles and skew products}
-
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXMgWSJdLFswLDEsIlgiXSxbMSwwLCJYIFxcdGltZXMgWSJdLFsxLDEsIlgiXSxbMCwxLCJcXHBpX1giXSxbMiwzLCJcXHBpX1giXSxbMSwzLCJmIiwxXSxbMCwyXV0=
-\[\begin{tikzcd}
-	{X \times Y} & {X \times Y} \\
-	X & X
-	\arrow[from=1-1, to=1-2]
-	\arrow["{\pi_X}", from=1-1, to=2-1]
-	\arrow["{\pi_X}", from=1-2, to=2-2]
-	\arrow["f"{description}, from=2-1, to=2-2]
-\end{tikzcd}\]
-
-
-\begin{example}[Iterated function system]
-  % TODO: write
-\end{example}
-
-\subsection{Lyapunov exponents}\label{sec:lyapunov-exponents}
-
-\section{Empirical measures}
-\todo{Improve this, this is the main concept of the dissertation, so it deserves more love.}
-
-Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
-\[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
-encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
-\begin{equation*}
-  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
-\end{equation*}
-and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature empirical.
-The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. 
-
-It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotic distribution of the orbit. Reciprocally,
-For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
-
-\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
-
-It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important problem in dynamics.
-
-\begin{proposition}\label{prop:limiting-measures}
-  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
-  \begin{equation*}
-    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
-  \end{equation*}
-  form a compact connected subset of the invariant measures.
-\end{proposition}
-
-\begin{proof}
-  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
-  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
-  \begin{equation*}
-    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
-  \end{equation*}
-  which is a metric inducing the weak* topology on the set of probability measures (see~\ref{prop:weak-star-metrizable}). Since it is a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
-  Indeed,
-  \begin{align*}
-    d(\Emp[n](x), \Emp[n + 1](x))
-    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
-    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
-  \end{align*}
-\end{proof}
-
-\section{Ergodic theorems}
+\todo{The fundamental tools in ergodic theory.}
 
 Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/lua-vr/pointwise-birkhoff}. It is in the process of being upstreamed to the Mathlib library.}.
 
@@ -375,6 +194,238 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
   \end{equation*}
   and the result follows by letting \(\varepsilon \to 0\).
 \end{proof}
+
+\section{Extensions}
+
+We can relate different dynamical systems by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\). The single morphism \(F(\star) \to G(\star)\) specified by the natural transformation is also called the \emph{factor map}.
+
+\begin{definition}
+  Let \(F,G \colon M \to \Cat{C}\) be two dynamical systems on the category \(\Cat{C}\). An extension \(\eta \colon F \Rightarrow G\) consists of a morphism \(\eta \colon F(\star) \to G(\star)\) of \(\Cat{C}\) (the factor map), such that for all \(m \in M\), the diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      F(\star) \arrow[r, "F(m)"] \arrow[d, "\eta"] & F(\star) \arrow[d, "\eta"] \\
+      G(\star) \arrow[r, "G(m)"] & G(\star)
+    \end{tikzcd}
+  \end{equation*}
+  commutes.
+\end{definition}
+
+\todo{Now, we conclude our tour around the zoo and focus on our beloved species, measure-preserving systems.}
+
+\begin{definition} Let $(X, \mathcal{B}_X, \mu, f)$ and $(Y,\mathcal{B}_Y, \nu, g)$ be measure-preserving transformations. 
+  $(Y,\mathcal{B}_Y, \nu, g)$ is a \textbf{factor} of $(X, \mathcal{B}_X, \mu, f)$ if there exists a measure-preserving map $\phi: X \to Y$ such that 
+  \[
+    \begin{tikzcd}
+      X \arrow[r, "f"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
+      Y \arrow[r, "g"] & Y
+    \end{tikzcd}
+  \]
+  commutes.
+\end{definition}
+  
+
+\begin{example}
+  Every system admits a trivial factor:
+  \[
+    \begin{tikzcd}
+      X \arrow[r, "f"] \arrow[d, "\phi"] & X \arrow[d, "\phi"] \\
+      \{ \star \} \arrow[r, "\text{id}"] & \{ \star \}
+    \end{tikzcd}
+  \]
+\end{example}
+
+
+\todo{``For Borel standard systems, extensions are classified by invariant sub-$\sigma$-algebras''}
+
+\begin{lemma}
+  Let $(X, \mathcal{B}_X, \mu, f)$ and $(Y,\mathcal{B}_Y, \nu, g)$ be invertible systems, and let $\phi:X \to Y$ be a factor map. 
+  Then $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \subset \mathcal{B}_X$ is an invariant sub-$\sigma$-algebra.
+\end{lemma}
+
+\begin{theorem}
+    Let $(X, \mathcal{B}, \mu, f)$ be a measure-preserving Borel probability system, and let $\mathcal{A} \subseteq \mathcal{B}$ be an \(f\)-invariant sub-$\sigma$-algebra. Then, there is a measure-preserving system $(Y,\mathcal{B}_Y, \nu, g)$ on a Borel probability space and a factor map $\phi:X \to Y$ with $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \pmod{\mu}$. 
+\end{theorem}
+
+\begin{proof}
+  \todo{
+    \begin{itemize}
+    \item $Y = \mathcal{M}(X)$
+    \item $S : Y \to S$ defined by $S(\eta) = T_* \eta$
+    \item $\phi:X \to Y$ defined by $\phi(x) = \mu_{x}^{\mathcal{A}}$
+    \item $\nu = \phi_* \mu$
+    \end{itemize}
+  }
+\end{proof}
+
+\begin{corollary}
+  A system \((X, \mathcal{B}, \mu, f)\) is ergodic if, and only if, its only factors are the trivial factor and the identity factor, up to isomorphism.
+\end{corollary}
+
+\begin{lemma}\label{lem:factor-ergodic}
+  Suppose \(p \colon (X, f) \to (Y, g)\) is a factor map. Then, if \(\mu \in \Meas[f]{X}\) is ergodic for \(f\) then \(p_*\mu \in \Meas[g]{Y}\) is ergodic for \(g\).
+\end{lemma}
+
+\begin{proof}
+  Suppose \(A \subseteq Y\) is measurable and invariant for \(g\). Then, \(p^{-1}(A)\) is an invariant set for \(f\), because \[f^{-1}(p^{-1}(A)) = p^{-1}(g^{-1}(A)) = p^{-1}(A).\]
+  Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) = 0\).
+\end{proof}
+
+
+\subsection{Invertible extensions}\label{sec:invert-extens}
+
+\begin{equation}
+  \begin{tikzcd}[column sep = tiny]
+    {(\widetilde{X}, \tilde{f})} \\
+     & {(Y,g)} \\
+    {(X,f)}
+    \arrow["\exists! h"', dashed, from=2-2, to=1-1]
+    \arrow["\pi"', from=1-1, to=3-1]
+    \arrow["p", from=2-2, to=3-1]
+  \end{tikzcd}
+\end{equation}
+
+% \cite[pp. 20]{einsiedlerErgodicTheoryView2011} 
+
+\begin{theorem}
+  Let \((X,\mathcal{B},\mu,f)\) be a measure-preserving system on a Borel space. \todo{Then, the natural invertible extension exists.}
+\end{theorem}
+
+\begin{proof}
+  \todo{Apply Kolmogorov extension theorem.}
+
+  Let \(\widetilde{X} \subseteq X^{\ZZ}\) be the subset defined by
+  \begin{equation*}
+    \widetilde{X} = \bigcap_{i \in \ZZ} \set{ x \in X^{\ZZ} \where x_{i + 1} = f(x_{i})},
+  \end{equation*}
+  which is closed in the product topology by definition.
+
+  , with \(\pi \colon \widetilde{X} \to X\) being the projection on the zeroth coordinate, that is, \(\pi(\dots,x_{-1},x_0,x_1,\dots) = x_0\).
+
+  First, define \(\tilde{f}\) to be
+\end{proof}
+
+\begin{lemma}
+  Let \(\pi \colon (\widetilde{X}, \tilde{f}, \tilde{\mu}) \to (X, f, \mu)\) be a natural invertible extension. Then, we have a converse for \cref{lem:factor-ergodic}: if \(\mu\) is ergodic for \(f\), then \(\tilde{\mu}\) is ergodic for \(\tilde{f}\).
+\end{lemma}
+
+\subsubsection{A failure of existence}
+\cite{przytyckiConformalFractalsErgodic2010}
+
+Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
+
+If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
+\[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
+then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
+
+Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
+
+Now, for any \(A \in \mathcal{C}_K\), we can write \(A = B \cup Z\) with \(B \in \mathcal{E}\) and \(\mu^*(Z) = 0\); thus, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note that
+\begin{equation*}
+  \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
+\end{equation*}
+therefore \(f^{-1}(\mathcal{C}_K) \subset \mathcal{C}_K\).
+
+The same calculation shows that \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) for any \(A \subseteq X\). Thus, if \(A\) is measurable,
+\begin{equation*}
+  1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
+\end{equation*}
+so \(f_*\mu = \mu\) on \(\mathcal{C}_K\).
+
+Consider \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) as the inverse limit of \((X,f,\mathcal{C}_K)\), endowed with the restriction of the product \(\sigma\)-algebra. Note that \(\tilde{f} \colon \Sigma \to \Sigma\) given by
+\[
+\tilde{f}((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots, x_{-1}, x_0, f(x_0))
+\]
+is invertible and measurable, since
+\[
+\tilde{f}([A_{-k}, \dots, A_0] \cap \Sigma) = [A_{-k}, \dots, A_0, X] \cap \Sigma.
+\]
+For each \(n \in \ZZ_{\leq 0}\), let \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suppose there exists \(\tilde{\mu}\), a measure on \(\Sigma\) such that \(\pi_* \tilde{\mu} = \mu\), where \(\pi((x_i)_{i \leq 0}) = x_0\). Then
+\begin{equation*}
+  \tilde{\mu}(K_n) = \tilde{\mu}(\tilde{f}^n(\pi^{-1}(K))) = \mu(K) = 1
+\end{equation*}
+for every \(n\). On the other hand, since \(f\) is invertible,
+\begin{align*}
+  \bigcap_{n \leq 0} K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
+    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.
+\end{align*}
+But this set is empty because
+\begin{equation*}
+    \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
+\end{equation*}
+
+\subsection{The solenoid}
+\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025} \cite{anderssonNonuniformlyHyperbolicEndomorphisms2024}}
+% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
+
+\section{Cocycles and skew products}
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXMgWSJdLFswLDEsIlgiXSxbMSwwLCJYIFxcdGltZXMgWSJdLFsxLDEsIlgiXSxbMCwxLCJcXHBpX1giXSxbMiwzLCJcXHBpX1giXSxbMSwzLCJmIiwxXSxbMCwyXV0=
+\[\begin{tikzcd}
+	{X \times Y} & {X \times Y} \\
+	X & X
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\pi_X}", from=1-1, to=2-1]
+	\arrow["{\pi_X}", from=1-2, to=2-2]
+	\arrow["f"{description}, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+
+\begin{example}[Iterated function system]
+  \todo{IFSs are examples of skew products.}
+  % TODO: write
+\end{example}
+
+\subsection{Lyapunov exponents}\label{sec:lyapunov-exponents}
+
+\todo{Define for linear cocycles. Oseledets theorem.}
+
+\section{Empirical measures}
+\todo{Improve this, this is the main concept of the dissertation, so it deserves more love.}
+
+Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
+\[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
+encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
+\begin{equation*}
+  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
+\end{equation*}
+and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature empirical.
+The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. 
+
+It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotic distribution of the orbit. Reciprocally,
+For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
+
+\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
+
+It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important open problem in dynamics.
+
+\begin{proposition}\label{prop:limiting-measures}
+  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
+  \begin{equation*}
+    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
+  \end{equation*}
+  form a compact connected subset of the invariant measures.
+\end{proposition}
+
+\begin{proof}
+  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
+  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
+  \begin{equation*}
+    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
+  \end{equation*}
+  which is a metric inducing the weak* topology on the set of probability measures (see~\ref{prop:weak-star-metrizable}). Since it is a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
+  Indeed,
+  \begin{align*}
+    d(\Emp[n](x), \Emp[n + 1](x))
+    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
+    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
+  \end{align*}
+\end{proof}
+
+% \section{Ergodic theorems}
+
+\begin{lemma}\label{lem:erg-iff-basin-full-meas}
+  If \(\mu\) is invariant for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
+\end{lemma}
 
 \section{Partitions}
 A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize that the set of subsets is the object of our attentions.
@@ -442,7 +493,7 @@ Not all partitions are created equal. Some may be pathological enough that there
 \end{remark}
 
 \begin{remark}
-  The \cref{eg:nonmeas-partition} also shows that it is not sufficient that the \emph{elements} of the partition are measurable sets. In the remark above, the orbits are countable sets of points in the circle, and thus are Lebesgue (or even Borel) measurable, and yet the partition does not admit a disintegration.
+  The \cref{eg:nonmeas-partition} also shows that it is not sufficient for the \emph{elements} of the partition to be measurable sets. In the remark above, the orbits are countable sets of points in the circle, and thus are Lebesgue (or even Borel) measurable, and yet the partition does not admit a disintegration.
 \end{remark}
 
 The right notion of a ``well-behaved'' partition with respect to disintegrations will turn out to be the notion of \emph{measurable partitions}.
@@ -462,18 +513,23 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
   Any partition \(\pP\) of a compact metric space \(X\) whose elements are closed is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
-  Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (this is the Hausdorff metric, which we detail in \cref{sec:hausdorff}). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\bot\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
+  Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (this is the Hausdorff metric, which we detail in \cref{def:hausdorff-metric}). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\bot\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
 \end{proof}
 
-\subsection{Construction of conditional measures}
+
+
+\subsection{Conditional measures}
 
 
 
 \section{Entropy}
 
 \subsection{Topological entropy}
+\todo{Define.}
 \subsection{Measure-theoretic entropy}
+\todo{Define.}
 
 \subsection{Pesin entropy formula}
+\todo{State the theorem, to be used in the invariance principle section.}
 
 \end{document}

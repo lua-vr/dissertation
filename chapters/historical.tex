@@ -31,6 +31,8 @@ Later, Floris Takens exposed the problem again in~\cite{takensOrbitsHistoricBeha
 
 
 \subsection{Genericity of historical orbits}
+\todo{Under relatively few hypothesis, historical orbits form a residual subset of the manifold}.
+
 \label{sec:genericity}
 
 \todo{\cite{carvalhoGenericityHistoricBehavior2021}}
@@ -125,110 +127,84 @@ Let \((X,\mu)\) be a Borel probability space, where \(X\) is compact and metriza
 \begin{equation*}
   F(x,y) = (g(x),f_x(y))
 \end{equation*}
-where \(g \colon X \to X\) is ergodic and measure-preserving. Suppose there is a homeomorphism \(\gamma \colon I \to \RR[closure]\) and a measurable function \(p \colon X \to \RR\) satisfying \(t_{x} \circ \gamma = \gamma \circ f_x\) for all \(x \in X\), where \(t_x(y) = y + p(x)\) is the translation by \(p(x)\). 
+where \(g \colon X \to X\) is ergodic and measure-preserving. Suppose there is a homeomorphism \(\gamma \colon I \to \RR[closure]\) and a measurable function \(p \colon X \to \RR\) such that, if we set \(t_x(y) = y + p(x)\), we have \[t_{x} \circ \gamma = \gamma \circ f_x\] for all \(x \in X\), where \(t_x\) is to be interpreted as the translation by \(p(x)\). 
 \[
   \begin{tikzcd}
     I \arrow[d, "\gamma"]\arrow[r, "f_{x}"] & I \arrow[d, "\gamma"]\\
     \RR[closure] \arrow[r,"t_{x}"] & \RR[closure]
   \end{tikzcd}
 \]
-Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamma(1) = +\infty\) and \(\gamma\left(\frac{1}{2}\right) = 0\).
+Since the \(t_x\) are translations, there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamma(1) = +\infty\) and \(\gamma\left(\frac{1}{2}\right) = 0\), so we shall adopt this convention for simplicity.
 
 \begin{theorem}\label{thm:wip-historical}
-  If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i - 1})_{i \geq 1}\), then \(F\) has historical behavior. In fact, for \(\mu\)-almost every \(x \in X\) and every \(y \in (0,1)\),
+  If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i - 1})_{i \geq 1}\), then \(F\) has historical behavior. More specifically,
   \begin{equation}\label{eq:emp-closure}
-    \set{e_n(x,y)}[n \in \NN, '] = [\delta_-, \delta_+]
+    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, ']
   \end{equation}
   where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak* topology.
 \end{theorem}
 
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=5cm]{../figures/p-delta}
+%   \caption{The function \(s_\delta\)}\label{fig:p-delta-plot}
+% \end{figure}
+
 \begin{proof}
-  Fix \(\delta \in (0,1)\), and define
+  Let \(\delta > 0\) and \(s_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(s_{\delta}(0) = 0\) and \(s_{\delta}(t) > 1 + \delta\) for \(t > \delta\).
+  Let \(U_{\delta} = B_{\delta}(s_{\delta})\) be an open ball of radius \(\delta\) around \(s_{\delta}\) in the uniform topology. By \cref{thm:forgery}, we know \(W(U_{\delta}) > 0\), so by \cref{thm:portmanteau}
+  \begin{equation*}
+    \liminf_{n \to \infty}(\DProc[n,spar,pf]\mu)(U_{\delta}) \geq \sigma W(U_{\delta}) > 0.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    S_{\delta} = \limsup_{n \to \infty}\, \DProc[n,spar,inv]{U_{\delta}} \subseteq X
+  \end{equation*}
+  has positive measure. This set is also invariant for \(g\) because
   \begin{align*}
-    T(x,y) &= \limsup_{n \to \infty}\frac{1}{n}\# \set{ 0 \leq i < n \where f^{(i)}_x(y) > \delta }\\
-           &= \limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}1_{(M_y,\infty)}(\PSum[i](x))
+    g^{-1}(S_{\delta})
+    &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
+    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - s_{\delta}(t)} <\delta }\\
+    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
+    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta } = S_{\delta}.
   \end{align*}
-  where \(M_y = \gamma(\delta) - \gamma(y)\).
-  Let \(E\) be the full \(\mu\)-measure set given by \cref{lem:avoid-compacts}.
-  \begin{claim}
-    \(T(x,y_1) = T(x,y_2)\) for all \(x \in E\), \(y_1,y_2 \in (0,1)\).
-  \end{claim}
-  Indeed, set \(M = \max \{ \abs{M_{y_1}},\abs{M_{y_2}}\}\) and let
-  \(G = \set{ i : \abs{\PSum[i,rv = \xi](x)} > M}\).
-  Since \(1_{(M_{y_1},\infty)}(t) = 1_{(M_{y_2},\infty)}(t)\) whenever \(\lvert t \rvert > M\), for all \(i \in G\), \[1_{(M_{y_1},\infty)}(\PSum[i](x)) =  1_{(M_{y_2},\infty)}(\PSum[i](x)).\]
-  So
+  Therefore \(\mu(S_{\delta}) = 1\). Now, notice that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
   \begin{align*}
-    \lvert T(x,y_1) - T(x,y_2) \rvert
-    &\leq \limsup_{n \to \infty} \frac{1}{n} \sum_{i = 0}^{n - 1} \lvert 1_{(M_{y_1},\infty)}(\PSum[i](x)) -  1_{(M_{y_2},\infty)}(\PSum[i](x)) \rvert\\
-    &\le \limsup_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where i \notin G} = 0.
+    \#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \geq (1 - \delta)n_k^{+}.
   \end{align*}
-  This proves the claim. Since \(T\) is invariant by \(F\), for any \(x \in g^{-1}(E)\),
+  Analogously, by repeating the argument with \(- s_{\delta}\), we find \(n_k^- \to \infty\) such that for every \(k\),
+  \begin{align*}
+    \#\set[par = auto]{ 0 \leq i < n_k^- \where S_{i}^{\xi}(x) < -\sqrt{\textstyle n^-_k} } \geq (1 - \delta)n_k^{-}.
+  \end{align*}
+  By considering \(E = \bigcap_{i = 1}^{\infty} U_{1/i} \subseteq X\), a set of full measure, and applying a diagonalization argument to the previous two observations, for each \(x \in E\) we find \(n_k^+, n_k^- \to \infty\) for which
   \begin{equation*}
-    T(x,y) = T(g(x), f_x(y)) = T(g(x),y).
+    \frac{1}{n_k^+}\#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \to 1
   \end{equation*}
-  By ergodicity, there is a full measure set \(\sH \subseteq X\) and \(t \in [0,1]\) for which \(T(x,y) = t\) for all \(x \in \sH\), \(y \in (0,1)\).
+  and
+  \begin{equation}\label{eq:6}
+    \frac{1}{n_k^-}\#\set[par = auto]{ 0 \leq i < n_k^- \where S_{i}^{\xi}(x) < -\sqrt{\textstyle n^-_k} } \to 1.
+  \end{equation}
 
-  We can use the arcsine law to evaluate this constant. Given \(\varepsilon > 0\), fix some \(y \in (0,1)\) and define 
-
+  Now, by ergodicity of \(g\) and \cref{lem:erg-iff-basin-full-meas}, let \(S = E \cap \Basin{\mu}\) be a full measure set where
   \begin{equation*}
-    E_n = \set[par = auto]{x \in X \where \frac{1}{n} \#\set{0 \leq i < n \where \PSum[i](x) > M_y} > 1 - \varepsilon}.
+    \frac{1}{n} \sum_{i = 0}^{n - 1}\varphi(g^i(x)) \to \int_X \varphi(z) \;d\mu(z)
   \end{equation*}
-  By the \cref{lem:weak-arcsine}, we know \(\lim_{n}\mu(E_n) = Z([1 - \varepsilon, 1]) > 0\), so
-  \begin{equation*}
-    \mu(\limsup_{n \to \infty} E_n) \geq \limsup_{n \to \infty} \mu(E_n) > 0.
-  \end{equation*}
-  This means there exists \(x_0 \in \sH \cap \limsup E_n\), and since
-  \begin{equation*}
-    \limsup_{n \to \infty}E_n = \set{x \in X \where T(x,y) > 1 - \varepsilon}
-  \end{equation*}
-  we have \(t = T(x_0,y) > 1 - \varepsilon\). But \(\varepsilon > 0\) is arbitrary, so \(T(x,y) = 1\) for every \(x \in \sH\) and \(y \in (0,1)\).
-
-  So far, we started with \(\delta \in (0,1)\) and showed that for 
-  \begin{equation*}
-    T_{\delta}(x,y) = \limsup_{n \to \infty}\frac{1}{n}\# \set{ 0 \leq i < n \where f^{(i)}_x(y) > \delta },
-  \end{equation*}
-  there is \(\sH_{\delta} \subseteq X\) with \(\mu(\sH_{\delta}) = 1\) such that for \(x \in \sH_{\delta}\), \(y \in (0,1)\), \(\sH_{\delta}(x,y) = 1\). But note that for fixed \(x,y\), the function \(\delta \mapsto T_{\delta}(x,y)\) is monotone. With this observation, it's easy to see that if we define
-  \begin{equation*}
-    \sH = \bigcap_{i = 1}^{\infty} \sH_{1/i} \cap \sH_{1 - 1/i},
-  \end{equation*}
-  then \(\mu(F) = 1\) and \(T_{\delta}(x,y) = 1\) for all \(x \in \sH\) and \(y, \delta \in (0,1)\).
-
-  In particular, this implies that if \(x \in \sH\) and \(y \in (0,1)\), then for any \(\delta \in (0,1)\), letting \(U_n = \set{0 \leq i < n \where f_x^{(i)}(y) > \delta}\), the limit supremum of the \(y\) coordinate satisfies
-  \[\limsup_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) \geq \limsup_{n \to \infty}\frac{1}{n} \sum_{i \in U_n}\delta = \delta,\]
-  so the left-hand side is equal to 1. The proof we have so far works analogously for the time averages of the iterates in which \(f^{(i)}_x(y) < \delta\), and by doing so we get
-  \[\liminf_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1}f_x^{(i)}(y) = 0.\]
-  Note that those are time averages of the continuous bounded function \(\pi_2 \colon X \times I \to \mathbb{R}\), so historical behavior is proved.
-  
-  We now focus on \cref{eq:emp-closure}.
-  By Birkhoff, we can fix a full measure set \(\sS \subseteq X\) such that for all \(x \in \sS\) and \(\varphi \in \Cs{X}\),
-  \begin{equation*}
-    \frac{1}{n} \sum_{i = 0}^{n - 1}\varphi(g^i(x)) \to \int_X \varphi \;d\mu.
-  \end{equation*}
-  Given \(x\) in the full measure set \(\sH \cap \sS\) and \(y \in (0,1)\), we construct an increasing sequence \((n^-_k)_k \subseteq \NN\) inductively, letting \(n^-_0 = 1\) and \(n^-_{k + 1} > n^+_k\) be any integer satisfying
-  \[
-    \frac{1}{n^-_k}\#\set{ 0 \leq i < n^-_k \where f^{(i)}_x(y) < 1/k } > 1 - 1/k.
-  \]
-  Analogously, we can pick an increasing sequence \((n^+_k)_k \subseteq \NN\) for which
-  \[
-    \frac{1}{n^+_k}\#\set{ 0 \leq i < n^+_k \where f^{(i)}_x(y) >1 - 1/k } > 1 - 1/k.
-  \]
-
-  \begin{claim}
-    \[e_{n^-_k}(x,y) \weakto \delta_- \quad\text{ and }\quad e_{n^+_k}(x,y) \weakto \delta_+.\]
-  \end{claim}
+  for all \(\varphi \in \Cs{X}\) and \(x \in S\).
+  It suffices to show that for all \(x \in S\),
+  \[e_{n^-_k}(x,y) \weakto \delta_- \quad\text{ and }\quad e_{n^+_k}(x,y) \weakto \delta_+.\]
   We only show the first convergence, since the second is analogous.
 
   Let \(\phi \in \Cs{X \times I}\) and \(\varepsilon > 0\). Since \(\phi\) is uniformly continuous, there is some \(k_1\) for which
   \begin{equation*}
-    \sup\set[par = \big]{\abs{\phi(x,1) - \phi(x, s)} : x \in X, s \in [0,1/k_1]} < \varepsilon.
+    \sup\set[par = \big]{\abs{\phi(x,0) - \phi(x, s)} : x \in X, s \in [0,1/k_1]} < \varepsilon.
   \end{equation*}
   Let \(D = \set{i \where f^{(i)}_x(y) < 1/k_1}\), and let \(N\) be big enough so that for \(k \geq N\),
   \begin{equation*}
-    \abs[\Bigg]{\frac{1}{n_k^-} \sum_{i = 0}^{n_k^- - 1}\phi(F^i(x,0)) - \int_X \phi(z,0) \;d\mu(z)} < \varepsilon
+    \abs[\Bigg]{\frac{1}{n_k^-} \sum_{i = 0}^{n_k^- - 1}\phi(F^i(x,0)) - \int_X \phi(z,0) \;d\mu(z)} < \varepsilon,
   \end{equation*}
-  (which is possible since \(x \in \sS\) and \(\varphi(x) = \phi(x,0)\) is continuous), and
+  which is possible since \(x \in \sS\) and \(\varphi(x) = \phi(x,0)\) is continuous, and also big enough so that
   \[\frac{1}{n_k^-}\# \set{ 0 \leq i < n_k^- \where i \notin D } < \varepsilon / \lVert \phi \rVert_{\infty},\]
-  so we can estimate
+  which is due to \cref{eq:6}. Therefore, we can estimate
   \begin{align*}
     \abs{e_{n_k^-}(x,y)(\phi) &- \delta_-(\phi)}\\
     &=
@@ -255,60 +231,43 @@ Note there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamm
     \abs*{\phi(F^i(x,y)) - \phi(F^i(x,0))} + 3\varepsilon\\
     &\leq \varepsilon + 3\varepsilon = 4\varepsilon.
   \end{align*}
-  This completes the proof of the claim. To finish the proof of~\eqref{eq:emp-closure}, we first show the following.
+  This completes the proof.
+\end{proof}
 
+
+\begin{corollary}
+  If for any compact \(K \subseteq \RR\), the vising time of the processes \(\PSum[n,rv = \xi]\) to \(K\) tends to zero almost surely as \(n \to \infty\), that is,
+  \begin{equation*}
+    \int 1_K \circ \PSum[n,rv = \xi](x)(t) \;d\Leb \to 0
+  \end{equation*}
+  then
+  \begin{equation}\label{eq:4}
+    \set{e_n(x,y)}[n \in \NN, '] = [\delta_-, \delta_+]
+  \end{equation}
+  for \(\mu\)-almost every \(x\) and all \(y \in (0,1)\).
+\end{corollary}
+
+\begin{proof}
   \begin{claim}
-    If \(\eta \in \Meas{x,y}\), then \(\supp \eta \subseteq X \times \{ 0, 1 \}\) and \(\eta \in [\delta_0,\delta_1]\).
+    If \(\eta \in \Meas{x,y}\), then \(\supp \eta \subseteq X \times \{ 0, 1 \}\) and \(\eta \in [\delta_-,\delta_+]\).
   \end{claim}
 
+  
   We use \cref{lem:avoid-compacts} again for this. Let \(\Emp[n_k]{x,y} \weakto \eta\) be a limit point, \(x_0 \in X\) and \(y_0 \in (0,1)\), so there is a neighborhood \(\U\) of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). By the lemma, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \nameref{thm:portmanteau}
   \begin{equation*}
     \eta(\U) \leq \liminf_{k \to \infty} \Emp[n_k]{x,y}(\U) = 0.
   \end{equation*}
   This shows \((x_0,y_0) \notin \supp \eta\).
 
-  We know \(\eta\) is a limiting measure for \(x\), so it's invariant by \(F\), and the fact \(x \in X\) implies \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), and since \(\delta_{ - },\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
+  We know \(\eta\) is a limiting measure for \(x\), so it is invariant by \(F\). The fact \(x \in S\) implies by the definition of \(S\) that \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), and since \(\delta_{ - }\) and \(\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
 
-  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to note that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and since it contains both \(\delta_-\) and \(\delta_+\), it must be the whole segment.
+  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to notice that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and therefore, since it contains both endpoints \(\delta_-\) and \(\delta_+\), it must be the whole segment.
 \end{proof}
 
-\begin{remark}[A different proof]
-  Another way to show \(\delta_-, \delta_+ \in \Meas{x}\) for \(x\) in a full measure set \(\sH\) is as follows: let \(\delta > 0\) and \(p_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(p_{\delta}(0) = 0\) and \(p(t) > 1 + \delta\) for \(t > \delta\).
-  \begin{figure}[h]
-    \centering
-    \includegraphics[width=5cm]{../figures/p-delta}
-    \caption{The function \(p_\delta\)}\label{fig:p-delta-plot}
-  \end{figure}
-  Let \(U_{\delta} = B_{\delta}(p_{\delta})\). By the \nameref{thm:forgery} we know \(W(U_{\delta}) > 0\), so by \cref{thm:portmanteau}
-  \begin{equation*}
-    \liminf_{n \to \infty}(\DProc[n,spar,pf]\mu)(U_{\delta}) \geq \sigma W(U_{\delta}) > 0.
-  \end{equation*}
-  Therefore,
-  \begin{equation*}
-    S_{\delta} = \limsup_{n \to \infty}\, \DProc[n,spar,inv]{U_{\delta}} \subseteq X
-  \end{equation*}
-  has positive measure. This set is also invariant for \(g\) because
-  \begin{align*}
-    g^{-1}(S_{\delta})
-    &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
-    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - p_{\delta}(t)} <\delta }\\
-    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
-    &= \set[par = auto]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - p_{\delta}(t)} <\delta } = S_{\delta}.
-  \end{align*}
-  Therefore \(\mu(S_{\delta}) = 1\). Now, note that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
-  \begin{align*}
-    \#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \geq (1 - \delta)n_k^{+}.
-  \end{align*}
-  Analogously, there is \(n_k^- \to \infty\) such that for every \(k\),
-  \begin{align*}
-    \#\set[par = auto]{ 0 \leq i < n_k^- \where S_{i}^{\xi}(x) < -\sqrt{\textstyle n^-_k} } \geq (1 - \delta)n_k^{-}.
-  \end{align*}
-  Both can be used as in the previous proof.
-\end{remark}
 
 \section{Recent developments}
 
-  \todo{Conclude explaining the recent work of Kiriri, Soma, Vargas et al.}
+  \todo{Conclude with an overview of the recent work of Kiriri, Soma, Vargas et al.}
 
 % \begin{theorem}
 %   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),

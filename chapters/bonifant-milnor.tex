@@ -294,7 +294,6 @@ Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), t
 
 \begin{proof}
   By symmetry, it is enough to show  \(\mathcal{A}_1 \subseteq K\). Let \((x,y) \in K\) be the point in the statement. 
-
   Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) such that \(x_{ - n - 1} \in g^{-1}(\{ x_{-n} \})\) is the closest preimage of \(x_-\). Since \(x_-\) is a repelling fixed point, the construction implies that \(x_{-n} \to x_-\), so by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-1}(y_0) > y\). In particular,
   \[y_{ - n} = f_{x_{-n}}^{-1} \circ \cdots \circ f_{x_{-1}}^{-1}(y_0)\]
   is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, notice that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
@@ -383,6 +382,14 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
+\subsection{Hausdorff dimension}
+
+An interesting question to consider is what is the Hausdorff dimension of the set \(\graph \xi\) in the situation of intermingled basins. Since this set is a graph, it is clearly at least \(1\) and at most \(2\).
+
+\todo{In this situation of intermingled basins, what is the Hausdorff dimension of the graph separating the basins, or of the basins themselves?}
+
+\todo{It should be strictly greater than 1: this is a corollary of regularity.}
+
 \section{Positive Schwarzian}
 
 \todo{the paragraph below conflicts, or should be moved to, the section which defines the empirical measures, as it's not clear whether it concerns an asymptotic measure for each point, or a single one for almost every point. If necessary, adjust the theorem statement.}
@@ -428,6 +435,8 @@ The idea of the proof is to pass to the invertible extension of the system and o
   \[F_* \nu = (F \circ \pi)_* \enu = (\pi \circ \eF)_* \enu = \pi_*\enu = \nu.\]
   Furthermore, the basin of \(\nu\) has full Lebesgue measure. In fact, if \(\varphi \in \Cs{X \times I}\), then \(\varphi \circ \pi \in \Cs{\eX \times I}\) and \(e_n(\pi(\ex), y)(\varphi) = e_n(\ex, y)(\varphi \circ \pi)\). Therefore, \(e_n(x, y) \to \nu\) if and only if \(e_n(\ex, y) \to \enu\) for any \(\ex \in \pi^{-1}(x)\), that is, \((\pi \times \Id)^{-1}(\mathcal{B}(\nu)) = \mathcal{B}(\enu)\). It follows that \((\mu \otimes \Leb)(\mathcal{B}(\nu)) = (\emu \otimes \Leb)(\mathcal{B}(\enu)) = 1\).
 \end{proof}
+
+\todo{Perhaps a section should be dedicated to the hyperbolic metric, or the Hilbert metric. Perhaps put it next to the Hausdorff metric.}
 
 % TODO: Ali's argument probably works?
 % TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples
