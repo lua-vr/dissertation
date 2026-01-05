@@ -7,19 +7,49 @@
 \section{Probability spaces}
 
 \subsection{Products}
-\todo{We can take arbitrary products of probability measures. See \cite{bogachevMeasureTheory2007}}
+A fact that is not always covered in measure theory courses and literature is that we can take arbitrary products of measures when they are probability measures. We will sneakily use this fact in some definitions of this section.
 
-\subsection{Borel Spaces}
+\begin{theorem}
+  Let \(T\) be an arbitrary index set, and let \((X_t,\mathcal{B}_t,\mu_t)\) be a probability space. Then, there exists a unique measure \(\mu\) on the measurable space \(\rpar{\prod_{t \in T}X_t, \bigotimes_{t \in T}\mathcal{B}_t}\), which is the product of \(\mu_t\). That is, for all finite subsets \(\Lambda \subseteq T\), considering the canonical projection \(\pi_{\Lambda}\colon \prod_{t \in T}X_t \to \prod_{t \in \Lambda}X_t\), we have \((\pi_{\Lambda})_*\mu = \bigotimes_{t \in \Lambda}\mu_t\).
+\end{theorem}
+
+\begin{proof}
+  See~\cite[section 3.5]{bogachevMeasureTheory2007}.
+\end{proof}
 
 \subsection{The Kolmogorov Extension Theorem}
 
-\todo{What if we want to construct a measure on a product space that is not the product measure? Kolmogorov to the rescue.}
+Let \(T\) be an arbitrary index set. Suppose that for every \(t \in T\), we have a measurable space \((\Omega_t, \mathcal{B}_t)\). Moreover, suppose we have a more complex specification of how to ``patch together'' finite collections of these measurable spaces into a measure spaces, that is itself consistent: for every finite subset \(\Lambda \subset T\), we specify a measure \(\mu_{\Lambda}\) on \((\Omega_{\Lambda} \coloneqq \prod_{t \in \Lambda}\Omega_t
+, \mathcal{B}_{\Lambda} \colon= \bigotimes_{t \in \Lambda} \mathcal{B}_t)\), such that if \(\Lambda_1 \subset \Lambda_2\), the image of the measure \(\mu_{\Lambda_2}\) under the natural projection from \(\Omega_{\Lambda_2}\) to \(\Omega_{\Lambda_1}\) coincides with \(\mu_{\Lambda_1}\). We call a such a specification \(\set{\mu_{\Lambda}}_{\Lambda}\) a \emph{projective system} of measures.
 
-The following theorem is known as the \emph{Kolmogorov Extension Theorem}, as quoted from~\cite[theorem 7.7.1]{bogachevMeasureTheory2007}.
+From this finitary specification, when is it possible to construct a measure on the whole product $\left(\Omega:=\prod_{t \in T} \Omega_t, \mathcal{B}:=\bigotimes_{t \in T} \mathcal{B}_t\right)$? Clearly, this is a more general problem than that of constructing an infinite product measure. In fact, this is not always possible in general, but as we shall see, a topological-flavored condition proves to be sufficient for the existence of the extension.
 
-\begin{theorem}
-  Suppose that for every finite set $\Lambda \subset T$, we are given a probability measure $\mu_{\Lambda}$ on  $(\Omega_{\Lambda}, \mathcal{B}_{\Lambda})$  such that the following consistency condition is fulfilled: if $\Lambda_1 \subset \Lambda_2$, then the image of the measure $\mu_{\Lambda_2}$ under the natural projection from $\Omega_{\Lambda_2}$ to $\Omega_{\Lambda_1}$ coincides with $\mu_{\Lambda_1}$. Suppose that for every $t \in T$, the measure $\mu_t$ on $\mathcal{B}_t$ possesses an approximating compact class $\mathcal{K}_t \subset \mathcal{B}_t$. Then, there exists a probability measure $\mu$ on the measurable space $\left(\Omega:=\prod_{t \in T} \Omega_t, \mathcal{B}:=\bigotimes_{t \in T} \mathcal{B}_t\right)$ such that the image of $\mu$ under the natural projection from $\Omega$ to $\Omega_{\Lambda}$ is $\mu_{\Lambda}$ for each finite set $\Lambda \subset T$.
+\begin{definition}
+  Let \(X\) be a set. A collection \(\mathcal{K} \subseteq 2^X\) of subsets is called a \emph{compact class} if it has the finite intersection property, meaning that for all countable subsets \((K_n)_{n = 1}^{\infty} \subseteq \mathcal{K}\), then
+  \[\rpar[\Big]{\forall N,\;\; \bigcap_{n = 1}^N K_n \neq \varnothing} \implies \bigcap_{n = 1}^{\infty}K_n \neq \varnothing.\]
+\end{definition}
+
+\begin{definition}
+  Let \((X,\mathcal{B}_X,\mu)\) be a measure space. A compact class \(\mathcal{K} \subseteq \mathcal{B}_X\) is called \emph{approximating} if the values of \(\mu\) on any set can be approximated by those on elements of \(\mathcal{K}\), meaning that for any measurable \(A\), and \(\varepsilon > 0\), there exists \(K \in \mathcal{K}\) such that \(K \subseteq A\) and \(\mu(A \setminus K) < \varepsilon\).
+\end{definition}
+
+\begin{theorem}[Kolmogorov Extension Theorem]\label{thm:kolmogorov-ext}
+  Suppose that for every $t \in T$, the measure $\mu_{\set{t}}$ on $\mathcal{B}_{\set{t}}$ possesses an approximating compact class $\mathcal{K}_{t} \subset \mathcal{B}_{\set{t}}$. Then, there exists a probability measure $\mu$ on the measurable space $(\Omega, \mathcal{B})$ such that the image of $\mu$ under the natural projection from $\Omega$ to $\Omega_{\Lambda}$ is $\mu_{\Lambda}$ for each finite set $\Lambda \subset T$.
 \end{theorem}
+
+\begin{proof}
+  See~\cite[theorem 7.7.1]{bogachevMeasureTheory2007}.
+\end{proof}
+
+\begin{remark}
+  Clearly, if each \(\mathcal{B}_{\set{t}}\) is the Borel algebra of a topological space whose compact sets satisfy the finite intersection property and \(\mu_{\set{t}}\) is inner regular, then it has an approximating compact class given by the compact sets. For instance, this is the case in any Standard Borel space, a family which includes all finite Borel measures in complete separable metric spaces, like \(\RR\).
+\end{remark}
+
+% \subsection{Standard Borel spaces}
+
+% \begin{definition}
+%   A measure space \((X,\mathcal{B}_X, \mu)\) is called \emph{Standard Borel}
+% \end{definition}
 
 \section{Random variables}
 
@@ -49,9 +79,11 @@ If \((X, \mathcal{A}, \Prob)\) is a probability space and \((Y, \mathcal{B})\) i
   \end{enumerate}
 \end{proposition}
 
-\section{Brownian motion}
+\nomenclature{\(\WM\)}{The Wiener measure, defined in \cref{sec:brownian-motion}.}
 
-The rigorous mathematical foundation of Brownian motion was laid by Norbert Wiener in 1923, who constructed Brownian motion as a measure on the space of continuous functions. This construction is why the Brownian motion is often called the Wiener process, and defined as the \emph{Wiener measure}.
+\section{Brownian motion}\label{sec:brownian-motion}
+
+The rigorous mathematical foundation of Brownian motion was laid by Norbert Wiener, who constructed Brownian motion as a measure on the space of continuous functions. This construction is why the Brownian motion is often called the Wiener process, and defined as the \emph{Wiener measure}.
 
 We shall denote by \(\Normal[\mu][\nu] \in \Meas[1](\RR)\) the probability measure corresponding to the normal distribution with mean \(\mu\) and variance \(\nu\). It can be defined as \(\Normal[\mu][\nu] = \rho \Leb\), where \(\rho\) is the probability density function
 \begin{equation*}
@@ -59,7 +91,7 @@ We shall denote by \(\Normal[\mu][\nu] \in \Meas[1](\RR)\) the probability measu
 \end{equation*}
 
 \begin{definition}
-  Let \(\mathcal{C}\) be the product \(\sigma\)-algebra on \(\CWPS\). The Wiener measure \(\WM\) is the measure on \((\CWPS, \mathcal{C})\) defined by the following properties: if we denote by \(\WM[t] \colon \CWPS \to \RR\) the evaluation at time \(t\), seen as a random variable on \((\CWPS, \mathcal{C}, \WM)\), then
+  Let \(\mathcal{C}\) be the product \(\sigma\)-algebra on \(\CWPS\). The Wiener measure \(\WM\) is the unique measure on \((\CWPS, \mathcal{C})\) defined by the following properties: if we denote by \(\WM[t] \colon \CWPS \to \RR\) the evaluation at time \(t\), seen as a random variable on \((\CWPS, \mathcal{C}, \WM)\), then
   \begin{enumerate}[(i)]
   \item \(\WM[0] = 0\) almost surely;
   \item for \(t > 0\), \(\WM[t] \sim \Normal[0][t]\);
@@ -67,7 +99,7 @@ We shall denote by \(\Normal[\mu][\nu] \in \Meas[1](\RR)\) the probability measu
   \end{enumerate}
 \end{definition}
 
-\subsection{The space of càdlàg functions}
+\subsection{The space of càdlàg functions}\label{sec:space-cadl-funct}
 
 The space \(\CWPS\) of continuous functions does not let us talk about processes that contain discontinuities, or even about how discontinuous processes can converge in a suitable way to continuous ones. This is important in our setting to deal with the convergence of certain processes induced by discrete dynamics, which consist of step functions, to the Brownian motion, which is continuous almost surely.
 
@@ -79,6 +111,9 @@ at the point is equal to the right limit:
 \end{equation*}
 We want to put a metric on this space with the property that functions are close together if their values are close to each other uniformly, but also allowing small perturbations in the parametrization of time. 
 
+\nomenclature{\(\CWPS\)}{The set of continuous functions \([0,1] \to \RR\) with the topology of uniform convergence.}
+\nomenclature{\(\Sko{[0,1]}\)}{The Skorohod space, defined in \cref{sec:space-cadl-funct}.}
+
 \begin{definition}[Skorohod topology]
   Let \(\Lambda\) be the set of strictly increasing continuous functions from \([0,1]\) to itself. For \(f,g \in \WPS\), we define
   \begin{equation}\label{eq:sko-metric}
@@ -89,6 +124,11 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 
 \begin{proposition}\label{prop:skorohod-uniform}
   The restriction of the Skorohod topology to \(\CWPS\) coincides with the uniform topology. In fact, if \(f \colon [0,1] \to \RR\) is continuous, then any ball \[B_{\delta}(f) = \set{g \in \Sko{[0,1]} \where \norm{f - g}_{\infty} < \delta},\] of the uniform topology contains an open neighborhood of \(f\) in the Skorohod topology.
+  % That is, there exists \(\delta'\) such that
+  % \begin{equation*}
+  %   B_{\delta'}(f) \subseteq B_{\delta'}'(f) \subseteq  B_{\delta}(f)
+  % \end{equation*}
+  % where \(B_{\delta'}'(f) = \set{g \in \Sko{[0,1]} \where d(f, g) < \delta}\).
 \end{proposition}
 \begin{proof}
   Since the Skorohod topology is coarser, it suffices to show the second part of the statement. Since \(f\) is uniformly continuous, there is \(\delta_2 < \delta/2\) such that if \(\norm{\lambda - \Id}_{\infty} < \delta_2\), then
@@ -107,8 +147,6 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 
 \begin{proposition}\label{prop:sko-conv-pointwise}
   If \(f_n \to f\) in the Skorohod topology, then \(f_n(x) \to f(x)\) for all \(x\) in a set \(E\) whose complement is at most countable.
-
-  \todo{This is not necessary for \cref{lem:ptime-continuous} because we can take \(E\) to be a subset of continuous functions there. The continuous functions \(\CWPS\) are closed in \(\WPS\). This could be removed.}
 \end{proposition}
 
 \begin{proof}
@@ -135,7 +173,7 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 \end{lemma}
 
 \begin{proof}
-  Since the normal distributions are non-atomic and \(W_t\) has normal distribution for every \(t \in \interval[open left]{0}{1}\), we have that \[W(\{ f \in \WPS : f(t) = 0 \}) = 0\] for all \(t \in \interval[open left]{0}{1}\). Therefore, by Fubini, \[\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\] for all \(f\) in a set \(E \subseteq \WPS\) of full \(W\)-measure. It remains to check that \(\pTime\) is continuous at such points \(f \in E\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f\) is in this set and \(f_n \to f\) in the Skorohod space, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere by \cref{prop:sko-conv-pointwise}. By the dominated convergence theorem,
+  Since the normal distributions are non-atomic and \(W_t\) has normal distribution for every \(t \in \interval[open left]{0}{1}\), we have that \[W(\{ f \in \WPS : f(t) = 0 \}) = 0\] for all \(t \in \interval[open left]{0}{1}\). Therefore, by Fubini, \[\Leb(\{ t \in [0,1] : f(t) = 0 \}) = 0\] for all \(f\) in a set \(E \subseteq \WPS\) of full \(W\)-measure. It remains to check that \(\pTime\) is continuous at such points \(f \in E\). Indeed, \(0\) is the only discontinuity of the indicator function \(1_{(0,\infty)}\), so if \(f \in E\) and \(f_n \to f\) in the Skorohod space, then \(1_{(0,\infty)} \circ f_n \to 1_{(0,\infty)} \circ f\) almost everywhere by \cref{prop:sko-conv-pointwise}. By the dominated convergence theorem,
   \begin{equation*}
     \pTime{f} =  \int_{[0,1]} 1_{(0,\infty)} \circ f \;d\Leb = \lim_{n \to \infty}
     \int_{[0,1]} 1_{(0,\infty)} \circ f_n \;d\Leb = \lim_{n \to \infty} \pTime{f_n}.
@@ -148,8 +186,37 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 \end{theorem}
 
 \begin{proof}
-  See~\cite{billingsleyConvergenceProbabilityMeasures1999}. \todo{Find number of the theorem.}
+  See~\cite[equation 9.27]{billingsleyConvergenceProbabilityMeasures1999}.
 \end{proof}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      % --- Box Style (maintaining consistency) ---
+      axis line style={very thick},
+      axis on top,
+      enlargelimits=false,
+      width=5cm,
+      height=5cm,
+      % Remove ticks and labels
+      xtick=\empty,
+      ytick=\empty,
+      xlabel={},
+      ylabel={},
+      title={},
+      % --- Axis Limits ---
+      xmin=0, xmax=1,
+      ymin=0, ymax=1, % A CDF always ranges from 0 to 1
+      % --- Plot Style ---
+      samples=200, % Sufficient for a smooth curve
+      every axis plot/.append style={very thick, smooth}
+      ]
+      \addplot[blue, domain=0:1] {asin(sqrt(x)) / 90};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The value of \(\frac{2}{\pi} \arcsin \sqrt{\alpha}\) for \(0 \le \alpha \le 1\).}
+\end{figure}
 
 \begin{theorem}[Forgery Theorem, or Support Theorem]\label{thm:forgery}
   If \(f \in \CWPS\) and \(f(0) = 0\), then every neighborhood of \(f\) has positive Wiener measure. Note that by \cref{prop:skorohod-uniform}, this is true for neighborhoods both in the uniform and in the Skorohod topologies.
@@ -168,7 +235,7 @@ obtained by appropriately scaling the partial sums of the random variables up to
 Remarkably, for many classes of sequences \(\xi\), their corresponding processes \(\DProc[n]\) converge in some way to the Brownian motion --- we denote by an \emph{invariance principle} a result of this form. Perhaps the best known invariance principle is the Donsker's theorem, which is a \emph{weak} invariance principle since it asserts convergence in the weak topology.
 
 \begin{theorem}[Donsker]\label{thm:donsker}
-  If \(\xi \subseteq L^2(\Prob)\) is a sequence of \iid{} variables with mean zero and variance \(1\), then the measures \(\DProc[n,spar,pf] \Prob\) converge weakly to the Wiener measure. In other words, for every measurable continuous function \(\varphi \colon \WPS \to \mathbb{R}\),
+  If \(\xi \subseteq L^2(\Prob)\) is a sequence of \iid variables with mean zero and variance \(1\), then the measures \(\DProc[n,spar,pf] \Prob\) converge weakly to the Wiener measure. In other words, for every measurable continuous function \(\varphi \colon \WPS \to \mathbb{R}\),
   \[\int \varphi \circ \DProc[n] \;d\Prob \to \int \varphi \;dW.\]
 \end{theorem}
 
@@ -182,7 +249,7 @@ The motivation for looking into invariance principles is that they allow transfe
 \end{lemma}
 
 \begin{proof}
-  Writing \(\pTime[n]{\omega} = \frac{1}{n} \#\set{ 1 \leq i \leq n \where S^{\xi}_n(\omega) > M }\), the left-hand side can be rewritten as \(\lim_{n \to \infty}\pTime[n,spar,pf]\Prob{[0,\alpha]}\). Set \(c_n = M/\sqrt{n}\), and note that
+  Writing \(\pTime[n]{\omega} = \frac{1}{n} \#\set{ 1 \leq i \leq n \where S^{\xi}_n(\omega) > M }\), the left-hand side can be rewritten as \(\lim_{n \to \infty}\pTime[n,spar,pf]\Prob{[0,\alpha]}\). Set \(c_n = M/\sqrt{n}\), and notice that
   \[\pTime[n]{\omega} =\frac{1}{n} \#\set[par = auto]{ 1 \leq i \leq n \where \frac{S^{\xi}_i(\omega)}{\sqrt{n}} - \frac{M}{\sqrt{n}} >0 } = \pTime{\DProc[n,rv = \xi]{\omega} - c_n}.\]
   Since by \cref{thm:arcsine-brownian} we know \(Z = \pTime[spar,pf]W\) is equivalent to the Lebesgue measure on \([0,1]\), intervals are continuity sets for it. By the weak convergence assumption and continuity of \(\pTime\), we know \(\Fun{\pTime \circ \DProc[n,rv = \xi]}[spar,pf]\Prob\weakto Z\), and since \(c_n \to 0\) (as a sequence in \(\WPS\)), in fact \[\Fun{\pTime \circ (\DProc[n,rv = \xi] - c_n)}[spar,pf]\Prob\weakto Z.\] By Portmanteau, this means 
   \[\lim_{n \to \infty}\pTime[n,spar,pf]\Prob{[0,\alpha]} = \lim_{n \to \infty}\Fun{\pTime \circ (\DProc[n,rv = \xi] - c_n)}[spar,pf]\Prob{[0,\alpha]} = \frac{2}{\pi}\arcsin \sqrt{\alpha}.\]
@@ -193,9 +260,9 @@ The motivation for looking into invariance principles is that they allow transfe
 Donsker's theorem is not the most general result of its kind. In our case, we are interested in a version of the weak invariance principle for ergodic martingale difference sequences. Intuitively, these are the sequences that behave as the time-one steps of a martingale, in the sense that even if the value of some previous steps are known, the expected value of the next step is still zero.
 
 \begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots) \in L^1(\Prob)^{\NN}\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
+  A sequence \(\xi = (\xi_0,\xi_1\dots) \in L^1(\Prob)^{\NN}\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
   \begin{equation*}
-    \CE[\Prob]{\xi_{n}, {\sigma(\xi_1,\dots,\xi_{n - 1})}} = 0.
+    \CE[\Prob]{\xi_{n}, {\sigma(\xi_0,\dots,\xi_{n - 1})}} = 0.
   \end{equation*}
 \end{definition}
 
@@ -204,7 +271,7 @@ Donsker's theorem is not the most general result of its kind. In our case, we ar
 In the previous definition we considered an one-sided sequence of random variables. As is often the case in ergodic theory, the sequences we shall be dealing with have the additional property of \emph{stationarity}, which is a sort of time-invariance. This property will also allow us to lift one-sided sequences of variables to two-sided ones, that is, sequences with indices in \(\ZZ\), due to the existence of the invertible extensions exposed in~\cref{sec:invert-extens}.
 
 \begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). Similarly, we can define stationarity for two-sided sequences by replacing \(\NN\) by \(\ZZ\) in the definition.
+  A sequence \(\xi = (\xi_0,\xi_1\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). Similarly, we can define stationarity for two-sided sequences by replacing \(\NN\) by \(\ZZ\) in the definition.
 \end{definition}
 
 \begin{definition}
@@ -214,12 +281,35 @@ In the previous definition we considered an one-sided sequence of random variabl
   \end{equation*}
 \end{definition}
 
-\begin{lemma}
-  Every  stationary one-sided ergodic martingale difference sequence \(\xi\) is associated to a two-sided stationary ergodic martingale difference sequence \(\zeta\) with the same marginal distributions on positive indices. That is, if \(\pi \colon Y^{\ZZ}\to Y^{\NN}\) is defined by \(\pi(\dots x_{-1},x_0,x_1,\dots) = (x_1,x_2,\dots)\), we have \((\pi \circ \zeta)_*\Prob = \xi_*\Prob\).
+\begin{lemma}[Lévy's upward theorem]\label{lem:levy-up}
+  Let \((X,\mathcal{B}\mu)\) be a measure space and \(\varphi \colon X \to \RR\) be a random variable. If \(\set{\mathcal{B}_n}_{n \in \NN}\) is an increasing sequence of sub-\(\sigma\)-algebras of \(\mathcal{B}\) (an upwards filtration), then
+  \begin{equation*}
+    \lim_{n \to \infty} \CE[\mu]{\varphi, \mathcal{B}_n} = \CE[\mu,par = \big]{\varphi, \sigma(\set{\mathcal{B}_n}_{n \in \NN})}
+  \end{equation*}
+  almost-surely.
 \end{lemma}
 
 \begin{proof}
-  \todo{write}
+  See~\cite{billingsleyProbabilityMeasure1995}.
+\end{proof}
+
+\begin{lemma}\label{lem:two-sided-from-one}
+  Every stationary one-sided ergodic martingale difference sequence \((\xi, \Prob_1)\) can be extended to a two-sided stationary ergodic martingale difference sequence \((\zeta, \Prob_2)\) with the same marginal distributions on positive indices. That is, if \(\pi \colon \RR^{\ZZ}\to \RR^{\NN}\) is the canonical projection, we have \((\pi \circ \zeta)_*\Prob_2 = \xi_*\Prob_1\).
+\end{lemma}
+
+\begin{proof}
+  Consider the projective system of measures \(\set{\mu_{\Lambda}}_{\Lambda}\) on \(\RR^{\ZZ}\) defined by
+  \begin{equation*}
+    \mu_{\set{z_1,z_2,\dots,z_n}} = (\pi_{\set{0, (z_2 - z_1),\dots,(z_n - z_1)}} \circ \xi)_*\Prob_1,
+  \end{equation*}
+  where for \(\Lambda \subseteq \NN\), \(\pi_{\Lambda} \colon \RR^{\NN}\to \RR^{\Lambda}\) is the canonical projection. Since \(\xi_*\Prob_1\) is invariant by the left shift \(\sigma\), this system satisfies the consistency condition of \cref{thm:kolmogorov-ext}. Let \(\Prob_2 \in \Meas{\RR^{\ZZ}}\) be the extension of the measure given by the theorem, and define \(\zeta_n \colon \RR^{\ZZ} \to \RR\) simply as \(\zeta_n((x_i)_i) = x_n\). By definition, it satisfies \((\pi \circ \zeta)_*\Prob_2 = \xi_*\Prob_1\).
+
+  Now, we show it is a two-sided martingale difference sequence. By stationarity and the extension property, this two-sided extension satisfies
+  \begin{equation*}
+    \CE[\Prob_2]{\zeta_{n}, {\sigma(\set{\zeta_{n - k},\dots,\zeta_{n - 1}})}} = 
+    \CE[\Prob_1]{\xi_{n + k}, {\sigma(\set{\xi_{0},\dots,\xi_{n - 1 + k}})}} = 0
+  \end{equation*}
+  for all \(k\). By letting \(k \to \infty\) and applying \cref{lem:levy-up}, this implies \(\CE[\Prob_2]{\zeta_{n}, {\sigma(\set{\zeta_i \where i < n})}} = 0\).
 \end{proof}
 
 
@@ -230,26 +320,26 @@ In the previous definition we considered an one-sided sequence of random variabl
 \end{definition}
 
 \begin{example}
-  Let \((\cms, f, \mu)\) be a measure-preserving system with an ergodic measure \(\mu\). Any function \(\varphi \colon X \to Y\) defines a sequence of random variables \[\xi = (\varphi \circ f^{n - 1})_{n \ge 1},\]
+  Let \((\cms, f, \mu)\) be a measure-preserving system with an ergodic measure \(\mu\). Any function \(\varphi \colon X \to Y\) defines a sequence of random variables \[\xi = (\varphi \circ f^{n})_{n \ge 0},\]
   and this sequence can also be seen as a factor map for the extension \(\xi \colon (X,f,\mu) \to (Y^{\NN}, \sigma, \xi_*\mu)\). By applying \cref{lem:factor-ergodic}, we see that the sequence \(\xi\) is an ergodic sequence.
 \end{example}
 
-The next result can be found in~\cite[theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
-
 \begin{theorem}\label{thm:donsker-martingale}
-  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
+  If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2\) satisfies \(0 < \sigma < \infty\), then the measures \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
 \end{theorem}
 
 \begin{proof}
-  \todo{the idea here is to... . For a complete proof, see the aforementioned reference.}
+  See~\cite[theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
 \end{proof}
 
 \subsection{Reverse martingale difference sequences}
 
-In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\). This process, however, cannot possibly be a martingale difference sequence unless \(\varphi \equiv 0\), because \(\varphi \circ f^n\) is measurable for the \(\sigma\)-algebra \(f^{-n}(\mathcal{F})\), which is non-increasing due to measurability of \(f\). In other words, we always have \(\CE[\mu]{\varphi \circ f^{n}, {\sigma(\varphi, \dots, \varphi \circ f^{n - 1})}} = \varphi \circ f^{n} \neq 0\) in general. This motivates the following definition.
+In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\). This process is unlikely be a martingale difference sequence unless \(\varphi \equiv 0\), because \(\varphi \circ f^n\) is measurable for the \(\sigma\)-algebra \(f^{-n}(\mathcal{F})\), which is non-increasing due to measurability of \(f\). In other words, we may have \(\CE[\mu]{\varphi \circ f^{n}, {\sigma(\varphi, \dots, \varphi \circ f^{n - 1})}} = \varphi \circ f^{n} \neq 0\) in general. In the non-invertible case, the algebras \(f^{-n}(\mathcal{F})\) form a decreasing sequence in general. This suggests we should look at the processes in the opposite direction, and motivates the following definition.
 \begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be a \textit{reverse martingale difference sequence} if for all \(n\),
-  \[\CE[\Prob]{\xi_n, {\sigma(\xi_{n + 1}, \xi_{n + 2}, \dots)}} = 0.\]
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be a \textit{reverse} martingale difference sequence if for all \(n\),
+  \begin{equation*}
+    \CE[\Prob]{\xi_{n}, {\sigma(\set{\xi_i \where i > n})}} = 0.
+  \end{equation*}
 \end{definition}
 
 In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) and \(\Prob = \mu\) an invariant measure for \(f\)), results for martingale difference sequences can be stated dually for reverse martingale difference sequences. The following discussion expands on comments and text present in~\cite[Appendix M22 and Section 19]{billingsleyConvergenceProbabilityMeasures1999}.
@@ -259,14 +349,11 @@ In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ 
 \end{corollary}
 
 \begin{proof}
-  Consider the space \(\RR^{\NN}\) with the product \(\sigma\)-algebra \(\mathcal{H} = \mathcal{B}^{ \otimes \NN}\) and the measure \(\nu = \xi_* \Prob\). This measure is invariant by the left shift \(\sigma \colon \RR^{\NN} \to \RR^{\NN}\) by the definition of stationarity. Since \(\mathcal{H}\) coincides with the Borel \(\sigma\)-algebra, the construction of the invertible extension (see \cref{sec:invert-extens}) gives us a stationary measure \(\tilde \nu \in \Meas{\RR^{\ZZ}}\) for the invertible shift, which we shall call \(\tilde \sigma \colon \RR^{\ZZ} \to \RR^{\ZZ}\), whose projection \(\pi_* \tilde \nu\) by \(\pi \colon \RR^{\ZZ} \to \RR^{\NN}\) is equal to \(\nu\). The measure \(\tilde \nu\) is also ergodic for the invertible shift, since \(\nu\) is.
-
-  We now construct an (usual) martingale difference sequence on this space. Let \(\mathcal{F}_n = \pi^{-1}(\mathcal{G}_n)\).
-
-  
-  \todo{Finish}
+  First, apply the extension theorem as in \cref{lem:two-sided-from-one} in order to lift \(\xi\) to a two-sided sequence \(\zeta \in L^2(\Prob_2)^{\ZZ}\) given by the coordinates of the probability space \((\RR^{\ZZ},\Prob_2)\). Then, invert the sequence: consider \(\zeta'_i = \zeta_{-i}\) and the probability \(\Prob_3 = \tau_*\Prob_2\), where  \(\tau((x_i)) = (x_{-i})\). Then \((\zeta,\Prob_3)\) is an ordinary two-sided martingale difference sequence, for which we can apply \cref{thm:donsker-martingale}. Now, the key is noticing that due to commutativity, \(\zeta'_0 + \cdots + \zeta'_n = \zeta_{0} + \cdots + \zeta_{-n}\) is equal to \(\zeta_{-n} + \cdots + \zeta_0\), which by stationarity  has the same distribution as \(\zeta_0 + \cdots + \zeta_n\). The process \(\DProc[n,rv = \zeta]\) only depends on such sums, therefore
+  \begin{equation*}
+    \DProc[n, rv = \zeta', spar, pf] \Prob_3 = (\DProc[n, rv = \zeta])_* \Prob_2 = (\DProc[n, rv = \xi])_* \Prob
+  \end{equation*}
+  for all \(n\), which implies \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
 \end{proof}
-
-\todo{Re-visit this section.}
 
 \end{document}

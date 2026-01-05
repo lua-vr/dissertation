@@ -7,14 +7,14 @@
 
 \section{A category}
 
-A \emph{category} \(\Cat{C}\) consists of a collection of \emph{objects} \(\Ob{C}\), and for each pair of objects \(A,B \in \Ob{C}\), there is a collection of \emph{morphisms} \(\Hom{C}(A,B)\), also called arrows, that possess the following properties:
+A \emph{category} \(\Cat{C}\) consists of a collection of \emph{objects} \(\Ob{C}\), and for each pair of objects \(A,B \in \Ob{C}\), a collection of \emph{morphisms} \(\Hom{C}(A,B)\), also called arrows, endowed with the following properties:
 
 \begin{enumerate}
 \item given \(A,B,C \in \Ob{C}\), there exists an operation
   \[
     \circ : \Hom{C}(A,B) \times \Hom{C}(B,C) \to \Hom{C}(A,C)
   \]
-  called categorical composition (note that it does not need to be the composition of functions). If \(f : A \to B\) and \(g : B \to C\), we write \(g \circ f := {\circ}(f,g)\). The composition function must be associative; that is, if \(h \in \Hom{C}(C,D)\), then \((h \circ g) \circ f = h \circ (g \circ f)\);
+  called categorical composition (which is not necessarily the composition of functions). If \(f \in \Hom{C}(A,B)\), we may write \(f \colon A \to B\), and given \(f : A \to B\) and \(g : B \to C\), we write \(g \circ f := {\circ}(f,g)\). The composition function must be associative; that is, if \(h \in \Hom{C}(C,D)\), then \((h \circ g) \circ f = h \circ (g \circ f)\);
 \item for every \(A \in \Ob{C}\), there exists an identity morphism \(1_A \in \Hom{C}(A,A)\), and for all \(f,g \in \Hom{C}\) with \(\dom{f} = \cod{g} = A\), it holds that \(f \circ 1_A = f\) and \(1_A \circ g = g\).
 \end{enumerate}
    

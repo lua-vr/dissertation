@@ -1,9 +1,7 @@
 \documentclass[../main]{subfiles}
 
 \begin{document}
-\chapter{Functional Analysis}
-
-\todo{Perhaps it's not worth to split this appendix into sections, and instead have just a collection of miscellanea.}
+\chapter{Miscellaneous results}
 
 \begin{theorem}[Riesz–Markov–Kakutani]\label{thm:riez_repr}
   Let \(K\) be a compact space. Then, for every continuous linear functional \(L \colon \Cs{K} \to \RR\), there exists a unique (possibly signed) Radon measure \(\mu \in \Meas{K}\) such that
@@ -17,18 +15,18 @@
 \end{proof}
 
 \begin{corollary}\label{cor:conv_of_exists}
-  If \(\cms\) is a compact space,  \((\nu_n)_n \in \Meas{\cms}^{\NN}\) is a sequence of measures and for all \(\varphi \in \Cs{X}\), the limit \(L(\varphi) = \lim_{n \to \infty} \int \varphi \;d\nu_n\) exists, then \((\nu_n)_n\) converges in the weak* topology. Moreover, if the \(\nu_n\) are probabilities, then the weak limit \(\nu = \lim_{n \to \infty} \nu_n\) is a probability.
+  If \(\cms\) is a compact space,  \((\nu_n)_n \in \Meas{\cms}^{\NN}\) is a sequence of measures and for all \(\varphi \in \Cs{X}\), the limit \(L(\varphi) = \lim_{n \to \infty} \int \varphi \;d\nu_n\) exists, then \((\nu_n)_n\) converges in the weak-\(\ast\) topology. Moreover, if the \(\nu_n\) are probabilities, then the weak limit \(\nu = \lim_{n \to \infty} \nu_n\) is a probability.
 \end{corollary}
 
 \begin{proof}
-  By \cref{thm:riez_repr} and definition of weak* convergence, it suffices to show that \(L\) is a continuous linear functional. This, in turn, is a direct application of Banach-Steinhaus to the sequence of linear operators \(L_n(\varphi) \mapsto \int \varphi\;d\nu_n\), since the hypotheses imply \(\Cs{\cms}\) is a Banach space. The last observation is simply the fact \(\nu(\cms) = \lim_{n \to \infty} L_n(1) = 1\).
+  By \cref{thm:riez_repr} and definition of weak-\(\ast\) convergence, it suffices to show that \(L\) is a continuous linear functional. This, in turn, is a direct application of Banach-Steinhaus to the sequence of linear operators \(L_n(\varphi) \mapsto \int \varphi\;d\nu_n\), since the hypotheses imply \(\Cs{\cms}\) is a Banach space. The last observation is simply the fact \(\nu(\cms) = \lim_{n \to \infty} L_n(1) = 1\).
 \end{proof}
 
 
 
 
 \begin{proposition}\label{prop:weak-star-metrizable}
-  If a normed vector space \(E\) is separable, then the weak* topology on its dual \(E'\) is metrizable. For instance, for a choice \(\set{\phi_i}_{i \in \NN} \subseteq E\) of a countable dense set,
+  If a normed vector space \(E\) is separable, then the weak-\(\ast\) topology on its dual \(E'\) is metrizable. For instance, for a choice \(\set{\phi_i}_{i \in \NN} \subseteq E\) of a countable dense set,
   \begin{equation*}
     d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
   \end{equation*}

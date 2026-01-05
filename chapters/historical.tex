@@ -10,7 +10,7 @@ More precisely, by existence of statistics, we mean the weak convergence of the 
 \begin{equation}\label{eq:3}
   \lim_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \varphi(f^i(x))
 \end{equation}
-does not exist.\footnote{The fact we don't need to quantify over measures that could be limits here is a consequence of \cref{cor:conv_of_exists}.} We then say that a diffeomorphism \(f\) of a compact manifold presents historical behavior if \(\Emp[n]{x}[spar, n]\) does not converge for \(x\) in a set of positive Lebesgue measure.
+does not exist. (The fact that we don't need to quantify over measures that are possible limits here is a consequence of \cref{cor:conv_of_exists}.) We then say that a diffeomorphism \(f\) of a compact manifold presents historical behavior if \(\Emp[n]{x}[spar, n]\) does not converge for \(x\) in a set of positive Lebesgue measure.
 
 \section{History}
 The ``historical'' terminology was introduced by Ruelle in~\cite{ruelleHistoricalBehaviourSmooth2001}, suggesting that for \cref{eq:3} not to converge, the sequence must keep ``changing its mind'' as \(n\) goes to infinity, and therefore has some sort of history. For instance, in the absence of external forces like human activity, we could expect that general patterns in climate would follow some predictable statistics, while with climate change we see that such statistics are not consistent along history. In the article, Ruelle recognized the problem of \textit{nonrecurrent} behavior of orbits as going against the expectation that recurrent behavior is generic in the space of diffeomorphisms, and presented the open problem of finding whether historical behavior can exist in a persistent manner, making some physical justifications for this possibility. He cites the theory of spin glasses, where the time evolution of the system is akin to a random walk in a random potential: a particle stays arbitrarily large amounts of time exploring some valley in the potential before eventually crossing the barrier to another valley, in such a way that time averages like \cref{eq:3} do not exist. As we shall see in this chapter, we can indeed produce historical behavior by constructing a diffeomorphism whose orbits behave like random walks, albeit not necessarily persistently.
@@ -18,106 +18,54 @@ The ``historical'' terminology was introduced by Ruelle in~\cite{ruelleHistorica
 Later, Floris Takens exposed the problem again in~\cite{takensOrbitsHistoricBehaviour2008}, giving some promising examples that were known at the time and also making some remarks about generiticity of points without asymptotic measures. For this reason and his work in related matters, the open question also became known as \textit{Taken's Last Problem}.
 
 \begin{example}[Logistic family]
-   The family of interval maps \(f_a(x) = ax(1 - x)\), for \(0 < a \le 4\), is known as the logistic family, and is one of the earliest examples where historical behavior is present abundantly: in~\cite{hofbauerQuadraticMapsAsymptotic1990}, the authors showed that for an uncountable number of parameters \(a\), Lebesgue almost every orbit in \([0,1]\) has no asymptotic measure.
+   The family of interval maps \(f_a(x) = ax(1 - x)\), for \(0 < a \le 4\), is known as the logistic family, and is one of the earliest examples where historical behavior is present ``abundantly'': in~\cite{hofbauerQuadraticMapsAsymptotic1990}, it is shown that for an uncountable number of parameters \(a\), Lebesgue almost every orbit in \([0,1]\) has no asymptotic measure. The example is not persistent, however.
 \end{example}
 
-\todo{figure}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin=0, xmax=1,
+      ymin=0, ymax=1,
+      enlargelimits=false,
+      axis on top,
+      axis line style={thick},
+      width=5cm,
+      height=5cm,
+      xtick=\empty,
+      ytick=\empty,
+      xlabel={},
+      ylabel={},
+      title={},
+      every axis plot/.append style={thick, smooth},
+      samples=10
+      ]
+      \addplot[dashed, gray, domain=0:1] {x}; 
+      \addplot[blue, domain=0:1] {1*x*(1-x)};
+      \addplot[green!60!black, domain=0:1] {2*x*(1-x)};
+      \addplot[orange, domain=0:1] {3*x*(1-x)};
+      \addplot[red, domain=0:1] {3.8*x*(1-x)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The logistic family $f_a(x) = ax(1-x)$.}
+\end{figure}
 
 \begin{example}[Bowen's eye]
-  Another example was given by Bowen, although it's also not persistent. 
+  Another non-persistent example of historical behavior was given by Bowen (see~\cite{takensHeteroclinicAttractorsTime1994} for the attribution). It can be constructed as the time-one map of a smooth vector field with three fixed points, one of which is repelling, and two saddle points, with two saddle connections, as shown in the figure. The saddles are such that any orbit starting from the interior of the disk bounded by the saddle connections spend arbitrarily large amounts of time close to either saddle point, so that both Dirac masses at the saddle points are limit points of the empirical measures. The ``problem'' with this example is that the saddle connections are not stable, as shown in the second picture.
 \end{example}
 
-\todo{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=4cm]{../figures/bowen}
+  \caption{Schematic drawing of Bowen's eye, and a perturbation destroying one of its saddle connections.}
+\end{figure}
 
+% \subsection{Genericity of historical orbits}
+% \todo{Under relatively few hypothesis, historical orbits form a residual subset of the manifold}.
 
-\subsection{Genericity of historical orbits}
-\todo{Under relatively few hypothesis, historical orbits form a residual subset of the manifold}.
+% \label{sec:genericity}
 
-\label{sec:genericity}
-
-\todo{\cite{carvalhoGenericityHistoricBehavior2021}}
-
-
-
-\section{Martingale-coboundary decomposition}
-
-% Even though \cref{thm:donsker} requires the random variables to be independent, we can still reach similar conclusions by requiring them to be co-homologous
-
-The key idea for applying \cref{thm:donsker-martingale} in a dynamical system \((X,\mathcal{F},\mu,f)\), where \(\mu\) is a \(f\)-invariant probability, is finding a sub-\(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\varphi \in L^2(\mu)\) can be decomposed as a sum
-\begin{equation}\label{eq:coboundary}
-  \varphi = \varphi_0 + \phi \circ f - \phi
-\end{equation}
-such that \(\phi \in L^2(\mu)\), \(\varphi_0\) is \(\mathcal{G}\)-measurable and \(\eta = (\varphi_0 \circ f^{i - 1})_{i \geq 1}\) is a reversed martingale difference sequence. Indeed, this allows the transference of the weak invariant principle for the original \(\varphi\): let \(\xi = \rpar{\varphi \circ f^{i - 1}}_{i \geq 1}\), and notice that
-\begin{equation*}
-  \PSum[n,rv = \xi] = \PSum[n,rv = \eta] + \phi \circ f^n - \phi,
-\end{equation*}
-so
-\begin{equation*}
-  \DProc[n,rv=\xi]{x}{t}
-  = \frac{\PSum[\floor{nt},rv=\xi]{x}}{\sqrt{n}} = \DProc[n,rv=\eta]{x}{t} + \frac{1}{\sqrt{n}} \big(\phi \circ f^{\floor{nt}} - \phi\big)(x).
-\end{equation*}
-It suffices to show that for \(\mu\)-almost every \(x\), the second term in the sum converges uniformly to zero (as a function of \(t\)). Given \(\varepsilon > 0\), we look at the sets \(B_n = \{ x :(\phi ^2 \circ f^n)(x) \geq n \varepsilon \}\). Since
-\begin{equation*}
-  \sum_{n = 1}^{\infty}\mu(B_n) = \sum_{n = 1}^{\infty}\mu(\set{\phi^2 \geq n \varepsilon}) = \int \floor{\phi^2/ \varepsilon} \;d\mu \leq \frac{1}{\varepsilon} \lVert \phi \rVert_2^2,
-\end{equation*}
-by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the intersection over \(k\) of the sets \(\liminf_{n \to \infty}B_n^{\complement}\) for \(\varepsilon = 1/k\), we get a full-measure set \(G\) with the property that for every \(x \in G\) and \(\varepsilon > 0\), there exists \(N\) such that \(n \geq N\) implies \(\frac{1}{\sqrt{n}}|\phi(f^n(x))| \leq \varepsilon\). Now, let \(M \geq N\) be big enough so that \(n \geq M\) implies \(\frac{1}{\sqrt{n}}|\phi(f^i(x))| \leq \varepsilon\) for all \(0 \leq i \leq N\). So for \(n \geq M\),
-\begin{equation*}
-  \sup_{t \in [0,1]}\frac{1}{\sqrt{n}} \big\lvert\phi \circ f^{\floor{nt}} - \phi\big\rvert(x) \leq 
-  \max_{0 \leq i \leq N}\frac{|\phi \circ f^{i}(x)|}{\sqrt{n}} + 
-  \max_{N \leq i \le n}\frac{|\phi \circ f^{i}(x)|}{\sqrt{i}} 
-  \leq 2\varepsilon
-\end{equation*}
-as desired.
-
-\subsubsection{Existence of martingale-coboundary decomposition}
-From now on, we assume that \(\mu\) is an ergodic measure for \(f\).
-
-\begin{theorem}\label{thm:decomposition-existence}
-  Suppose \(\varphi \in L^2(\mu)\) and \(\mathcal{F}_j = f ^{-j}(\mathcal{F})\) are such that
-  \begin{equation*}
-    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{\varphi, \mathcal{F}_j} \rVert_2 < \infty.
-  \end{equation*}
-  Then a decomposition as in \cref{eq:coboundary} exists. Moreover, this implies that
-  \begin{equation*}
-    \int \varphi \;d\mu = \int \varphi_0 \;d\mu = 0
-  \end{equation*}
-  and that the series in
-  \begin{equation*}
-    \sigma ^2 = \lVert \varphi_0 \rVert^2_2 = \lVert \varphi \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int \varphi \cdot \varphi \circ f^n \;d\mu
-  \end{equation*}
-  converges absolutely. By the preceding arguments, if \(\varphi_0 \neq 0\) then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
-\end{theorem}
-
-\begin{proof}
-  \newcommand{\pp}{\phi^+}
-  \newcommand{\pn}{\phi^-}
-  We begin by writing \(\phi= \pn + \pp\), where \(\pp = \CE[\mu]{\phi, \mathcal{G}_0}\).
-  
-  \todo{write}
-\end{proof}
-
-\begin{remark}
-  If \(\varphi\) was a coboundary \(\varphi = \phi \circ f - \phi\) to begin with, then it is clear that \(\PSum[n,rv = \xi] = \phi \circ f^n - \phi\), so the iterates of the skew product \(F(x,y) = (f(x), y + \varphi(x))\) satisfy
-  \begin{equation*}
-    F^n(x_0,y_0) = (f^n(x_0), \phi(f^n(x_0)) - \phi(x_0) + y_0) \subseteq \graph(\psi)
-  \end{equation*}
-  and are thus contained in the graph of \(\psi\), where \(\psi(x) = \phi(x) - \phi(x_0) + y_0\). In particular, \(F\) is not ergodic for \(\mu \otimes \Leb\).
-\end{remark}
-
-\begin{corollary}\label{cor:decay-implies-summable}
-  Suppose \(\varphi\) is such that there exists a summable sequence \(c_n > 0\) satisfying
-  \begin{equation*}
-    \int (\psi \circ f^n) \varphi \;d\mu \leq \lVert \psi \rVert_2c_n
-  \end{equation*}
-  for all \(\psi \in L^2(\mathcal{G})\), where \(\mathcal{G}\) is as in \cref{thm:decomposition-existence}. Then
-  \begin{equation*}
-    \sum_{n = 0}^{\infty} \lVert \CE{\varphi, f^{-n}(\mathcal{G})} \rVert_2 < \infty.
-  \end{equation*}
-\end{corollary}
-
-\begin{remark}
-  The book~\cite{vianaStochasticDynamicsDeterministic2021} proves this condition is satisfied for smooth expanding maps, Hölder-continuous \(\varphi\) and \(\mathcal{G} = \mathcal{F}\), so this includes the \(f(x) = kx\) maps. The second condition is trivial when \(\mathcal{G} = \mathcal{F}\).
-\end{remark}
+% \todo{\cite{carvalhoGenericityHistoricBehavior2021}}
 
 \section{Historical behavior for skew products}
 
@@ -136,12 +84,33 @@ where \(g \colon X \to X\) is ergodic and measure-preserving. Suppose there is a
 \]
 Since the \(t_x\) are translations, there is no loss of generality in assuming \(\gamma(0) = -\infty\), \(\gamma(1) = +\infty\) and \(\gamma\left(\frac{1}{2}\right) = 0\), so we shall adopt this convention for simplicity.
 
+\begin{example}[Zero Schwarzian]
+  In the example of~\citeauthor{bonifantSchwarzianDerivativesCylinder2008} from \cref{cha:bonifant-milnor}, if all the fiber maps \(f_x\) satisfy \(\SchD f_x \equiv 0\), then the condition above is satisfied. Indeed, by the last item of \cref{prop:schwarzian}, each \(f_x\) is a fractional linear transformation. Therefore, if we define \(\gamma(y) = \log y - \log (1 - y)\), for \(f_x(y) = \frac{a_x y}{1 + (a_x - 1)y}\) and \(p(x) = \log a_x\), we have
+  \begin{align*}
+    \gamma(f_x(y)) &= \log\left(\frac{a_x y}{1 + (a_x - 1)y} \right) - \log\left(1 - \frac{a_x y}{1 + (a_x - 1)y}  \right)\\
+    &= \log\left(\frac{a_x y}{1 - y} \right) = \log a_x + \log \frac{y}{1 - y} = t_x(\gamma(y)).
+  \end{align*}
+
+  In this specific case, we have \(f_x'(0) = - f_x'(1) = a_x\). Therefore, \[\Lyap{\mathcal{A}_0} = - \Lyap{\mathcal{A}_1} = \int p \;d\mu.\]
+  By the pointwise ergodic theorem,
+  \begin{equation*}
+    \frac{\gamma(f_x^n(y)) - \gamma(y)}{n} = \frac{1}{n}\sum_{i = 0}^{n - 1} p(g^n(x)) \to \int p \;d\mu.
+  \end{equation*}
+  Therefore, if \(\int p \;d\mu \neq 0\), then either \(\gamma(f_x^n(y)) \to \infty\) or \(\gamma(f_x^n(y)) \to - \infty\), so all orbits in \(X \times (0,1)\) converge to one of the boundaries, which one depending only on the sign of \(\Lyap{\mathcal{A}_0}\).
+  
+  The interesting case, therefore, is when \(\int p \;d\mu = 0\). In the article, the authors managed to show that this case displays historical behavior, but only for the very particular case of \(g = kx \pmod 1\) and \(p\) being constant on each branch \(\interval[open right]{i/k}{(i + 1)/k}\). They conjectured that historical behavior would still be present for the same \(g\) but a continuous \(p \colon X \to \RR\) with zero mean, in general. For the rest of the section, we explain how results already present in the literature, namely weak or almost sure invariance principles, answer their question in the affirmative.
+\end{example}
+
+At this point, we recommend that the reader has familiarized themselves with \cref{sec:brownian-motion}, but we can briefly remind ourselves of some notions defined in there. Let \(\xi = (p \circ g^{i})_{i \geq 0}\). We can see \(\xi\) as a sequence of random variables defined on the probability space \((X,\mu)\). Accordingly, we have their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and the sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
+\[\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}},\]
+as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wiener measure, and that we say \(\xi\) satisfies an \emph{weak invariance principle} the processes \(\DProc[n,rv = \xi]\) converge (weakly) in distribution to \(\sigma W\) for some \(\sigma > 0\). The theorem below shows that if we assume this condition for \(g\) and \(p\), we have historical behavior.
+
 \begin{theorem}\label{thm:wip-historical}
-  If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i - 1})_{i \geq 1}\), then \(F\) has historical behavior. More specifically,
+  If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
   \begin{equation}\label{eq:emp-closure}
-    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, ']
+    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, '']
   \end{equation}
-  where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak* topology.
+  where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
 \end{theorem}
 
 % \begin{figure}[h]
@@ -165,7 +134,7 @@ Since the \(t_x\) are translations, there is no loss of generality in assuming \
     g^{-1}(S_{\delta})
     &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
     &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - s_{\delta}(t)} <\delta }\\
-    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
+    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt''}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
     &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta } = S_{\delta}.
   \end{align*}
   Therefore \(\mu(S_{\delta}) = 1\). Now, notice that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
@@ -235,10 +204,10 @@ Since the \(t_x\) are translations, there is no loss of generality in assuming \
 \end{proof}
 
 
-\begin{corollary}
-  If for any compact \(K \subseteq \RR\), the vising time of the processes \(\PSum[n,rv = \xi]\) to \(K\) tends to zero almost surely as \(n \to \infty\), that is,
+\begin{corollary}\label{col:histo-avoid-compacts}
+  If, in addition to the hypotheses of \cref{thm:wip-historical}, for any compact \(K \subseteq (0,1)\) the average visiting time of \(f^n_x(y)\) to \(K\) tends to zero as \(n \to \infty\) for almost every \(x\) for some (and therefore, for any) \(y \in (0,1)\), that is,
   \begin{equation*}
-    \int 1_K \circ \PSum[n,rv = \xi](x)(t) \;d\Leb \to 0
+    \frac{1}{n}\#\set{ 0 \le i < n \where f^i_x(y) \in K} \to 0,
   \end{equation*}
   then
   \begin{equation}\label{eq:4}
@@ -248,21 +217,184 @@ Since the \(t_x\) are translations, there is no loss of generality in assuming \
 \end{corollary}
 
 \begin{proof}
-  \begin{claim}
-    If \(\eta \in \Meas{x,y}\), then \(\supp \eta \subseteq X \times \{ 0, 1 \}\) and \(\eta \in [\delta_-,\delta_+]\).
-  \end{claim}
-
-  
-  We use \cref{lem:avoid-compacts} again for this. Let \(\Emp[n_k]{x,y} \weakto \eta\) be a limit point, \(x_0 \in X\) and \(y_0 \in (0,1)\), so there is a neighborhood \(\U\) of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). By the lemma, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \nameref{thm:portmanteau}
+  Let \(E \subseteq X\) be a full measure subset of the basin of \(\mu\) that satisfies both the hypothesis and the result of \cref{thm:wip-historical}. For \(x \in E\) and \(y \in (0,1)\), let \(\Emp[n_k]{x,y} \weakto \eta\) be any limit point of the empirical measures. First, we show \(\supp \eta \subseteq X \times \set{0,1}\). Indeed, let \(x_0 \in X\) and \(y_0 \in (0,1)\), and let \(\U\) be a neighborhood of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). Since \(\U[closure]\) is compact and \(x \in E\), by hypothesis, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \nameref{thm:portmanteau}
   \begin{equation*}
     \eta(\U) \leq \liminf_{k \to \infty} \Emp[n_k]{x,y}(\U) = 0.
   \end{equation*}
-  This shows \((x_0,y_0) \notin \supp \eta\).
+  This shows \((x_0,y_0) \notin \supp \eta\), so \(\supp \eta \subseteq X \times \set{0,1}\).
 
-  We know \(\eta\) is a limiting measure for \(x\), so it is invariant by \(F\). The fact \(x \in S\) implies by the definition of \(S\) that \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), and since \(\delta_{ - }\) and \(\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
+  We know \(\eta\) is a limiting measure for \(x\), so it is invariant by \(F\). The fact \(x\) is in the basin of \(\mu\) implies by definition that \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), because for all measurable \(A\),
+  \[\eta(A) = \eta(A \cap X \times \set{0,1})\le \mu(\set{x \where (x,0) \in A}) + \mu(\set{x \where (x,1) \in A}) = (\delta_- + \delta_+)(A).\]
+  Since \(\delta_{ - }\) and \(\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
 
-  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to notice that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and therefore, since it contains both endpoints \(\delta_-\) and \(\delta_+\), it must be the whole segment.
+  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to notice that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and therefore, since by \cref{thm:wip-historical} it contains both endpoints \(\delta_-\) and \(\delta_+\), it must be the whole segment.
 \end{proof}
+
+In the \cref{sec:deriv-weak-invar}, we will show how the weak invariance principle can be derived for a large class of dynamics, including the original \(g(x) = kx \pmod 1\).
+
+\subsection{Infinite ergodic theory}
+
+It's possible to show that if we already assume the weak invariance principle, then the extra condition of \cref{col:histo-avoid-compacts} may be met by means of infinite ergodic theory. Let's see some relevant definitions.
+
+\begin{definition}
+  A map \(f \colon X \to X\) on a (potentially infinite) measure space \((X,\mathcal{B},\mu)\) is called \emph{conservative} if for all measurable sets \(E \subseteq X\) with the property that \(\set{f^{-n}(E)}_{n \in \NN}\), 
+\end{definition}
+
+\begin{remark}
+  When the (infinite) measure \(\mu \otimes \Leb\) is conservative and ergodic for \((x, y) \mapsto (g(x), y + p(y))\), then the additional hypothesis of \cref{col:histo-avoid-compacts} is satisfied.
+
+  \todo{todo}
+\end{remark}
+
+\subsection{Almost sure invariance principle}
+
+Alternatively, all the hypotheses of both \cref{thm:wip-historical,col:histo-avoid-compacts} are satisfied when the pair \((g,p)\) satisfies an \emph{almost sure} invariance principle. By that, we mean there exists \(\sigma > 0\) and \(\delta \in (0,1/2)\) and new probability space \((\Omega,\Prob)\), along with two sequences of random variables \(\zeta = (\zeta_n)_n\) and \(\beta = (\beta_n)_n\), where \(\zeta_n, \beta_n \colon \Omega \to \RR\), such that:
+\begin{enumerate}
+\item \label{item:1}\(\zeta\) and \(\xi = (p \circ g^n)_n\) have the same distribution: \(\zeta_*\Prob = \xi_*\mu \in \Meas[1]{\RR^{\NN}}\);
+\item \(\beta_n\) are independent and identically distributed as \(\Normal[0][\sigma]\);
+\item \label{item:3}we can match the partial sums \(\PSum[n,rv = \zeta]\) and \(\PSum[n,rv = \beta]\), in the sense that for \(\Prob\)-almost every \(\omega \in \Omega\),
+  \begin{equation*}
+    \frac{\PSum[n,rv = \zeta]{\omega} - \PSum[n,rv = \beta]{\omega}}{n^{\delta}} \to 0.
+  \end{equation*}
+\end{enumerate}
+In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \cref{thm:donsker}, this condition implies that \(\DProc[n,rv = \xi,spar,pf]\mu = \DProc[n,rv = \zeta,spar,pf]\Prob\) converges to the same limit \(\sigma W\).
+
+\begin{theorem}
+  When the pair \((g,p)\) satisfies an almost sure invariance principle, the extra condition of \cref{col:histo-avoid-compacts} is satisfied.
+\end{theorem}
+\begin{proof}
+  Fixing a compact \(K \subseteq \RR\), \cref{item:1} implies that
+  \begin{equation}\label{eq:9}
+    \mu\rpar[\bigg]{\set[par = \Big]{x \in X \where \frac{1}{n}\sum_{i = 0}^{n - 1}1_K(\PSum[i](x)) \to 0}}
+    =
+    \Prob\rpar[\bigg]{\set[par = \Big]{\omega \in \Omega \where \frac{1}{n}\sum_{i = 0}^{n - 1}1_K(\PSum[i,rv = \zeta](\omega)) \to 0}}.
+  \end{equation}
+  By a change of coordinates using \(\gamma\), it suffices to show the right-hand side of \cref{eq:9} is equal to \(1\). By choosing \(M > 0\) big enough, it is also sufficient to consider \(K = [-M,M]\).
+
+  Define
+  \[\Omega_C = \set[par = \bigg]{\omega \in \Omega \where \sup_n \frac{\abs{\PSum[n,rv = \zeta]{\omega} - \PSum[n,rv = \beta]{\omega}}}{n^{\delta}} \le C}.\]
+  Notice that by \cref{item:3}, \(\Omega = \bigcup_{C = 1}^{\infty} \Omega_C\).
+
+  Fix \(C\), and let \(\Prob_C(A) = \Prob(A \cap \Omega_C)\). We estimate the rate of decay of \(p_n = \Prob[C]{\abs{\PSum[n,rv = \zeta]} \le M}\). Let \(N_C\) be big enough that \(n \ge N_C\) implies \(M \le Cn^{\delta}\). By the triangle inequality, we have \(p_n \le \Prob[C](\abs{\PSum[n,rv = \beta]} \le 2Cn^{\delta})\) for \(n \ge N_C\). Since \(\PSum[n,rv = \beta] \sim \Normal[0][n \sigma]\),
+  \begin{equation*}
+    \Prob[C](\abs{\PSum[n,rv = \beta]} \le 2Cn^{\delta}) \le \frac{4Cn^{\delta}}{\sqrt{2\pi n \sigma}} = O(n^{\delta - 1/2}).
+  \end{equation*}
+  Therefore, \(p_n = O(n^{\delta - 1/2})\). Now, let
+  \[A_n(\omega) = \frac{1}{n} \sum_{i = 0}^{n - 1} 1_K(\PSum[i,rv = \zeta]{\omega}), \]
+  and let \(a_n = \CE[\Prob[C]]{A_n} = \int_{\Omega_C} A_n \;d\Prob\). By Fubini,
+  \(a_n = \frac{1}{n} \sum_{i = 0}^{n - 1} p_i\), and since \(\delta - 1/2 \in (-1/2,0)\), we also have \(a_n = O(n^{\delta - 1/2})\).
+
+
+  Let \(n_k = 2^k\), \(\varepsilon > 0\) and \(E_k = \set{\omega \in \Omega_C \where A_{n_k}(\omega) > \varepsilon}\). By Markov's inequality, \(\Prob(E_k) \le a_{n_k}/\varepsilon\).
+  Since \(\delta - 1/2 < 0\), we therefore have \(\sum_{k = 0}^{\infty} \Prob(E_k) < \infty\). Applying Borel-Cantelli, \[\Prob(\limsup E_k) = \Prob(\set{\omega \in \Omega_C\where \limsup_{k \to \infty} A_{n_k}(\omega) > \varepsilon}) = 0.\]
+  Since \(\varepsilon > 0\) and \(C > 0\) are arbitrary, this shows \(\lim_{k \to \infty} A_{n_k} = 0\) almost surely. To recover the same limit for the original sequence, we simply notice that \(1_K \ge 0\), so
+  \begin{equation*}
+    A_n \le A_{n_{k + 1}} \cdot \frac{n_{k + 1}}{n_k} = 2 A_{n_{k + 1}}
+  \end{equation*}
+  and therefore \(A_n \to 0\) almost surely.
+\end{proof}
+
+  The almost sure invariance principle (ASIP) holds for a large class of dynamics and observables. Here, we highlight the Theorem 2.1 of~\cite{korepanovRatesAlmostSure2018}, where it is shown that the ASIP holds for every \(\delta > 0\) when \(g\) is a nonuniformly expanding map and \(p\) is a Hölder continuous function with \(\int p \;d\mu = 0\). This includes the original example of \citeauthor{bonifantSchwarzianDerivativesCylinder2008} in which \(g(x) = kx \pmod 1\).
+
+\section{Deriving the weak invariance principle}\label{sec:deriv-weak-invar}
+
+The following proof is inspired by the argument at the end of the proof of~\cite[Theorem 19.1]{billingsleyConvergenceProbabilityMeasures1999}.
+
+\begin{theorem}\label{thm:martingale-coboundary}
+  Suppose \(p \in L^2(\mu)\) can be decomposed as a sum
+  \begin{equation}
+    p = q + s \circ g - s
+  \end{equation}
+  such that \(0 < \norm{q}_2 < \infty\) and \(\zeta = (q \circ g^i)_{i \geq 0}\) is a reversed martingale difference sequence. Then, \(\xi = (p \circ g^i)_{i \ge 0}\) is such that \(\DProc[n,spar,pf]\mu \weakto \sigma W\).
+\end{theorem}
+
+\begin{proof}
+  Notice that
+\begin{equation*}
+  \PSum[n,rv = \xi] = \PSum[n,rv = \zeta] + s \circ g^n - s,
+\end{equation*}
+so
+\begin{equation*}
+  \DProc[n,rv=\xi]{x}{t}
+  = \frac{1}{\sqrt{n}}\PSum[\floor{nt},rv=\xi]{x} = \DProc[n,rv=\zeta]{x}{t} + \frac{1}{\sqrt{n}} \big(s \circ g^{\floor{nt}} - s\big)(x).
+\end{equation*}
+By \cref{cor:donsker-martingale}, \(\DProc[n,rv = \zeta,spar,pf]\mu \weakto \sigma W\), so it suffices to show that for \(\mu\)-almost every \(x\), the second term in the sum converges uniformly to zero (as a function of \(t\)). Given \(\varepsilon > 0\), we look at the sets \(B_n = \{ x :s(g^n(x))^2\geq n \varepsilon \}\). Since
+\begin{equation*}
+  \sum_{n = 1}^{\infty}\mu(B_n) = \sum_{n = 1}^{\infty}\mu(\set{s^2 \geq n \varepsilon}) = \int \floor{s^2/ \varepsilon} \;d\mu \leq \frac{1}{\varepsilon} \lVert s \rVert_2^2,
+\end{equation*}
+by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the intersection over \(k\) of the sets \(\liminf_{n \to \infty}B_n^{\complement}\) for \(\varepsilon = 1/k\), we get a full-measure set \(G\) with the property that for every \(x \in G\) and \(\varepsilon > 0\), there exists \(N\) such that \(n \geq N\) implies \(\frac{1}{\sqrt{n}}|s(g^n(x))| \leq \varepsilon\). Now, let \(M \geq N\) be big enough so that \(n \geq M\) implies \(\frac{1}{\sqrt{n}}|s(g^i(x))| \leq \varepsilon\) for all \(0 \leq i \leq N\). So for \(n \geq M\),
+\begin{equation*}
+  \sup_{t \in [0,1]}\frac{1}{\sqrt{n}} \big\lvert s \circ g^{\floor{nt}} - s\big\rvert(x) \leq 
+  \max_{0 \leq i \leq N}\frac{|s \circ g^{i}(x)|}{\sqrt{n}} + 
+  \max_{N \leq i \le n}\frac{|s \circ g^{i}(x)|}{\sqrt{i}} 
+  \leq 2\varepsilon.
+\end{equation*}
+\end{proof}
+
+We will call the decomposition in \cref{thm:martingale-coboundary} a martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: invertible, and non-invertible \(g\).
+
+\subsection{Existence of martingale-coboundary decomposition}
+From now on, we assume that \(\mu\) is an ergodic measure for \(g\).
+
+\begin{theorem}\label{thm:decomposition-existence}
+  Suppose \(\phi \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) are such that
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{\phi, \mathcal{F}_j} \rVert_2 < \infty.
+  \end{equation*}
+  Then a decomposition as in \cref{eq:coboundary} exists. Moreover, this implies that
+  \begin{equation*}
+    \int \phi \;d\mu = \int \phi_0 \;d\mu = 0
+  \end{equation*}
+  and that the series in
+  \begin{equation*}
+    \sigma ^2 = \lVert \phi_0 \rVert^2_2 = \lVert \phi \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int \phi \cdot \phi \circ g^n \;d\mu
+  \end{equation*}
+  converges absolutely. By the preceding arguments, if \(\phi_0 \neq 0\) then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
+\end{theorem}
+
+\begin{proof}
+  \newcommand{\pp}{\phi^+}
+  \newcommand{\pn}{\phi^-}
+  Denote by \(U \colon L^2(\mu) \to L^2(\mu)\) the Koopman operator \(U(\varphi) = \varphi \circ f\). Let \(L \colon L^2(\mu) \to L^2(\mu)\) be its adjoint:
+  \begin{equation*}
+    \int L(\varphi)\psi \;d\mu = \int \varphi U(\psi) \;d\mu.
+  \end{equation*}
+  Since \(U\) is an isometry, \(L\) is an isometry as well. Moreover, being an isometry implies \(UL = \Id\).
+
+  
+  Define
+  \begin{equation*}
+    \zeta = - \sum_{i = 1}^{\infty} L^i(\CE[\mu]{\phi,\mathcal{F}_i})\quad\text{ and }\quad
+    \eta = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{\phi,\mathcal{F}_i} - \CE[\mu]{\phi, \mathcal{F}_{j + 1}}),
+  \end{equation*}
+  whose series converge due to the hypothesis and \(L\) being an isometry.
+
+  
+  \todo{write}
+\end{proof}
+
+\begin{remark}
+  If \(\varphi\) was a coboundary \(\varphi = \phi \circ f - \phi\) to begin with, then it is clear that \(\PSum[n,rv = \xi] = \phi \circ f^n - \phi\), so the iterates of the skew product \(F(x,y) = (f(x), y + \varphi(x))\) satisfy
+  \begin{equation*}
+    F^n(x_0,y_0) = (f^n(x_0), \phi(f^n(x_0)) - \phi(x_0) + y_0) \subseteq \graph(\psi)
+  \end{equation*}
+  and are thus contained in the graph of \(\psi\), where \(\psi(x) = \phi(x) - \phi(x_0) + y_0\). In particular, \(F\) is not ergodic for \(\mu \otimes \Leb\).
+\end{remark}
+
+\begin{corollary}\label{cor:decay-implies-summable}
+  Suppose \(\varphi\) is such that there exists a summable sequence \(c_n > 0\) satisfying
+  \begin{equation*}
+    \int (\psi \circ f^n) \varphi \;d\mu \leq \lVert \psi \rVert_2c_n
+  \end{equation*}
+  for all \(\psi \in L^2(\mathcal{G})\), where \(\mathcal{G}\) is as in \cref{thm:decomposition-existence}. Then
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \lVert \CE{\varphi, f^{-n}(\mathcal{G})} \rVert_2 < \infty.
+  \end{equation*}
+\end{corollary}
+
+\begin{remark}
+  The book~\cite{vianaStochasticDynamicsDeterministic2021} proves this condition is satisfied for smooth expanding maps, Hölder continuous \(\varphi\) and \(\mathcal{G} = \mathcal{F}\), so this includes the \(f(x) = kx\) maps. The second condition is trivial when \(\mathcal{G} = \mathcal{F}\).
+\end{remark}
 
 
 \section{Recent developments}

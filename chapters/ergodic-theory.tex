@@ -123,25 +123,24 @@ commutes. If a cone is to be seen as a collection of invariant states, then the 
 
 More generally, a kernel \(g \colon Y \to \Meas[1]{X}\) will define a cone if for every \(y \in Y\), \(g(y) \in \Meas[1]{X}\) is invariant. As we shall see later, if \(X\) is a Borel space and \(f\) comes from a deterministic map (that is, every \(f(x)\) is a Dirac mass), then the universal cone exists and is given by what is called the \emph{ergodic decomposition}.
 
-\begin{example}
-  \todo{For an iterated function system of contractions, the universal cone is the Hutchinson attractor. It is the map sending \(\star\) to the compact set \(A = \lim_{n \to \infty} H^i(x)\), which is independent of our starting point \(x\).}
-\end{example}
+% \begin{example}
+%   \todo{For an iterated function system of contractions, the universal cone is the Hutchinson attractor. It is the map sending \(\star\) to the compact set \(A = \lim_{n \to \infty} H^i(x)\), which is independent of our starting point \(x\).}
+% \end{example}
 
 \section{Ergodic theory and ergodicity}
+Ergodic theory is the domain of dynamical systems that study dynamics by means of invariant measures; it can be seen as the specialization of the section above to categories related to measure spaces and measure-preserving transformations. The hope is that the invariant measures are able to encode the asymptotic statistical behavior of the dynamics, even when individual points have very chaotic and unpredictable trajectories, and therefore, we should turn our attention to them. Indeed, the cornerstone theorem of the field, the Birkhoff pointwise ergodic theorem, provides a very positive answer to this hope.
 
-\subsection{Ergodic theorems}
+\subsection{The pointwise ergodic theorem}
 
-\todo{The fundamental tools in ergodic theory.}
-
-Below we reproduce a succinct proof of the pointwise ergodic theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/lua-vr/pointwise-birkhoff}. It is in the process of being upstreamed to the Mathlib library.}.
-
-\begin{theorem}[Birkhoff Ergodic Theorem]\label{thm:birkhoff}
+\begin{theorem}\label{thm:birkhoff}
   Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
-  \begin{equation*}
+  \begin{equation}\label{eq:birkhoff}
     \frac{1}{n}\sum_{i = 0}^{n - 1} \phi (f^i(x)) \to \CE[\mu]{\phi, \mathcal{I}}(x),
-  \end{equation*}
+  \end{equation}
   where \(\mathcal{I}\) is the sub-\(\sigma\)-algebra of (strictly) invariant sets.
 \end{theorem}
+
+Below we reproduce a succinct proof of the theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/lua-vr/pointwise-birkhoff}. It is in the process of being upstreamed to the Mathlib library.}.
 
 \begin{proof}
   Let
@@ -195,9 +194,106 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
   and the result follows by letting \(\varepsilon \to 0\).
 \end{proof}
 
-\section{Extensions}
+The Birkhoff ergodic theorem shows that the Birkhoff averages often look much simpler than the observable itself. Indeed, \(\CE{\phi,\mathcal{I}}\) is measurable for the sub-\(\sigma\)-algebra \(\mathcal{I}\), and therefore is an invariant function: \(\CE{\phi,\mathcal{I}} \circ f = \CE{\phi,\mathcal{I}}\). If this algebra is trivial, then all the Birkhoff averages would converge to the same value. This suggests the following definition.
 
-We can relate different dynamical systems by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\). The single morphism \(F(\star) \to G(\star)\) specified by the natural transformation is also called the \emph{factor map}.
+\begin{definition}
+  We say that a measure \(\mu\) is \emph{ergodic} for \(f\) if the algebra \(\mathcal{I}\) is trivial modulo \(\mu\): for every \(A \in \mathcal{I}\), either \(\mu(A) = 0\) or \(\mu(A^{\complement}) = 0\).
+\end{definition}
+
+\section{Empirical measures}\label{sec:empirical-measures}
+Let \(X\) be a compact metric space, and \(f \colon X \to X\) be a Borel measurable map. Given a point \(x \in X\), we can define a sequence of \emph{empirical measures}
+\[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
+encoding the averages along the orbit of \(x\) up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
+\begin{equation*}
+  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)).
+\end{equation*}
+The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. In particular, weak convergence of the empirical measures mean that asymptotically, the orbit has a well defined statistics: there is some invariant measure \(\mu\) which encode the limit of the Birkhoff averages of all continuous observables \(\phi\).
+
+\begin{lemma}
+  If \(e_n \weakto \mu\), then \(\mu\) is invariant for \(f\).
+\end{lemma}
+
+\begin{proof}
+  Since \(X\) is compact and \(\mu\) is a Borel, continuous functions are dense in \(L^1(\mu)\). Therefore, it suffices to check that \(\mu(\phi) = \mu(\phi \circ f)\) for all \(\phi \in \Cs{X}\). For that, we notice that
+  \begin{equation*}
+    \abs{e_N(\phi) - e_N(\phi \circ f)} \le {2\max \phi}/{N},
+  \end{equation*}
+  and let \(N \to \infty\).
+\end{proof}
+
+Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask what are the points of \(X\) whose empirical measures converge to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
+
+\begin{lemma}\label{lem:erg-iff-basin-full-meas}
+  If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
+\end{lemma}
+
+\begin{proof}
+  Suppose \(\mu\) is an  ergodic for \(f\). Since \(X\) is compact, there is a sequence \(\set{\phi_i}_{i \in \NN} \subseteq \Cs{X}\) of functions that is uniformly dense in \(\Cs{X}\). By the pointwise ergodic theorem, for each \(i\) there is a full measure set \(E_i\) where \(\Emp[n](x)(\phi_i) \to \mu(\phi_i)\) for all \(x \in E_i\). Let \(E = \bigcap_{i \in \NN} E_i\), which has full measure.
+
+  We claim that for all \(\phi \in \Cs{X}\) and \(x \in E\), we have \(\Emp[n](x)(\phi) \to \mu(\phi)\). Let \(\varepsilon > 0\) and let \(i\) be such that \(\norm{\phi - \phi_i}_{\infty} < \varepsilon\). If \(N\) is large enough that \(n \ge N\) implies \(\abs[\big]{\Emp[n](x)(\phi_i) - \mu(\phi_i)} < \varepsilon\), we have
+  \[
+    \abs[\big]{\Emp[n](x)(\phi) - \mu(\phi)} \le
+    \abs[\big]{\Emp[n](x)(\phi_i) - \mu(\phi_i)} +
+    \abs[\big]{\Emp[n](x)(\phi - \phi_i)} +
+    \abs[\big]{\mu(\phi - \phi_i)} \le 3\varepsilon.
+  \]
+  This shows the claim. In particular, \(E \subseteq \Basin{\mu}\), and therefore \(\mu(\Basin{\mu}) = 1\).
+
+  Now, suppose \(\mu\) is not ergodic; in this case, there exists some invariant set \(E \subseteq X\) with \(\mu(E) \in (0,1)\). For \(\varepsilon > 0\), consider a continuous function \(\phi\) with the property that \(\mu(\phi) = 1\) and \(\int_{E} \phi \;d\mu < \varepsilon\), which exists by normality and inner regularity. In one hand, for all \(x \in \Basin{\mu}\), we have \(\Emp[n](x)(\phi) \to \mu(\phi)\), so
+  \[\int_{\Basin{\mu} \cap E}\Emp[n](x)(\phi)\;d\mu \to \mu({\Basin{\mu} \cap E})\mu(\phi) = \mu({\Basin{\mu} \cap E}).\]
+  On the other hand, by the pointwise ergodic theorem and the fact \(\Basin{\mu}\cap E\) is invariant,
+  \[\int_{\Basin{\mu} \cap E}\Emp[n](x)(\phi)\;d\mu \to
+    \int_{\Basin{\mu}\cap E}\CE[\mu]{\phi, \mathcal{I}}(x)\;d\mu = 
+    \int_{\Basin{\mu}\cap E}\phi(x)\;d\mu < \varepsilon.
+  \]
+  Therefore, \(\mu({\Basin{\mu} \cap E}) < \varepsilon\). Letting \(\varepsilon \to 0\), we have \(\mu({\Basin{\mu} \cap E}) = 0\). Exchanging \(E\) with \(E^{\complement}\), we conclude that \(\mu(\Basin{\mu}) = 0\).
+  % tá muito zoado isso aqui, muito zoado....
+\end{proof}
+
+\begin{lemma}\label{prop:limiting-measures}
+  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak-\(\ast\) topology of the sequence of empirical measures
+  \begin{equation*}
+    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
+  \end{equation*}
+  form a compact connected subset of the invariant measures.
+\end{lemma}
+
+\begin{proof}
+  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
+  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
+  \begin{equation*}
+    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
+  \end{equation*}
+  which is a metric inducing the weak-\(\ast\) topology on the set of probability measures (see~\ref{prop:weak-star-metrizable}). Since it is a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
+  Indeed,
+  \begin{align*}
+    d(\Emp[n](x), \Emp[n + 1](x))
+    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
+    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
+  \end{align*}
+\end{proof}
+
+% \section{Ergodic theorems}
+
+\section{Palis' dream conjecture}
+
+\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
+
+\begin{theorem}[Newhouse~\cite{newhouseDiffeomorphismsInfinitelyMany1974}]
+  Let \(M\) be a compact surface. There exists a non-empty open set \(U \subseteq \Diff^2(M)\) of non-hyperbolic diffeomorphisms. Moreover, any diffeomorphism in a dense \(G_{\delta}\)-subset of \(U\) has infinitely many sinks.
+\end{theorem}
+
+We note that in this context, a \emph{sink} is an attracting periodic orbit. Each sink corresponds to an ergodic measure (supported on the period orbit) whose basin is an open set, and therefore has positive volume.
+
+\begin{conjecture}
+  A
+\end{conjecture}
+
+It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important open problem in dynamics.
+
+\section{Relating dynamics: extensions}
+
+Different dynamical systems can be related to each other by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\). The single morphism \(F(\star) \to G(\star)\) specified by the natural transformation is also called the \emph{factor map}.
 
 \begin{definition}
   Let \(F,G \colon M \to \Cat{C}\) be two dynamical systems on the category \(\Cat{C}\). An extension \(\eta \colon F \Rightarrow G\) consists of a morphism \(\eta \colon F(\star) \to G(\star)\) of \(\Cat{C}\) (the factor map), such that for all \(m \in M\), the diagram
@@ -234,33 +330,6 @@ We can relate different dynamical systems by the concept of \emph{factors}, or \
   \]
 \end{example}
 
-
-\todo{``For Borel standard systems, extensions are classified by invariant sub-$\sigma$-algebras''}
-
-\begin{lemma}
-  Let $(X, \mathcal{B}_X, \mu, f)$ and $(Y,\mathcal{B}_Y, \nu, g)$ be invertible systems, and let $\phi:X \to Y$ be a factor map. 
-  Then $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \subset \mathcal{B}_X$ is an invariant sub-$\sigma$-algebra.
-\end{lemma}
-
-\begin{theorem}
-    Let $(X, \mathcal{B}, \mu, f)$ be a measure-preserving Borel probability system, and let $\mathcal{A} \subseteq \mathcal{B}$ be an \(f\)-invariant sub-$\sigma$-algebra. Then, there is a measure-preserving system $(Y,\mathcal{B}_Y, \nu, g)$ on a Borel probability space and a factor map $\phi:X \to Y$ with $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \pmod{\mu}$. 
-\end{theorem}
-
-\begin{proof}
-  \todo{
-    \begin{itemize}
-    \item $Y = \mathcal{M}(X)$
-    \item $S : Y \to S$ defined by $S(\eta) = T_* \eta$
-    \item $\phi:X \to Y$ defined by $\phi(x) = \mu_{x}^{\mathcal{A}}$
-    \item $\nu = \phi_* \mu$
-    \end{itemize}
-  }
-\end{proof}
-
-\begin{corollary}
-  A system \((X, \mathcal{B}, \mu, f)\) is ergodic if, and only if, its only factors are the trivial factor and the identity factor, up to isomorphism.
-\end{corollary}
-
 \begin{lemma}\label{lem:factor-ergodic}
   Suppose \(p \colon (X, f) \to (Y, g)\) is a factor map. Then, if \(\mu \in \Meas[f]{X}\) is ergodic for \(f\) then \(p_*\mu \in \Meas[g]{Y}\) is ergodic for \(g\).
 \end{lemma}
@@ -269,6 +338,32 @@ We can relate different dynamical systems by the concept of \emph{factors}, or \
   Suppose \(A \subseteq Y\) is measurable and invariant for \(g\). Then, \(p^{-1}(A)\) is an invariant set for \(f\), because \[f^{-1}(p^{-1}(A)) = p^{-1}(g^{-1}(A)) = p^{-1}(A).\]
   Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) = 0\).
 \end{proof}
+
+% \todo{``For Borel standard systems, extensions are classified by invariant sub-$\sigma$-algebras''}
+
+% \begin{lemma}
+%   Let $(X, \mathcal{B}_X, \mu, f)$ and $(Y,\mathcal{B}_Y, \nu, g)$ be invertible systems, and let $\phi:X \to Y$ be a factor map. 
+%   Then $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \subset \mathcal{B}_X$ is an invariant sub-$\sigma$-algebra.
+% \end{lemma}
+
+% \begin{theorem}
+%     Let $(X, \mathcal{B}, \mu, f)$ be a measure-preserving Borel probability system, and let $\mathcal{A} \subseteq \mathcal{B}$ be an \(f\)-invariant sub-$\sigma$-algebra. Then, there is a measure-preserving system $(Y,\mathcal{B}_Y, \nu, g)$ on a Borel probability space and a factor map $\phi:X \to Y$ with $\mathcal{A} = \phi^{-1}(\mathcal{B}_Y) \pmod{\mu}$. 
+% \end{theorem}
+
+% \begin{proof}
+%   \todo{
+%     \begin{itemize}
+%     \item $Y = \mathcal{M}(X)$
+%     \item $S : Y \to S$ defined by $S(\eta) = T_* \eta$
+%     \item $\phi:X \to Y$ defined by $\phi(x) = \mu_{x}^{\mathcal{A}}$
+%     \item $\nu = \phi_* \mu$
+%     \end{itemize}
+%   }
+% \end{proof}
+
+% \begin{corollary}
+%   A system \((X, \mathcal{B}, \mu, f)\) is ergodic if, and only if, its only factors are the trivial factor and the identity factor, up to isomorphism.
+% \end{corollary}
 
 
 \subsection{Invertible extensions}\label{sec:invert-extens}
@@ -379,53 +474,7 @@ But this set is empty because
 
 \todo{Define for linear cocycles. Oseledets theorem.}
 
-\section{Empirical measures}
-\todo{Improve this, this is the main concept of the dissertation, so it deserves more love.}
-
-Given a map \(f \colon X \to X\) on a measurable space and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
-\[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
-encoding the averages along the orbit up to a time \(n\). These measures are, indeed, uniquely defined by the property that for any observable \(\phi \colon X \to \mathbb{R}\), its integral with respect to \(\Emp[n](x)\) equals the Birkhoff average up to time \(n\): 
-\begin{equation*}
-  \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)),
-\end{equation*}
-and it is this quality of being defined by the values observed on a finite number of steps along an orbit that should justify the nomenclature empirical.
-The direct relation to Birkhoff averages also highlights these objects as having a central role in ergodic theory. 
-
-It's not always the case that this sequence converges (weakly) to some measure, but when it does, the limit is invariant and represents the asymptotic distribution of the orbit. Reciprocally,
-For each invariant measure \(\mu \in \Meas[f]{X}\), we can ask whether the empirical measures of a point will converge weakly to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
-
-\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
-
-It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important open problem in dynamics.
-
-\begin{proposition}\label{prop:limiting-measures}
-  Let \(X\) be a compact metric space with the Borel \(\sigma\)-algebra. For every \(x \in X\), the limit points in the weak* topology of the sequence of empirical measures
-  \begin{equation*}
-    \Meas(x) = \set{ e_n(x) }[n \geq 0, '] = \bigcap_{i = 0}^{\infty} \set{ e_n(x) }[n \geq i,spar,closure]
-  \end{equation*}
-  form a compact connected subset of the invariant measures.
-\end{proposition}
-
-\begin{proof}
-  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
-  Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
-  \begin{equation*}
-    d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
-  \end{equation*}
-  which is a metric inducing the weak* topology on the set of probability measures (see~\ref{prop:weak-star-metrizable}). Since it is a metric, there are two open sets \(U_1 \supseteq K_1, U_2 \supseteq K_2\) with positive distance \(s > 0\) from each other. We claim \(\lim_{n \to \infty} d(\Emp[n]{x}, \Emp[n + 1]{x}) = 0\), which would contradict \(s > 0\) because the definition of \(\Meas{x}\) implies \(\Emp[n]{x} \in U_1\) and \(\Emp[n + 1]{x} \in U_2\) for infinitely many \(n\).
-  Indeed,
-  \begin{align*}
-    d(\Emp[n](x), \Emp[n + 1](x))
-    &= \sum_{i = 1}^{\infty} \frac{\abs{\frac{1}{n}\sum_{i = 0}^{n - 1}\phi_i \circ f^i(x) - \frac{1}{n + 1}\sum_{i = 0}^{n}\phi_i \circ f^i(x)}}{2^{i}}\\
-    &\leq \sum_{i = 1}^{\infty} \frac{2}{n}\frac{\lVert \phi_i \rVert_{\infty}}{2^{i}} \leq \frac{2}{n} \to 0.
-  \end{align*}
-\end{proof}
-
-% \section{Ergodic theorems}
-
-\begin{lemma}\label{lem:erg-iff-basin-full-meas}
-  If \(\mu\) is invariant for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
-\end{lemma}
+\nomenclature{\(\Basin{\mu}\)}{Basin of the measure \(\mu\), defined in \cref{sec:empirical-measures}.}
 
 \section{Partitions}
 A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize that the set of subsets is the object of our attentions.

@@ -4,7 +4,7 @@
 
 \chapter{Schwarzian derivatives and cylinder maps}\label{cha:bonifant-milnor}
 
-In this chapter, we follow the exposition by \textcite{bonifantSchwarzianDerivativesCylinder2008} on a family of endomorphisms of a cylinder.
+In this chapter, we follow the exposition by \textcite{bonifantSchwarzianDerivativesCylinder2008} on a family of endomorphisms of a cylinder with interesting properties.
 
 \section{Cross ratios and the Schwarzian derivative}
 
@@ -41,8 +41,6 @@ The Schwarzian derivative has some important properties that we highlight in the
   The Schwarzian derivative has the following properties:
   \begin{enumerate}
   \item\label{prop:schwarzian:item:1}
-    The Schwarzian is a second-order derivation~\cite{ovsienkoSchwarzianDerivative}
-    
     If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
   \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
   \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
@@ -160,21 +158,18 @@ Note that by \cref{prop:schwarzian}, analogous results to the last two lemmas ho
 
 \section{Skew products}
 
-\todo{move things to the skew product section under extensions}
-
-We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\nu_0 = \mu \otimes \delta_0\) and \(\nu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \nu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the upper and lower ``boundaries'' of \(X \times I\).
-Let \(\mathcal{B}_i = \mathcal{B}(\nu_i)\) be the basins of the respective measures.
+We call a map \(F \colon X \times Y \to X \times Y\) a \emph{skew product} if it is of the form \(F(x,y) = (g(x), f_x(y))\) for some \(g \colon X \to X\) and a family of functions \(\{ f_x \}_{x \in X}\), \(f_x \colon Y \to Y\). We are interested in the case where \(X\) is a compact metric space with the Borel \(\sigma\)-algebra, \(g \colon X \to X\) is a continuous map preserving an ergodic probability measure \(\mu \in \Meas{X}\), \(Y = I\) is the interval \([0,1]\), and \(f_x \colon I \to I\) are \(C^3\) diffeomorphisms preserving orientation. We will see how, depending on the Schwarzian derivative of the maps \(f_x\), we observe different behaviors of the dynamics with respect to the invariant measures \(\mu_0 = \mu \otimes \delta_0\) and \(\mu_1 = \mu \otimes \delta_1\). Note that for \(i \in \{ 0,1 \}\), \(\supp \mu_i = \mathcal{A}_i\), where \(\mathcal{A}_i = X \times \{ i \}\) are the upper and lower ``boundaries'' of \(X \times I\).
 
 To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(F^n(x,y)\), that is, \(f_x^{n} = f_{g^{n - 1}(x)} \circ \cdots \circ f_x\).
 
 \begin{lemma}\label{lem:basin-segment}
-  If \((x, y_1) \in \mathcal{B}_0\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \leq y_1\). Similarly, if \((x, y_1) \in \mathcal{B}_1\), then \((x,y_2) \in \mathcal{B}_0\) for all \(y_2 \geq y_1\).
+  If \((x, y_1) \in \Basin{\mu_0}\), then \((x,y_2) \in \Basin{\mu_0}\) for all \(y_2 \leq y_1\). Similarly, if \((x, y_1) \in \Basin{\mu_1}\), then \((x,y_2) \in \Basin{\mu_1}\) for all \(y_2 \geq y_1\).
 \end{lemma}
 
 \begin{proof}
-  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \mathcal{B}_0\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\nu_0\) and \(e_n(x,y_2) \to \nu_0\), by \nameref{thm:portmanteau}
+  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \Basin{\mu_0}\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\mu_0\) and \(e_n(x,y_2) \to \mu_0\), by \nameref{thm:portmanteau}
     \newcommand{\timeinU}{\frac{1}{n}\# \set{ 0 \leq i < n \where f_x^n(y_2) < \delta }}
-    \[\lim_{n \to \infty} e_n(x,y_2)(U) = \nu_0(U) = 1.\]
+    \[\lim_{n \to \infty} e_n(x,y_2)(U) = \mu_0(U) = 1.\]
     Define \(\tau_n = e_n(x,y_2)(U) = \timeinU\).
     Note that if \(f_x^n(y_2) < \delta\), then \(f_x^n(y_1) < \delta\) since the diffeomorphisms preserve orientation. Thus,
     \begin{align*}
@@ -182,7 +177,7 @@ To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(
       &\leq \frac{1}{n}\sum_{i = 0}^{n - 1}\abs[\big]{\varphi(g^n(x),f_x^{n}(y_1)) - \varphi(g^n(x),f_x^{n}(y_2))}\\
       &\leq \varepsilon \tau_n + 2 \lVert \varphi \rVert_{\infty} (1 - \tau_n).
     \end{align*}
-    Since \(\tau_n \to 1\), there exists \(N\) such that \(n \geq N\) implies that the right side is less than \(2 \varepsilon\), hence both integrals on the left converge to \(\nu_0(\varphi)\).
+    Since \(\tau_n \to 1\), there exists \(N\) such that \(n \geq N\) implies that the right side is less than \(2 \varepsilon\), hence both integrals on the left converge to \(\mu_0(\varphi)\).
 \end{proof}
 
 \section{Transversal Lyapunov exponents}
@@ -206,7 +201,7 @@ Thus, by the ergodicity of \(\mu\)  for \(g\) and the Birkhoff ergodic theorem, 
 \end{equation}
 and we shall denote this common value by \(\Lyap(\mathcal{A}_i)\).
 
-The version of the statement below is slightly more general than the corresponding one in~\cite[lema A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
+The version of the statement below is slightly more general than the corresponding one in~\cite[lemma A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
 \begin{lemma}\label{lem:lyap-basin-posmeas}
   If the family \(\{ f_x' \}_{x \in X}\) is equicontinuous at \(i \in \{ 0,1 \}\) and \(\Lyap(\mathcal{A}_i) < 0\), then the basin of \(\mu \otimes \delta_i\) has positive \(\mu \otimes \Leb\) measure.  Conversely, if \(\Lyap(\mathcal{A}_i) > 0\), then the corresponding basin has null measure.
 \end{lemma}
@@ -237,7 +232,7 @@ The version of the statement below is slightly more general than the correspondi
                    &\leq (f'_{g^{n}(x)}(0) + \varepsilon)f_x^n(y)\\
                    &\leq \exp\rpar*{a(g^{n}(x)) + \sum_{k = 0}^{n - 1}a(g^k(x)) - A(x)}\delta.
   \end{align*}
-  Since \(\lim_{n \to \infty} \sum_{k = 0}^{n - 1}a(g^k(x)) = -\infty\), we have \(f_x^{n + 1}(y) \to 0\). Thus, if \(x \in \mathcal{B}(\mu)\) (which has full measure), then \(e_{n}(x,y) \weakto \nu_0\) whenever \(y \leq \delta e^{-A(x)}\).
+  Since \(\lim_{n \to \infty} \sum_{k = 0}^{n - 1}a(g^k(x)) = -\infty\), we have \(f_x^{n + 1}(y) \to 0\). Thus, if \(x \in \mathcal{B}(\mu)\) (which has full measure), then \(e_{n}(x,y) \weakto \mu_0\) whenever \(y \leq \delta e^{-A(x)}\).
 
   % TODO: write the converse
 \end{proof}
@@ -255,75 +250,90 @@ The version of the statement below is slightly more general than the correspondi
 
 The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
 
+\begin{definition}
+  Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say \((X,f,\mu)\) displays intermingled basins if there exists two distinct invariant measures \(\mu_0 \neq \mu_1\) such that for each open set \(U \subseteq X\), we have \(\mu(\Basin{\mu_0} \cap U), \mu(\Basin{\mu_1} \cap U) > 0\).
+\end{definition}
+
 \todo{Refer to discussion in~\cite{bonattiDynamicsUniformHyperbolicity2005}}
 
-In this section we shall describe the construction of that flavor of example in a more general setting of skew products that also encompasses the original example. As before, let \(X\) be a compact metric space, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continuous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
+For this section, let \(X\) be a compact manifold, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continuous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
 \begin{equation*}
   \Lyap(\mathcal{A}_i) = \int \log f_{x}'(i) \;d \mu(x)
 \end{equation*}
-for \(i = 0,1\) are both negative, then both basins have positive volume. Assuming this, the main property that will produce the intermingled phenomenon is the following hypothesis.
+for \(i = 0,1\) are both negative, then both basins have positive volume. We will state this condition as an hypothesis:
 
-\begin{hypothesis}\label{hip:elevators}
-  There exists two periodic points \(x^+\) and \(x^-\) in \(X\), of periods \(n^+, n^-\), such that for every  \(y \in (0,1)\), \(f_{x^+}^{n^+}(y) > y\) and \(f_{x^-}^{n^-}(y) < y\).
+\begin{hypothesis}\label{hip:basins-support-nonempty}
+  The basins \(\Basin{\mu_{0}}\) and \(\Basin{\mu_{1}}\) have positive volume \(\mu \otimes \Leb\).
 \end{hypothesis}
 
-Note that if we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) follows by symmetry. First, we shall collect some lemmas. 
+Assuming this, the main property that will produce the intermingled phenomenon is the following additional hypothesis.
 
-\begin{lemma}
-  Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is a segment \(\{ x \} \times [0,a_x]\).
+\begin{hypothesis}\label{hip:elevators}
+  The map \(g\) is topologically exact, in the sense that for each nonempty open set \(U\), there exists \(n\) for which \(g^n(U) = X\). Moreover, there exists two expanding periodic points \(x^+\) and \(x^-\) in \(X\), of periods \(n^+, n^-\), such that for every \(y \in (0,1)\), \(f_{x^+}^{n^+}(y) > y\) and \(f_{x^-}^{n^-}(y) < y\).
+\end{hypothesis}
+
+Let's define the measures \(\beta_i(A) = m(A \cap \Basin{\mu_i})\). Then the basins are intermingled if, and only if, \(\supp \beta_i = X \times I\) for both \(i = 0,1\). Indeed, both supports being equal to the whole space means precisely that for every open set \(U \subseteq X \times I\), the measures \(\beta_i(U) = m(U \cap \Basin{\mu_i})\) are both positive for the reference measure \(m = \mu \otimes \Leb\).
+
+We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) follows by symmetry. First, we shall collect some lemmas. 
+
+\begin{lemma}\label{lem:supp-segment}
+  If \((x, y_1) \in \supp \beta_0\), then \((x,y_2) \in \supp \beta_0\) for all \(y_2 \leq y_1\).
 \end{lemma}
 \begin{proof}
-  By \cref{lem:basin-segment}, \(\mathcal{B}_0\) is of the above form. Since we know that the support of a measure is closed, we can take \(y < 1\) such that \((x,y) \in \supp \mu_0\) and show that if \(z < y\) then \((x,z) \in \supp \mu_0\).
-  Let \(U = B_{\varepsilon}(x,z)\) be a ball centered at \((x, z)\) of radius smaller than \(1 - y\), and \(V = B_{\varepsilon}(x,y)\). Note that
-  \[V \cap \mathcal{B}_0 \subseteq \set{(u,v + y - z) \where (u,v) \in U \cap \mathcal{B}_0},\] so since \((x,y) \in \supp \mu_0\), and \(\Leb\) is invariant by vertical translations, \(\Leb(U \cap \mathcal{B}_0) \geq \Leb(V \cap \mathcal{B}_0) > 0\).
+  By \cref{lem:basin-segment}, we know this property is true for \(\Basin{\mu_0}\).
+  Let \(U = B_{\varepsilon}(x,y_2)\) be a ball centered at \((x, y_2)\) of radius smaller than \(1 - y_1\), and \(V = B_{\varepsilon}(x,y_1)\). Notice that \[V \cap \Basin{\mu_0} \subseteq \set{(u,v + y_1 - y_2) \where (u,v) \in U \cap \Basin{\mu_0}}.\] Since \((x,y_1) \in \supp \beta_0\), and \(m = \mu \otimes \Leb\) is invariant by vertical translations, \[\beta_0(U) = m(U \cap \Basin{\mu_0}) \geq m(V \cap \Basin{\mu_0}) > 0.\]
+  Since this is true for all sufficiently small balls \(U\), this shows \((x,y_2) \in \supp \beta_0\).
+\end{proof}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{../figures/translation}
+\end{figure}
+
+\begin{lemma}
+  The set \(\supp \beta_0\) is backwards invariant, that is, \(F^{-1}(\supp \beta_0) = \supp \beta_0\).
+\end{lemma}
+\begin{proof}
+  If \(p \in F^{-1}(\supp \beta_0)\) and \(U\) is a neighborhood of \(p\), then since \(F\) is an open map, \(F(U)\) is a neighborhood of \(F(p) \in \supp \beta_0\), so \(\beta_0(F(U)) > 0\). Since \(F\) is Lipschitz, if \(\beta_0(U)\) were \(0\), then \(\beta_0(F(U)) = m(F(U) \cap \Basin{\mu_0}) = m(F(U \cap \Basin{\mu_0})) = 0\), which is not the case, so \(\beta_0(U) > 0\).
 \end{proof}
 
 \begin{lemma}
-  The support \(\supp \mu_0\) is an invariant set, that is, \(F^{-1}(\supp \mu_0) = \supp \mu_0\).
+  We have \(m(\supp \beta_0) \ge \beta_0(\supp \beta_0) = \beta_0(X \times I) = m(\Basin{\mu_0}) > 0\).
 \end{lemma}
+
 \begin{proof}
-  If \(p \in F^{-1}(\supp \mu_0)\) and \(U\) is a neighborhood of \(p\), then since \(F\) is an open map, \(F(U)\) is a neighborhood of \(F(p) \in \supp \mu_0\), so \(\mu_0(F(U)) > 0\). Since \(F\) is Lipschitz, if \(\mu_0(U)\) were \(0\), then \(\mu_0(F(U)) = \Leb(F(U) \cap \mathcal{B}_0) = \Leb(F(U \cap \mathcal{B}_0)) = 0\), which is not the case, so \(\mu_0(U) > 0\).
+  The last value is positive by \cref{hip:basins-support-nonempty}, and the first and last equalities are, respectively, by subadditivity and definition. To show the second equality, let \(C = (\supp \beta_0)^{\complement}\). By definition, for each \(x \in C\), there exists an open neighborhood \(U_x \ni x\) for which \(\beta_0(U_x) = 0\). Since \(X \times I\) is Lindelöf, we can extract a countable subcover \(U_{x_1} \cup U_{x_2} \cup \cdots\) of \(C\). By subadditivity, this shows \(\mu(C) = 0\).
+\end{proof}
+
+\begin{lemma}\label{lem:basin-pos-full}
+  The set \(B_0 = \set{x \in X \where \exists y \in (0,1), \; (x,y) \in \supp \beta_0}\) is nonempty.
+\end{lemma}
+
+\begin{proof}
+  It suffices to show it has positive measure. For that, let \(0 < \lambda < m(\supp \beta_0)\), and notice that \[m(\supp \beta_0 \setminus X \times [0,\lambda]) \ge m(\supp \beta_0) - \lambda > 0.\]
+  Set \(E_{\lambda} = \supp \beta_0 \setminus X \times [0,\lambda]\). Then \(\mu(\pi_X(E_{\lambda})) \ge m(E_{\lambda}) > 0\), and clearly \(\pi_X(E_{\lambda}) \subseteq B_0\).
+
 \end{proof}
 
 
-\begin{corollary}
-  \(\supp \mu_0 = X \times I\).
+\begin{corollary}\label{cor:basins-eq}
+  We have \(\supp \beta_0 = X \times I\).
 \end{corollary}
 
-\todo{WRITE this}
-
 \begin{proof}
-  By symmetry, it is enough to show  \(\mathcal{A}_1 \subseteq K\). Let \((x,y) \in K\) be the point in the statement. 
-  Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) such that \(x_{ - n - 1} \in g^{-1}(\{ x_{-n} \})\) is the closest preimage of \(x_-\). Since \(x_-\) is a repelling fixed point, the construction implies that \(x_{-n} \to x_-\), so by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-1}(y_0) > y\). In particular,
+  Let \(x_0 \in B_0\) and \(y_0 \in (0,1)\) such that \((x_0,y_0) \in \supp \beta_0\).
+  Inductively, we can construct a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) of \(g\) with the property that \(x_{-n} \to \Orbit{x^-}\). Indeed, since \(x^-\) is an expanding periodic point, there is a neighborhood \(U\) and a partial inverse \(u \colon U \to g^{-1}(U)\) with \(g \circ u = \Id|_U\) for which \(u^n(x) \to \Orbit{x^-}\) for all \(x \in U\). And by exactness, there is some \(N\) for which \(x_0 \in g^N(U)\).
+
+
+  Since \(x_{-n} \to \Orbit{x^-}\), by \cref{hip:elevators}, for every \(y \in (0,1)\) there exists \(n_0\) such that \(n \geq n_0\) implies \(f_{x_{-n}}^{-n}(y_0) > y\). In particular,
   \[y_{ - n} = f_{x_{-n}}^{-1} \circ \cdots \circ f_{x_{-1}}^{-1}(y_0)\]
-  is such that \(y_{ - n} \to 1\). Since \(\supp \mu_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \mu_0)\), we conclude that \((x_-, 1) \in \supp \mu_0\). Now, notice that \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x_- \})\) is dense in \(X\) and \(1\) is a fixed point of the \(f_x\). Thus, \(E \times \{ 1 \} \subseteq \supp \mu_0\) and consequently \(\mathcal{A}_1 \subseteq \supp \mu_0\).
+  is such that \(y_{ - n} \to 1\). Therefore, \((x_{-n},y_{-n}) \to (x^-,1)\). Since \(\supp \beta_0\) is closed and \((x_{ - n},y_{ - n}) \in F^{-n}(\supp \beta_0)\), we conclude that \((x^-, 1) \in \supp \mu_0\). Now, by exactness, the set \(E = \bigcup_{n = 0}^{\infty}g ^{-1}(\{ x^- \})\) is dense in \(X\), and \(1\) is a fixed point of the \(f_x\), thus \(E \times \{ 1 \} \subseteq \supp \beta_0\). Taking the closure, we have \(\mathcal{A}_1 \subseteq \supp \beta_0\), and by \cref{lem:supp-segment}, it is the whole \(X \times I\).
 \end{proof}
 
-\begin{corollary}\label{cor:intermingled}
-  Suppose \cref{hip:elevators} holds and both basins have positive measure. Then the basins \(\mathcal{B}_0\) and \(\mathcal{B}_1\) are intermingled for the Lebesgue measure on the cylinder.
-\end{corollary}
-
-\begin{proof}
-  By definition, the basins are strictly invariant sets. If we define the measures \(\mu_i(A) = \Leb(A \cap \mathcal{B}_i)\), then the basins are intermingled if, and only if, \(\supp \mu_i = X \times I\) for both \(i = 0,1\). We will show this is the case for \(\supp \mu_0\), as the proof for \(i = 1\) is analogous.
-
-  \begin{claim}
-    The support \(\supp \mu_0\) is backwards-invariant.
-  \end{claim}
-  Indeed, if \(p \in F^{-1}(\supp \mu_0)\) and \(U\) is a neighborhood of \(p\), then since \(F\) is an open map, \(F(U)\) is a neighborhood of \(F(p) \in \supp \mu_0\), so \(\mu_0(F(U)) > 0\). Since \(F\) is Lipschitz, if \(\mu_0(U)\) were \(0\), then \(\mu_0(F(U)) = \Leb(F(U) \cap \mathcal{B}_0) = \Leb(F(U \cap \mathcal{B}_0)) = 0\), which is not the case, so \(\mu_0(U) > 0\).
-
-  \begin{claim}
-    There exists a point \((x_0,y_0) \in \supp \mu_0 \setminus X \times \{ 0 \}\).
-  \end{claim}
-  Indeed, \(\mu_0(\supp \mu_0) \geq \Leb(\mathcal{B}_0) > 0\), so \(\mu_0(\supp \mu_0 \setminus X \times \{ 0 \}) > 0\) and the set cannot be empty.
-
-  \begin{claim}
-    Given \(x \in X\), \(\supp \mu_0 \cap \{ x \} \times I\) is a segment \(\{ x \} \times [0,a_x]\).
-  \end{claim}
-  By \cref{lem:basin-segment}, \(\mathcal{B}_0\) is of the above form. To show that the support also has this property, we can take \(y < 1\) such that \((x,y) \in \supp \mu_0\) and show that if \(z < y\) then \((x,z) \in \supp \mu_0\).
-  Let \(U = B_{\varepsilon}(x,z)\) be a ball centered at \((x, z)\) of radius smaller than \(1 - y\), and \(V = B_{\varepsilon}(x,y)\). Note that \(V \cap \mathcal{B}_0 \subseteq (U \cap \mathcal{B}_0) + (0, y - z)\), and since \((x,y) \in \supp \mu_0\), \(\Leb(U \cap \mathcal{B}_0) \geq \Leb(V \cap \mathcal{B}_0) > 0\). This shows the claim.
-
-  Now, by the first two claims and \cref{thm:inv-closed-contains-boundary}, \(\supp \mu_0\) contains both boundaries. By the last claim, it is composed of vertical segments, so it must be equal to \(X \times I\).
-\end{proof}
+\begin{remark}
+  With Pesin theory, it is possible to show that intermingled basins are present in the more general setting of \(g\) being a hyperbolic automorphism. See the examples 3.2.1 and 3.2.2 of~\cite{uresNonrobustnessIntermingledBasins2018}. The argument goes as follows: pick a point \(p = (x,y)\) with \(y \in (0,1)\), and consider a disk \(D_p\) transversal to the center direction (the \(y\) direction).
+  \todo{todo}
+\end{remark}
 
 \begin{figure}[h]
   \centering
@@ -352,7 +362,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   \begin{equation*}
     \xi_0(x) = \sup \{ y \in I : (x,y) \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \mathcal{B}_1 \}.
   \end{equation*}
-  By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\nu_0 = \mu \otimes \delta_0\) or to \(\nu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\nu_0\) or \(\nu_1\).
+  By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\mu_0 = \mu \otimes \delta_0\) or to \(\mu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\mu_0\) or \(\mu_1\).
   
   It is sufficient to show that \(A = \{ x \in X : \xi_0(x) \neq \xi_1(x) \}\) has measure zero, since in this case we can define \(\sigma\) as the common value of the two functions. Suppose by contradiction that this set does not have measure zero. Since the \(f_x\) are bijective, \(A\) is an invariant set under \(g\), so the ergodicity of \(\mu\) implies that \(A\) has full measure.
 
@@ -361,7 +371,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
     \lim_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where \xi_1(g^i(x)) < \delta_k} = \mu(E_{k}) > 1 - 1/k.
   \end{equation}
   
-  By the ergodicity of \(\mu\), there exists another set \(C \subseteq X\) of full measure whose empirical measures converge to \(\mu\), and since \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), there exists a set \(D\) of full measure such that \(\SchD f_{g^n(x)} \prec 0\) for all \(n \geq 0, x \in D\). Let \(x_0 \in A \cap B \cap C \cap D\) and \(y_0 \in (\xi_0(x), \xi_1(x))\), and let \(\nu \in \Meas{x,y} \setminus \{ \nu_0 \}\) be a limit point of the empirical measures different from \(\nu_0\). Note that since \(x_0 \in B\), necessarily \((\pi_X)_* \nu = \mu\), but since \(\nu \neq \nu_0\), it follows that \(\nu(X \times \{ 0 \}) < 1\). Thus, \(\supp \nu\) is not contained in \(X \times \{ 0 \}\), and there exists \(\varepsilon > 0\) such that \(U = X \times \interval[open left]{\varepsilon}{1}\) satisfies \(\nu(U) > 0\). Let \(k\) be such that \(\nu(U) > 1/k\), and \(n_j \to \infty\) such that \(\liminf_{j \to \infty} e_{n_j}(x_0,y_0)(U) > 1/k\).
+  By the ergodicity of \(\mu\), there exists another set \(C \subseteq X\) of full measure whose empirical measures converge to \(\mu\), and since \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), there exists a set \(D\) of full measure such that \(\SchD f_{g^n(x)} \prec 0\) for all \(n \geq 0, x \in D\). Let \(x_0 \in A \cap B \cap C \cap D\) and \(y_0 \in (\xi_0(x), \xi_1(x))\), and let \(\nu \in \Meas{x,y} \setminus \{ \mu_0 \}\) be a limit point of the empirical measures different from \(\mu_0\). Note that since \(x_0 \in B\), necessarily \((\pi_X)_* \nu = \mu\), but since \(\nu \neq \mu_0\), it follows that \(\nu(X \times \{ 0 \}) < 1\). Thus, \(\supp \nu\) is not contained in \(X \times \{ 0 \}\), and there exists \(\varepsilon > 0\) such that \(U = X \times \interval[open left]{\varepsilon}{1}\) satisfies \(\nu(U) > 0\). Let \(k\) be such that \(\nu(U) > 1/k\), and \(n_j \to \infty\) such that \(\liminf_{j \to \infty} e_{n_j}(x_0,y_0)(U) > 1/k\).
   In other words, we have
   \begin{equation}\label{eq:time-big}
     \liminf_{j \to \infty} \frac{1}{n_j} \# \set{ 0 \leq i < n_j \where f_{x_0}^i(y_0) > \varepsilon} > 1/k.
@@ -382,17 +392,15 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
-\subsection{Hausdorff dimension}
+% \subsection{Hausdorff dimension}
 
-An interesting question to consider is what is the Hausdorff dimension of the set \(\graph \xi\) in the situation of intermingled basins. Since this set is a graph, it is clearly at least \(1\) and at most \(2\).
+% An interesting question to consider is what is the Hausdorff dimension of the set \(\graph \xi\) in the situation of intermingled basins. Since this set is a graph, it is clearly at least \(1\) and at most \(2\).
 
-\todo{In this situation of intermingled basins, what is the Hausdorff dimension of the graph separating the basins, or of the basins themselves?}
+% \todo{In this situation of intermingled basins, what is the Hausdorff dimension of the graph separating the basins, or of the basins themselves?}
 
-\todo{It should be strictly greater than 1: this is a corollary of regularity.}
+% \todo{It should be strictly greater than 1: this is a corollary of regularity.}
 
 \section{Positive Schwarzian}
-
-\todo{the paragraph below conflicts, or should be moved to, the section which defines the empirical measures, as it's not clear whether it concerns an asymptotic measure for each point, or a single one for almost every point. If necessary, adjust the theorem statement.}
 
 If \(f \colon M \to M\) is a diffeomorphism on a manifold, we say that an invariant measure \(\mu\) is \emph{asymptotic} with respect to a reference measure if the empirical measures of almost every point of the reference measure converges to \(\mu\). Intuitively, \(\mu\) describes the entire statistical behavior of the system, up to a set of zero volume.
 
@@ -436,7 +444,6 @@ The idea of the proof is to pass to the invertible extension of the system and o
   Furthermore, the basin of \(\nu\) has full Lebesgue measure. In fact, if \(\varphi \in \Cs{X \times I}\), then \(\varphi \circ \pi \in \Cs{\eX \times I}\) and \(e_n(\pi(\ex), y)(\varphi) = e_n(\ex, y)(\varphi \circ \pi)\). Therefore, \(e_n(x, y) \to \nu\) if and only if \(e_n(\ex, y) \to \enu\) for any \(\ex \in \pi^{-1}(x)\), that is, \((\pi \times \Id)^{-1}(\mathcal{B}(\nu)) = \mathcal{B}(\enu)\). It follows that \((\mu \otimes \Leb)(\mathcal{B}(\nu)) = (\emu \otimes \Leb)(\mathcal{B}(\enu)) = 1\).
 \end{proof}
 
-\todo{Perhaps a section should be dedicated to the hyperbolic metric, or the Hilbert metric. Perhaps put it next to the Hausdorff metric.}
 
 % TODO: Ali's argument probably works?
 % TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples

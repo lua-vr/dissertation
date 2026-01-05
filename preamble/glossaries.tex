@@ -1,12 +1,32 @@
-\usepackage[noredefwarn, sort=use]{glossaries}
-\usepackage{glossary-mcols}
-\setglossarystyle{mcolindex}
-\renewcommand{\glspostdescription}{\dotfill}
+\usepackage{nomencl}
+\makenomenclature
 
-\newglossary[ob-glg]{objects}{ob-gls}{ob-glo}{Objects}
-\newcommand*{\newobject}[3][]{%
-  \newglossaryentry{#2}{type=objects,%
-    name={$#3$},text={#3},description={},#1}%
-}
+\providetoggle{nomsort}
+\settoggle{nomsort}{true} % true = sort by use, false = sort as usual
 
-\makeglossaries
+\makeatletter
+\iftoggle{nomsort}{%
+    \let\old@@@nomenclature=\@@@nomenclature        
+        \newcounter{@nomcount} \setcounter{@nomcount}{0}%
+        \renewcommand\the@nomcount{\two@digits{\value{@nomcount}}}% Ensure 10>01
+        \def\@@@nomenclature[#1]#2#3{% Taken from package documentation
+          \addtocounter{@nomcount}{1}%
+        \def\@tempa{#2}\def\@tempb{#3}%
+          \protected@write\@nomenclaturefile{}%
+          {\string\nomenclatureentry{\the@nomcount\nom@verb\@tempa @[{\nom@verb\@tempa}]%
+          \begingroup\nom@verb\@tempb\protect\nomeqref{\theequation}%
+          |nompageref}{\thepage}}%
+          \endgroup
+          \@esphack}%
+      }{}
+\makeatother
+
+\nomenclature{\(\ZZ\)}{The integers.}
+\nomenclature{\(\NN\)}{The natural numbers, usually starting at zero.}
+\nomenclature{\(\ZZ_{\ge 0}\)}{The natural numbers, definitely starting at zero.}
+\nomenclature{\(\ZZ_{\ge 1}\)}{The natural numbers, definitely starting at one.}
+\nomenclature{\(\Meas{X}\)}{The set of measures of a measurable space \(X\), with the weak-\(\ast\) topology.}
+\nomenclature{\(\Meas[1]{X}\)}{The set of probability measures of a measurable space \(X\), with the weak-\(\ast\) topology.}
+\nomenclature{\(\mu_n \weakto \mu\)}{Weak-\(\ast\) convergence.}
+\nomenclature{\(\CE[\mu]{\phi, \mathcal{A}}\)}{Conditional expectation of \(\phi\) with respect to the measure \(\mu\) and sub-\(\sigma\)-algebra \(\mathcal{A}\).}
+\nomenclature{\((\Omega, \mathcal{F}, \Prob)\)}{Some arbitrary probability space.}
