@@ -224,7 +224,7 @@ The direct relation to Birkhoff averages also highlights these objects as having
 Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask what are the points of \(X\) whose empirical measures converge to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
 
 \begin{lemma}\label{lem:erg-iff-basin-full-meas}
-  If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
+  If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).\sidetodo{new :)}
 \end{lemma}
 
 \begin{proof}
@@ -396,9 +396,9 @@ Different dynamical systems can be related to each other by the concept of \emph
   Suppose \(\mu\) is ergodic but \(\tilde{\mu}\) is not; then, we can write \(\tilde{\mu} = \lambda\mu_0 + (1 - \lambda)\mu_1\) for \(\mu_0 \neq \mu_1\). Let \(\nu_0 = \pi_*\mu_0\) and \(\nu_1 = \pi_*\mu_1\), so that \(\mu = \lambda\nu_0 + (1 - \lambda)\nu_1\) by linearity. By ergodicity, \(\nu_0 = \nu_1 = \mu\), contradicting the uniqueness of the measure \(\tilde{\mu}\) such that \(\pi_*\tilde{\mu} = \mu\).
 \end{proof}
 
-Invertible extensions may not exist for non-Borel spaces. The following example of non-existence of the natural extension expands on an exercise of~\cite{przytyckiConformalFractalsErgodic2010}.
+Invertible extensions may not exist for non-Borel spaces. The following example of non-existence of the natural extension expands on an exercise of~\cite{przytyckiConformalFractalsErgodic2010}, and relies on the Axiom of Choice.
 
-\begin{example}[Non-existence]
+\begin{example}[Non-existence of the natural extension]
   Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
   If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
@@ -438,9 +438,14 @@ Invertible extensions may not exist for non-Borel spaces. The following example 
   \end{align*}
   But this set is empty because
   \begin{equation*}
-    \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
+    \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing,
   \end{equation*}
+  a contradiction.
 \end{example}
+
+\begin{question}
+  Is there an example that does not use the Axiom of Choice?
+\end{question}
 
 
 \subsection{The solenoid}

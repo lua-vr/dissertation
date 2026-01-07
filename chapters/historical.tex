@@ -259,7 +259,7 @@ Alternatively, all the hypotheses of both \cref{thm:wip-historical,col:histo-avo
 \end{enumerate}
 In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \cref{thm:donsker}, this condition implies that \(\DProc[n,rv = \xi,spar,pf]\mu = \DProc[n,rv = \zeta,spar,pf]\Prob\) converges to the same limit \(\sigma W\).
 
-\begin{theorem}
+\begin{theorem}\label{thm:avoid-compacts-asip}
   When the pair \((g,p)\) satisfies an almost sure invariance principle, the extra condition of \cref{col:histo-avoid-compacts} is satisfied.
 \end{theorem}
 \begin{proof}
@@ -296,6 +296,10 @@ In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \
 
   The almost sure invariance principle (ASIP) holds for a large class of dynamics and observables. Here, we highlight the Theorem 2.1 of~\cite{korepanovRatesAlmostSure2018}, where it is shown that the ASIP holds for every \(\delta > 0\) when \(g\) is a nonuniformly expanding map and \(p\) is a Hölder continuous function with \(\int p \;d\mu = 0\). This includes the original example of \citeauthor{bonifantSchwarzianDerivativesCylinder2008} in which \(g(x) = kx \pmod 1\).
 
+\begin{question}
+  Is \cref{thm:avoid-compacts-asip} true for the sharp case \(\abs{\PSum[n,rv = \zeta]{\omega} - \PSum[n,rv = \beta]{\omega}} = o(\sqrt{n})\)?
+\end{question}
+  
 \section{Deriving the weak invariance principle}\label{sec:deriv-weak-invar}
 
 The following proof is inspired by the argument at the end of the proof of~\cite[Theorem 19.1]{billingsleyConvergenceProbabilityMeasures1999}.
@@ -331,20 +335,17 @@ by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the inters
 \end{equation*}
 \end{proof}
 
-We will call the decomposition in \cref{thm:martingale-coboundary} a reverse martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: invertible, and non-invertible \(g\).
+We will call the decomposition in \cref{thm:martingale-coboundary} a reverse martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: non-invertible, and invertible \(g\).
 
-\subsection{Existence of martingale-coboundary decomposition}
-From now on, we assume that \(\mu\) is an ergodic measure for \(g\). We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic2021} for the next theorem.
-
-\subsubsection{Non-invertible case}
-Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\)-algebras \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) form a strictly decreasing sequence in general.
+\subsection{Non-invertible case}
+Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\)-algebras \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) form a strictly decreasing sequence in general. We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic2021} for the next theorem.
 
 \begin{theorem}\label{thm:decomposition-existence}
-  Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) are such that
+  Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-n}(\mathcal{F})\) are such that
   \begin{equation*}
     \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_j} \rVert_2 < \infty.
   \end{equation*}
-  Then a reverse margintale-coboundary decomposition exists. Moreover, this implies that
+  Then a reverse martingale-coboundary decomposition exists. Moreover, this implies that
   \begin{equation*}
     \int p \;d\mu = \int q \;d\mu = 0
   \end{equation*}
@@ -352,7 +353,7 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
   \begin{equation*}
     \sigma ^2 = \lVert q \rVert^2_2 = \lVert p \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int p \cdot p \circ g^n \;d\mu.
   \end{equation*}
-  This gives a way to calculate \(\sigma\) in terms of \(p\). By the preceding arguments, if \(\sigma > 0\), then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
+  This gives a way to calculate \(\sigma\) in terms of \(p\). By \cref{thm:martingale-coboundary}, if \(\sigma > 0\), then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
 \end{theorem}
 
 \begin{proof}
@@ -393,7 +394,7 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
     \int_A p \;d\mu - \int_A p \;d\mu =
     0,
   \]
-  for all \(A \in \mathcal{F}_{i + 1}\), so \(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \in L^2(\mathcal{F}_{i + 1})^{\bot}\). Then, \(q \in L^2(\mathcal{F}_1)^{\bot}\), so \(\CE[\mu]{q,\mathcal{F}_1} = 0\). It's clear, then, that
+  for all \(A \in \mathcal{F}_{i + 1}\), so \(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \in L^2(\mathcal{F}_{i + 1})^{\bot}\). Then, \(q \in L^2(\mathcal{F}_1)^{\bot}\), so \(\CE[\mu]{q,\mathcal{F}_1} = 0\) and \(\xi\) is an stationary ergodic reverse martingale difference sequence. It's also clear that
   \begin{equation*}
     \int p \;d\mu = \int q + s \circ g - s \;d\mu = \int q \;d\mu = \int \CE[\mu]{q,\mathcal{F}_1} \;d\mu = 0.
   \end{equation*}
@@ -432,8 +433,10 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
   \begin{figure}[h]
     \centering
     \includegraphics[width=150pt]{../figures/gridsum}
+    \caption{Depiction of the identity \(\sum_{0 \le i < j < n} f(j - i) = \sum_{i = 1}^n (n - i)f(i)\).}\label{fig:sum-identity}
+    % \caption{The sum of \(f(j - i)\) over \(0 \le i < j < n\) equals the sum of \((n - i)f(i)\) over \(1 \le i \le n\).}
   \end{figure}
-  Now, we have
+  Now, we have (see \cref{fig:sum-identity})
   \begin{equation*}
     \sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
     = 
@@ -456,9 +459,50 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
   \end{equation*}
   converges to the same limit. Substituting in \cref{normeq},
   \begin{equation*}
-    \norm{q}_2^2 = \norm{p}_2^2 + 2\lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{\infty} n \int p\cdot(p\circ g^{i}) \;d\mu
+    \norm{q}_2^2 = \norm{p}_2^2 + 2\lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{n} n \int p\cdot(p\circ g^{i}) \;d\mu
     = \norm{p}_2^2 + 2\sum_{i = 1}^{\infty}\int p\cdot(p\circ g^{i}) \;d\mu.
   \end{equation*}
+\end{proof}
+
+\subsection{Invertible case}
+
+If \(g\) is invertible (with measurable inverse), then \(\mathcal{F} = g^{-1}(\mathcal{F})\), so there is no hope of applying \cref{thm:decomposition-existence}. Still, in this case, we may be able to find a smaller \(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(g^{-1}\) ``forgets'' about the past values of \(p\) fast enough, but \(\CE{p,g^n(\mathcal{G})}\) is still asymptotically close to \(p\).
+For the sake of intuition, suppose \(X = \set{0,1}^{\ZZ}\) and \(g\) was the shift \(g((x_i)) = x_{i + 1}\). If we let \(\mathcal{G} \subseteq \mathcal{F}\) be the \(\sigma\)-algebra generated by the projections \(\pi_j\) on positive coordinates \(j \ge 0\), then for a continuous \(p\), we still expect that \(\CE[\mu]{p,g^{-n}(\mathcal{G})} \to 0\) for this algebra (because \(\bigcap_{n = 1}^{\infty} g^{-n}(\mathcal{G}) = \{\varnothing, X\}\)), but we expect \(\CE[\mu]{p,g^{n}(\mathcal{G})} \to p\) (because \(\bigcup_{n = 1}^{\infty} g^{n}(\mathcal{G}) = \mathcal{F}\)).
+
+\begin{theorem}\label{thm:decomposition-existence-inv}
+  Suppose \(p \in L^2(\mu)\), the inverse of \(g\) is measurable and there is a smaller \(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\mathcal{G}_j = g^{-j}(\mathcal{G})\) satisfies
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{G}_n} \rVert_2 < \infty\quad \text{ and }
+    \quad \sum_{n = 0}^{\infty} \norm{p - \CE[\mu]{p,\mathcal{G}_{-n}}}_2 < \infty.
+  \end{equation*}
+  Then a reverse martingale-coboundary decomposition \(p = q + s \circ g - s\) for \(q \in L^2(\mathcal{G})\) exists and the same conclusions of \cref{thm:decomposition-existence} hold.
+\end{theorem}
+
+\begin{proof}
+  \NewObject\Notation{\OP}{\mathbb{P}}[
+    output=\RandomVariable,
+    set arg sep={\where}
+  ]
+  Let \(U,L \colon L^2(\mu) \to L^2(\mu)\) be adjoint to each other as before:
+  \[
+    \begin{tikzcd}
+      {L^2(\mathcal{G}_i)} & {L^2(\mathcal{G}_{i+1})}
+      \arrow["U", bend left, from=1-1, to=1-2]
+      \arrow["L", bend left, from=1-2, to=1-1].
+    \end{tikzcd}
+  \]
+  We introduce a new operator \(\OP[\mu]{\phi,\mathcal{A}} = \phi - \CE[\mu]{\phi,\mathcal{A}}\), which on \(L^2(\mu)\) is precisely the orthogonal projection onto \(L^2(\mathcal{A})^{\bot}\).
+  Now, define
+  \begin{equation*}
+    s^+ = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{G}_i})\quad\text{ and }\quad
+    q^+ = \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p,\mathcal{G}_i} - \CE[\mu]{p, \mathcal{G}_{i + 1}}),
+  \end{equation*}
+  \begin{equation*}
+    s^- = \sum_{i = 1}^{\infty} U^i(\OP[\mu]{p,\mathcal{G}_{-i}})\quad\text{ and }\quad
+    q^- = \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p,\mathcal{G}_{-i + 1}} - \OP[\mu]{p, \mathcal{G}_{-i}}).
+  \end{equation*}
+  All series are absolutely convergent by hypothesis.
+
 \end{proof}
 
 \begin{remark}
