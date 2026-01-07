@@ -261,7 +261,7 @@ The statement below assumes less regularity than the corresponding one in~\cite[
     \frac{1}{n}\sum_{i = 0}^{n - 1} a(g^i(x)) - 2\gamma M\\
     &\ge \rpar[\big]{\int a \;d\mu}/4 > 0.
   \end{align*}
-  This means that \((f^n_x)'(z) \to \infty\) uniformly on \(z \le y\) (because neither of \(N_2\) and \(\int a \;d\mu\) depend on \(0\le z \le y\)). This is impossible, because by the mean value theorem, \(f^n_x(y) = (f^n_x)'(z) \cdot y\) for some \(0\le z \le y\), while \(f^n_x(y) \le 1\) is bounded.
+  This means that \((f^n_x)'(z) \to \infty\) uniformly on \(z \le y\) (because neither \(N_2\) nor \(\int a \;d\mu\) depend on \(z \in [0,y]\)). This is impossible, because by the mean value theorem, \(f^n_x(y) = (f^n_x)'(z_n) \cdot y\) for some \(0\le z_n \le y\), while \(f^n_x(y) \le 1\) is bounded.
 \end{proof}
 
 \begin{corollary}\label{cor:schwarz-basin-pos-meas}
@@ -326,6 +326,7 @@ We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) 
 
 \begin{lemma}
   We have \(m(\supp \beta_0) \ge \beta_0(\supp \beta_0) = \beta_0(X \times I) = m(\Basin{\mu_0}) > 0\).
+  \sidetodo{new :)}
 \end{lemma}
 
 \begin{proof}

@@ -5,8 +5,9 @@
 
 \input{preamble/macros/utils}
 
+\NewCommandCopy\sidetodo\todo
+\renewcommand\todo[1]{\textcolor{purple}{#1}}
 \newcommand\ohno[1]{\textcolor{violet}{#1}}
-\newcommand\todo[1]{\textcolor{purple}{#1}}
 \newcommand\review[1]{\textcolor{red}{#1}}
 \newcommand\rem[1]{\textcolor{yellow}{\textbf{ps.} #1}}
 \renewcommand\complement{\mathsf{c}}

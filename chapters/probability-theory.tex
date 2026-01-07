@@ -111,7 +111,7 @@ at the point is equal to the right limit:
 \end{equation*}
 We want to put a metric on this space with the property that functions are close together if their values are close to each other uniformly, but also allowing small perturbations in the parametrization of time. 
 
-\nomenclature{\(\CWPS\)}{The set of continuous functions \([0,1] \to \RR\) with the topology of uniform convergence.}
+\nomenclature{\(\Cs{X}\)}{The set of continuous functions \(X \to \RR\) with the topology of uniform convergence.}
 \nomenclature{\(\Sko{[0,1]}\)}{The Skorohod space, defined in \cref{sec:space-cadl-funct}.}
 
 \begin{definition}[Skorohod topology]
@@ -228,7 +228,7 @@ The distance above defines a metric on \(\WPS\), whose topology is called the Sk
 
 \subsection{Weak invariance principles}
 
-We will fix a probability space \((\Omega, \mathcal{F}, \Prob)\) for the rest of this section. Given a sequence \(\xi = (\xi_1,\xi_2,\dots)\) of random variables defined on \(\Omega\), we can define their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and a sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
+We will fix a probability space \((\Omega, \mathcal{F}, \Prob)\) for the rest of this section. Given a sequence \(\xi = (\xi_0,\xi_1,\dots)\) of random variables defined on \(\Omega\), we can define their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 0}^{n - 1}\xi_i\) and a sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
 \[\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}},\]
 obtained by appropriately scaling the partial sums of the random variables up to some iterate \(n\).
 
@@ -316,7 +316,7 @@ In the previous definition we considered an one-sided sequence of random variabl
 \subsubsection{Invariance principle for ergodic sequences}
 
 \begin{definition}
-  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
+  A sequence \(\xi = (\xi_0,\xi_1\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
 \end{definition}
 
 \begin{example}
@@ -334,7 +334,7 @@ In the previous definition we considered an one-sided sequence of random variabl
 
 \subsection{Reverse martingale difference sequences}
 
-In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\). This process is unlikely be a martingale difference sequence unless \(\varphi \equiv 0\), because \(\varphi \circ f^n\) is measurable for the \(\sigma\)-algebra \(f^{-n}(\mathcal{F})\), which is non-increasing due to measurability of \(f\). In other words, we may have \(\CE[\mu]{\varphi \circ f^{n}, {\sigma(\varphi, \dots, \varphi \circ f^{n - 1})}} = \varphi \circ f^{n} \neq 0\) in general. In the non-invertible case, the algebras \(f^{-n}(\mathcal{F})\) form a decreasing sequence in general. This suggests we should look at the processes in the opposite direction, and motivates the following definition.
+In ergodic dynamics, the processes we usually care about are the values \(\xi = (\varphi \circ f^{n})_{n \geq 0}\) of some observable \(\varphi \in L^1(\mu)\) along orbits of \(f\). This process is unlikely be a martingale difference sequence unless \(\varphi \equiv 0\), because \(\varphi \circ f^n\) is measurable for the \(\sigma\)-algebra \(f^{-n}(\mathcal{F})\), which is non-increasing due to measurability of \(f\). In other words, we may have \(\CE[\mu]{\varphi \circ f^{n}, {\sigma(\varphi, \dots, \varphi \circ f^{n})}} = \varphi \circ f^{n} \neq 0\) in general. In the non-invertible case, the algebras \(f^{-n}(\mathcal{F})\) form a decreasing sequence in general. This suggests we should look at the processes in the opposite direction, and motivates the following definition.
 \begin{definition}
   A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be a \textit{reverse} martingale difference sequence if for all \(n\),
   \begin{equation*}
@@ -342,7 +342,7 @@ In ergodic dynamics, the processes we usually care about are the values \(\xi = 
   \end{equation*}
 \end{definition}
 
-In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ f^{n - 1})_{n \geq 1}\) and \(\Prob = \mu\) an invariant measure for \(f\)), results for martingale difference sequences can be stated dually for reverse martingale difference sequences. The following discussion expands on comments and text present in~\cite[Appendix M22 and Section 19]{billingsleyConvergenceProbabilityMeasures1999}.
+In the case of a stationary sequence (as is the case for \(\xi = (\varphi \circ f^{n})_{n \geq 0}\) and \(\Prob = \mu\) an invariant measure for \(f\)), results for martingale difference sequences can be stated dually for reverse martingale difference sequences. The following discussion expands on comments and text present in~\cite[Appendix M22 and Section 19]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{corollary}\label{cor:donsker-martingale}
   If \(\xi \in L^2(\Prob)^{\NN}\) is a stationary ergodic reverse martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).

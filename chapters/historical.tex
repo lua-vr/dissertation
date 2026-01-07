@@ -18,7 +18,7 @@ The ``historical'' terminology was introduced by Ruelle in~\cite{ruelleHistorica
 Later, Floris Takens exposed the problem again in~\cite{takensOrbitsHistoricBehaviour2008}, giving some promising examples that were known at the time and also making some remarks about generiticity of points without asymptotic measures. For this reason and his work in related matters, the open question also became known as \textit{Taken's Last Problem}.
 
 \begin{example}[Logistic family]
-   The family of interval maps \(f_a(x) = ax(1 - x)\), for \(0 < a \le 4\), is known as the logistic family, and is one of the earliest examples where historical behavior is present ``abundantly'': in~\cite{hofbauerQuadraticMapsAsymptotic1990}, it is shown that for an uncountable number of parameters \(a\), Lebesgue almost every orbit in \([0,1]\) has no asymptotic measure. The example is not persistent, however.
+   The family of interval maps \(f_a(x) = ax(1 - x)\) for \(0 < a \le 4\) is known as the logistic family, and is one of the earliest examples where historical behavior is present ``abundantly'': in~\cite{hofbauerQuadraticMapsAsymptotic1990}, it is shown that for an uncountable number of parameters \(a\), Lebesgue almost every orbit in \([0,1]\) has no asymptotic measure. The example is not persistent, however.
 \end{example}
 
 \begin{figure}[h]
@@ -234,7 +234,7 @@ In the \cref{sec:deriv-weak-invar}, we will show how the weak invariance princip
 
 \subsection{Infinite ergodic theory}
 
-It's possible to show that if we already assume the weak invariance principle, then the extra condition of \cref{col:histo-avoid-compacts} may be met by means of infinite ergodic theory. Let's see some relevant definitions.
+It is possible to show that under the assumption of a weak invariance principle, the extra condition of \cref{col:histo-avoid-compacts} may be met by means of infinite ergodic theory. Let's see some relevant definitions.
 
 \begin{definition}
   A map \(f \colon X \to X\) on a (potentially infinite) measure space \((X,\mathcal{B},\mu)\) is called \emph{conservative} if for all measurable sets \(E \subseteq X\) with the property that \(\set{f^{-n}(E)}_{n \in \NN}\), 
@@ -263,7 +263,7 @@ In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \
   When the pair \((g,p)\) satisfies an almost sure invariance principle, the extra condition of \cref{col:histo-avoid-compacts} is satisfied.
 \end{theorem}
 \begin{proof}
-  Fixing a compact \(K \subseteq \RR\), \cref{item:1} implies that
+  Fixing a compact \(K \subseteq \RR\), \cref{item:1} implies that\sidetodo{new :)}
   \begin{equation}\label{eq:9}
     \mu\rpar[\bigg]{\set[par = \Big]{x \in X \where \frac{1}{n}\sum_{i = 0}^{n - 1}1_K(\PSum[i](x)) \to 0}}
     =
@@ -331,50 +331,124 @@ by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the inters
 \end{equation*}
 \end{proof}
 
-We will call the decomposition in \cref{thm:martingale-coboundary} a martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: invertible, and non-invertible \(g\).
+We will call the decomposition in \cref{thm:martingale-coboundary} a reverse martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: invertible, and non-invertible \(g\).
 
 \subsection{Existence of martingale-coboundary decomposition}
-From now on, we assume that \(\mu\) is an ergodic measure for \(g\).
+From now on, we assume that \(\mu\) is an ergodic measure for \(g\). We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic2021} for the next theorem.
 
 \begin{theorem}\label{thm:decomposition-existence}
-  Suppose \(\phi \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) are such that
+  Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) are such that
   \begin{equation*}
-    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{\phi, \mathcal{F}_j} \rVert_2 < \infty.
+    \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_j} \rVert_2 < \infty.
   \end{equation*}
-  Then a decomposition as in \cref{eq:coboundary} exists. Moreover, this implies that
+  Then a reverse margintale-coboundary decomposition exists. Moreover, this implies that
   \begin{equation*}
-    \int \phi \;d\mu = \int \phi_0 \;d\mu = 0
+    \int p \;d\mu = \int q \;d\mu = 0
   \end{equation*}
-  and that the series in
+  and we have the equality
   \begin{equation*}
-    \sigma ^2 = \lVert \phi_0 \rVert^2_2 = \lVert \phi \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int \phi \cdot \phi \circ g^n \;d\mu
+    \sigma ^2 = \lVert q \rVert^2_2 = \lVert p \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int p \cdot p \circ g^n \;d\mu.
   \end{equation*}
-  converges absolutely. By the preceding arguments, if \(\phi_0 \neq 0\) then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
+  This gives a way to calculate \(\sigma\) in terms of \(p\). By the preceding arguments, if \(\sigma > 0\), then \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\).
 \end{theorem}
 
 \begin{proof}
   \newcommand{\pp}{\phi^+}
   \newcommand{\pn}{\phi^-}
-  Denote by \(U \colon L^2(\mu) \to L^2(\mu)\) the Koopman operator \(U(\varphi) = \varphi \circ f\). Let \(L \colon L^2(\mu) \to L^2(\mu)\) be its adjoint:
+  Denote by \(U \colon L^2(\mu) \to L^2(\mu)\) the Koopman operator \(U(\varphi) = \varphi \circ g\). Let \(L \colon L^2(\mu) \to L^2(\mu)\) be its adjoint:
   \begin{equation*}
-    \int L(\varphi)\psi \;d\mu = \int \varphi U(\psi) \;d\mu.
+    \int L(\varphi)\cdot \psi \;d\mu = \int \varphi \cdot U(\psi) \;d\mu.
   \end{equation*}
-  Since \(U\) is an isometry, \(L\) is an isometry as well. Moreover, being an isometry implies \(UL = \Id\).
+  Since \(U\) is an isometry into \(U(L^2(\mu)) = L^2(\mathcal{F}_1)\), the restriction \(L \mid L^2(\mathcal{F}_1)\) is an isometry as well. Moreover, we have \(UL\mid  L^2(\mathcal{F}_1) = \Id \mid L^2(\mathcal{F}_1)\) (but be careful: \(\ker L = L^2(\mathcal{F}_1)^{\bot}\)).
 
   
   Define
   \begin{equation*}
-    \zeta = - \sum_{i = 1}^{\infty} L^i(\CE[\mu]{\phi,\mathcal{F}_i})\quad\text{ and }\quad
-    \eta = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{\phi,\mathcal{F}_i} - \CE[\mu]{\phi, \mathcal{F}_{j + 1}}),
+    s = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i})\quad\text{ and }\quad
+    q = \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}}),
   \end{equation*}
-  whose series converge due to the hypothesis and \(L\) being an isometry.
-
-  
-  \todo{write}
+  whose series converge due to the hypothesis and \(L\) being an isometry. Rewriting,
+  \begin{align*}
+    q &=
+        \CE[\mu]{p,\mathcal{F}_0} + 
+        \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+        \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p, \mathcal{F}_{i + 1}})\\
+      &=
+        p +
+        \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+        \sum_{i = 0}^{\infty} UL(L^i(\CE[\mu]{p, \mathcal{F}_{i + 1}}))\\
+      &=
+        p +
+        \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+        \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p, \mathcal{F}_{i}}) \circ g\\
+      &=
+        p + s - s \circ g.
+  \end{align*}
+  Therefore \(p = q + s \circ g - s\). We now check \(q\) is a reverse martingale. For that, notice that \(L^i(L^2(\mathcal{F}_{i + 1})^{\bot}) = L^2(\mathcal{F}_1)^{\bot}\), and since \(\mathcal{F}_{i + 1} \subseteq \mathcal{F}_i\),
+  \[
+    \int_A\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \;d\mu =
+    \int_A p \;d\mu - \int_A p \;d\mu =
+    0,
+  \]
+  for all \(A \in \mathcal{F}_{i + 1}\), so \(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \in L^2(\mathcal{F}_{i + 1})^{\bot}\). Then, \(q \in L^2(\mathcal{F}_1)^{\bot}\), so \(\CE[\mu]{q,\mathcal{F}_1} = 0\). It's clear, then, that
+  \begin{equation*}
+    \int p \;d\mu = \int q + s \circ g - s \;d\mu = \int q \;d\mu = \int \CE[\mu]{q,\mathcal{F}_1} \;d\mu = 0.
+  \end{equation*}
+  Also, for any \(0 \le i < j\),
+  \begin{equation*}
+    \int (q \circ f^i)(q \circ g^j) \;d\mu = 
+    \int q \cdot (q \circ g^j) \;d\mu = 0
+  \end{equation*}
+  because \(q \circ g^j \in L^2(\mathcal{F}_j) \subseteq L^2(\mathcal{F}_1)^{\bot}\).
+  Therefore,
+  \begin{equation*}
+    \norm{q}_2^2
+    = \frac{1}{n}\sum_{i = 0}^{n - 1} \norm{q \circ g^i}_2^2
+    = \norm[\Big]{\frac{1}{\sqrt{n}}\sum_{i = 0}^{n - 1} q \circ g^i}_2^2.
+  \end{equation*}
+  We also have
+  \begin{equation*}
+    \norm[\Big]{\frac{1}{\sqrt{n}}\sum_{i = 0}^{n - 1} p \circ g^i - \frac{1}{\sqrt{n}}\sum_{i = 0}^{n - 1} q \circ g^i}_2
+    = \frac{1}{\sqrt{n}}\norm{ s \circ g^{n} - s}_2
+    \le \frac{2\norm{s}_2}{\sqrt{n}} \to 0,
+  \end{equation*}
+  so
+  \begin{align*}
+    \norm{q}_2^2
+    &= \lim_{n \to \infty} 
+    \norm[\Big]{\frac{1}{\sqrt{n}}\sum_{i = 0}^{n - 1} p \circ g^i}_2^2\\
+    &= \lim_{n \to \infty} 
+    \frac{1}{n}\rpar[\Big]{\sum_{i = 0}^{n - 1} \norm{p \circ g^i}_2^2
+      + 2 \sum_{0 \le i < j < n} \int (p \circ g^i)(p \circ g^j) \;d\mu
+    }\\
+    &= \norm{p}_2^2 +
+      2\lim_{n \to \infty} \frac{1}{n}
+      \sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
+      .
+  \end{align*}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=150pt]{../figures/gridsum}
+  \end{figure}
+  Now, we have
+  \begin{equation*}
+    \frac{1}{n}\sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
+    = 
+    \frac{1}{n}\sum_{i = 1}^{n}(n - i) \int p \cdot (p \circ g^{i}) \;d\mu.
+  \end{equation*}
+  Notice
+  \begin{equation*}
+    \int p \cdot (p \circ g^{i}) \;d\mu
+  \end{equation*}
+  and
+  % \begin{equation*}
+  %   \frac{1}{n}\sum_{i = 1}^{n}i \int p\frac{1}{n}circ g^{i}) \;d\iu
+  %   \to 0
+  % \end{equation*}
 \end{proof}
 
 \begin{remark}
-  If \(\varphi\) was a coboundary \(\varphi = \phi \circ f - \phi\) to begin with, then it is clear that \(\PSum[n,rv = \xi] = \phi \circ f^n - \phi\), so the iterates of the skew product \(F(x,y) = (f(x), y + \varphi(x))\) satisfy
+  If \(p\) was a coboundary \(p = \phi \circ f - \phi\) to begin with, then it is clear that \(\PSum[n,rv = \xi] = \phi \circ f^n - \phi\), so the iterates of the skew product \(F(x,y) = (f(x), y + p(x))\) satisfy
   \begin{equation*}
     F^n(x_0,y_0) = (f^n(x_0), \phi(f^n(x_0)) - \phi(x_0) + y_0) \subseteq \graph(\psi)
   \end{equation*}

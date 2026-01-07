@@ -289,8 +289,6 @@ We note that in this context, a \emph{sink} is an attracting periodic orbit. Eac
   A
 \end{conjecture}
 
-It may happen that the set of points whose empirical measures do not converge is large, in the sense that it has positive volume. Systems with this property are said to exhibit \emph{historical behavior}, and the existence of diffeomorphisms exhibiting historical behavior in a robust way is an important open problem in dynamics.
-
 \section{Relating dynamics: extensions}
 
 Different dynamical systems can be related to each other by the concept of \emph{factors}, or \emph{extensions}, expressing a sense in which one system is a simplification of another. In the categorical language we have been developing, an extension is a natural transformation \(F \Rightarrow G\) between two dynamical systems \(F\) and \(G\). In this situation, we then say that \(G\) is a \emph{factor} of \(F\). The single morphism \(F(\star) \to G(\star)\) specified by the natural transformation is also called the \emph{factor map}.
@@ -388,65 +386,62 @@ Different dynamical systems can be related to each other by the concept of \emph
 \begin{proof}
   \todo{Apply Kolmogorov extension theorem.}
 
-  Let \(\widetilde{X} \subseteq X^{\ZZ}\) be the subset defined by
-  \begin{equation*}
-    \widetilde{X} = \bigcap_{i \in \ZZ} \set{ x \in X^{\ZZ} \where x_{i + 1} = f(x_{i})},
-  \end{equation*}
-  which is closed in the product topology by definition.
-
-  , with \(\pi \colon \widetilde{X} \to X\) being the projection on the zeroth coordinate, that is, \(\pi(\dots,x_{-1},x_0,x_1,\dots) = x_0\).
-
-  First, define \(\tilde{f}\) to be
 \end{proof}
 
-\begin{lemma}
-  Let \(\pi \colon (\widetilde{X}, \tilde{f}, \tilde{\mu}) \to (X, f, \mu)\) be a natural invertible extension. Then, we have a converse for \cref{lem:factor-ergodic}: if \(\mu\) is ergodic for \(f\), then \(\tilde{\mu}\) is ergodic for \(\tilde{f}\).
+\begin{lemma}\label{lem:inv-ext-ergodic}
+  Let \(\pi \colon (\widetilde{X}, \tilde{f}, \tilde{\mu}) \to (X, f, \mu)\) be the natural invertible extension. Then, we have a converse for \cref{lem:factor-ergodic}: if \(\mu\) is ergodic for \(f\), then \(\tilde{\mu}\) is ergodic for \(\tilde{f}\).
 \end{lemma}
 
-\subsubsection{A failure of existence}
-\cite{przytyckiConformalFractalsErgodic2010}
+\begin{proof}
+  Suppose \(\mu\) is ergodic but \(\tilde{\mu}\) is not; then, we can write \(\tilde{\mu} = \lambda\mu_0 + (1 - \lambda)\mu_1\) for \(\mu_0 \neq \mu_1\). Let \(\nu_0 = \pi_*\mu_0\) and \(\nu_1 = \pi_*\mu_1\), so that \(\mu = \lambda\nu_0 + (1 - \lambda)\nu_1\) by linearity. By ergodicity, \(\nu_0 = \nu_1 = \mu\), contradicting the uniqueness of the measure \(\tilde{\mu}\) such that \(\pi_*\tilde{\mu} = \mu\).
+\end{proof}
 
-Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
+Invertible extensions may not exist for non-Borel spaces. The following example of non-existence of the natural extension expands on an exercise of~\cite{przytyckiConformalFractalsErgodic2010}.
 
-If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
-\[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
-then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
+\begin{example}[Non-existence]
+  Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
 
-Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
+  If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
+  \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
+  then \(\mu^*\) is an probability outer measure that restricts itself to a probability measure \(\mu\) on \(\mathcal{E}\). It is also the case that \(\mathcal{E} = \mathcal{B} \cup \{ A \cap K : A \in \mathcal{B} \} \cup \{ A \cap K^{\complement} : A \in \mathcal{B} \}\). Let \(\mathcal{C}_K\) be the completion by \(\mu^*\) of the \(\sigma\)-algebra \(\mathcal{E}\).
 
-Now, for any \(A \in \mathcal{C}_K\), we can write \(A = B \cup Z\) with \(B \in \mathcal{E}\) and \(\mu^*(Z) = 0\); thus, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Note that
-\begin{equation*}
-  \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
-\end{equation*}
-therefore \(f^{-1}(\mathcal{C}_K) \subset \mathcal{C}_K\).
+  Let's apply the above construction for \(K = \bigcup_{n = 1}^{\infty}f^{n}(E)\). Note that \(E \cap K = \varnothing\), therefore \(\mu^*(E) = 0\) and \(E \in \mathcal{C}_K\). We conclude that \(f^{-1}(K) = E \cup K\) is measurable as well, so for every \(A \in \mathcal{B}\), \(f^{-1}(A \cap K) = f^{-1}(A) \cap f^{-1}(K)\) is measurable, thus \(f^{-1}(\mathcal{E}) \subseteq \mathcal{C}_K\).
 
-The same calculation shows that \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) for any \(A \subseteq X\). Thus, if \(A\) is measurable,
-\begin{equation*}
-  1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
-\end{equation*}
-so \(f_*\mu = \mu\) on \(\mathcal{C}_K\).
+  Now, for any \(A \in \mathcal{C}_K\), we can write \(A = B \cup Z\) with \(B \in \mathcal{E}\) and \(\mu^*(Z) = 0\); thus, \(f^{-1}(A) = f^{-1}(B) \cup f^{-1}(Z)\). Notice that
+  \begin{equation*}
+    \mu^*(f^{-1}(Z)) = m^*(Z \cap f(K)) \leq m^*(Z \cap K) = \mu^*(Z) = 0,
+  \end{equation*}
+  therefore \(f^{-1}(\mathcal{C}_K) \subset \mathcal{C}_K\).
 
-Consider \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) as the inverse limit of \((X,f,\mathcal{C}_K)\), endowed with the restriction of the product \(\sigma\)-algebra. Note that \(\tilde{f} \colon \Sigma \to \Sigma\) given by
-\[
-\tilde{f}((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots, x_{-1}, x_0, f(x_0))
-\]
-is invertible and measurable, since
-\[
-\tilde{f}([A_{-k}, \dots, A_0] \cap \Sigma) = [A_{-k}, \dots, A_0, X] \cap \Sigma.
-\]
-For each \(n \in \ZZ_{\leq 0}\), let \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suppose there exists \(\tilde{\mu}\), a measure on \(\Sigma\) such that \(\pi_* \tilde{\mu} = \mu\), where \(\pi((x_i)_{i \leq 0}) = x_0\). Then
-\begin{equation*}
-  \tilde{\mu}(K_n) = \tilde{\mu}(\tilde{f}^n(\pi^{-1}(K))) = \mu(K) = 1
-\end{equation*}
-for every \(n\). On the other hand, since \(f\) is invertible,
-\begin{align*}
-  \bigcap_{n \leq 0} K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
-    &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.
-\end{align*}
-But this set is empty because
-\begin{equation*}
+  The same calculation shows that \(\mu^*(f^{-1}(A)) \leq \mu^*(A)\) for any \(A \subseteq X\). Thus, if \(A\) is measurable,
+  \begin{equation*}
+    1 - \mu(f^{-1}(A)) = \mu(f^{-1}(A^{\complement})) \leq \mu(A^{\complement}) = 1 - \mu(A),
+  \end{equation*}
+  so \(f_*\mu = \mu\) on \(\mathcal{C}_K\).
+
+  Consider \(\Sigma = \{ (x_i)_{i \leq 0} : f(x_i) = x_{i + 1} \} \subseteq X^{\ZZ_{\le 0}}\) as the inverse limit of \((X,f,\mathcal{C}_K)\), endowed with the restriction of the product \(\sigma\)-algebra. Note that \(\tilde{f} \colon \Sigma \to \Sigma\) given by
+  \[
+    \tilde{f}((x_i)_{i \leq 0}) = (f(x_i))_{i \leq 0} = (\dots, x_{-1}, x_0, f(x_0))
+  \]
+  is invertible and measurable, since
+  \[
+    \tilde{f}([A_{-k}, \dots, A_0] \cap \Sigma) = [A_{-k}, \dots, A_0, X] \cap \Sigma.
+  \]
+  For each \(n \in \ZZ_{\leq 0}\), let \(K_n = [n \mid K] =  \{ (x_i)_{i \leq 0} : x_n \in K \}\). Suppose there exists \(\tilde{\mu}\), a measure on \(\Sigma\) such that \(\pi_* \tilde{\mu} = \mu\), where \(\pi((x_i)_{i \leq 0}) = x_0\). Then
+  \begin{equation*}
+    \tilde{\mu}(K_n) = \tilde{\mu}(\tilde{f}^n(\pi^{-1}(K))) = \mu(K) = 1
+  \end{equation*}
+  for every \(n\). On the other hand, since \(f\) is invertible,
+  \begin{align*}
+    \bigcap_{n \leq 0} K_n &= \{ (x_i)_{i \leq 0} : \forall i, x_i \in K \} \\
+                           &= \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \}.
+  \end{align*}
+  But this set is empty because
+  \begin{equation*}
     \{ (x_i)_{i \leq 0} : \forall n \geq 0, f^{-n}(x_0) \in K \} = \bigcap_{n = 0}^{\infty} f^n(K) = \limsup_n E_n =  \varnothing.
-\end{equation*}
+  \end{equation*}
+\end{example}
+
 
 \subsection{The solenoid}
 \todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025} \cite{anderssonNonuniformlyHyperbolicEndomorphisms2024}}
