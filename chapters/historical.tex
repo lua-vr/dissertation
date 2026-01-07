@@ -336,6 +336,9 @@ We will call the decomposition in \cref{thm:martingale-coboundary} a reverse mar
 \subsection{Existence of martingale-coboundary decomposition}
 From now on, we assume that \(\mu\) is an ergodic measure for \(g\). We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic2021} for the next theorem.
 
+\subsubsection{Non-invertible case}
+Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\)-algebras \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) form a strictly decreasing sequence in general.
+
 \begin{theorem}\label{thm:decomposition-existence}
   Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) are such that
   \begin{equation*}
@@ -424,7 +427,7 @@ From now on, we assume that \(\mu\) is an ergodic measure for \(g\). We will fol
     &= \norm{p}_2^2 +
       2\lim_{n \to \infty} \frac{1}{n}
       \sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
-      .
+      .\stepcounter{equation}\tag{\theequation}\label{normeq}
   \end{align*}
   \begin{figure}[h]
     \centering
@@ -432,19 +435,30 @@ From now on, we assume that \(\mu\) is an ergodic measure for \(g\). We will fol
   \end{figure}
   Now, we have
   \begin{equation*}
-    \frac{1}{n}\sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
+    \sum_{0 \le i < j < n} \int p \cdot (p \circ g^{j - i}) \;d\mu
     = 
-    \frac{1}{n}\sum_{i = 1}^{n}(n - i) \int p \cdot (p \circ g^{i}) \;d\mu.
+    \sum_{i = 1}^{n}(n - i) \int p \cdot (p \circ g^{i}) \;d\mu.
   \end{equation*}
-  Notice
+  Since \(p \circ g^i \in L^2(\mathcal{F}_i)\), by Cauchy-Schwarz,
   \begin{equation*}
-    \int p \cdot (p \circ g^{i}) \;d\mu
+    \int p \cdot (p \circ g^{i}) \;d\mu = 
+    \int \CE[\mu]{p,\mathcal{F}_i} (p \circ g^{i}) \;d\mu
+    \le \norm{p}_2 \norm{\CE[\mu]{p,\mathcal{F}_i}}
   \end{equation*}
-  and
-  % \begin{equation*}
-  %   \frac{1}{n}\sum_{i = 1}^{n}i \int p\frac{1}{n}circ g^{i}) \;d\iu
-  %   \to 0
-  % \end{equation*}
+  and therefore
+  \begin{equation*}
+    \sum_{i = 1}^{\infty} \int p \cdot (p \circ g^{i}) \;d\mu < \infty
+  \end{equation*}
+  by the assumption. This implies \(i \int p \cdot (p \circ g^{i}) \;d\mu \to 0\), so the Cesàro average
+  \begin{equation*}
+    \frac{1}{n}\sum_{i = 1}^{n}i \int p\cdot(p\circ g^{i}) \;d\mu
+    \to 0
+  \end{equation*}
+  converges to the same limit. Substituting in \cref{normeq},
+  \begin{equation*}
+    \norm{q}_2^2 = \norm{p}_2^2 + 2\lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{\infty} n \int p\cdot(p\circ g^{i}) \;d\mu
+    = \norm{p}_2^2 + 2\sum_{i = 1}^{\infty}\int p\cdot(p\circ g^{i}) \;d\mu.
+  \end{equation*}
 \end{proof}
 
 \begin{remark}
