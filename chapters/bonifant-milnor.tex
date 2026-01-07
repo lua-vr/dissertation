@@ -201,7 +201,7 @@ Thus, by the ergodicity of \(\mu\)  for \(g\) and the Birkhoff ergodic theorem, 
 \end{equation}
 and we shall denote this common value by \(\Lyap(\mathcal{A}_i)\).
 
-The version of the statement below is slightly more general than the corresponding one in~\cite[lemma A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
+The statement below assumes less regularity than the corresponding one in~\cite[lemma A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). Also, the second part of the proof (when the Lyapunov exponent is positive) is original, because the basins of the original article are topological instead of measure-theoretic. In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
 \begin{lemma}\label{lem:lyap-basin-posmeas}
   If the family \(\{ f_x' \}_{x \in X}\) is equicontinuous at \(i \in \{ 0,1 \}\) and \(\Lyap(\mathcal{A}_i) < 0\), then the basin of \(\mu \otimes \delta_i\) has positive \(\mu \otimes \Leb\) measure.  Conversely, if \(\Lyap(\mathcal{A}_i) > 0\), then the corresponding basin has null measure.
 \end{lemma}
@@ -214,7 +214,7 @@ The version of the statement below is slightly more general than the correspondi
   Let \(a(x) = \log(f_x'(0) + \varepsilon)\). By the Birkhoff ergodic theorem, for \(\mu\)-almost every \(x \in X\)
   \begin{equation*}
     \lim_{n \to \infty}\frac{1}{n}\sum_{k = 0}^{n - 1} a(g^k(x)) = 
-    \int a(x) \;d\mu(x) < 0,
+    \int a \;d\mu < 0,
   \end{equation*}
   which implies \(\lim_{n \to \infty}\sum_{k = 0}^{n - 1} a(g^k(x)) = -\infty\). This means that the function
   \begin{equation*}
@@ -234,7 +234,34 @@ The version of the statement below is slightly more general than the correspondi
   \end{align*}
   Since \(\lim_{n \to \infty} \sum_{k = 0}^{n - 1}a(g^k(x)) = -\infty\), we have \(f_x^{n + 1}(y) \to 0\). Thus, if \(x \in \mathcal{B}(\mu)\) (which has full measure), then \(e_{n}(x,y) \weakto \mu_0\) whenever \(y \leq \delta e^{-A(x)}\).
 
-  % TODO: write the converse
+  The converse is slightly more tricky, because \((x,y)\) may be in the basin of \(\mu_0\) but \(f_x^n(y)\not\to 0\).\sidetodo{new :)} Let \(\varepsilon > 0\) be such that
+  \begin{equation*}
+    \int \log(f_x'(0) - \varepsilon) \;d\mu(x) > 0.
+  \end{equation*}
+  and let \(M = \max_{(x,y)} \abs{\log (f'_x(y))}\). Define \(a(x) = \log(f_x'(0) - \varepsilon)\), so like before, 
+  \begin{equation*}
+    \lim_{n \to \infty}\frac{1}{n}\sum_{i = 0}^{n - 1} a(g^i(x)) = 
+    \int a \;d\mu > 0,
+  \end{equation*}
+  for \(x \in E\) in a full measure set, and let \(\delta\) be such that \(0 \le y \le \delta\) implies \(\abs{f_x'(0) - f_x'(y)} < \epsilon\). Let \(\gamma = (\int a \;d\mu)/(8M) < 1\). Take \((x, y) \in \Basin{\mu_0}\) such that \(x \in E\) and \(y \in (0,1)\), which is possible if we assume \(\Basin{\mu_0}\) has positive \(\mu \otimes \Leb\) measure. Now, consider the strip \(S_{\delta} = X \times \interval[open right]{0}{\delta}\). Since \(\mu_0(S_{\delta}) = 1\), \(\mu_0(\partial S_{\delta}) = 0\) and \((x,y) \in \Basin{\mu_0}\), by \cref{thm:portmanteau} there is \(N_1\) for which \(n \ge N_1\) implies \(G_n = \set{0 \le i \le n \where f_x^i(y) < \delta}\) satisfies \(\# G_n / n > 1 - \gamma\). Let \(N_2 \ge N_1\) be such that \(n \ge N_2\) implies \(\frac{1}{n}\sum_{i = 0}^{n - 1} a(g^i(x)) > 
+  (\int a \;d\mu)/2\). Then, for \(n \ge N_2\) and any \(z \le y\), we have
+  \begin{equation*}
+    \frac{1}{n}\log ((f^n_x)'(z))
+    = 
+    \frac{1}{n}\sum_{i = 0}^{n - 1} \log(f'_{g^i(x)}(f_x^i(z)))
+    \ge 
+    \frac{1}{n}\sum_{i \in G_n} \log(f'_{g^i(x)}(f_x^i(z))) - \gamma M.
+  \end{equation*}
+  Now, \(i \in G_n\) implies \(f^i_x(y) < \delta\), which implies \(f^i_x(z) < \delta\) by monotonicity. This, in turn, implies \(\log(f'_{g^i(x)}(f_x^i(z))) \ge \log(f'_{g^i(x)}(0) - \varepsilon) = a(g^i(x))\). Therefore
+  \begin{align*}
+    \frac{1}{n}\log ((f^n_x)'(z))
+    \ge 
+    \frac{1}{n}\sum_{i \in G_n} a(g^i(x)) - \gamma M.
+    &\ge 
+    \frac{1}{n}\sum_{i = 0}^{n - 1} a(g^i(x)) - 2\gamma M\\
+    &\ge \rpar[\big]{\int a \;d\mu}/4 > 0.
+  \end{align*}
+  This means that \((f^n_x)'(z) \to \infty\) uniformly on \(z \le y\) (because neither of \(N_2\) and \(\int a \;d\mu\) depend on \(0\le z \le y\)). This is impossible, because by the mean value theorem, \(f^n_x(y) = (f^n_x)'(z) \cdot y\) for some \(0\le z \le y\), while \(f^n_x(y) \le 1\) is bounded.
 \end{proof}
 
 \begin{corollary}\label{cor:schwarz-basin-pos-meas}
@@ -429,9 +456,10 @@ The idea of the proof is to pass to the invertible extension of the system and o
   \begin{equation*}
     \eF(\ex, y) = (\eg(\ex), f_{\pi(\ex)}(y)).
   \end{equation*}
-  Note that \(\eF^{-1}(x, y) = (\eg^{-1}(x), f_{\pi(\eg^{-1}(x))}^{-1}(y))\). Since \(\pi_* \emu = \mu\) and \(\eg_* \emu = \emu\), by \cref{prop:schwarzian} we have \(f_{\pi(\eg^{-1}(\ex))}^{-1} \prec 0\) for almost every \(\ex \in \eX\). Thus, we can apply \cref{thm:neg-schwarz-sep-graph} to \(F^{-1}\) and obtain a function \(\sigma \colon \eX \to I\) that separates the basins \(\eBu\) and \(\eBl\).
+  Note that \(\eF^{-1}(x, y) = (\eg^{-1}(x), f_{\pi(\eg^{-1}(x))}^{-1}(y))\). Since \(\pi_* \emu = \mu\) and \(\eg_* \emu = \emu\), by \cref{prop:schwarzian} we have \(f_{\pi(\eg^{-1}(\ex))}^{-1} \prec 0\) for almost every \(\ex \in \eX\). Also, by \cref{lem:inv-ext-ergodic}, \(\tilde{\mu}\) is ergodic for \(F\) (and therefore, also for \(F ^{-1}\)). Thus, we can apply \cref{thm:neg-schwarz-sep-graph} to \(F^{-1}\) and obtain a function \(\sigma \colon \eX \to I\) that separates the basins \(\eBu\) and \(\eBl\).
 
-  The hyperbolic metric (which coincides with the Hilbert metric) on \((0, 1)\) is given by \[d_H(r, s) = \log \lvert \rho(0, r, s, 1) \rvert.\]
+  The hyperbolic metric (which coincides with the Hilbert metric) on \((0, 1)\) is given by
+  \[d_H(r, s) = \log \lvert \rho(0, r, s, 1) \rvert.\]
   This metric induces the usual topology of the interval.
   Since maps with positive Schwarzian decrease cross-ratios, the condition \(\SchD f_x \succ 0\) means that \(f_x\) is a contraction (not necessarily uniform) for this metric.
 
