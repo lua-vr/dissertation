@@ -5,6 +5,16 @@
 \chapter{Partially hyperbolic dynamics}
 
 \section{Partial hyperbolicity}
+
+\begin{definition}
+  Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists \(\lambda \in (0,1)\) and a decomposition \(TM = E^s \oplus E^c \oplus E^u\) which is invariant by \(df\) and such that
+  \begin{enumerate}
+  \item \(\norm{df^n v^s} \le \lambda^n \norm{v^s}\);
+  \item \(\norm{df^{-n} v^u} \le \lambda^n \norm{v^u}\);
+  \item \(\lambda^{-n}\norm{df^n v^s} \le \norm{df^n v^c} \le \lambda^n \norm{df^n v^u}\).
+  \end{enumerate}
+\end{definition}
+
 \section{Invariance Principle}
 
 \begin{definition}
@@ -16,8 +26,25 @@
 \end{definition}
 
 \begin{theorem}\label{thm:invariance-principle-skew-products}
-  Let \(f \colon M \to M\), where \(M = X \times Y\), be a skew product diffeomorphism with an ergodic invariant measure \(\mu\).  Then, \(\lambda^c(\mu) \le 0\) implies that \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that \((h^u_{x,y})_*\mu_x^c = \mu^c_{y}\).
+  Let \(f \colon X \to X\), where \(X = M \times N\), be a skew product diffeomorphism with an ergodic invariant measure \(\mu\) and \(M\), \(N\) are compact manifolds.  Then, \(\lambda^c(\mu) \le 0\) implies that \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that \((h^u_{x,y})_*\mu_x^c = \mu^c_{y}\).
 \end{theorem}
+
+We will begin by explaining the main idea behind the proof. For that, assume we work locally in \(W^{cu}\), in a coordinate system parametrized by a box \([0,1]^{\dim E^u} \times [0,1]^{\dim N}\). In this box, each leaf of the \(\mathcal{F}^c\) foliation is simply a ``vertical'' section \(\mathcal{F}^c(x,y) = \set{(x,y) \where y \in [0,1]^{\dim N}}\), and the unstable holonomy maps \(h_{x_1,x_2}^u(y) = y\) are the identity on \([0,1]^{\dim N}\).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[page=1,scale=0.8]{../figures/invp}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[page=2,scale=0.8]{../figures/invp}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[page=3,scale=0.8]{../figures/invp}
+\end{figure}
 
 \todo{Sketch the proof as in the notes taken on ICTP.}
 

@@ -552,17 +552,17 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
 \end{definition}
 
 \begin{example}\label{eg:point-partition-meas}
-  The partition \(\bot\) of all points of a second-countable \(T_1\) topological space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
+  The partition \(\top\) of all points of a second-countable \(T_1\) topological space \(\cms\) is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
-  Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(P \in \mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable by definition, and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \bot\).
+  Let \(\set{U_n}_{n \in \NN}\) be a countable basis for the topology of \(\cms\), and define \(\pP[n] = \set{U_n, U_n^{\complement}}\). Let \(\mathcal{P} = \bigvee_{n \in \NN} \mathcal{P}_n\), which is measurable by definition, and let \(P \in \mathcal{P}\) and \(p \in P\). If \(q \in P\), then we must have \(\pP[n](p) = \pP[n](q)\) for all \(n \in \NN\), or in other words, \(p \in U_n \iff q \in U_n\), for all \(n\). The \(T_1\) property then implies \(p = q\), so \(P = \set{p}\). This shows \(\pP = \top\).
 \end{proof}
 
 \begin{example}
   Any partition \(\pP\) of a compact metric space \(X\) whose elements are closed is measurable in the Borel \(\sigma\)-algebra.
 \end{example}
 \begin{proof}
-  Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (this is the Hausdorff metric, which we detail in \cref{def:hausdorff-metric}). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\bot\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
+  Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (since they are disjoint, this defines a metric). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\top\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
 \end{proof}
 
 
@@ -573,8 +573,6 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
 
 \section{Entropy}
 
-\subsection{Topological entropy}
-\todo{Define.}
 \subsection{Measure-theoretic entropy}
 \todo{Define.}
 
