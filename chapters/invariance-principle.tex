@@ -6,47 +6,219 @@
 
 \section{Partial hyperbolicity}
 
-\begin{definition}
-  Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists \(\lambda \in (0,1)\) and a decomposition \(TM = E^s \oplus E^c \oplus E^u\) which is invariant by \(df\) and such that
+\begin{definition}[Splitting]
+  We say \(TM = E_1\oplus \cdots \oplus E_n\) is a \emph{splitting} of \(TM\) if at each \(x \in M\), \(T_xM = E_1(x)\oplus \cdots \oplus E_n(x)\) and \(\dim E_i(x)\) does not depend on \(x\). We say that the splitting is \emph{continuous}, \emph{smooth}, etc.\ if the subbundle \(E_i \subseteq TM\) is respectively continuous, smooth, etc. (For a definition of subbundles, see~\cite[pp. 264]{leeIntroductionSmoothManifolds2012}.)
+\end{definition}
+
+\begin{definition}[Dominated splitting]
+  We say a splitting \(TM = E_1\oplus \cdots \oplus E_n\) is \emph{dominated} for a diffeomorphism \(f \colon M \to M\) if:
   \begin{enumerate}
-  \item \(\norm{df^n v^s} \le \lambda^n \norm{v^s}\);
-  \item \(\norm{df^{-n} v^u} \le \lambda^n \norm{v^u}\);
-  \item \(\lambda^{-n}\norm{df^n v^s} \le \norm{df^n v^c} \le \lambda^n \norm{df^n v^u}\).
+  \item the splitting is \(df\)-\emph{invariant}, that is, \(df_x(E_i(x)) = E_i(f(x))\) for all \(i,x\);
+  \item there exists constants \(c > 0\) and \(\lambda \in (0,1)\) such that for all \(1 \le i \le n - 1\), \(x \in M\) \(u \in E_i(x) \setminus \set{0}\), \(v \in E_{i + 1}(x) \setminus \set{0}\) and \(k \ge 0\),
+    \begin{equation*}
+      \frac{\norm{df^k_x(u)}}{\norm{u}} \le c \lambda^k \frac{\norm{df^k_x(v)}}{\norm{v}}.
+    \end{equation*}
   \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  A subbundle \(E \subseteq TM\) is \emph{uniformly contracted} by \(df\) if there exists \(c > 0\) and \(\lambda \in (0,1)\) such that for all \(x \in M\), \(u \in E(x)\) and \(k \ge 0\),
+  \begin{equation*}
+    \norm{df^k_x(u)} \le c \lambda^k \norm{u}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists \(\lambda \in (0,1)\) and a dominated splitting \(TM = E^s \oplus E^c \oplus E^u\) such that \(E^s\) is uniformly contracted by \(df\) and \(E^u\) is uniformly contracted by \(df ^{-1}\).
 \end{definition}
 
 \section{Invariance Principle}
 
-\begin{definition}
-  A partially hyperbolic diffeomorphism is \textit{accessible} if between any two points in the manifold, there is a path composed of segments tangent to either \(E^s\) or \(E^u\).
-\end{definition}
+This exposition is based on a minicourse given by Maurício Poletti and Yuri Lima on ICTP in 2024, and also on the article~\cite{tahzibiInvariancePrincipleRigidity2018} which the minicourse sourced for the proof.
 
-\begin{definition}
-  A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively.
-\end{definition}
+% \begin{definition}
+%   A partially hyperbolic diffeomorphism is \textit{accessible} if between any two points in the manifold, there is a path composed of segments tangent to either \(E^s\) or \(E^u\).
+% \end{definition}
+
+% \begin{definition}
+%   A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively.
+% \end{definition}
 
 \begin{theorem}\label{thm:invariance-principle-skew-products}
-  Let \(f \colon X \to X\), where \(X = M \times N\), be a skew product diffeomorphism with an ergodic invariant measure \(\mu\) and \(M\), \(N\) are compact manifolds.  Then, \(\lambda^c(\mu) \le 0\) implies that \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that \((h^u_{x,y})_*\mu_x^c = \mu^c_{y}\).
+  Let \(X = M \times N\) and \(f \colon X \to X\) be a skew product diffeomorphism of the form \(f(x,y) = (g(x), f_x(y))\), where \(M\), \(N\) are compact manifolds and \(g \colon M \to M\) is hyperbolic. Let \(\mu\) be an ergodic invariant measure for \(f\). Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that \((h^u_{x,y})_*\mu_x^c = \mu^c_{y}\).
 \end{theorem}
 
-We will begin by explaining the main idea behind the proof. For that, assume we work locally in \(W^{cu}\), in a coordinate system parametrized by a box \([0,1]^{\dim E^u} \times [0,1]^{\dim N}\). In this box, each leaf of the \(\mathcal{F}^c\) foliation is simply a ``vertical'' section \(\mathcal{F}^c(x,y) = \set{(x,y) \where y \in [0,1]^{\dim N}}\), and the unstable holonomy maps \(h_{x_1,x_2}^u(y) = y\) are the identity on \([0,1]^{\dim N}\).
+\subsection{A local trick}
+
+We will begin by explaining the main idea behind the proof. For that, assume we work locally in a leaf of \(\mathcal{F}^{cu}\), in a local coordinate system parametrized by a box \([0,1]^{u} \times [0,1]^{c}\), where \(u = \dim E^u\) and \(c = \dim N\). In this box, each leaf of the \(\mathcal{F}^c\) foliation is a ``vertical'' section \(\mathcal{F}^c(x,y) = \set{(x,y) \where y \in [0,1]^{c}}\), and the unstable holonomy maps \(h_{x_1,x_2}^u(x_1,y) = (x_2,y)\) are the identity on \([0,1]^{c}\). Suppose that in this particular leaf, the conditional measure \(\mu^{cu}\) is defined. Also let \(\pi^u(x,y) = x\), \(\pi^c(x,y) = y\), \(\mu^u = \pi^u_*\mu^{cu}\) and \(\mu^c = \pi^c_*\mu^{cu}\).
 
 \begin{figure}[h]
   \centering
   \includegraphics[page=1,scale=0.8]{../figures/invp}
+  \caption{Local trivialization of \(\mathcal{F}^{cu}\).}
 \end{figure}
+
+For each \(x \in [0,1]^{u}\), we have the conditional measure \(\mu^c_x\). In this box, the \(\mu_x^c\) being invariant by \(h^u\) means precisely that they are all equal when seen as a measure on \([0,1]^{c}\), or in other words, \(\pi^c_*\mu^c_{x} = \mu^c\) for \(\mu^u\)-almost every \(x\). By the definition of a disintegration and Fubini, this is equivalent to \(\mu^{cu} = \mu^u\otimes \mu^c\) being a product, and is also equivalent to all \(\pi^u_*\mu_y^u = \mu^u\) being constant for \(\mu^c\)-every \(y\). We will prove this latter condition, using Jensen's Inequality and a clever observation about the entropy. 
 
 \begin{figure}[h]
   \centering
   \includegraphics[page=2,scale=0.8]{../figures/invp}
+  \caption{Schematic of the partition \(\mathcal{P}\) and the measures \(\mu^u_y\).}
 \end{figure}
+
+Let \(\mathcal{P}\) be a countable partition. Define
+\begin{equation*}
+  H_{\mu^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu^{cu}(P)),
+\end{equation*}
+\begin{equation*}
+  H_{\mu^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
+  = \int H_{\mu^{u}_p}(\mathcal{P}) \;d\mu^{cu}(p)
+  = \int \sum_{P \in \mathcal{P}} I(\mu_p^{u}(P)) \;d\mu^{cu}(p).
+\end{equation*}
+
+\begin{proposition}[Jensen's Inequality]\label{prop:jensen}
+  Suppose \(\varphi \colon \RR \to \RR\) is a concave function, and let \(\psi \colon \Omega \to \RR\) be a measurable function for a probability space \((\Omega,\mathcal{B},\Prob)\). Then
+  \begin{equation*}
+    \int \varphi \circ \psi \;d\Prob \le \varphi\rpar[\bigg]{\int \psi \;d\Prob}.
+  \end{equation*}
+  Moreover, if \(\varphi\) is strictly concave, the equality holds if, and only if, \(\psi\) is constant almost everywhere.
+\end{proposition}
+% \begin{proposition}[Jensen's Inequality]\label{prop:jensen}
+%   Suppose \(E\) is a real Banach space, \(\varphi \colon E \to \RR\) is continuous and concave, and \(\psi \colon \Omega \to E\) is a Bochner integrable function defined on a probability space \((\Omega,\mathcal{B},\Prob)\). Then
+%   \begin{equation*}
+%     \int \varphi \circ \psi \;d\Prob \le \varphi\rpar[\bigg]{\int \psi \;d\Prob}.
+%   \end{equation*}
+%   Moreover, if \(\varphi\) is strictly concave, the equality holds if, and only if, \(\psi\) is constant almost everywhere.
+% \end{proposition}
+
+Applying \cref{prop:jensen} to \(\Prob = \mu^{cu}\), \(\varphi(x) = I(x) =  - x\log x\) (which is strictly concave) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\) we have
+\begin{equation*}
+  \int I(\mu_p^u(P))\;d\mu^{cu}(p)\le I\rpar[\bigg]{\int \mu_p^u(P)\;d\mu^{cu}(p) } = I(\mu^{cu}(P)),
+\end{equation*}
+so summing over \(P \in \mathcal{P}\),
+\begin{equation*}
+  H_{\mu^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu^{cu}}(\mathcal{P})
+\end{equation*}
+with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu^{cu}\)-every \(p\) and all \(P\). This leads to the next lemma.
+
+\begin{lemma}\label{lem:unstable-eq-entropy-inv}
+  If \(H_{\mu^{cu}}(\mathcal{P}\mid \mathcal{F}^u) =  H_{\mu^{cu}}(\mathcal{P})\) for a sequence \((\mathcal{P}_n)_n\) of partitions whose elements \(P \in \mathcal{P}_n\) are of the form \(P = \pi^u(P) \times [0,1]^{c}\) and \(\sup_{P \in \mathcal{P}_n} \operatorname{diam} \pi^u(P) \to 0\), then \(\mu^{cu} = \mu^u\otimes \mu^c\) is a product measure. 
+\end{lemma}
+
+Our goal, then, will be to find a partition that fulfills the conditions of \cref{lem:unstable-eq-entropy-inv}.
+
+\subsection{Global argument}
+
+\begin{definition}[Adapted partition]
+  We say a measurable partition \(\xi\) is \(\mu\)-adapted to a foliation \(\mathcal{F}\) if there exists \(\varepsilon > 0\) such that
+  \begin{enumerate}
+  \item\label{item:2} \(\xi(x) \subseteq W^u_{\varepsilon}(x)\) for \(\mu\)-\almostevery \(x \in M\),
+  \item\label{item:4} \(\xi(x)\) is a neighborhood of \(x\) inside \(W^u(x)\) for \(\mu\)-\almostevery \(x \in M\) and
+  \item\label{item:5} \(\xi \prec f^{-1}(\xi)\).
+  \end{enumerate}
+\end{definition}
 
 \begin{figure}[h]
   \centering
   \includegraphics[page=3,scale=0.8]{../figures/invp}
+  \caption{A partition \(\xi\) adapted to \(\mathcal{F}^u\).}
 \end{figure}
 
-\todo{Sketch the proof as in the notes taken on ICTP.}
+\begin{definition}[Unstable entropy]
+  Let \(\xi\) be any measurable partition \(\mu\)-adapted to the unstable foliation \(\mathcal{F}^u\). The \emph{unstable entropy} is defined as
+  \begin{equation*}
+    h_{\mu}^u(f) =
+    h_{\mu}(f, \xi) =
+    H_{\mu}(f ^{-1}(\xi) \mid \xi) =
+    \int H_{\mu_x^u}(f^{-1}(\xi))\;d\mu(x),
+ \end{equation*}
+ where \(\set{\mu^u_x}_{x \in X}\) is the decomposition of \(\mu\) with respect to \(\xi\).
+\end{definition}
+
+The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyDiffeomorphisms1985}.
+\begin{lemma}
+  The unstable entropy does not depend on the choice of adapted partition \(\xi\).
+\end{lemma}
+
+\begin{proof}
+  Let \(\xi_1\) and \(\xi_2\) be two partitions adapted for the unstable foliation. It suffices to show that \(h_{\mu}(f, \xi_1 \vee \xi_2) = h_{\mu}(f,\xi_1)\). Let  \(n \ge 0\), and notice that by monotonicity,
+  \begin{equation*}
+    h_{\mu}(f, \xi_1 \vee \xi_2)\ge h_{\mu}(f, \xi_1 \vee f^n(\xi_2)).
+  \end{equation*}
+  On the other hand,
+  \begin{equation*}
+     h_{\mu}(f, \xi_1 \vee \xi_2) \le h_{\mu}(f, f^{-n}(\xi_1) \vee \xi_2) = h_{\mu}(f, \xi_1 \vee f^n(\xi_2)).
+  \end{equation*}
+  So
+  \begin{align*}
+    h_{\mu}(f, \xi_1 \vee \xi_2) &= h_{\mu}(f, \xi_1 \vee f^n(\xi_2))\\
+    &= H_{\mu}(\xi_1 \vee f^n(\xi_2) \mid f(\xi_1) \vee f^{n + 1}(\xi_2))\\
+    &= H_{\mu}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2))
+    +  H_{\mu}(\xi_2 \mid f^{-n + 1}(\xi_1) \vee f(\xi_2)).
+  \end{align*}
+  Therefore,
+  Now, we let \(n \to \infty\). Since \(\xi_2 \prec \bigvee_n f^{-n + 1}(\xi_1)\), the second term goes to zero. For the first term, define the set \(D_n = \set{x \in X \where f(\xi_1)(x) \subseteq f^{n}(\xi_2)(x)}\).
+
+  \begin{claim}
+    \(\mu(D_n) \to 1\).
+  \end{claim}
+  To show the claim, we use that \(f\) is measure-preserving, so
+  \begin{align*}
+    \mu(D_n) &= \mu(\set{x \in X \where f(\xi_1)(f^n(x)) \subseteq f^{n}(\xi_2)(f^n(x))})\\
+     &= \mu(\set{x \in X \where f^{-n + 1}(\xi_1)(x) \subseteq \xi_2(x)}).
+  \end{align*}
+  Since for \(\mu\)-almost every \(x \in X\), \(\xi_2(x)\) contains a neighborhood in the unstable leaf and \(\diam f^{-n + 1}(\xi_1)(x) \to 0\), the set \(f^{-n + 1}(\xi_1)(x)\) is eventually contained in \(\xi_2(x)\) for \almostevery \(x\). By the dominated convergence theorem, this shows \(\mu(D_n) \to 1\).
+  
+  Therefore,
+  \begin{align*}
+    H_{\mu}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2)) &\ge
+    H_{\mu \llcorner D_n}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2))\\ &= 
+    H_{\mu \llcorner D_n}(\xi_1 \mid f(\xi_1)) \to H_{\mu}(\xi_1 \mid f(\xi_1)).
+  \end{align*}
+  Since \(H_{\mu}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2)) \le H_{\mu}(\xi_1 \mid f(\xi_1))\), we have \(h_{\mu}(f, \xi_1 \vee \xi_2) = h_{\mu}(f,\xi_1)\).
+\end{proof}
+
+\begin{lemma}
+  For \(\mu\)-almost every \(x\),
+  \begin{equation*}
+    H_{\mu_{x}^u}(f^{-1}(\xi)) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Since \(f\) is a skew product and \(\xi \prec f^{-1}(\xi)\), the elements of \(f^{-1}(\xi)\) have the form
+  \[f^{-1}(\xi)(y) = f^{-1}(\xi^{cu})(y) \cap \xi(y).\]
+  Now, by definition of disintegration, for \(\mu\)-almost every \(x\) and \(\mu_x^u\)-almost every \(y\), \(\mu_y^u(\xi(y)) = 1\), so
+  \begin{align*}
+    H_{\mu_{x}^u}(f^{-1}(\xi))
+    &= - \int \log \mu(f^{-1}(\xi)(y)) \;d\mu_x^u(y)\\
+    &= - \int \log \mu(f^{-1}(\xi^{cu})(y) \cap \xi(y)) \;d\mu_x^u(y)\\
+    &= - \int \log \mu(f^{-1}(\xi^{cu})(y)) \;d\mu_x^u(y) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu})).
+  \end{align*}
+\end{proof}
+
+Now, suppose that 
+
+\begin{proof}
+  Since \(f\) is a skew-product
+\end{proof}
+
+\begin{align*}
+  h_{\mu}^u(f)
+  = \int H_{\mu_{x}^u}(f^{-1}(\xi))\;d\mu(x)
+  &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+  &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+  & =  \int H_{\nu^{u}_x}(g^{-1}(\xi_c))\;d\nu(x) = h^u_{\nu}(g) = h_{\nu}(g).
+\end{align*}
+
+\begin{definition}[Markov partition]
+  \todo{todo}
+\end{definition}
+
+\begin{lemma}
+  If \(g\) admits a Markov partition \(\mathcal{P}\), the refinement \(\xi = \mathcal{P} \wedge \mathcal{F}^u\) by unstable leaves is a subordinate partition.
+\end{lemma}
+
 
 \todo{What does it say about the Bonifant-Milnor example.}
 

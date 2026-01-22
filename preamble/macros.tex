@@ -12,9 +12,9 @@
 \newcommand\rem[1]{\textcolor{yellow}{\textbf{ps.} #1}}
 \renewcommand\complement{\mathsf{c}}
 
-\NewDocumentEnvironment{dedication}{O{}}
+\NewDocumentEnvironment{dedication}{o}
 {\vspace*{3cm}\begin{quotation}\begin{flushright}\begin{em}}
-{\end{em}\par{}\vspace*{3em}{\small --- #1}\end{flushright}\end{quotation}}
+{\end{em}\IfValueT{#1}{\par{}\vspace*{3em}{\small --- #1}}\end{flushright}\end{quotation}}
 
 % Delimiters
 \DeclarePairedDelimiter{\sqpar}{[}{]}

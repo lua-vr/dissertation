@@ -116,7 +116,7 @@ The Schwarzian derivative has some important properties that we highlight in the
     \begin{equation*}
       f(y) - f(a) = \int_a^y \frac{1}{(ct + d)^2} \;dt = \frac{1}{c}\rpar*{\frac{1}{ca + d} - \frac{1}{cy + d}} = \frac{y - a}{c(ca + d)y + d(ca + d)}
     \end{equation*}
-    which is a fractional linear transformation, as desired.
+    which is a fractional linear transformation.
   \end{enumerate}
 \end{proof}
 
@@ -278,7 +278,7 @@ The statement below assumes less regularity than the corresponding one in~\cite[
 The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
 
 \begin{definition}
-  Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say \((X,f,\mu)\) displays intermingled basins if there exists two distinct invariant measures \(\mu_0 \neq \mu_1\) such that for each open set \(U \subseteq X\), we have \(\mu(\Basin{\mu_0} \cap U), \mu(\Basin{\mu_1} \cap U) > 0\).
+  Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say a measure \(\nu \in \Meas[f](X)\) has an intermingled basin if for each nonempty open set \(U \subseteq X\), we have \(\mu(\Basin{\nu} \cap U) > 0\) and \(\mu(\Basin{\nu}^{\complement} \cap U) > 0\). Similarly, for set of measures \(\set{\nu_i}_i\), we say that their basins are intermingled if for each nonempty open \(U \subseteq X\), \(\mu(\Basin{\nu_i} \cap U) > 0\) for all \(i\).
 \end{definition}
 
 \todo{Refer to discussion in~\cite{bonattiDynamicsUniformHyperbolicity2005}}
@@ -419,6 +419,12 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
+\subsection{Measures that project to the base}
+
+\begin{theorem}
+  Suppose that we are in the hypothesis of \cref{thm:neg-schwarz-sep-graph} and \(\nu\) is an invariant measure for \(F\) such that \((\pi_X)_*\nu = \mu\). Then, \(\nu \in \set{\mu_0,\mu_1,\mu_{\sigma}}\) where \(\mu_{\sigma} = (\graph \sigma)_*\mu\).
+\end{theorem}
+
 % \subsection{Hausdorff dimension}
 
 % An interesting question to consider is what is the Hausdorff dimension of the set \(\graph \xi\) in the situation of intermingled basins. Since this set is a graph, it is clearly at least \(1\) and at most \(2\).
@@ -431,7 +437,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 
 If \(f \colon M \to M\) is a diffeomorphism on a manifold, we say that an invariant measure \(\mu\) is \emph{asymptotic} with respect to a reference measure if the empirical measures of almost every point of the reference measure converges to \(\mu\). Intuitively, \(\mu\) describes the entire statistical behavior of the system, up to a set of zero volume.
 
-Since \cref{thm:neg-schwarz-sep-graph} does not require that both basins have positive measure, we also obtain a more general statement than the version in~\cite[Theorem 5.1]{bonifantSchwarzianDerivativesCylinder2008}, which requires both Lyapunov exponents to be positive. The proof below is also somewhat different, more similar to the proof of \cref{thm:neg-schwarz-sep-graph}.
+Since \cref{thm:neg-schwarz-sep-graph} does not require that both basins have positive measure, we also obtain a more general statement than the version in~\cite[Theorem 5.1]{bonifantSchwarzianDerivativesCylinder2008}, which requires both Lyapunov exponents to be positive. The proof below is also a little different from the proof in the article, and more similar to the proof of \cref{thm:neg-schwarz-sep-graph}.
 
 \begin{theorem}\label{thm:pos-schwarz-asymptotic}
   If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
@@ -472,6 +478,35 @@ The idea of the proof is to pass to the invertible extension of the system and o
   Furthermore, the basin of \(\nu\) has full Lebesgue measure. In fact, if \(\varphi \in \Cs{X \times I}\), then \(\varphi \circ \pi \in \Cs{\eX \times I}\) and \(e_n(\pi(\ex), y)(\varphi) = e_n(\ex, y)(\varphi \circ \pi)\). Therefore, \(e_n(x, y) \to \nu\) if and only if \(e_n(\ex, y) \to \enu\) for any \(\ex \in \pi^{-1}(x)\), that is, \((\pi \times \Id)^{-1}(\mathcal{B}(\nu)) = \mathcal{B}(\enu)\). It follows that \((\mu \otimes \Leb)(\mathcal{B}(\nu)) = (\emu \otimes \Leb)(\mathcal{B}(\enu)) = 1\).
 \end{proof}
 
+\begin{example}
+  Let \(X = S^1\), \(g(x) = kx \pmod{1}\) and \(f_x(y) = q_{p(x)}^{-1}(y)\), where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) are defined as in \cref{ex:intermingled}. We claim that the Lebesgue measure \(\lambda\) on \(S^1\times I\) is the asymptotic measure for \(F\). To see this, notice that for every \(x \in X\), there is a small neighborhood \(U\) of \(x\) in which \(g\) has \(k\) inverse branches, which we label \(g_i^{-1} \colon U \to X\) for \(1 \le i \le k\). Therefore, for each branch, we have a local inverse
+  \begin{equation*}
+    F^{-1}_i(x,y) = (g_i^{-1}(x), y + \varepsilon \cos(2 \pi g^{-1}_i(x))(1 - y)).
+  \end{equation*}
+  Since \((g_i^{-1})'(x) = k^{-1}\), the determinant of the Jacobian is given by
+  \begin{equation*}
+    \abs{d(F^{-1}_i)_{(x,y)}} =
+      k^{-1} \cdot (1 - \varepsilon \cos (2\pi g_i^{-1}(x)))
+  \end{equation*}
+  which across all branches, sums to
+  \begin{equation*}
+    \sum_{i = 1}^k
+    \abs{d(F^{-1}_i)_{(x,y)}} =
+    \frac{1}{k}\sum_{i = 1}^k
+    (1 - \varepsilon \cos (2\pi g_i^{-1}(x))) = 1.
+  \end{equation*}
+  By the change of variables formula, this means that \(\lambda\) is preserved by \(F\).
+
+  In \cref{ex:intermingled}, we calculated \(\SchD q_a \prec 0\) to be negative whenever \(a \neq 0\); by \cref{prop:schwarzian}, \(\SchD q_a^{-1} \succ 0\), so \(\SchD f_x \succ 0\) whenever \(\cos (2\pi x) \neq 0\). This means we can apply \cref{thm:pos-schwarz-asymptotic} to get an asymptotic measure \(\nu\) whose basin has full measure for \(\lambda\). But since \(\lambda\) is itself invariant, for all continuous \(\phi \in \Cs{S^1 \times I}\),
+  \begin{equation*}
+    \nu(\phi) = \lim_{n \to \infty} \int \Emp[n]{x}{\phi} \;d\lambda(x) = \lim_{n \to \infty} \frac{1}{n}\sum_{i = 0}^{n - 1} \int \phi \circ F^i \;d\lambda = \lambda(\phi).
+  \end{equation*}
+  This shows \(\nu = \lambda\).
+\end{example}
+
+\begin{question}
+  We know the asymptotic measure \(\nu\) of \cref{thm:pos-schwarz-asymptotic} satisfies \((\pi_X)_*\nu = \mu\), and we can disintegrate \(\nu = \int \nu_x \;d\mu(x)\) for the partition \(\set{x}\times I\). What are general conditions for \(\nu_x \ll \Leb\) (that is, when is \(\nu\) absolutely continuous on the fibers)?
+\end{question}
 
 % TODO: Ali's argument probably works?
 % TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples

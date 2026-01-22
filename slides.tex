@@ -1,0 +1,76 @@
+\documentclass[shortlabels, 9pt, aspectratio=2013]{beamer}
+
+\title{Empirical measures in dynamics}
+\author{Lua Viana Reis}
+
+\usepackage{graphicx}
+\usepackage{dinamica}
+\usepackage{categorias}
+\usepackage{liberdade}
+\input{preamble/tikz}
+\input{preamble/macros}
+
+\input{slides/customization}
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\begin{frame}{test}
+  aaaaaaaa \(\Leb\), \(\dim E_i\)
+\end{frame}
+
+\section{Foo}
+
+\setbeamercolor{frametitle}{bg=tpink}
+
+\begin{frame}{Special thanks}
+  \begin{itemize}
+  \item For my friends, many of whom are watching (thank you!)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Special thanks}
+  For the OpenAPS community. DIY automated insulin delivery!
+  \begin{figure}
+    \centering
+    \includegraphics[height=3cm]{figures/Dana-Lewis_desk-with-OpenAPS-parts.jpg} 
+    \includegraphics[height=3cm]{figures/AAPS_preparing_overview_01.png}
+    \caption{Dana is type 1 diabetic and the creator of OpenAPS (left)}
+  \end{figure}
+  
+  \structure{Special \textbf{non-}thanks for\dots}
+  \begin{itemize}
+  \item big pharmaceutical companies for profiting over a chronic illness; I lost days with their faulty products and dehumanized costumer support.
+  \item my insurance company for fighting coverage of my treatment in court.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Special thanks}
+  \begin{itemize}
+  \item During my short journey as a master student, two fellow graduate students with disabilities passed away in the math departments I've belonged to (IMECC and ICMC). This is hard to accept.
+  \item I feel I must repeat the obvious fact that not all disabilities are visible or physical, and the disabled person has no obligation of disclosing it to you. Be kind to people. Be patient with people. Let everyone have their own time to achieve their potential.
+  \end{itemize}
+\end{frame}
+
+{
+  \setbeamertemplate{background canvas}{%
+    \begin{tikzpicture}[remember picture, overlay]
+      % FIGURE 1: Rotated and Scaled in the Center
+      \node[xshift=3cm, yshift=-2cm, opacity=1] at (current page.center) {
+        \includegraphics[width=4cm, angle=10]{figures/castle}
+      };
+    \end{tikzpicture}%
+  }
+  \begin{frame}
+    \begin{center}
+      {\Huge Thank you!}\\[1em]
+      
+      {(and see you in Bonn!!)}
+    \end{center}
+  \end{frame}
+}
+
+\end{document}

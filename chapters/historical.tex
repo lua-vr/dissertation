@@ -98,7 +98,7 @@ Since the \(t_x\) are translations, there is no loss of generality in assuming \
   \end{equation*}
   Therefore, if \(\int p \;d\mu \neq 0\), then either \(\gamma(f_x^n(y)) \to \infty\) or \(\gamma(f_x^n(y)) \to - \infty\), so all orbits in \(X \times (0,1)\) converge to one of the boundaries, which one depending only on the sign of \(\Lyap{\mathcal{A}_0}\).
   
-  The interesting case, therefore, is when \(\int p \;d\mu = 0\). In the article, the authors managed to show that this case displays historical behavior, but only for the very particular case of \(g = kx \pmod 1\) and \(p\) being constant on each branch \(\interval[open right]{i/k}{(i + 1)/k}\). They conjectured that historical behavior would still be present for the same \(g\) but a continuous \(p \colon X \to \RR\) with zero mean, in general. For the rest of the section, we explain how results already present in the literature, namely weak or almost sure invariance principles, answer their question in the affirmative.
+  The interesting case, therefore, is when \(\int p \;d\mu = 0\). In the article, it is shown that this case displays historical behavior, but only for the very particular case of \(g = kx \pmod 1\) and \(p\) being constant on each branch \(\interval[open right]{i/k}{(i + 1)/k}\). It is then conjectured that historical behavior would still be present for the same \(g\) but a continuous \(p \colon X \to \RR\) with zero mean, in general. For the rest of the section, we explain how results already present in the literature, namely weak or almost sure invariance principles, answer their question in the affirmative.
 \end{example}
 
 At this point, we recommend that the reader has familiarized themselves with \cref{sec:brownian-motion}, but we can briefly remind ourselves of some notions defined in there. Let \(\xi = (p \circ g^{i})_{i \geq 0}\). We can see \(\xi\) as a sequence of random variables defined on the probability space \((X,\mu)\). Accordingly, we have their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and the sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
@@ -108,7 +108,7 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
 \begin{theorem}\label{thm:wip-historical}
   If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
   \begin{equation}\label{eq:emp-closure}
-    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, '']
+    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, ']
   \end{equation}
   where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
 \end{theorem}
@@ -134,7 +134,7 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
     g^{-1}(S_{\delta})
     &= \limsup_{n \to \infty} \set{x \in X \where \DProc[n]{g(x)} \in U_{\delta}}\\
     &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt} + 1]{x} - p(x)}{\sqrt{n}} - s_{\delta}(t)} <\delta }\\
-    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt''}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
+    &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt'}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta }  \text{ where }t' = t + 1/n\\
     &= \set[par = \Bigg]{x \in X : \liminf_{n \to \infty} \sup_t\abs*{\frac{\PSum[\floor{nt}]{x}}{\sqrt{n}} - s_{\delta}(t)} <\delta } = S_{\delta}.
   \end{align*}
   Therefore \(\mu(S_{\delta}) = 1\). Now, notice that if \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which for every \(k\), \(D_{n_k}^{\xi}(x) \in U_{\delta}\). This in turn implies that
@@ -302,7 +302,7 @@ In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \
   
 \section{Deriving the weak invariance principle}\label{sec:deriv-weak-invar}
 
-The following proof is inspired by the argument at the end of the proof of~\cite[Theorem 19.1]{billingsleyConvergenceProbabilityMeasures1999}.
+The following proof is adapted from the argument at the end of the proof of~\cite[Theorem 19.1]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{theorem}\label{thm:martingale-coboundary}
   Suppose \(p \in L^2(\mu)\) can be decomposed as a sum
@@ -454,7 +454,7 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
   \begin{equation*}
     \int p \cdot (p \circ g^{i}) \;d\mu = 
     \int \CE[\mu]{p,\mathcal{F}_i} (p \circ g^{i}) \;d\mu
-    \le \norm{p}_2 \norm{\CE[\mu]{p,\mathcal{F}_i}}
+    \le \norm{p}_2 \norm{\CE[\mu]{p,\mathcal{F}_i}}_2
   \end{equation*}
   and therefore
   \begin{equation*}

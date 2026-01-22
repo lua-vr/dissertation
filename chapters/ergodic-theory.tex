@@ -449,7 +449,7 @@ Invertible extensions may not exist for non-Borel spaces. The following example 
 
 
 \subsection{The solenoid}
-\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025} \cite{anderssonNonuniformlyHyperbolicEndomorphisms2024}}
+\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025}}
 % TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
 
 \section{Cocycles and skew products}
@@ -480,6 +480,7 @@ Invertible extensions may not exist for non-Borel spaces. The following example 
 A \emph{partition} of a set \(\aset\) is a collection of disjoint subsets \(\pP \subseteq \powerset{\aset}\) whose union is \(\aset\). It's important to notice that \(\pP\) can be seen either as a set of subsets or (with some abuse of notation) as a function \(\pP \colon \aset \to \powerset{\aset}\) assigning to each point \(p \in \aset\) the unique \(\pP{p} \in \pP\) such that \(p \in \pP{p}\). To make matters clearer, henceforward we shall denote by \(\pP[eqc] \subseteq \powerset{\aset}\) the image of \(\pP \colon \aset \to \powerset{\aset}\) whenever we need to emphasize that the set of subsets is the object of our attentions.
 
 \subsection{Lattice structure}
+\newcommand{\sfP}{\textsf{P}}
 The partitions \(\pof{\aset}\) of a set \(\aset\) form a lattice under the refinement order. Namely, we endow \(\pof{\aset}\) with the partial order where \(\pP \preceq \pQ\) if and only if for all \(Q \in \pQ[eqc]\), there is some \(P \in \pP[eqc]\) such that \(Q \subseteq P\), and whenever this happens we say that \(\pQ\) is \emph{finer} and \(\pP\) is \emph{coarser} relative to each other. Given two partitions \(\pP, \pQ \in \pof{\aset}\), there is a \emph{join} operation defined by
 \begin{equation*}
   (\pP \vee \pQ)(x) = \pP(x) \cap \pQ(x)
@@ -488,7 +489,6 @@ that is the least upper bound of \(\pP\) and \(\pQ\) (the coarsest partition fin
 \begin{equation*}
   \pP \wedge \pQ =  \set[par = \Big]{ \bigcup_{S \in [P]} S \where{} [P] \in \pP[eqc] \cup \pQ[eqc] / \sim}.
 \end{equation*}
-\newcommand{\sfP}{\textsf{P}}
 The partitions \(\pof{\aset}\) form, in fact, a \emph{complete} lattice, meaning that all subsets \(\sfP \subseteq \pof{\aset}\) have both a least upper bound \(\bigvee_{\pP \in \sfP}\pP \in \pof{\aset}\) and a greatest lower bound \(\bigwedge_{\pP \in \sfP}\pP \in \pof{\aset}\). Their construction is very similar to their binary versions: the join can be defined as \(\left( \bigvee_{\pP \in \sfP}\pP \right)(x) = \bigcap_{\pP \in \sfP}\pP(x)\), and we can use the join to define the meet as
 \begin{equation*}
   \bigwedge_{\pP \in \sfP}\pP = \bigvee_{\substack{\pQ \text{ is an upper}\\\text{bound for }\sfP}}\pQ.
