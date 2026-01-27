@@ -44,13 +44,21 @@ This exposition is based on a minicourse given by Maurício Poletti and Yuri Lim
 %   A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively.
 % \end{definition}
 
+\begin{definition}
+  Consider the quotient map \(\pi \colon X \to X/\mathcal{F}^c\). We say that a partially hyperbolic diffeomorphism \(f \colon X \to X\) has \emph{global unstable holonomies} if for every \(p_1,p_2 \in X/\mathcal{F}^c\) that are in the same leaf of \(\pi(\mathcal{F}^{u})\), there exists an homeomorphism \(h^u_{p_1,p_2}\colon \mathcal{F}^c(p_1) \to \mathcal{F}^c(p_2)\) with the property that \(h^u_{p_1,p_2}(x) \in \mathcal{F}^u(p_1) \cap \mathcal{F}^c(p_2)\). Moreover, for all \(p_1,p_2,p_3 \in X\) in the same leaf of \(\pi(\mathcal{F}^{u})\),
+  \begin{enumerate}
+  \item \(h^u_{p_1,p_2} \circ h^u_{p_2,p_3} = h^u_{p_1,p_3}\) and
+  \item \(h^u_{p_1,p_1} = \Id\).
+  \end{enumerate}
+\end{definition}
+
 \begin{theorem}\label{thm:invariance-principle-skew-products}
-  Let \(X = M \times N\) and \(f \colon X \to X\) be a skew product diffeomorphism of the form \(f(x,y) = (g(x), f_x(y))\), where \(M\), \(N\) are compact manifolds and \(g \colon M \to M\) is hyperbolic. Let \(\mu\) be an ergodic invariant measure for \(f\). Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that \((h^u_{x,y})_*\mu_x^c = \mu^c_{y}\).
+  Let \(f \colon X \to X\) be a diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic. Let \(\mu\) be an ergodic invariant measure for \(f\), and also suppose \(f\) has global unstable holonomies. Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
 \end{theorem}
 
-\subsection{A local trick}
+\subsection{A trick in a box}
 
-We will begin by explaining the main idea behind the proof. For that, assume we work locally in a leaf of \(\mathcal{F}^{cu}\), in a local coordinate system parametrized by a box \([0,1]^{u} \times [0,1]^{c}\), where \(u = \dim E^u\) and \(c = \dim N\). In this box, each leaf of the \(\mathcal{F}^c\) foliation is a ``vertical'' section \(\mathcal{F}^c(x,y) = \set{(x,y) \where y \in [0,1]^{c}}\), and the unstable holonomy maps \(h_{x_1,x_2}^u(x_1,y) = (x_2,y)\) are the identity on \([0,1]^{c}\). Suppose that in this particular leaf, the conditional measure \(\mu^{cu}\) is defined. Also let \(\pi^u(x,y) = x\), \(\pi^c(x,y) = y\), \(\mu^u = \pi^u_*\mu^{cu}\) and \(\mu^c = \pi^c_*\mu^{cu}\).
+We will begin by explaining the main idea behind the proof. For that, assume we work locally in a leaf of \(\mathcal{F}^{cu}\), in a local coordinate system parametrized by a box \(B = [0,1]^{u} \times [0,1]^{c}\), where \(u = \dim E^u\) and \(c = \dim E^c\). In this box, each leaf of the \(\mathcal{F}^c\) foliation is a ``vertical'' section \(\mathcal{F}^c(x,y) = \set{(x,y) \where y \in [0,1]^{c}}\), and the unstable holonomy maps \(h_{x_1,x_2}^u(x_1,y) = (x_2,y)\) are the identity on \([0,1]^{c}\). Suppose that in this particular leaf, the conditional measure \(\mu^{cu}\) is defined. Also let \(\pi^u(x,y) = x\), \(\pi^c(x,y) = y\), \(\mu^u = \pi^u_*\mu^{cu}\) and \(\mu^c = \pi^c_*\mu^{cu}\).
 
 \begin{figure}[h]
   \centering
@@ -58,23 +66,67 @@ We will begin by explaining the main idea behind the proof. For that, assume we 
   \caption{Local trivialization of \(\mathcal{F}^{cu}\).}
 \end{figure}
 
-For each \(x \in [0,1]^{u}\), we have the conditional measure \(\mu^c_x\). In this box, the \(\mu_x^c\) being invariant by \(h^u\) means precisely that they are all equal when seen as a measure on \([0,1]^{c}\), or in other words, \(\pi^c_*\mu^c_{x} = \mu^c\) for \(\mu^u\)-almost every \(x\). By the definition of a disintegration and Fubini, this is equivalent to \(\mu^{cu} = \mu^u\otimes \mu^c\) being a product, and is also equivalent to all \(\pi^u_*\mu_y^u = \mu^u\) being constant for \(\mu^c\)-every \(y\). We will prove this latter condition, using Jensen's Inequality and a clever observation about the entropy. 
+We can disintegrate the measure \(\mu^{cu}\) along the foliations \(\mathcal{F}^u\) and \(\mathcal{F}^c\), giving us two families \(\set{\mu^u_p}_{p \in B}\) and \(\set{\mu^c_p}_{p \in B}\). The key fact is that in the box, the projections \(\pi^u_*\mu^u_p\) and \(\pi^c_*\mu^c_p\) uniquely determine \(\mu^u_p\) and \(\mu^c_p\):
+
+\begin{lemma}
+  If \(\nu\) is such that \(\nu(\mathcal{F}^c(p)) = 1\), then \(\nu = \delta_{\pi^u(p)} \otimes \pi^c_*\nu\). Similarly, if \(\nu(\mathcal{F}^u(p)) = 1\), then \(\nu = \pi^u_*\nu \otimes \delta_{\pi^c(p)}\).
+\end{lemma}
+
+\begin{proof}
+  In the first case,
+  \begin{align*}
+    \nu(A) &= \nu(A \cap \mathcal{F}^c(p))\\
+    &= \nu(\set{(x,y) \in A \where x = \pi^u(p)})\\
+    &= (\delta_{\pi^u(p)} \otimes \pi^c_*\nu)(A).
+  \end{align*}
+  The second case is analogous.
+\end{proof}
+
+As we remarked before, \(\pi^c \circ h^u_{p_1,p_2} = \Id\). Together, these conditions let us rephrase the invariance principle as the statement that in this box, \(\pi^c_*\mu^c_p = \mu^c\) for \(\mu^{cu}\)-almost every \(p\). By Fubini, this is equivalent to \(\mu^{cu} = \mu^u \otimes \mu^c\) being a product measure, which in turn is equivalent to \(\pi^u_*\mu^u_p = \mu^u\) for \(\mu^{cu}\)-almost every \(p\). Thus, at least locally, we can show the invariance principle by showing that the conditional measures \(\mu^u_p\) all project down to the same measure on the base. 
+
+\subsection{From the box to a leaf}
+
+The previous observation is not at all restricted to the box of the last section. We now state the results for an actual ``plaque'' of a \(\mathcal{F}^{cu}\) leaf, which will be the element of a suitable partition.
+
+Denote by \(\pi \colon X \to X/\mathcal{F}^c\) the quotient map, and let \(\set{\mu^c_p}_{p \in X}\) be the disintegration of \(\mu\) along the (measurable) foliation \(\mathcal{F}^c\).
+Since \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic, the quotient also has stable and unstable foliations, which we denote by \(W^s\) and \(W^u\) respectively. Also note that we have \(\mathcal{F}^{cu} = \pi ^{-1}(W^u)\) and \(\mathcal{F}^{cs} = \pi ^{-1}(W^s)\). Let \(\nu = \pi_*\mu\) be the quotient measure on \(X/\mathcal{F}^c\).
+
+We will work with a partition \(\xi_c\) of \(X/\mathcal{F}^c\) whose elements are compact sets and which is finer than the \(W^u\) foliation, that is, \(W^u \prec \xi_c\). 
+Denote \(\xi^{cu} = \pi ^{-1}(\xi_c)\), which by construction is finer than the foliation \(\mathcal{F}^u\). Clearly, the elements of \(\xi^{cu}\) are closed, so it is also disintegrates \(\mu\) to a family \(\set{\mu^{cu}_p}_{p \in X}\).
+Also let \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\), whose elements are also closed, and gives a disintegration \(\set{\mu^{u}_p}_{p \in X}\). Lastly, we set \(\nu^u_{\pi(p)} = \pi_*\mu^{cu}_p\), which defines a decomposition \(\set{\nu^u_x}_{x \in X/\mathcal{F}^c}\) of \(\nu\) along the partition \(\xi_c\).
+
+By the properties of disintegrations, for \(x\) in a full \(\mu\)-measure set \(E_1\), \(\mu^{c}_x(\mathcal{F}^{c}(x)) = \mu^u_x(\xi^u(x)) = 1\) and \(\set{\mu^u_y}_{y \in X}\) is also a disintegration for \(\mu^{cu}_x\) along \(\xi^u\). Since
+\begin{equation*}
+  \int \mu_x^{cu}(E_1) \;d\mu(x) = \mu(E_1) = 1,
+\end{equation*}
+\(\mu_x^{cu}(E_1) = 1\) for \(x\) in a full measure set \(E_2\). We now fix \(x \in E_2\), \(\mu^{cu} = \mu^{cu}_x\), \(\nu = \nu_{\pi(x)}\) and \(P = \xi^{cu}(x)\).
+
+Let \(p \in X\) and \(P = \xi^{cu}(p)\), which we know is of the form \(\pi ^{-1}(Q)\) for some \(Q \in \xi_c\). We can parameterize \(P\) by the measurable isomorphism \(\psi \colon Q \times \mathcal{F}(p) \to P\) given by \(\psi(q,y) = h^u_{\pi(p), q}(y)\).
+
+By now, we have the same ingredients as the case of a box. Indeed, we have the lemma
+
+\begin{lemma}
+  If \(\nu\) is such that \(\nu(\mathcal{F}^c(p)) = 1\), then \(\nu = \delta_{\pi^u(p)} \otimes \pi^c_*\nu\). Similarly, if \(\nu(\mathcal{F}^u(p)) = 1\), then \(\nu = \pi^u_*\nu \otimes \delta_{\pi^c(p)}\).
+\end{lemma}
+
+\subsubsection{Jensen's inequality}
+
+Let \(\mathcal{P}\) be a partition of \(B = [0,1]^u \times [0,1]^c\) of finite entropy. We have (see \cref{sec:entropy})
+\begin{equation*}
+  H_{\mu^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu^{cu}(P)),
+\end{equation*}
+and also the conditional entropy
+\begin{equation*}
+  H_{\mu^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
+  = \int_B H_{\mu^{u}_p}(\mathcal{P}) \;d\mu^{cu}(p)
+  = \int_B \sum_{P \in \mathcal{P}} I(\mu_p^{u}(P)) \;d\mu^{cu}(p).
+\end{equation*}
 
 \begin{figure}[h]
   \centering
   \includegraphics[page=2,scale=0.8]{../figures/invp}
   \caption{Schematic of the partition \(\mathcal{P}\) and the measures \(\mu^u_y\).}
 \end{figure}
-
-Let \(\mathcal{P}\) be a countable partition. Define
-\begin{equation*}
-  H_{\mu^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu^{cu}(P)),
-\end{equation*}
-\begin{equation*}
-  H_{\mu^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
-  = \int H_{\mu^{u}_p}(\mathcal{P}) \;d\mu^{cu}(p)
-  = \int \sum_{P \in \mathcal{P}} I(\mu_p^{u}(P)) \;d\mu^{cu}(p).
-\end{equation*}
 
 \begin{proposition}[Jensen's Inequality]\label{prop:jensen}
   Suppose \(\varphi \colon \RR \to \RR\) is a concave function, and let \(\psi \colon \Omega \to \RR\) be a measurable function for a probability space \((\Omega,\mathcal{B},\Prob)\). Then
@@ -99,22 +151,29 @@ so summing over \(P \in \mathcal{P}\),
 \begin{equation*}
   H_{\mu^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu^{cu}}(\mathcal{P})
 \end{equation*}
-with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu^{cu}\)-every \(p\) and all \(P\). This leads to the next lemma.
+with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu^{cu}\)-every \(p\) and all \(P\).
 
-\begin{lemma}\label{lem:unstable-eq-entropy-inv}
-  If \(H_{\mu^{cu}}(\mathcal{P}\mid \mathcal{F}^u) =  H_{\mu^{cu}}(\mathcal{P})\) for a sequence \((\mathcal{P}_n)_n\) of partitions whose elements \(P \in \mathcal{P}_n\) are of the form \(P = \pi^u(P) \times [0,1]^{c}\) and \(\sup_{P \in \mathcal{P}_n} \operatorname{diam} \pi^u(P) \to 0\), then \(\mu^{cu} = \mu^u\otimes \mu^c\) is a product measure. 
+\subsection{Adapted partitions}
+
+
+
+\begin{lemma}\label{lem:condition-invprin}
+ If there exists a full measure set \(E \subseteq X\) for which \(\pi_*\mu^{u}_p = \nu^u_{\pi(p)}\) for all \(p \in E\), the measures \(\mu^c_p\) are invariant by unstable holonomies.
 \end{lemma}
 
-Our goal, then, will be to find a partition that fulfills the conditions of \cref{lem:unstable-eq-entropy-inv}.
+\begin{remark}
+  A measure \(\mu\) as in \cref{lem:condition-invprin} is called a \emph{\(\operatorname{Gibbs}^u_{\nu}\)-state}.
+\end{remark}
 
-\subsection{Global argument}
+\subsubsection{Unstable entropy}
+
+We now define and construct special kind of partition refining the unstable foliation, and an associated notion of entropy, that will satisfy the hypothesis of \cref{lem:condition-invprin}.
 
 \begin{definition}[Adapted partition]
-  We say a measurable partition \(\xi\) is \(\mu\)-adapted to a foliation \(\mathcal{F}\) if there exists \(\varepsilon > 0\) such that
+  We say a measurable partition \(\xi\) is \(\mu\)-adapted to a foliation \(\mathcal{F}\) if \(\xi \prec f^{-1}(\xi)\) and there exists \(\varepsilon > 0\) such that for \(\mu\)-\almostevery \(x \in M\),
   \begin{enumerate}
-  \item\label{item:2} \(\xi(x) \subseteq W^u_{\varepsilon}(x)\) for \(\mu\)-\almostevery \(x \in M\),
-  \item\label{item:4} \(\xi(x)\) is a neighborhood of \(x\) inside \(W^u(x)\) for \(\mu\)-\almostevery \(x \in M\) and
-  \item\label{item:5} \(\xi \prec f^{-1}(\xi)\).
+  \item\label{item:2} \(\xi(x) \subseteq \mathcal{F}(x)\cap B_{\varepsilon}(x)\) and
+  \item\label{item:4} \(\xi(x)\) is a neighborhood of \(x\) inside \(\mathcal{F}(x)\).
   \end{enumerate}
 \end{definition}
 
@@ -125,7 +184,7 @@ Our goal, then, will be to find a partition that fulfills the conditions of \cre
 \end{figure}
 
 \begin{definition}[Unstable entropy]
-  Let \(\xi\) be any measurable partition \(\mu\)-adapted to the unstable foliation \(\mathcal{F}^u\). The \emph{unstable entropy} is defined as
+  Let \(\xi\) be a partition \(\mu\)-adapted to the unstable foliation \(\mathcal{F}^u\). The \emph{unstable entropy} is defined as
   \begin{equation*}
     h_{\mu}^u(f) =
     h_{\mu}(f, \xi) =
@@ -134,6 +193,10 @@ Our goal, then, will be to find a partition that fulfills the conditions of \cre
  \end{equation*}
  where \(\set{\mu^u_x}_{x \in X}\) is the decomposition of \(\mu\) with respect to \(\xi\).
 \end{definition}
+
+% \begin{remark}
+%   Notice that the partitions \(f^{-1}(\xi)\) have finite entropy for \(\mu_x^u\) for \(\mu\)-almost every \(x\), so the definition makes sense. Indeed, we know
+% \end{remark}
 
 The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyDiffeomorphisms1985}.
 \begin{lemma}
@@ -157,17 +220,17 @@ The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyD
     +  H_{\mu}(\xi_2 \mid f^{-n + 1}(\xi_1) \vee f(\xi_2)).
   \end{align*}
   Therefore,
-  Now, we let \(n \to \infty\). Since \(\xi_2 \prec \bigvee_n f^{-n + 1}(\xi_1)\), the second term goes to zero. For the first term, define the set \(D_n = \set{x \in X \where f(\xi_1)(x) \subseteq f^{n}(\xi_2)(x)}\).
+  Now, we let \(n \to \infty\). Since \(\xi_2 \prec \bigvee_n f^{-n + 1}(\xi_1)\), the second term goes to zero. For the first term, define the set \(D_n = \set{x \in X \where f(\xi_1)(x) \subseteq f^{n + 1}(\xi_2)(x)}\).
 
   \begin{claim}
     \(\mu(D_n) \to 1\).
   \end{claim}
   To show the claim, we use that \(f\) is measure-preserving, so
   \begin{align*}
-    \mu(D_n) &= \mu(\set{x \in X \where f(\xi_1)(f^n(x)) \subseteq f^{n}(\xi_2)(f^n(x))})\\
-     &= \mu(\set{x \in X \where f^{-n + 1}(\xi_1)(x) \subseteq \xi_2(x)}).
+    \mu(D_n) &= \mu(\set{x \in X \where f(\xi_1)(f^{n + 1}(x)) \subseteq f^{n + 1}(\xi_2)(f^{n + 1}(x))})\\
+     &= \mu(\set{x \in X \where f^{-n}(\xi_1)(x) \subseteq \xi_2(x)}).
   \end{align*}
-  Since for \(\mu\)-almost every \(x \in X\), \(\xi_2(x)\) contains a neighborhood in the unstable leaf and \(\diam f^{-n + 1}(\xi_1)(x) \to 0\), the set \(f^{-n + 1}(\xi_1)(x)\) is eventually contained in \(\xi_2(x)\) for \almostevery \(x\). By the dominated convergence theorem, this shows \(\mu(D_n) \to 1\).
+  Since for \(\mu\)-almost every \(x \in X\), \(\xi_2(x)\) contains a neighborhood in the unstable leaf and \(\diam f^{-n}(\xi_1)(x) \to 0\), the set \(f^{-n}(\xi_1)(x)\) is eventually contained in \(\xi_2(x)\) for \almostevery \(x\). By the dominated convergence theorem, this shows \(\mu(D_n) \to 1\).
   
   Therefore,
   \begin{align*}
@@ -178,7 +241,28 @@ The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyD
   Since \(H_{\mu}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2)) \le H_{\mu}(\xi_1 \mid f(\xi_1))\), we have \(h_{\mu}(f, \xi_1 \vee \xi_2) = h_{\mu}(f,\xi_1)\).
 \end{proof}
 
-\begin{lemma}
+Let's construct this adapted partition \(\xi\). Since \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic for \(\nu\), it admits a Markov partition whose boundary is a null \(\nu\)-measure set (see, for instance,~\cite[Theorem 3.12.]{bowenEquilibriumStatesErgodic2008}). For a choice of small \(\varepsilon > 0\), a Markov partition is defined as follows.
+
+\begin{definition}
+  We say a set \(R \subseteq X/\mathcal{F}^c\) is a \emph{proper rectangle} if \(R\) is closed, \(R = \closure{\interior{R}}\) and \([x,y] \in R\) whenever \(x, y \in R\). The bracket \([x,y]\) is defined as the unique point in \(W^s_{\varepsilon}(x)\cap W^u_{\varepsilon}(y)\) for all \(x,y\) such that \(d(x,y) < \delta\) for some \(0 < \delta < \varepsilon\) (see~\cite[3.3. Canonical Coordinates]{bowenEquilibriumStatesErgodic2008}). For that to make sense, we also require that \(\diam R < \delta\).
+\end{definition}
+
+\begin{definition}
+  A \emph{Markov partition} is a finite partition \(\mathcal{R} = \set{R_1,\dots,R_m}\) of \(X/\mathcal{F}^c\) by proper rectangles such that for all \(x \in X\) with \(x, f(x) \notin \bigcup_{i = 1}^m \partial R_i\),
+  \begin{enumerate}
+  \item\label{item:6} \(W^u(f(x)) \cap \mathcal{R}(f(x)) \subseteq f(W^u(x)\cap \mathcal{R}(x))\) and
+  \item \(W^s(f(x)) \cap \mathcal{R}(f(x)) \supseteq f(W^s(x)\cap \mathcal{R}(x))\).
+  \end{enumerate}
+\end{definition}
+
+Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu}\) and \(\xi^u\) as in \cref{sec:meas-part}. We claim \(\xi = \xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, by \cref{item:6} we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
+so \(\xi^{u}(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\) of small diameter because \(\pi(x) \in \interior \mathcal{R}(\pi(x))\).
+
+\subsubsection{Conclusion}
+
+With the partition \(\xi = \xi^u\) in hand, we conclude the argument with a series of lemmas.
+
+\begin{lemma}\label{lem:entropy-eq}
   For \(\mu\)-almost every \(x\),
   \begin{equation*}
     H_{\mu_{x}^u}(f^{-1}(\xi)) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))
@@ -186,9 +270,9 @@ The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyD
 \end{lemma}
 
 \begin{proof}
-  Since \(f\) is a skew product and \(\xi \prec f^{-1}(\xi)\), the elements of \(f^{-1}(\xi)\) have the form
-  \[f^{-1}(\xi)(y) = f^{-1}(\xi^{cu})(y) \cap \xi(y).\]
-  Now, by definition of disintegration, for \(\mu\)-almost every \(x\) and \(\mu_x^u\)-almost every \(y\), \(\mu_y^u(\xi(y)) = 1\), so
+  Since \(\xi \prec f^{-1}(\xi)\) and by definition, the elements of \(f^{-1}(\xi)\) have the form
+  \[f^{-1}(\xi)(y) = f^{-1}(\xi^{cu})(y) \cap \mathcal{F}^u(y) = f^{-1}(\xi^{cu})(y) \cap \xi(y).\]
+  By definition of a disintegration, for \(\mu\)-almost every \(x\) and \(\mu_x^u\)-almost every \(y\), \(\mu_y^u(\xi(y)) = 1\), so
   \begin{align*}
     H_{\mu_{x}^u}(f^{-1}(\xi))
     &= - \int \log \mu(f^{-1}(\xi)(y)) \;d\mu_x^u(y)\\
@@ -197,27 +281,24 @@ The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyD
   \end{align*}
 \end{proof}
 
-Now, suppose that 
+\begin{figure}[h]
+  \centering
+  \includegraphics[page=4,scale=0.8]{../figures/invp}
+  \caption{The identity \(f^{-1}(\xi)(x) = f^{-1}(\xi^{cu})(x) \cap \xi(x)\).}
+\end{figure}
 
-\begin{proof}
-  Since \(f\) is a skew-product
-\end{proof}
-
+Therefore, we have the inequality
 \begin{align*}
   h_{\mu}^u(f)
   = \int H_{\mu_{x}^u}(f^{-1}(\xi))\;d\mu(x)
   &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
   &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
-  & =  \int H_{\nu^{u}_x}(g^{-1}(\xi_c))\;d\nu(x) = h^u_{\nu}(g) = h_{\nu}(g).
+  &=  \int H_{\nu^{u}_{\pi(x)}}(f_c^{-1}(\xi_c))\;d\mu(x)\\
+  &=  \int H_{\nu^{u}_{y}}(f_c^{-1}(\xi_c))\;d\nu(y)\\
+  &= h^u_{\nu}(f_c) = h_{\nu}(f_c)
 \end{align*}
-
-\begin{definition}[Markov partition]
-  \todo{todo}
-\end{definition}
-
-\begin{lemma}
-  If \(g\) admits a Markov partition \(\mathcal{P}\), the refinement \(\xi = \mathcal{P} \wedge \mathcal{F}^u\) by unstable leaves is a subordinate partition.
-\end{lemma}
+with equality if, and only if, \(\pi_*\mu_{x}^u = \nu^{u}_{\pi(x)}\) for \(\mu\)-almost every \(x\).
+In the first line, we applied \cref{lem:entropy-eq}, and in the second line, we used 
 
 
 \todo{What does it say about the Bonifant-Milnor example.}
