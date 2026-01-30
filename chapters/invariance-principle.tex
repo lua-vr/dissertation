@@ -29,7 +29,7 @@
 \end{definition}
 
 \begin{definition}
-  Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists \(\lambda \in (0,1)\) and a dominated splitting \(TM = E^s \oplus E^c \oplus E^u\) such that \(E^s\) is uniformly contracted by \(df\) and \(E^u\) is uniformly contracted by \(df ^{-1}\).
+  Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists a dominated splitting \(TM = E^s \oplus E^c \oplus E^u\) such that \(E^s\) is uniformly contracted by \(df\) and \(E^u\) is uniformly contracted by \(df ^{-1}\).
 \end{definition}
 
 \section{Invariance Principle}
@@ -40,9 +40,9 @@ This exposition is based on a minicourse given by Maurício Poletti and Yuri Lim
 %   A partially hyperbolic diffeomorphism is \textit{accessible} if between any two points in the manifold, there is a path composed of segments tangent to either \(E^s\) or \(E^u\).
 % \end{definition}
 
-% \begin{definition}
-%   A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively.
-% \end{definition}
+\begin{definition}
+  A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively. In this case, we can also define \(\fF^c = \fF^{cs}\vee \fF^{cu}\).
+\end{definition}
 
 \begin{definition}
   Consider the quotient map \(\pi \colon X \to X/\mathcal{F}^c\). We say that a partially hyperbolic diffeomorphism \(f \colon X \to X\) has \emph{global unstable holonomies} if for every \(p_1,p_2 \in X/\mathcal{F}^c\) that are in the same leaf of \(\pi(\mathcal{F}^{u})\), there exists an homeomorphism \(h^u_{p_1,p_2}\colon \mathcal{F}^c(p_1) \to \mathcal{F}^c(p_2)\) with the property that \(h^u_{p_1,p_2}(x) \in \mathcal{F}^u(p_1) \cap \mathcal{F}^c(p_2)\). Moreover, for all \(p_1,p_2,p_3 \in X\) in the same leaf of \(\pi(\mathcal{F}^{u})\),
@@ -50,9 +50,10 @@ This exposition is based on a minicourse given by Maurício Poletti and Yuri Lim
   \item \(h^u_{p_1,p_2} \circ h^u_{p_2,p_3} = h^u_{p_1,p_3}\) and
   \item \(h^u_{p_1,p_1} = \Id\).
   \end{enumerate}
+  By a slight abuse of notation, if \(p_1,p_2 \in X\), we denote \(h^u_{p_1,p_2} = h^u_{\pi(p_1),\pi(p_2)}\).
 \end{definition}
 
-\begin{theorem}\label{thm:invariance-principle-skew-products}
+\begin{theorem}\label{thm:invariance-principle}
   Let \(f \colon X \to X\) be a diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic. Let \(\mu\) be an ergodic invariant measure for \(f\), and also suppose \(f\) has global unstable holonomies. Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
 \end{theorem}
 
@@ -84,48 +85,52 @@ We can disintegrate the measure \(\mu^{cu}\) along the foliations \(\mathcal{F}^
 
 As we remarked before, \(\pi^c \circ h^u_{p_1,p_2} = \Id\). Together, these conditions let us rephrase the invariance principle as the statement that in this box, \(\pi^c_*\mu^c_p = \mu^c\) for \(\mu^{cu}\)-almost every \(p\). By Fubini, this is equivalent to \(\mu^{cu} = \mu^u \otimes \mu^c\) being a product measure, which in turn is equivalent to \(\pi^u_*\mu^u_p = \mu^u\) for \(\mu^{cu}\)-almost every \(p\). Thus, at least locally, we can show the invariance principle by showing that the conditional measures \(\mu^u_p\) all project down to the same measure on the base. 
 
-\subsection{From the box to a leaf}
+\subsection{From the box to a leaf}\label{sec:from-box-leaf}
 
 The previous observation is not at all restricted to the box of the last section. We now state the results for an actual ``plaque'' of a \(\mathcal{F}^{cu}\) leaf, which will be the element of a suitable partition.
 
 Denote by \(\pi \colon X \to X/\mathcal{F}^c\) the quotient map, and let \(\set{\mu^c_p}_{p \in X}\) be the disintegration of \(\mu\) along the (measurable) foliation \(\mathcal{F}^c\).
 Since \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic, the quotient also has stable and unstable foliations, which we denote by \(W^s\) and \(W^u\) respectively. Also note that we have \(\mathcal{F}^{cu} = \pi ^{-1}(W^u)\) and \(\mathcal{F}^{cs} = \pi ^{-1}(W^s)\). Let \(\nu = \pi_*\mu\) be the quotient measure on \(X/\mathcal{F}^c\).
 
-We will work with a partition \(\xi_c\) of \(X/\mathcal{F}^c\) whose elements are compact sets and which is finer than the \(W^u\) foliation, that is, \(W^u \prec \xi_c\). 
+We will work with a partition \(\xi_c\) of \(X/\mathcal{F}^c\) whose elements are compact sets and which is finer than the \(W^u\) foliation, that is, \(W^u \prec \xi_c\). By measurability, we have an associated disintegration \(\set{\nu^u_x}_{x \in X/\mathcal{F}^c}\) of \(\nu\).
 Denote \(\xi^{cu} = \pi ^{-1}(\xi_c)\), which by construction is finer than the foliation \(\mathcal{F}^u\). Clearly, the elements of \(\xi^{cu}\) are closed, so it is also disintegrates \(\mu\) to a family \(\set{\mu^{cu}_p}_{p \in X}\).
-Also let \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\), whose elements are also closed, and gives a disintegration \(\set{\mu^{u}_p}_{p \in X}\). Lastly, we set \(\nu^u_{\pi(p)} = \pi_*\mu^{cu}_p\), which defines a decomposition \(\set{\nu^u_x}_{x \in X/\mathcal{F}^c}\) of \(\nu\) along the partition \(\xi_c\).
+Also let \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\), whose elements are also closed, and gives a disintegration \(\set{\mu^{u}_p}_{p \in X}\).
 
 By the properties of disintegrations, for \(x\) in a full \(\mu\)-measure set \(E_1\), \(\mu^{c}_x(\mathcal{F}^{c}(x)) = \mu^u_x(\xi^u(x)) = 1\) and \(\set{\mu^u_y}_{y \in X}\) is also a disintegration for \(\mu^{cu}_x\) along \(\xi^u\). Since
 \begin{equation*}
   \int \mu_x^{cu}(E_1) \;d\mu(x) = \mu(E_1) = 1,
 \end{equation*}
-\(\mu_x^{cu}(E_1) = 1\) for \(x\) in a full measure set \(E_2\). We now fix \(x \in E_2\), \(\mu^{cu} = \mu^{cu}_x\), \(\nu = \nu_{\pi(x)}\) and \(P = \xi^{cu}(x)\).
+\(\mu_x^{cu}(E_1) = 1\) for \(x\) in a full \(\mu\)-measure set \(E_2\). Let \(E_3 \subseteq E_2\) be of full \(\mu\)-measure and such that \(x \in E_3\) implies \(\pi_*\mu^{cu}_x = \nu_{\pi(x)}\).
 
-Let \(p \in X\) and \(P = \xi^{cu}(p)\), which we know is of the form \(\pi ^{-1}(Q)\) for some \(Q \in \xi_c\). We can parameterize \(P\) by the measurable isomorphism \(\psi \colon Q \times \mathcal{F}(p) \to P\) given by \(\psi(q,y) = h^u_{\pi(p), q}(y)\).
+We now fix \(x \in E_3\), \(\mu^{cu} = \mu^{cu}_x\), \(\nu = \pi_*\mu^{cu}\) and \(P = \xi^{cu}(x)\). We know \(P\) is of the form \(\pi ^{-1}(Q)\) for some \(Q \in \xi_c\). We can parameterize \(P\) by the measurable isomorphism \(\psi \colon Q \times \mathcal{F}(p) \to P\) given by \(\psi(x,q) = h^u_{\pi(p), x}(q)\), whose inverse is \(\psi ^{-1}(q) = (\pi(q),h^u_{\pi(q),\pi(p)}(q))\).
 
-By now, we have the same ingredients as the case of a box. Indeed, we have the lemma
+Pushing the measures to the product along the isomorphism, have the same ingredients as in the case of a box. Therefore, we can state a sufficient condition for invariance.
 
-\begin{lemma}
-  If \(\nu\) is such that \(\nu(\mathcal{F}^c(p)) = 1\), then \(\nu = \delta_{\pi^u(p)} \otimes \pi^c_*\nu\). Similarly, if \(\nu(\mathcal{F}^u(p)) = 1\), then \(\nu = \pi^u_*\nu \otimes \delta_{\pi^c(p)}\).
+\begin{lemma}\label{lem:proj-implies-invariance}
+  For all \(x \in E_3\), if \(\pi_* \mu^u_p = \nu_{\pi(p)}^u\) for \(\mu_x^{cu}\)-almost all \(p\), then there is a full \(\mu_x^{cu}\)-measure set \(E_4(x) \subseteq \xi^{cu}(x)\) where \((h^u_{q_1,q_2})_*\mu^c_{q_1} = \mu^c_{q_2}\) for all \(q_1,q_2 \in E_4(x)\).
 \end{lemma}
 
-\subsubsection{Jensen's inequality}
+\begin{proof}
+  Restricting to \(x \in E_3\), this is the same argument of the last section, but using Fubini in the product space \(Q \times \mathcal{F}(p)\).
+\end{proof}
 
-Let \(\mathcal{P}\) be a partition of \(B = [0,1]^u \times [0,1]^c\) of finite entropy. We have (see \cref{sec:entropy})
+\subsection{Jensen's inequality}\label{sec:jensens-inequality}
+
+Fix \(x \in X\), and let \(\mathcal{P}\) be a partition of finite entropy for \(\mu^{cu}_x\). We have (see \cref{sec:entropy})
 \begin{equation*}
-  H_{\mu^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu^{cu}(P)),
+  H_{\mu_x^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu_x^{cu}(P)),
 \end{equation*}
 and also the conditional entropy
 \begin{equation*}
-  H_{\mu^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
-  = \int_B H_{\mu^{u}_p}(\mathcal{P}) \;d\mu^{cu}(p)
-  = \int_B \sum_{P \in \mathcal{P}} I(\mu_p^{u}(P)) \;d\mu^{cu}(p).
+  H_{\mu_x^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
+  = \int H_{\mu^{u}_y}(\mathcal{P}) \;d\mu_x^{cu}(y)
+  = \int \sum_{P \in \mathcal{P}} I(\mu_y^{u}(P)) \;d\mu_x^{cu}(y).
 \end{equation*}
 
 \begin{figure}[h]
   \centering
   \includegraphics[page=2,scale=0.8]{../figures/invp}
-  \caption{Schematic of the partition \(\mathcal{P}\) and the measures \(\mu^u_y\).}
+  \caption{Schematic of a partition \(\mathcal{P}\) and the measures \(\mu^u_y\).}
 \end{figure}
 
 \begin{proposition}[Jensen's Inequality]\label{prop:jensen}
@@ -143,31 +148,98 @@ and also the conditional entropy
 %   Moreover, if \(\varphi\) is strictly concave, the equality holds if, and only if, \(\psi\) is constant almost everywhere.
 % \end{proposition}
 
-Applying \cref{prop:jensen} to \(\Prob = \mu^{cu}\), \(\varphi(x) = I(x) =  - x\log x\) (which is strictly concave) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\) we have
+Applying \cref{prop:jensen} to \(\Prob = \mu_x^{cu}\), \(\varphi(x) = I(x) =  - x\log x\) (which is strictly concave) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\) we have
 \begin{equation*}
-  \int I(\mu_p^u(P))\;d\mu^{cu}(p)\le I\rpar[\bigg]{\int \mu_p^u(P)\;d\mu^{cu}(p) } = I(\mu^{cu}(P)),
+  \int I(\mu_p^u(P))\;d\mu_x^{cu}(p)\le I\rpar[\bigg]{\int \mu_p^u(P)\;d\mu_x^{cu}(p) } = I(\mu_x^{cu}(P)),
 \end{equation*}
 so summing over \(P \in \mathcal{P}\),
+\begin{equation}\label{eq:5}
+  H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu_x^{cu}}(\mathcal{P})
+\end{equation}
+with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu_x^{cu}\)-every \(p\) and all \(P\).
+
+Now, suppose \(\mathcal{P}\) is of the form \(\mathcal{P} = \pi ^{-1}(\xi_c)\), for some partition \(\xi_c\) of \(X/\mathcal{F}^c\). If \(H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P})\), then as we noticed, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu_x^{cu}\)-every \(p\) and all \(P \in \mathcal{P}\). Suppose additionally that \(x \in E_3\) as defined in the last section. Then, for every \(A \in \xi_c\),
+
 \begin{equation*}
-  H_{\mu^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu^{cu}}(\mathcal{P})
+  \int \pi_*\mu_p^{u}(A) \;d\mu_x^{cu}(p) =
+  \int \mu_p^{u}(\pi ^{-1}(A)) \;d\mu_x^{cu}(p) =
+  \mu_x^{cu}(\pi ^{-1}(A)) = \nu_{\pi(x)}(A),
 \end{equation*}
-with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu^{cu}\)-every \(p\) and all \(P\).
+so \(\pi_*\mu_p^{u}(A) = \nu_{\pi(x)}(A)\) for \(\mu^{cu}_x\)-almost all \(p\) and all \(A \in \xi_c\).
+In other words, we have shown the following lemma.
 
-\subsection{Adapted partitions}
-
-
-
-\begin{lemma}\label{lem:condition-invprin}
- If there exists a full measure set \(E \subseteq X\) for which \(\pi_*\mu^{u}_p = \nu^u_{\pi(p)}\) for all \(p \in E\), the measures \(\mu^c_p\) are invariant by unstable holonomies.
+\begin{lemma}\label{lem:almost-there}
+  Let \(x \in E_3\) and let \(\mathcal{P} = \pi ^{-1}(\xi_c)\) be a partition with finite entropy for \(\mu^{cu}_x\). If \(H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P})\), then for \(\mu^{cu}_x\)-almost all \(p\), \(\pi_*\mu^u_p\) and \(\nu^u_p\) coincide in the \(\sigma\)-algebra \(\sigma(\xi_c)\).
 \end{lemma}
 
-\begin{remark}
-  A measure \(\mu\) as in \cref{lem:condition-invprin} is called a \emph{\(\operatorname{Gibbs}^u_{\nu}\)-state}.
-\end{remark}
+\begin{proof}
+  See above.
+\end{proof}
 
-\subsubsection{Unstable entropy}
+\begin{lemma}\label{cor:gen-implies-inv}
+  Fix \(\xi_c\) and suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\). Let \(\mathcal{P}_n = \pi ^{-1}(f_c^{-n}(\xi_c))\). For all \(x \in E_3\), if \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\), then there exists a full \(\mu_x^{cu}\)-measure set \(E_4(x)\), such that for all \(p_1, p_2 \in E_4(x)\), \((h^u_{p_1,p_2})_*\mu^c_{p_1} = \mu^c_{p_2}\).
+\end{lemma}
 
-We now define and construct special kind of partition refining the unstable foliation, and an associated notion of entropy, that will satisfy the hypothesis of \cref{lem:condition-invprin}.
+\begin{proof}
+  Let \(x \in E_3\). By \cref{lem:almost-there}, for all \(n\), \(\pi_*\mu^u_p\) and \(\nu^u_p\) coincide in the \(\sigma\)-algebra \(\sigma(f_c^{-n}(\xi_c))\) for \(\mu^{cu}_x\)-almost all \(p\). Since \(\bigcup_n f_c^{-n}(\xi_c)\) is finer than the Borel algebra, \(\pi_*\mu^u_p = \nu^u_p\) for \(\mu^{cu}_x\)-almost all \(p\). The result follows by applying \cref{lem:proj-implies-invariance}, which gives the set \(E_4(x)\).
+\end{proof}
+
+\begin{lemma}\label{cor:gen-implies-inv-ae}
+  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and in the notation of \cref{cor:gen-implies-inv},  \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E_5 \subseteq X\) such that for all \(x,y \in E_5\), if \(y \in \xi^{cu}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+\end{lemma}
+
+\begin{proof}
+  Let \(E \subseteq E_3\) be a full-measure subset of \(E_3\) where \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) holds for all \(n\). We explicitly define
+  \begin{equation*}
+    E_5 = \bigcup_{x \in E}E_4(x).
+  \end{equation*}
+  This set has full measure because
+  \begin{equation*}
+    \mu(E_5) \ge \int_{E} \mu^{cu}_x(E_4(x)) \;d\mu(x) \ge \mu(E) = 1.
+  \end{equation*}
+  Now, if \(x,y \in E_5\), then by definition there exists \(p \in E\) such that \(x \in E_4(p) \subseteq \xi^{cu}(p)\). Therefore, if \(y \in \xi^{cu}(x)\), then \(y \in \xi^{cu}(p)\) and \(y \in E_4(p)\). By definition of \(E_4(p)\) and \cref{cor:gen-implies-inv}, we know \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+\end{proof}
+
+\subsection{Patching the argument together}
+
+We have shown a sufficient condition for the invariance principle to hold for a pair of points inside the \emph{same} \(cu\)-plaque, that is, an element of \(\xi^{cu}\). But generally, even if \(x\) and \(y\) are in the same leaf of \(\mathcal{F}^{cu}\), they need not be in the same element of \(\xi^{cu}\). So we need a small adaptation to show \((h^u_{x,y})_*\mu^c_x = \mu^c_y\) in this case. For that, we assume an extra condition on \(\xi_c\):
+
+\begin{hypothesis}\label{hip:neighb}
+  For \(\mu\)-almost every \(x\), \(\xi^u(x) = \xi^{cu}(x) \cap \mathcal{F}^u(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\).
+\end{hypothesis}
+
+\begin{lemma}
+  There exists \(\delta > 0\) such that the set
+  \begin{equation*}
+    S = S_{\delta} = \set{x \in X \where d^u(x, X \setminus \xi^{u}(x)) > \delta}
+  \end{equation*}
+  has positive measure.
+\end{lemma}
+\begin{proof}
+  By a simple application of \cref{hip:neighb} and the monotone convergence theorem, \(\lim_{\delta \to 0}      \mu(S_{\delta})\to 1\). Choose some \(\delta > 0\) for which \(\mu(S_{\delta})\) is positive.
+\end{proof}
+
+We finally arrive at the global version.
+
+\begin{lemma}\label{cor:cond-invprin}
+  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and in the notation of \cref{cor:gen-implies-inv},  \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E \subseteq X\) such that for all \(x,y \in E\), if \(y \in \mathcal{F}^{u}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+\end{lemma}
+
+\begin{proof}
+  Choose a full-measure \(E\) such that
+  \begin{enumerate}
+  \item \(\mu^c_{f^k(x)} = f^k_*\mu^c_x\) for all \(k \in \ZZ\), for all \(x \in E\) (by invariance of \(\mu\));
+  \item \(f^{-n}(x) \in S\) for infinitely many \(n > 0\), for all \(x \in E\) (by ergodicity);
+  \item \(E \subseteq \bigcap_{k \in \NN} f^{k}(E_5)\), where \(E_5\) is given by \cref{cor:gen-implies-inv-ae}.
+  \end{enumerate}
+  Let \(x,y \in E\) such that \(y \in \mathcal{F}^u(x)\). We know \(d^u(f^{-n}(x),f^{-n}(y)) \to 0\), so there exists some \(N\) for which \(d^u(f^{-N}(x),f^{-N}(y)) < \delta\) and \(f^{-N}(x) \in S\). By definition of \(S\), this implies \(f^{-N}(y) \in \xi^{cu}(f^{-N}(x))\). Since \(x, y \in f^N(E_5)\), \cref{cor:gen-implies-inv-ae} implies
+  \[f^{-N}_*(h^u_{x,y})_*\mu^c_x = (h^u_{f^{-N}(x),f^{-N}(y)})_*\mu^c_{f^{-N}(x)} = \mu^c_{f^{-N}(y)} = f^{-N}_*\mu^c_y.\]
+  Now, apply \(f^N_*\) to both sides to conclude \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+\end{proof}
+
+\subsection{Adapted partitions and unstable entropy}
+
+We now define and construct special kind of partition refining the unstable foliation, and an associated notion of entropy, that will satisfy the hypothesis of \cref{cor:cond-invprin}.
 
 \begin{definition}[Adapted partition]
   We say a measurable partition \(\xi\) is \(\mu\)-adapted to a foliation \(\mathcal{F}\) if \(\xi \prec f^{-1}(\xi)\) and there exists \(\varepsilon > 0\) such that for \(\mu\)-\almostevery \(x \in M\),
@@ -255,12 +327,10 @@ Let's construct this adapted partition \(\xi\). Since \(f_c \colon X/\mathcal{F}
   \end{enumerate}
 \end{definition}
 
-Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu}\) and \(\xi^u\) as in \cref{sec:meas-part}. We claim \(\xi = \xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, by \cref{item:6} we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
+Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu}\) and \(\xi^u\) as in \cref{sec:from-box-leaf}. We claim \(\xi = \xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, by \cref{item:6} we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
 so \(\xi^{u}(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\) of small diameter because \(\pi(x) \in \interior \mathcal{R}(\pi(x))\).
 
-\subsubsection{Conclusion}
-
-With the partition \(\xi = \xi^u\) in hand, we conclude the argument with a series of lemmas.
+With the partition \(\xi = \xi^u\) in hand, we finish the proof of \cref{thm:invariance-principle} with a series of lemmas.
 
 \begin{lemma}\label{lem:entropy-eq}
   For \(\mu\)-almost every \(x\),
@@ -287,21 +357,27 @@ With the partition \(\xi = \xi^u\) in hand, we conclude the argument with a seri
   \caption{The identity \(f^{-1}(\xi)(x) = f^{-1}(\xi^{cu})(x) \cap \xi(x)\).}
 \end{figure}
 
-Therefore, we have the inequality
+\begin{proof}[Proof of \cref{thm:invariance-principle}]
+We have the inequality
 \begin{align*}
   h_{\mu}^u(f)
   = \int H_{\mu_{x}^u}(f^{-1}(\xi))\;d\mu(x)
   &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+  &= \int H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u)\;d\mu(x)\\
   &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
   &=  \int H_{\nu^{u}_{\pi(x)}}(f_c^{-1}(\xi_c))\;d\mu(x)\\
   &=  \int H_{\nu^{u}_{y}}(f_c^{-1}(\xi_c))\;d\nu(y)\\
   &= h^u_{\nu}(f_c) = h_{\nu}(f_c)
 \end{align*}
-with equality if, and only if, \(\pi_*\mu_{x}^u = \nu^{u}_{\pi(x)}\) for \(\mu\)-almost every \(x\).
-In the first line, we applied \cref{lem:entropy-eq}, and in the second line, we used 
+with equality if, and only if, \(H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u) = H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\) for \(\mu\)-almost every \(x\).
+In the first line, we applied \cref{lem:entropy-eq}, and in the third line, we used  the \cref{eq:5} of \cref{sec:jensens-inequality}. The inequality above equally applies to \(f = f^n\), and since the diameter of \(f^{-n}(\xi_c)\) shrinks to zero, \(\sigma\rpar*{\bigcup_nf^{-n}(\xi_c)}\) is finer than the Borel algebra.
 
+Now, since \((f^n_c, \nu)\) is a factor of \((f^n,\mu)\), we have \(h_{\nu}(f_c^n) \le h_{\mu}(f^n)\). If \(\lambda^c(\mu) \le 0\), then the Ledrappier-Young formula tells us that \(h_{\mu}^u(f^n) = n h_{\mu}^u(f) = n h_{\mu}(f) = h_{\mu}(f^n)\), so we have equality in the equation above. By \cref{cor:cond-invprin}, the proof of \cref{thm:invariance-principle} is complete.
+\end{proof}
 
-\todo{What does it say about the Bonifant-Milnor example.}
+\section{Applications to Bonifant-Milnor}
+
+\todo{todo}
 
 % We begin the proof of \cref{thm:invariance-principle-skew-products} by examining a trick for establishing the invariance of the conditional measures by the unstable holonomy. Let 
 

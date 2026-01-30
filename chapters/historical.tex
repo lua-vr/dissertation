@@ -287,7 +287,7 @@ In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \
 
   Let \(n_k = 2^k\), \(\varepsilon > 0\) and \(E_k = \set{\omega \in \Omega_C \where A_{n_k}(\omega) > \varepsilon}\). By Markov's inequality, \(\Prob(E_k) \le a_{n_k}/\varepsilon\).
   Since \(\delta - 1/2 < 0\), we therefore have \(\sum_{k = 0}^{\infty} \Prob(E_k) < \infty\). Applying Borel-Cantelli, \[\Prob(\limsup E_k) = \Prob(\set{\omega \in \Omega_C\where \limsup_{k \to \infty} A_{n_k}(\omega) > \varepsilon}) = 0.\]
-  Since \(\varepsilon > 0\) and \(C > 0\) are arbitrary, this shows \(\lim_{k \to \infty} A_{n_k} = 0\) almost surely. To recover the same limit for the original sequence, we simply notice that \(1_K \ge 0\), so
+  Since \(\varepsilon > 0\) and \(C > 0\) are arbitrary, this shows \(\lim_{k \to \infty} A_{n_k} = 0\) almost surely. To recover the same limit for the original sequence, we simply notice that \(1_K \ge 0\), so for all \(n\), letting \(k\) be such that \(n_k \le n \le n_{k + 1}\),
   \begin{equation*}
     A_n \le A_{n_{k + 1}} \cdot \frac{n_{k + 1}}{n_k} = 2 A_{n_{k + 1}}
   \end{equation*}
@@ -587,11 +587,11 @@ For some intuition, suppose \(X = \set{0,1}^{\ZZ}\) and \(g\) was the shift \(g(
 \end{proof}
 
 \begin{lemma}
-  \todo{Take \(\mathcal{G} \subseteq \mathcal{F}\) to be the algebra of Borel subsets which are unions of local stable leaves of a uniformly hyperbolic attractor. Then both conditions of \cref{thm:decomposition-existence-inv} are satisfied.}
+  Take \(\mathcal{G} \subseteq \mathcal{F}\) to be the algebra of Borel subsets which are unions of local stable leaves of a uniformly hyperbolic attractor, and let \(p\) be Hölder continuous. Then, both conditions of \cref{thm:decomposition-existence-inv} are satisfied.
 \end{lemma}
 
 \begin{proof}
-  \todo{\cite[Proposition 4.14]{vianaStochasticDynamicsDeterministic2021}}
+  This is~\cite[Proposition 4.14]{vianaStochasticDynamicsDeterministic2021}.
 \end{proof}
 
 \section{Recent developments}
