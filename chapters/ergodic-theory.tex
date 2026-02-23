@@ -99,10 +99,10 @@ A cone \((C, c)\) is \emph{universal} for \(M \to \cC\) if it is a limit of the 
     X\arrow[rr,"m"] && X
   \end{tikzcd}
 \]
-commutes. If a cone is to be seen as a collection of invariant states, then the universal cone is the biggest of them. As we shall see in \cref{sec:limits-colimits}, a universal cone is a special case of a \emph{limit}. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
+commutes. If a cone is to be seen as a collection of invariant states, then the universal cone is the biggest of them. An universal cone is a special case of a \emph{limit}. Since categorical limits are unique, if a universal cone exists, it is unique up to isomorphism as well.
 
 \begin{example}
-  Let \(f \colon X \to X\) be any function from a set to itself. Like in previous example, this will define a dynamical system in \(\SetC\) over the monoid \(\NNZ\), mapping \(n \in \NNZ\) to the iterate \(f^n\). If \(x \in X\) is a fixed point of \(f\), then we get a cone by defining \(C = \set{x}\) and picking the morphism \(c \colon C \to X\) to be the inclusion. Since \(x\) is a fixed point, it's clear that the associated diagram will commute. Conversely, if \((C,c)\) is a cone and \(x \in C\), then the commutativity of the triangle means \(f(c(x)) = c(x)\), and therefore \(c(x) \in X\) is a fixed point for \(f\).
+  Let \(f \colon X \to X\) be any function from a set to itself. Like in previous example, this will define a dynamical system in \(\SetC\) over the monoid \(\NNZ\), mapping \(n \in \NNZ\) to the iterate \(f^n\). If \(x \in X\) is a fixed point of \(f\), then we get a cone by defining \(C = \set{x}\) and picking the morphism \(c \colon C \to X\) to be the inclusion. Since \(x\) is a fixed point, it is clear that the associated diagram will commute. Conversely, if \((C,c)\) is a cone and \(x \in C\), then the commutativity of the triangle means \(f(c(x)) = c(x)\), and therefore \(c(x) \in X\) is a fixed point for \(f\).
 
   In this case, the \emph{universal} cone for \(f\), then, will correspond to the set \(\Fix{f}\) of all fixed points (which may be empty) paired with the set inclusion \(\Fix{f} \hookrightarrow X\). Any other cone will map uniquely to this set, by matching each of its points with the corresponding fixed point in \(\Fix{f}\).
 \end{example}
@@ -121,7 +121,7 @@ commutes. If a cone is to be seen as a collection of invariant states, then the 
   \]
 \end{example}
 
-More generally, a kernel \(g \colon Y \to \Meas[1]{X}\) will define a cone if for every \(y \in Y\), \(g(y) \in \Meas[1]{X}\) is invariant. As we shall see later, if \(X\) is a Borel space and \(f\) comes from a deterministic map (that is, every \(f(x)\) is a Dirac mass), then the universal cone exists and is given by what is called the \emph{ergodic decomposition}.
+More generally, a kernel \(g \colon Y \to \Meas[1]{X}\) will define a cone if for every \(y \in Y\), \(g(y) \in \Meas[1]{X}\) is invariant.
 
 % \begin{example}
 %   \todo{For an iterated function system of contractions, the universal cone is the Hutchinson attractor. It is the map sending \(\star\) to the compact set \(A = \lim_{n \to \infty} H^i(x)\), which is independent of our starting point \(x\).}
@@ -140,7 +140,7 @@ Ergodic theory is the domain of dynamical systems that study dynamics by means o
   where \(\mathcal{I}\) is the sub-\(\sigma\)-algebra of (strictly) invariant sets.
 \end{theorem}
 
-Below we reproduce a succinct proof of the theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}\footnote{This is not exactly relevant to this dissertation, but the author has formally verified this proof in the Lean 4 ITP. The code is currently available at \url{https://github.com/lua-vr/pointwise-birkhoff}. It is in the process of being upstreamed to the Mathlib library.}.
+Below we reproduce a succinct proof of the theorem, described for example in~\cite[136]{katokIntroductionModernTheory1995}.
 
 \begin{proof}
   Let
@@ -169,7 +169,7 @@ Below we reproduce a succinct proof of the theorem, described for example in~\ci
   \begin{equation*}
     S = \set[par = auto]{x \in X \where F_n(x) \to + \infty}.
   \end{equation*}
-  The first observation is that \(S \in \mathcal{I}\), because it's measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
+  The first observation is that \(S \in \mathcal{I}\), because it is measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
   \begin{equation}\label{eq:1}
     0 \le \int_S F_{n + 1} - F_n\;d\mu = \int_S F_{n + 1} - F_n \circ f\;d\mu \to \int_S \phi\;d\mu
   \end{equation}
@@ -224,7 +224,7 @@ The direct relation to Birkhoff averages also highlights these objects as having
 Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask what are the points of \(X\) whose empirical measures converge to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
 
 \begin{lemma}\label{lem:erg-iff-basin-full-meas}
-  If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).\sidetodo{new :)}
+  If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
 \end{lemma}
 
 \begin{proof}
@@ -259,7 +259,7 @@ Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask wha
 \end{lemma}
 
 \begin{proof}
-  The set is closed by definition, so by Banach-Alaoglu it's compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
+  The set is closed by definition, so by Banach-Alaoglu it is compact; for connectedness, suppose \(\Meas{x} = K_1 \cup K_2\) where \(K_1, K_2\) are closed and disjoint.
   Let \(\set{\phi_i}_{i \in \NN} \subseteq B_{\Cs{X}}\) be a dense subset and define
   \begin{equation*}
     d(\mu, \nu) = \sum_{i = 1}^{\infty} \frac{\lvert \mu(\phi_i) - \nu(\phi_i) \rvert}{2^{i}},
@@ -275,19 +275,23 @@ Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask wha
 
 % \section{Ergodic theorems}
 
-\section{Palis' dream conjecture}
+% \section{Palis' conjecture}
 
-\todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
+% Jacob Palis had many dreams, and his dreams of mathematical nature were only a small part of his broader goals of developing science in the third world~\cite{pujalsPeixotosTheoremPaliss2011}.
 
-\begin{theorem}[Newhouse~\cite{newhouseDiffeomorphismsInfinitelyMany1974}]
-  Let \(M\) be a compact surface. There exists a non-empty open set \(U \subseteq \Diff^2(M)\) of non-hyperbolic diffeomorphisms. Moreover, any diffeomorphism in a dense \(G_{\delta}\)-subset of \(U\) has infinitely many sinks.
-\end{theorem}
 
-We note that in this context, a \emph{sink} is an attracting periodic orbit. Each sink corresponds to an ergodic measure (supported on the period orbit) whose basin is an open set, and therefore has positive volume.
 
-\begin{conjecture}
-  A
-\end{conjecture}
+% \todo{Describe the overall problem of generically finding finite set of limiting measures, whose basins cover almost all points of the manifold. Describe the robust counterexample to finiteness by Newhouse. Describe that the problem of historical behavior is open.}
+
+% \begin{theorem}[\cite{newhouseDiffeomorphismsInfinitelyMany1974}]
+%   Let \(M\) be a compact surface. There exists a non-empty open set \(U \subseteq \Diff^2(M)\) of non-hyperbolic diffeomorphisms. Moreover, any diffeomorphism in a dense \(G_{\delta}\)-subset of \(U\) has infinitely many sinks.
+% \end{theorem}
+
+% We note that in this context, a \emph{sink} is an attracting periodic orbit. Each sink corresponds to an ergodic measure (supported on the period orbit) whose basin is an open set, and therefore has positive volume.
+
+% \begin{conjecture}
+%   A
+% \end{conjecture}
 
 \section{Relating dynamics: extensions}
 
@@ -304,7 +308,7 @@ Different dynamical systems can be related to each other by the concept of \emph
   commutes.
 \end{definition}
 
-\todo{Now, we conclude our tour around the zoo and focus on our beloved species, measure-preserving systems.}
+Now, we conclude our tour around the zoo and focus on our beloved species, measure-preserving systems.
 
 \begin{definition} Let $(X, \mathcal{B}_X, \mu, f)$ and $(Y,\mathcal{B}_Y, \nu, g)$ be measure-preserving transformations. 
   $(Y,\mathcal{B}_Y, \nu, g)$ is a \textbf{factor} of $(X, \mathcal{B}_X, \mu, f)$ if there exists a measure-preserving map $\phi: X \to Y$ such that 
@@ -366,26 +370,37 @@ Different dynamical systems can be related to each other by the concept of \emph
 
 \subsection{Invertible extensions}\label{sec:invert-extens}
 
-\begin{equation}
-  \begin{tikzcd}[column sep = tiny]
-    {(\widetilde{X}, \tilde{f})} \\
-     & {(Y,g)} \\
-    {(X,f)}
-    \arrow["\exists! h"', dashed, from=2-2, to=1-1]
-    \arrow["\pi"', from=1-1, to=3-1]
-    \arrow["p", from=2-2, to=3-1]
-  \end{tikzcd}
-\end{equation}
+\begin{definition}
+  Let \((X, \mathcal{B}, \mu, f)\) be any measure-preserving system. We say an extension \(\pi \colon (\widetilde{X}, \widetilde{\mathcal{B}},\tilde{\mu}, \tilde{f}) \to (X,\mathcal{B}, \mu, f)\) is the \emph{natural invertible extension} if it is the smallest extension of \((X, \mu, f)\) for which \(\tilde{f}\) is invertible with measurable inverse, in the sense the following universal property is satisfied: if \(p \colon (Y,\mathcal{B}_Y,\nu,g) \to (X,\mathcal{B}, \mu, f)\) is another extension with invertible \(g\), then there exists a unique factor map \(h \colon (Y,\mathcal{B}_Y,\nu,g) \to (\widetilde{X}, \widetilde{\mathcal{B}},\tilde{\mu}, \tilde{f})\).
+  \begin{equation}
+    \begin{tikzcd}[column sep = tiny]
+      {(\widetilde{X}, \widetilde{\mathcal{B}}, \tilde{\mu}, \tilde{f})} \\
+      & {(Y,\mathcal{B}_Y,\nu,g)} \\
+      {(X,\mathcal{B},\mu,f)}
+      \arrow["\exists! h"', dashed, from=2-2, to=1-1]
+      \arrow["\pi"', from=1-1, to=3-1]
+      \arrow["p", from=2-2, to=3-1]
+    \end{tikzcd}
+  \end{equation}
+  By the usual shenanigans, if the extension exists, it is unique up to isomorphism in the category of measure-preserving maps.
+\end{definition}
 
 % \cite[pp. 20]{einsiedlerErgodicTheoryView2011} 
 
 \begin{theorem}
-  Let \((X,\mathcal{B},\mu,f)\) be a measure-preserving system on a Borel space. \todo{Then, the natural invertible extension exists.}
+  Let \((X,\mathcal{B},\mu,f)\) be a measure-preserving system on a Borel space. Then, the natural invertible extension exists.
 \end{theorem}
 
 \begin{proof}
-  \todo{Apply Kolmogorov extension theorem.}
+  Let \(\widetilde{X} \subseteq X^{\ZZ_{\le 0}}\) be the set of backward orbits:
+  \begin{equation*}
+    \tilde{X} = \{ (x_n)_{n \le 0} \in X^{\mathbb{Z}_{\le 0}} \mid f(x_{n-1}) = x_n \text{ for all } n \le 0 \}.
+  \end{equation*}
+  We endow $X^{\mathbb{Z}_{\le 0}}$ with the product $\sigma$-algebra $\mathcal{B}^{\otimes \mathbb{Z}_{\le 0}}$. Now, we construct a projective system of measures as in \cref{thm:kolmogorov-ext}: if \(\Lambda \subseteq \ZZ_{\le 0}\) and is a finite set and  \(N \le \min \Lambda\), we construct a map \(\gamma_{\Lambda} \colon X \to X^{\Lambda}\) by \(\gamma_{\Lambda}(x) = \prod_{n \in \Lambda}f^{n - N}(x)\) (\(n - N\) is non-negative), and a measure \(\mu_{\Lambda} = (\gamma_{\Lambda})_*\mu\). In particular, for any cylinder set \(C = [A_{-k},\dots,A_0]\) of \(X^{\mathbb{Z}_{\le 0}}\) and \(\Lambda \supseteq \set{-k,\dots,0}\), the measure is given by \(\mu_{\Lambda}(C) = \mu(A_{-k} \cap \cdots \cap f^{-k}(A_0))\). By invariance of \(\mu\) under \(f\), the measures \(\mu_{\Lambda}\) do not depend on the value of \(N \le \min \Lambda\), and therefore \(\mu_{\Lambda_1}\) also coincides (projects to) \(\mu_{\Lambda_2}\) whenever \(\Lambda_2 \subseteq \Lambda_1\), forming a projective system.
 
+  By \cref{thm:kolmogorov-ext}, there is a unique extension \(\tilde{\mu}\) that extends the \(\mu_{\Lambda}\) on the product \(X^{\ZZ_{\le 0}}\). Let \(E_j = \set{ (x_n)_{n \le 0} \where x_j = f(x_{j - 1})}\), so that \(\widetilde{X} = \bigcap_{j \in \ZZ_{\le 0}}E_j\). Since \(X\) is a Borel space, thus countably generated, each \(E_j\) is measurable. By construction of the \(\mu_{\Lambda}\) for \(\Lambda = \set{j - 1,j}\), and choosing \(N = j - 1\), we have \(\gamma_{\Lambda}(X) = \pi_{\Lambda}(E_j)\), so \(\mu_{\Lambda}(\pi_{\Lambda}(E_j)) = \mu(X) = 1\). By taking the countable intersection, we arrive at \(\tilde{\mu}(\widetilde{X}) = 1\), and we may restrict \(\tilde{\mu}\) to \(\widetilde{X}\).
+
+  Finally, we define \(\tilde{f} \colon \widetilde{X} \to \widetilde{X}\) to be the map \[f(\dots,x_{-1},x_0) = (\dots,x_{-1},x_0,f(x_0)),\] whose inverse is the right shift. Any other invertible extension \(p \colon (Y,\nu,g) \to (X,\mu,f)\) must extend \((\widetilde{X}, \tilde{\mu},\tilde{f})\) by letting the factor \(h \colon Y \to \widetilde{X}\) be the map given by \[h(y) = (\dots,p(g^{-2}(y)),p(g^{-1}(y)),p(y)).\]
 \end{proof}
 
 \begin{lemma}\label{lem:inv-ext-ergodic}
@@ -448,31 +463,43 @@ Invertible extensions may not exist for non-Borel spaces. The following example 
 \end{question}
 
 
-\subsection{The solenoid}
-\todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025}}
-% TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
+% \subsection{The solenoid}
+% \todo{\cite{anderssonNonuniformlyHyperbolicEndomorphisms2025}}
+% % TODO: See Carrasco paper for discussion about constructing and generalizing the solenoid.
 
 \section{Cocycles and skew products}
 
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXMgWSJdLFswLDEsIlgiXSxbMSwwLCJYIFxcdGltZXMgWSJdLFsxLDEsIlgiXSxbMCwxLCJcXHBpX1giXSxbMiwzLCJcXHBpX1giXSxbMSwzLCJmIiwxXSxbMCwyXV0=
-\[\begin{tikzcd}
-	{X \times Y} & {X \times Y} \\
-	X & X
-	\arrow[from=1-1, to=1-2]
-	\arrow["{\pi_X}", from=1-1, to=2-1]
-	\arrow["{\pi_X}", from=1-2, to=2-2]
-	\arrow["f"{description}, from=2-1, to=2-2]
-\end{tikzcd}\]
+\begin{definition}
+  We say that a function \(\phi \colon \NN \times X \to M\), where \(M\) is a monoid, is a \emph{cocycle} for \(f \colon X \to X\) if \(\phi(0,x) = \Id\) and \(\phi(n + m,x) = \phi(n,f^m(x)) \cdot \phi(m,x)\) for all \(m,n \in \NN\).
+\end{definition}
 
-
-\begin{example}[Iterated function system]
-  \todo{IFSs are examples of skew products.}
-  % TODO: write
-\end{example}
+% \begin{remark}
+%   From another point of view, a cocycle is equivalent to a functor from the action groupoid \(\NN \rtimes_f X\) to a monoid \(M\).
+% \end{remark}
 
 \subsection{Lyapunov exponents}\label{sec:lyapunov-exponents}
 
-\todo{Define for linear cocycles. Oseledets theorem.}
+Let \(\theta \colon X \to \GL_d(\RR)\) be a measurable function taking values on the general linear group of some dimension \(d\). This defines a cocycle
+\begin{equation*}
+  \phi(n,x) = \prod_{i = 0}^{n - 1} \theta(f^i(x)),
+\end{equation*}
+in the sense that \(\phi(n + m,x) = \phi(n,f^m(x)) \cdot \phi(m,x)\) for all \(m,n\). Therefore, \(\norm{\phi(n + m,x)}\le \norm{\phi(n,f^m(x))} \cdot \norm{\phi(m,x)}\) in the operator norm.
+
+The following statement is from~\cite{vianaFoundationsErgodicTheory2016}.
+
+\begin{theorem}[Oseledets]\label{thm:oseledets}
+  If \(\log^+ \norm{\theta} = \max \set{0, \norm{\theta}} \in L^1(\mu)\), then for \(\mu\)-almost every \(x \in X\) there exists a positive integer \(k = k(x)\), real numbers \(\lambda_1(x) > \cdots > \lambda_k(x)\) and a filtration
+  \begin{equation*}
+    \RR^d = V_x^1 \supsetneq \cdots \supsetneq V^k_x \supsetneq V^{k + 1}_x = \set{0}
+  \end{equation*}
+  such that for all \(i \in \set{1,\dots,k}\) and \(\mu\)-almost every \(x \in X\),
+  \begin{enumerate}
+  \item \(k\), \(\lambda_i\) are invariant functions and \(\theta(x) \cdot V_x^i = V^i_{f(x)}\);
+  \item\label{item:7} for all \(v \in V^i_x \setminus V^{i + 1}_x\), \(\lim_{n \to \infty} \frac{1}{n}\log \norm{\phi(n,x) \cdot v} = \lambda_i(x)\);
+  \item\label{item:8} \(\lim_{n \to \infty} \frac{1}{n}\log \abs{\det{\phi(n,x)}} = \sum_{i = 1}^k d_i(x) \lambda_i(x)\), where \(d_i(x) = \dim V^i_x - \dim V^{i + 1}_x\).
+  \end{enumerate}
+\end{theorem}
+The numbers \(\lambda_i(x)\) are called the \emph{Lyapunov exponents} of \(\theta\) relative to \(f\) at \(x\). Each \(d_i(x)\) is the \emph{multiplicity} of the exponent \(\lambda_i(x)\).
 
 \nomenclature{\(\Basin{\mu}\)}{Basin of the measure \(\mu\), defined in \cref{sec:empirical-measures}.}
 
@@ -500,7 +527,7 @@ In a measure space, it is often useful to relax the notions of equality and orde
 
 \section{Disintegrations}
 
-In the Calculus  course, we learn that it's most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional subsets.
+In the Calculus  course, we learn that it is most often easier to find the area of a region in the plane if we reduce the problem back to a single dimension, by taking integrals of the length along parallel lines. This is the essence of Fubini's theorem, which states that the integral of a function in a higher dimensional region can be written as nested integrals of the function along one-dimensional subsets.
 Then we go to the probability course, and the lecturer talks about conditional expectations and the whole philosophy of Bayes of taking probabilities conditioned to some event. It may not seem at first that this has anything to do with the aforementioned theorem in the Calculus course, at least not until we take the Ergodic theory course and learn about measures and disintegrations.
 
 While Fubini remains true for product measures, in general the problem of decomposing an arbitrary measure into a family of measures defined in smaller subsets is not as straightforward. Neither is straightforward to see how could one talk about the probability of an event conditioned to another event of \emph{zero probability}, even though in practice this happens very often. 
@@ -514,8 +541,6 @@ Both situations are instances of the general problem the disintegration of measu
   \item \(\mu(E) = \int \mu_x(E) \,d\mu (x)\).
   \end{enumerate}
 \end{definition}
-
-\subsection{Uniqueness}
 
 \subsection{Measurability}
 
@@ -565,21 +590,175 @@ The right notion of a ``well-behaved'' partition with respect to disintegrations
   Since they are closed, the elements of \(\pP\) are measurable in the Borel algebra. To show the partition is countably generated, we can define a metric on \(\pP[eqc]\) by letting \(d(P_1,P_2)\) be the distance between the compact sets \(P_1, P_2 \in \pP[eqc]\) (since they are disjoint, this defines a metric). With this metric, the surjection \(\pP \colon \cms \to \pP[eqc]\) is a contraction, so \(\pP[eqc]\) is a compact metric space as well. By the \cref{eg:point-partition-meas}, the partition \(\top\) of points of \(\pP[eqc]\) is countably generated, thus so is its preimage by \(\pP\).
 \end{proof}
 
-
+We will not define disintegrations with respect for a partition here. Instead, we define conditional measures, which work in the same way but are defined with respect to a sub-\(\sigma\)-algebra. Indeed, any partition \(\xi\) generates a \(\sigma\)-algebra \(\sigma(\xi)\) which is the smallest \(\sigma\)-algebra containing all elements of \(\xi\). If \(\xi\) is measurable, then \(\sigma(\xi)\) is countably generated. Namely, if \(\xi = \bigvee_{n \in \NN}\xi_n\), then \(\sigma(\xi) = \sigma(\xi_1,\xi_2,\dots)\), where each \(\xi_n\) is a countable partition.
 
 \subsection{Conditional measures}
 
+The following is~\cite[theorem 5.14]{einsiedlerErgodicTheoryView2011}. Also see~\cite[definition 10.4.1]{bogachevMeasureTheory2007} and related results for a definition of conditional measures in a more general setting of arbitrary measure spaces, and their existence in measurable spaces with a compact approximating class (\cref{def:approximating-class}).
 
+\begin{theorem}
+  Let \((X,\mathcal{B},\mu)\) be a Borel probability space and let \(\mathcal{A} \subseteq \mathcal{B}\) be a sub-\(\sigma\)-algebra. Then, there exists a \(\mathcal{A}\)-measurable full-measure set \(X' \subseteq X\) and a family \(\set{\mu^{\mathcal{A}}_x}_{x \in X'} \subseteq \Meas{\mathcal{B}}\) of probability measures on \((X,\mathcal{B})\), called \emph{conditional measures}, such that:
+  \begin{enumerate}
+  \item\label{item:5} for all \(\mu\)-integrable \(f \colon X \to \RR\),
+    \begin{equation*}
+      \CE[\mu]{f,\mathcal{A}}(x) = \int f \;d\mu_x^{\mathcal{A}}
+    \end{equation*}
+    almost everywhere;
+  \item if \(\mathcal{A}\) is countably generated, then \(\mu^{\mathcal{A}}_x(\mathcal{A}(x)) = 1\) for all \(x \in X'\), where
+    \begin{equation*}
+      \mathcal{A}(x) = \bigcap_{\substack{A \in \mathcal{A} \\ x \in A}}A,
+    \end{equation*}
+    and additionally, \(\mu^{\mathcal{A}}_x = \mu^{\mathcal{A}}_y\) for all \(y \in \mathcal{A}(x) \cap X'\);
+  \end{enumerate}
+  Moreover, \cref{item:5} uniquely determines \(\mu^{\mathcal{A}}_x\) for \(\mu\)-almost every \(x \in X\) --- that is, if \(\set{\nu^{\mathcal{A}}_x}_{x \in X''}\) satisfies \cref{item:5}, then \(\nu^{\mathcal{A}}_x = \mu^{\mathcal{A}}_x\) in a full measure set.
+\end{theorem}
+
+\begin{proof}
+  See~\cite[theorem 5.14]{einsiedlerErgodicTheoryView2011}.
+\end{proof}
+
+\begin{remark}
+  By abuse of notation, if \(\xi\) is a partition, we denote by \(\set{\mu^{\xi}_x}_x\) the conditional measures for the sub-\(\sigma\)-algebra \(\sigma(\xi)\). Clearly, it satisfies the definition of a disintegration.
+\end{remark}
 
 \section{Entropy}\label{sec:entropy}
 
-\subsection{Measure-theoretic entropy}
-Let \(\mathcal{P}\) be a partition.
+In this section, we follow~\cite{einsiedlerEntropyErgodicTheory}. We give only the basic definitions and properties, and omit most of the theory that is usually covered. Later, we relate the entropy of a diffeomorphism with its Lyapunov exponents, based on~\cite{ledrappierMetricEntropyDiffeomorphisms1985a}.
 
-\todo{Define.}
+\subsection{Measure-theoretic entropy}
+
+\begin{definition}
+  Let \(\phi \colon \RR_{>0} \to \RR\) be defined as
+  \begin{equation*}
+    \phi(x) =
+    \begin{cases}
+      0 & \text{if }x = 0;\\[-4pt]
+      - x \log x & \text{if } x > 0.
+    \end{cases}
+  \end{equation*}
+\end{definition}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      % --- Box Style (maintaining consistency) ---
+      axis line style={very thick},
+      axis on top,
+      enlargelimits=false,
+      width=5cm,
+      height=5cm,
+      % Remove ticks and labels
+      xtick=\empty,
+      ytick=\empty,
+      xlabel={},
+      ylabel={},
+      title={},
+      % --- Axis Limits ---
+      xmin=0, xmax=1,
+      ymin=0, ymax=1, % A CDF always ranges from 0 to 1
+      % --- Plot Style ---
+      samples=200, % Sufficient for a smooth curve
+      every axis plot/.append style={very thick, smooth}
+      ]
+      \addplot[blue, domain=0:1] {-x*ln(x)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The value of \(\phi(x)\) for \(0 \le x \le 1\).}
+\end{figure}
+
+\begin{definition}
+  Let \(\mathcal{P}\) be a partition of \(X\). We say \(\mathcal{P}\) has \emph{finite entropy} if there is a countable subset \(\mathcal{P}' \subseteq \mathcal{P}\) for which \(\bigcup_{P \in \mathcal{P}'}P\) covers \(X\) modulo \(\mu\), and such that
+  \begin{equation*}
+    H_{\mu}(\mathcal{P}) = \sum_{P \in \mathcal{P}} \phi(\mu(P)) < \infty.
+  \end{equation*}
+  We call \(H_{\mu}(\mathcal{P})\) the \emph{entropy} of the partition \(\mathcal{P}\).
+\end{definition}
+
+\begin{definition}
+  Let \((X,\mathcal{B},\mu,f)\) be a measure-preserving system and \(\xi\) be a partition of \(X\) with finite entropy. Then, the \emph{entropy of \(f\) with respect to \(\xi\)} is
+  \begin{equation*}
+    h_{\mu}(f,\xi) =
+    \lim_{n \to \infty} \frac{1}{n}H_{\mu}\rpar*{\bigvee_{0 \le k < n}f^{-k}(\xi)} = 
+    \inf_{n \ge 0} \frac{1}{n}H_{\mu}\rpar*{\bigvee_{0 \le k < n}f^{-k}(\xi)}.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  The \emph{entropy} of \(f\) with respect to \(\mu\) is defined as the supremum of the entropy of \(f\) with respect to partitions with finite entropy, that is,
+  \begin{equation*}
+    h_{\mu}(f) = \sup_{\xi \colon H_{\mu}(\xi) < \infty}h_{\mu}(f,\xi).
+  \end{equation*}
+\end{definition}
+
 \subsection{Conditional entropy}
 
-\subsection{Pesin entropy formula}
-\todo{State the theorem, to be used in the invariance principle section.}
+We also have a notion of \emph{conditional entropy}.
+
+\begin{definition}
+  Let \(\mathcal{P}\) be a partition of a Borel probability space \((X,\mathcal{B},\mu)\), and let \(\mathcal{A} \subseteq \mathcal{B}\) be a sub-\(\sigma\)-algebra. We define the \emph{conditional entropy} of \(\mathcal{P}\) given \(\mathcal{A}\) to be
+  \begin{equation*}
+    H_{\mu}(\mathcal{P}\mid \mathcal{A}) =
+    \int H_{\mu^{\mathcal{A}}_x}(\mathcal{P}) \;d\mu(x),
+  \end{equation*}
+  where \(H_{\mu^{\mathcal{A}}_x}(\mathcal{P})\) is defined to be \(+\infty\) when \(\mathcal{P}\) is not of finite entropy for \(\mu^{\mathcal{A}}_x\).
+\end{definition}
+
+\begin{proposition}
+  If \((X,\mathcal{B},\mu,f)\) if a measure-preserving system and \(\xi\) is a partition of \(X\) with finite entropy, the entropy of \(f\) with respect to \(\xi\) is equivalently equal to
+  \begin{equation*}
+    h_{\mu}(f,\xi) =
+    \lim_{n \to \infty} \frac{1}{n}H_{\mu}\rpar*{\xi \mathrel{\bigg|} \bigvee_{1 \le k \le n}f^{-k}(\xi)}.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  See~\cite[proposition 1.16]{einsiedlerEntropyErgodicTheory}.
+\end{proof}
+
+\subsection{Leddrapier-Young formula}
+
+Let \(f \colon M \to M\) be a measure-preserving \(C^2\)-diffeomorphism of a compact \(C^{\infty}\) riemannian manifold \(x\) preserving an ergodic borel probability measure \(\mu\). By \cref{thm:oseledets} applied to \(\theta(x) = df_x\) and ergodicity of \(\mu\), we have a full-measure set \(\Gamma \subseteq M\), a positive integer \(r > 0\) and numbers \[\lambda_1 > \cdots > \lambda_r\] such that for all \(x \in \Gamma\), there is a filtration of the tangent bundle
+\begin{equation*}
+  \set{0} = V^0_x \subseteq V^1_x \subseteq \cdots \subseteq V^{r}_x = T_xM
+\end{equation*}
+where \cref{item:7,item:8} of \cref{thm:oseledets} apply. Let \(u = \max \set{i : \lambda_{i} > 0}\). For each \(1 \le i \le u\), define
+\begin{equation*}
+  W^i(x) = \set[par = \Big]{y \in M \where \limsup_{n \to \infty} \frac{1}{n} \log d(f^{-n}(x), f^{-n}(y))\le - \lambda_i }.
+\end{equation*}
+This is an immersed \(\dim V^i\)-dimensional \(C^2\) submanifold tangent at each point to \(V^i\)~\cite{ledrappierMetricEntropyDiffeomorphisms1985a}. It is called the \(i\)-th unstable manifold of \(f\) and \(x\), and it defines a foliation \(\set{W^i(x)}_{x \in X}\), called the \(i\)-th unstable foliation.
+
+We now define a notion of dimension along the unstable foliation. Let \(1 \le i \le u\) and let \(\xi\) be a measurable partition of \(M\) that refines the foliation \(W^i\). For \(x \in M\), let \(\mu_x\) be the conditional measure at \(x\) for the partition \(\xi\), and let
+\begin{equation*}
+  \underline{\delta}_i(x,\xi) = \liminf_{\varepsilon \to 0}\frac{\log \mu_x (B^i(x,\varepsilon))}{\log \varepsilon}
+\end{equation*}
+and
+\begin{equation*}
+  \overline{\delta}_i(x,\xi) = \limsup_{\varepsilon \to 0}\frac{\log \mu_x (B^i(x,\varepsilon))}{\log \varepsilon}
+\end{equation*}
+
+\begin{lemma}
+  The functions \(\underline{\delta}_i(x,\xi)\) and \(\overline{\delta}_i(x,\xi)\) are invariant by \(f\) and independent of \(\xi\), and therefore are almost everywhere equal to two numbers \(\underline{\delta}_i\) and \(\overline{\delta}_i\). In fact, these two numbers are equal, and we denote the common value by \(\delta_i\).
+\end{lemma}
+
+\begin{proof}
+  See~\cite{ledrappierMetricEntropyDiffeomorphisms1985a}.
+\end{proof}
+
+The number \(\delta_i\) is called the \emph{dimension of \(\mu\) on \(W^i\)-manifolds}.
+
+\begin{theorem}[Ledrappier-Young formula]\label{thm:leddrappier-young}
+  Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\), and let \(\delta_i\) be the dimension of \(\mu\) on \(W^i\)-manifolds. Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that
+  \begin{equation*}
+    \delta_i = \sum_{j \le i} \gamma_i
+  \end{equation*}
+  and
+  \begin{equation*}
+    h_{\mu}(f) = \sum_{i \le u} \lambda_i\gamma_i.
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  See~\cite{ledrappierMetricEntropyDiffeomorphisms1985a}.
+\end{proof}
 
 \end{document}

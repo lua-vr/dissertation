@@ -46,7 +46,7 @@ Below we reproduce a succinct proof of the pointwise ergodic theorem, described 
   \begin{equation*}
     S = \set[par = auto]{x \in X \where F_n(x) \to + \infty}.
   \end{equation*}
-  The first observation is that \(S \in \mathcal{I}\), because it's measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
+  The first observation is that \(S \in \mathcal{I}\), because it is measurable and strictly invariant. Since \(\mu\) is invariant by \(f\), this implies \(\int_S F_n \circ f\;d\mu = \int_S F_n\;d\mu\). Also, the observations from the last claim show that \(F_{n + 1}(x) - F_n(f(x)) \to \phi(x)\) for \(x \in S\). Thus, by the dominated convergence theorem,
   \begin{equation}\label{eq:1}
     0 \le \int_S F_{n + 1} - F_n\;d\mu = \int_S F_{n + 1} - F_n \circ f\;d\mu \to \int_S \phi\;d\mu
   \end{equation}

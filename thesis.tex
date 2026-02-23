@@ -1,0 +1,147 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% ICMC: Modelo de Trabalho Acadêmico (tese de doutorado, dissertação de
+% mestrado e trabalhos monográficos em geral) em conformidade com 
+% ABNT NBR 14724:2011: Informação e documentação - Trabalhos acadêmicos -
+% Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+% Opções: 
+%   Qualificação          = qualificacao 
+%   Curso                 = doutorado/mestrado
+%   Situação do trabalho  = pre-defesa/pos-defesa (exceto para qualificação)
+%   Versão para impressão = impressao
+\PassOptionsToPackage{shortlabels}{enumitem}
+\PassOptionsToPackage{hidelinks}{hyperref}
+\documentclass[mestrado, pre-defesa]{packages/icmc}
+
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{subfiles}
+\usepackage{csquotes}
+\usepackage{bookmark}
+\usepackage{microtype}
+
+\usepackage{dinamica}
+\usepackage{categorias}
+\usepackage{teoremas}
+
+\input{preamble/bibliography}
+\input{preamble/glossaries}
+\input{preamble/tikz}
+\input{preamble/macros}
+
+
+\newcommand{\VerbL}{0.52\textwidth}
+\newcommand{\LatL}{0.42\textwidth}
+
+\genero{F}
+\tituloPT{Medidas empíricas em sistemas dinâmicos}
+\tituloEN{Empirical measures in dynamics}
+\autor[Viana Reis, L.]{Lua Viana Reis}
+\orientador[Orientador]{Prof. Dr.}{Ali Tahzibi}
+\curso{MAT}
+\data{19}{02}{2026} % Data do depósito
+\idioma{EN} % Idioma principal do documento (PT = português / EN = inglês)
+% ---
+
+
+% ---
+% RESUMOS
+% ---
+
+% Resumo em PORTUGUÊS
+% conter no máximo 500 palavras
+% conter no mínimo 1 e no máximo 5 palavras-chave
+\textoresumo[brazil]{
+Apresentamos uma visão geral do papel das medidas empíricas e de suas bacias em sistemas dinâmicos. Iniciando com os teoremas ergódicos básicos e a definição de bacia de uma medida empírica, seguimos a exposição de um artigo de Bonifant e Milnor para estudar uma família de endomorfismos do tipo skew-product no cilindro, buscando generalizá-la ao longo do caminho. Exploramos como o sinal da derivada Schwarziana das aplicações nas fibras influencia o comportamento estatístico das órbitas, levando ou ao fenômeno de bacias entrelaçadas ou à existência de uma única medida assintótica. Em seguida, discutimos esses exemplos no contexto da dinâmica parcialmente hiperbólica, apresentando uma demonstração da invariância das medidas condicionais nas folhas centrais com respeito a holonomias instáveis. Por fim, abordamos o conceito de comportamento histórico, mostrando como, de maneira adequada, uma dinâmica determinística pode convergir fracamente para um movimento Browniano, resultando na não convergência de medidas empíricas em um conjunto de medida total.
+    }{Teoria Ergódica, Sistemas Dinâmicos Diferenciáveis, Probabilidade}
+
+% resumo em INGLÊS
+% conter no máximo 500 palavras
+% conter no mínimo 1 e no máximo 5 palavras-chave
+\textoresumo[english]{
+  We give an overview of the role of empirical measures and their basins in dynamical systems. Beginning with the basic ergodic theorems and the definition of the basin of an empirical measure, we follow the exposition from an article by Bonifant and Milnor to study a family of skew-product endomorphisms on the cylinder, and try to generalize it along the way. We explore how the sign of the Schwarzian derivative of the fiber maps influences the statistical behavior of orbits, leading either to the phenomenon of intermingled basins or to the existence of a unique asymptotic measure. After that, we discuss these examples within the context of partially hyperbolic dynamics, presenting a proof for the invariance of conditional measures along center leaves along unstable holonomies. Finally, we address the concept of historical behavior by showing how in a suitable way, deterministic dynamics can converge weakly to a Brownian motion, resulting in non-convergence for almost all empirical measures.
+}{Ergodic Theory, Differentiable Dynamical Systems, Probability}
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+% Inserir a ficha catalográfica
+\incluifichacatalografica{tex/pre-textual/ficha-catalografica.pdf}
+
+% DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
+\textodedicatoria*{tex/pre-textual/dedicatoria}
+\textoagradecimentos*{tex/pre-textual/agradecimentos}
+\textoepigrafe*{tex/pre-textual/epigrafe}
+
+% Inclui a lista de figuras
+% \incluilistadefiguras
+
+% Inclui a lista de siglas e abreviaturas
+\incluilistadesiglas
+
+% Inclui a lista de símbolos
+% \incluilistadesimbolos
+
+% ----
+% Início do documento
+% ----
+\settocdepth{subsection}
+\begin{document}
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\subfileinclude{chapters/ergodic-theory}
+\subfileinclude{chapters/bonifant-milnor}
+\subfileinclude{chapters/invariance-principle}
+\subfileinclude{chapters/historical}
+
+
+% ---
+% Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
+% ---
+\bookmarksetup{startatroot}% 
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\printbibliography
+
+% ---------------------------------------------------------------------
+% GLOSSÁRIO
+% ---------------------------------------------------------------------
+
+% % Arquivo que contém as definições que vão aparecer no glossário
+% \input{tex/glossario}
+% % Comando para incluir todas as definições do arquivo glossario.tex
+% \glsaddall
+% % Impressão do glossário
+% \printglossaries
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+  \subfileinclude{chapters/probability-theory}
+  % \subfileinclude{chapters/category-theory}
+  \subfileinclude{chapters/functional-analysis}
+\end{apendicesenv}
+
+\end{document}

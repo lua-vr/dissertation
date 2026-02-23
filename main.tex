@@ -26,6 +26,8 @@
 % %%% TODO REMOVEME!!!
 % \usepackage{todonotes}
 
+\usepackage[english,english]{babel}
+
 \input{preamble/bibliography}
 \input{preamble/glossaries}
 \input{preamble/tikz}
@@ -44,26 +46,32 @@
 
 \frontmatter
   
-\begin{dedication}[Maria, \enquote{Unstable Orbits in the Space of Lies} (Greg Egan).]
+\begin{dedication}*[Reverend Mother Gaius Helen Mohiam, \emph{Dune} (Frank Hebert).]
+  \enquote{Once men turned their thinking over to machines in the hope that this would set them free. But that only permitted other men with machines to enslave them.}
+\end{dedication}
+
+\vfill
+
+\begin{dedication}[Mr.\ Melancholy.]
+  \enquote{Shh. It's okay. Soon you won't remember anything. Your real name, your superpowers, your heart. You won't even remember that you're dying.}
+\end{dedication}
+
+\pagebreak
+
+\begin{dedication}*[Maria, \emph{Unstable Orbits in the Space of Lies} (Greg Egan).]
   \enquote{Everyone else has an attractor --- why can't we have one of our own? Stranger than all the rest. Look at it: it's the most beautiful thing on the map.}
 \end{dedication}
 
-% \pagebreak
+\vfill
 
-% \begin{dedication}*
-%   \enquote{Shh. It's okay. Soon you won't remember anything. Your real name, your superpowers, your heart. You won't even remember that you're dying.}
-% \end{dedication}
-
-% \vfill
-
-% \begin{dedication}
-%   Eu vi um menino correndo\\
-%   Eu vi o tempo\\
-%   Brincando ao redor do caminho daquele menino\\
-%   Eu pus os meus pés no riacho\\
-%   E acho que nunca os tirei\\
-%   O Sol ainda brilha na estrada, e eu nunca passei
-% \end{dedication}
+\begin{dedication}
+  Eu vi um menino correndo\\
+  Eu vi o tempo\\
+  Brincando ao redor do caminho daquele menino\\
+  Eu pus os meus pés no riacho\\
+  E acho que nunca os tirei\\
+  O Sol ainda brilha na estrada, e eu nunca passei
+\end{dedication}
 
 % \begin{dedication}
 %   I spoke into his eyes\\I thought you died alone\\A long, long time ago\\Oh no, not me\\
@@ -87,7 +95,7 @@
 
 \appendix
 \subfileinclude{chapters/probability-theory}
-\subfileinclude{chapters/category-theory}
+% \subfileinclude{chapters/category-theory}
 \subfileinclude{chapters/functional-analysis}
 
 \printbibliography

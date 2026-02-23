@@ -9,7 +9,7 @@ In this chapter, we follow the exposition by \textcite{bonifantSchwarzianDerivat
 \section{Cross ratios and the Schwarzian derivative}
 
 Suppose we start with a field \(\mathbb{K}\) and, not being happy with the fact that we cannot divide by zero, decide to add a point at infinity; this gives us the \textit{projective line} \(P^1(\mathbb{K}) = \mathbb{K} \sqcup \{ \infty \}\), whose arithmetic operations are the same as those of \(\mathbb{K}\) except for the additional rules \(\frac{1}{0} = \infty\), \(\frac{1}{\infty} = 0\), \(x \cdot \infty = \infty\) if \(x \neq 0\), and \(x + \infty = \infty\) if \(x \neq \infty\).
-It's not possible to define such operations everywhere without introducing inconsistent rules, so the operations are partial --- we cannot multiply \(\infty \cdot 0\) or add \(\infty + \infty\).
+It is not possible to define such operations everywhere without introducing inconsistent rules, so the operations are partial --- we cannot multiply \(\infty \cdot 0\) or add \(\infty + \infty\).
 
 Our new space \(P^1(\mathbb{K})\) has an interesting property: given \(z \in P^1(\mathbb{K})\), we have three types of operations that we can apply to \(z\): translations \(z \mapsto z + x\), where \(x \in \mathbb{K}\), homotheties \(z \mapsto xz\) for \(x \in \mathbb{K} \setminus \{ 0 \}\), and the inverse \(z \mapsto 1/z\), which was not defined before if \(z = 0\), but now makes sense for every \(z\). These three families of actions, which are invertible, generate the \textit{group of homographies} with coefficients in \(\mathbb{K}\).
 
@@ -167,7 +167,7 @@ To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(
 \end{lemma}
 
 \begin{proof}
-  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \Basin{\mu_0}\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\mu_0\) and \(e_n(x,y_2) \to \mu_0\), by \nameref{thm:portmanteau}
+  We will prove the case \(i = 0\), as the situation is symmetric. Let \((x,y_1) \in \Basin{\mu_0}\) and \(y_2 \leq y_1\). If \(\varphi \in \Cs{X \times I}\), and \(\varepsilon > 0\), by the uniform continuity of \(\varphi\), there exists \(\delta > 0\) such that \(y < \delta\) implies \(\lvert \varphi(x,0) - \varphi(x,y) \rvert < \varepsilon\) for all \(x \in X\). Since \(U = X \times \interval[open right]{0}{\delta}\) is a continuity set for \(\mu_0\) and \(e_n(x,y_2) \to \mu_0\), by \cref{thm:portmanteau}
     \newcommand{\timeinU}{\frac{1}{n}\# \set{ 0 \leq i < n \where f_x^n(y_2) < \delta }}
     \[\lim_{n \to \infty} e_n(x,y_2)(U) = \mu_0(U) = 1.\]
     Define \(\tau_n = e_n(x,y_2)(U) = \timeinU\).
@@ -183,7 +183,6 @@ To simplify notation, let's denote by \(f_x^{n}(y)\) the second coordinate of \(
 \section{Transversal Lyapunov exponents}
 
 To each point \((x,y)\) of either boundary \(\mathcal{A}_i\), for \(i \in \set{0,1}\), we can associate a number that expresses the average expansion rate of tangent vectors along the direction normal to the skew product boundary. This is a specific case of the general definition of Lyapunov exponents, whose existence is given by the Oseledets theorem.
-\todo{make the link to \cref{sec:lyapunov-exponents}}
 
 \begin{definition}[Transversal Lyapunov exponent]
   \begin{equation*}
@@ -273,15 +272,13 @@ The statement below assumes less regularity than the corresponding one in~\cite[
   If suffices to integrate the logarithm of the inequality \(f_x'(0)f_x'(1) < 1\) from \cref{lem:bound-deriv-schwarz}, and then apply \cref{lem:lyap-basin-posmeas}.
 \end{proof}
 
-\section{Intermingled basins}
+\section{Intermingled basins}\label{sec:intermingled-basins}
 
 The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
 
 \begin{definition}
   Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say a measure \(\nu \in \Meas[f](X)\) has an intermingled basin if for each nonempty open set \(U \subseteq X\), we have \(\mu(\Basin{\nu} \cap U) > 0\) and \(\mu(\Basin{\nu}^{\complement} \cap U) > 0\). Similarly, for set of measures \(\set{\nu_i}_i\), we say that their basins are intermingled if for each nonempty open \(U \subseteq X\), \(\mu(\Basin{\nu_i} \cap U) > 0\) for all \(i\).
 \end{definition}
-
-\todo{Refer to discussion in~\cite{bonattiDynamicsUniformHyperbolicity2005}}
 
 For this section, let \(X\) be a compact manifold, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continuous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
 \begin{equation*}
@@ -358,8 +355,7 @@ We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) 
 \end{proof}
 
 \begin{remark}
-  With Pesin theory, it is possible to show that intermingled basins are present in the more general setting of \(g\) being a hyperbolic automorphism. See the examples 3.2.1 and 3.2.2 of~\cite{uresNonrobustnessIntermingledBasins2018}. The argument goes as follows: pick a point \(p = (x,y)\) with \(y \in (0,1)\), and consider a disk \(D_p\) transversal to the center direction (the \(y\) direction).
-  \todo{todo}
+  With Pesin theory, it is possible to show that intermingled basins are present in the more general setting of \(g\) being a hyperbolic diffeomorphism. See the examples 3.2.1 and 3.2.2 of~\cite{uresNonrobustnessIntermingledBasins2018}.
 \end{remark}
 
 \begin{figure}[h]
@@ -379,15 +375,15 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 \begin{theorem}\label{thm:neg-schwarz-sep-graph}
   If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
   \begin{equation*}
-    (x,y) \in \mathcal{B}_0 \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \mathcal{B}_1 \text{ whenever }y > \sigma(x).
+    (x,y) \in \Basin{\mu_0} \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \Basin{\mu_1} \text{ whenever }y > \sigma(x).
   \end{equation*}
-  Consequently, the union \(\mathcal{B}_0 \cup \mathcal{B}_1\) has total \(\mu \otimes \Leb\) measure.
+  Consequently, the union \(\Basin{\mu_0} \cup \Basin{\mu_1}\) has total \(\mu \otimes \Leb\) measure.
 \end{theorem}
 
 \begin{proof}
   We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that separate the basins in the following sense:
   \begin{equation*}
-    \xi_0(x) = \sup \{ y \in I : (x,y) \in \mathcal{B}_0 \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \mathcal{B}_1 \}.
+    \xi_0(x) = \sup \{ y \in I : (x,y) \in \Basin{\mu_0} \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \Basin{\mu_1} \}.
   \end{equation*}
   By \cref{lem:basin-segment}, if \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\mu_0 = \mu \otimes \delta_0\) or to \(\mu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\mu_0\) or \(\mu_1\).
   
@@ -406,7 +402,7 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
 
   Now, consider the sequence \(r_n = \rho(0, f_{x_0}^n(y_0), f_{x_0}^n(\xi_1(x_0)), 1)\), which is well-defined and positive since \(0 < f_{x_0}^n(y_0) < f_{x_0}^n(\xi_1(x_0)) < 1\) by the definition of the points. Note also that the graph of \(\xi_1\) is strictly invariant under \(F\), so \(f_{x_0}^n(\xi_1(x_0)) = \xi_1(g^n(x_0))\).
 
-  Since \(x \in D\), it follows by \cref{lem:sch-cross-increase} that \(r_n\) is an increasing sequence. On one hand, it is not possible for \(r_n \to \infty\), because from \cref{eq:time-small,eq:time-big} we know that there exist \(n \in \mathbb{N}\) arbitrarily large such that \(0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\). On the other hand, if \(r_n \to r < \infty\), then for each \(x \in X\) there exists a unique \(\xi(x)\) such that \(\rho(0, \xi(x), \xi_1(x), 1) = r\). In fact, a calculation shows that
+  Since \(x \in D\), it follows by \cref{lem:sch-cross-increase} that \(r_n\) is an increasing sequence. On one hand, it is not possible for \(r_n \to \infty\), because from \cref{eq:time-small,eq:time-big} we know that there exist arbitrarily large \(n \in \mathbb{N}\) such that \(0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\). On the other hand, if \(r_n \to r < \infty\), then for each \(x \in X\) there exists a unique \(\xi(x)\) such that \(\rho(0, \xi(x), \xi_1(x), 1) = r\). In fact, a calculation shows that
   \begin{equation*}
     \xi(x) = \frac{\xi_1(x)}{r(1 - \xi_1(x)) + \xi_1(x)}.
   \end{equation*}
@@ -419,11 +415,11 @@ The statement of the theorem below corresponds to~\cite[Theorem 3.2]{bonifantSch
   In \cref{ex:intermingled}, we have \(q_a'(y) = 1 + a(1 - 2y)\), \(q_a''(y) = -2a\) and \(q_a''' \equiv 0\), so \(\SchD q_a(y) < 0\) whenever \(a \neq 0\). Since \(q(x) = 0\) only at two points, by \cref{thm:neg-schwarz-sep-graph} there exists \(\sigma \colon S^1 \to I\) that separates the two basins.
 \end{example}
 
-\subsection{Measures that project to the base}
+% \subsection{Measures that project to the base}
 
-\begin{theorem}
-  Suppose that we are in the hypothesis of \cref{thm:neg-schwarz-sep-graph} and \(\nu\) is an invariant measure for \(F\) such that \((\pi_X)_*\nu = \mu\). Then, \(\nu \in \set{\mu_0,\mu_1,\mu_{\sigma}}\) where \(\mu_{\sigma} = (\graph \sigma)_*\mu\).
-\end{theorem}
+% \begin{theorem}
+%   Suppose that we are in the hypothesis of \cref{thm:neg-schwarz-sep-graph} and \(\nu\) is an invariant measure for \(F\) such that \((\pi_X)_*\nu = \mu\). Then, \(\nu \in \set{\mu_0,\mu_1,\mu_{\sigma}}\) where \(\mu_{\sigma} = (\graph \sigma)_*\mu\).
+% \end{theorem}
 
 % \subsection{Hausdorff dimension}
 
@@ -503,10 +499,6 @@ The idea of the proof is to pass to the invertible extension of the system and o
   \end{equation*}
   This shows \(\nu = \lambda\).
 \end{example}
-
-\begin{question}
-  We know the asymptotic measure \(\nu\) of \cref{thm:pos-schwarz-asymptotic} satisfies \((\pi_X)_*\nu = \mu\), and we can disintegrate \(\nu = \int \nu_x \;d\mu(x)\) for the partition \(\set{x}\times I\). What are general conditions for \(\nu_x \ll \Leb\) (that is, when is \(\nu\) absolutely continuous on the fibers)?
-\end{question}
 
 % TODO: Ali's argument probably works?
 % TODO: see https://arxiv.org/pdf/1503.07155 section 3, examples

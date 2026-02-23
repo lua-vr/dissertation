@@ -108,9 +108,9 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
 \begin{theorem}\label{thm:wip-historical}
   If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
   \begin{equation}\label{eq:emp-closure}
-    \set{\delta_-, \delta_+} \subseteq \set{e_n(x,y)}[n \in \NN, ']
+    \set{\mu_0, \mu_1} \subseteq \set{e_n(x,y)}[n \in \NN, ']
   \end{equation}
-  where \(\delta_- = \mu \otimes \delta_{0}\) and \(\delta_+ = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
+  where \(\mu_0 = \mu \otimes \delta_{0}\) and \(\mu_1 = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
 \end{theorem}
 
 % \begin{figure}[h]
@@ -160,7 +160,7 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
   \end{equation*}
   for all \(\varphi \in \Cs{X}\) and \(x \in S\).
   It suffices to show that for all \(x \in S\),
-  \[e_{n^-_k}(x,y) \weakto \delta_- \quad\text{ and }\quad e_{n^+_k}(x,y) \weakto \delta_+.\]
+  \[e_{n^-_k}(x,y) \weakto \mu_0 \quad\text{ and }\quad e_{n^+_k}(x,y) \weakto \mu_1.\]
   We only show the first convergence, since the second is analogous.
 
   Let \(\phi \in \Cs{X \times I}\) and \(\varepsilon > 0\). Since \(\phi\) is uniformly continuous, there is some \(k_1\) for which
@@ -175,7 +175,7 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
   \[\frac{1}{n_k^-}\# \set{ 0 \leq i < n_k^- \where i \notin D } < \varepsilon / \lVert \phi \rVert_{\infty},\]
   which is due to \cref{eq:6}. Therefore, we can estimate
   \begin{align*}
-    \abs{e_{n_k^-}(x,y)(\phi) &- \delta_-(\phi)}\\
+    \abs{e_{n_k^-}(x,y)(\phi) &- \mu_0(\phi)}\\
     &=
     \abs[\Bigg]{
     \frac{1}{n_k^-}\sum_{i = 0}^{n_k^- - 1} \phi(F^i(x,y))
@@ -211,44 +211,44 @@ as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wi
   \end{equation*}
   then
   \begin{equation}\label{eq:4}
-    \set{e_n(x,y)}[n \in \NN, '] = [\delta_-, \delta_+]
+    \set{e_n(x,y)}[n \in \NN, '] = [\mu_0, \mu_1]
   \end{equation}
   for \(\mu\)-almost every \(x\) and all \(y \in (0,1)\).
 \end{corollary}
 
 \begin{proof}
-  Let \(E \subseteq X\) be a full measure subset of the basin of \(\mu\) that satisfies both the hypothesis and the result of \cref{thm:wip-historical}. For \(x \in E\) and \(y \in (0,1)\), let \(\Emp[n_k]{x,y} \weakto \eta\) be any limit point of the empirical measures. First, we show \(\supp \eta \subseteq X \times \set{0,1}\). Indeed, let \(x_0 \in X\) and \(y_0 \in (0,1)\), and let \(\U\) be a neighborhood of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). Since \(\U[closure]\) is compact and \(x \in E\), by hypothesis, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \nameref{thm:portmanteau}
+  Let \(E \subseteq X\) be a full measure subset of the basin of \(\mu\) that satisfies both the hypothesis and the result of \cref{thm:wip-historical}. For \(x \in E\) and \(y \in (0,1)\), let \(\Emp[n_k]{x,y} \weakto \eta\) be any limit point of the empirical measures. First, we show \(\supp \eta \subseteq X \times \set{0,1}\). Indeed, let \(x_0 \in X\) and \(y_0 \in (0,1)\), and let \(\U\) be a neighborhood of \((x_0,y_0)\) such that \(\U[closure] \subseteq X \times (0,1)\). Since \(\U[closure]\) is compact and \(x \in E\), by hypothesis, \(\Emp[n_k]{x,y}(\U) \to 0\), so by \cref{thm:portmanteau}
   \begin{equation*}
     \eta(\U) \leq \liminf_{k \to \infty} \Emp[n_k]{x,y}(\U) = 0.
   \end{equation*}
   This shows \((x_0,y_0) \notin \supp \eta\), so \(\supp \eta \subseteq X \times \set{0,1}\).
 
-  We know \(\eta\) is a limiting measure for \(x\), so it is invariant by \(F\). The fact \(x\) is in the basin of \(\mu\) implies by definition that \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \delta_- + \delta_+\), because for all measurable \(A\),
-  \[\eta(A) = \eta(A \cap X \times \set{0,1})\le \mu(\set{x \where (x,0) \in A}) + \mu(\set{x \where (x,1) \in A}) = (\delta_- + \delta_+)(A).\]
-  Since \(\delta_{ - }\) and \(\delta_+\) are ergodic measures, \(\eta\) must be a convex combination of the two.
+  We know \(\eta\) is a limiting measure for \(x\), so it is invariant by \(F\). The fact \(x\) is in the basin of \(\mu\) implies by definition that \((\pi_1)_* \eta = \mu\). This means that \(\eta \ll \mu_0 + \mu_1\), because for all measurable \(A\),
+  \[\eta(A) = \eta(A \cap X \times \set{0,1})\le \mu(\set{x \where (x,0) \in A}) + \mu(\set{x \where (x,1) \in A}) = (\mu_0 + \mu_1)(A).\]
+  Since \(\mu_0\) and \(\mu_1\) are ergodic measures, \(\eta\) must be a convex combination of the two.
 
-  We have shown \(\Meas{x,y} \subseteq [\delta_-,\delta_+]\). To conclude \cref{eq:emp-closure}, it suffices to notice that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and therefore, since by \cref{thm:wip-historical} it contains both endpoints \(\delta_-\) and \(\delta_+\), it must be the whole segment.
+  We have shown \(\Meas{x,y} \subseteq [\mu_0,\mu_1]\). To conclude \cref{eq:emp-closure}, it suffices to notice that by \cref{prop:limiting-measures}, \(\Meas{x,y}\) is connected, and therefore, since by \cref{thm:wip-historical} it contains both endpoints \(\mu_0\) and \(\mu_1\), it must be the whole segment.
 \end{proof}
 
 In the \cref{sec:deriv-weak-invar}, we will show how the weak invariance principle can be derived for a large class of dynamics, including the original \(g(x) = kx \pmod 1\).
 
-\subsection{Infinite ergodic theory}
+% \subsection{Infinite ergodic theory}
 
-It is possible to show that under the assumption of a weak invariance principle, the extra condition of \cref{col:histo-avoid-compacts} may be met by means of infinite ergodic theory. Let's see some relevant definitions.
+% It is possible to show that under the assumption of a weak invariance principle, the extra condition of \cref{col:histo-avoid-compacts} may be met by means of infinite ergodic theory. Let's see some relevant definitions.
 
-\begin{definition}
-  A map \(f \colon X \to X\) on a (potentially infinite) measure space \((X,\mathcal{B},\mu)\) is called \emph{conservative} if for all measurable sets \(E \subseteq X\) with the property that \(\set{f^{-n}(E)}_{n \in \NN}\), 
-\end{definition}
+% \begin{definition}
+%   A map \(f \colon X \to X\) on a (potentially infinite) measure space \((X,\mathcal{B},\mu)\) is called \emph{conservative} if for all measurable sets \(E \subseteq X\) with the property that \(\set{f^{-n}(E)}_{n \in \NN}\), 
+% \end{definition}
 
-\begin{remark}
-  When the (infinite) measure \(\mu \otimes \Leb\) is conservative and ergodic for \((x, y) \mapsto (g(x), y + p(y))\), then the additional hypothesis of \cref{col:histo-avoid-compacts} is satisfied.
+% \begin{remark}
+%   When the (infinite) measure \(\mu \otimes \Leb\) is conservative and ergodic for \((x, y) \mapsto (g(x), y + p(y))\), then the additional hypothesis of \cref{col:histo-avoid-compacts} is satisfied.
 
-  \todo{todo}
-\end{remark}
+%   \todo{todo}
+% \end{remark}
 
 \subsection{Almost sure invariance principle}
 
-Alternatively, all the hypotheses of both \cref{thm:wip-historical,col:histo-avoid-compacts} are satisfied when the pair \((g,p)\) satisfies an \emph{almost sure} invariance principle. By that, we mean there exists \(\sigma > 0\) and \(\delta \in (0,1/2)\) and new probability space \((\Omega,\Prob)\), along with two sequences of random variables \(\zeta = (\zeta_n)_n\) and \(\beta = (\beta_n)_n\), where \(\zeta_n, \beta_n \colon \Omega \to \RR\), such that:
+The hypotheses of both \cref{thm:wip-historical,col:histo-avoid-compacts} are satisfied when the pair \((g,p)\) satisfies an \emph{almost sure} invariance principle. By that, we mean there exists \(\sigma > 0\) and \(\delta \in (0,1/2)\) and new probability space \((\Omega,\Prob)\), along with two sequences of random variables \(\zeta = (\zeta_n)_n\) and \(\beta = (\beta_n)_n\), where \(\zeta_n, \beta_n \colon \Omega \to \RR\), such that:
 \begin{enumerate}
 \item \label{item:1}\(\zeta\) and \(\xi = (p \circ g^n)_n\) have the same distribution: \(\zeta_*\Prob = \xi_*\mu \in \Meas[1]{\RR^{\NN}}\);
 \item \(\beta_n\) are independent and identically distributed as \(\Normal[0][\sigma]\);
@@ -346,7 +346,7 @@ by Borel-Cantelli, \(\mu(\limsup_{n \to \infty}B_n) = 0\). If we take the inters
 We will call the decomposition in \cref{thm:martingale-coboundary} a reverse martingale-coboundary decomposition. In the rest of the section, we derive conditions for it to exist in two different situations: non-invertible, and invertible \(g\).
 
 \subsection{Non-invertible case}
-Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\)-algebras \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) form a strictly decreasing sequence in general. We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic2021} for the next theorem.
+Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\)-algebras \(\mathcal{F}_j = g^{-j}(\mathcal{F})\) form a strictly decreasing sequence in general. We will follow~\cite[Proposition 2.12]{vianaStochasticDynamicsDeterministic1997} for the next theorem.
 
 \begin{theorem}\label{thm:decomposition-existence}
   Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-n}(\mathcal{F})\) are such that
@@ -402,7 +402,7 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
     \int_A p \;d\mu - \int_A p \;d\mu =
     0,
   \]
-  for all \(A \in \mathcal{F}_{i + 1}\), so \(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \in L^2(\mathcal{F}_{i + 1})^{\bot}\). Then, \(q \in L^2(\mathcal{F}_1)^{\bot}\), so \(\CE[\mu]{q,\mathcal{F}_1} = 0\) and \(\xi\) is an stationary ergodic reverse martingale difference sequence. It's also clear that
+  for all \(A \in \mathcal{F}_{i + 1}\), so \(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}} \in L^2(\mathcal{F}_{i + 1})^{\bot}\). Then, \(q \in L^2(\mathcal{F}_1)^{\bot}\), so \(\CE[\mu]{q,\mathcal{F}_1} = 0\) and \(\xi\) is an stationary ergodic reverse martingale difference sequence. It is also clear that
   \begin{equation*}
     \int p \;d\mu = \int q + s \circ g - s \;d\mu = \int q \;d\mu = \int \CE[\mu]{q,\mathcal{F}_1} \;d\mu = 0.
   \end{equation*}
@@ -493,7 +493,13 @@ Contrary to the invertible case, when \(g\) is not invertible, the sub-\(\sigma\
   \end{align*}
 \end{proof}
 
-\todo{Relate to fast decay of correlations for expanding maps.}
+\begin{corollary}
+  If \(g \colon X \to X\) is a \(C^r\) expanding map on a compact manifold \(X\), \(r > 1\), then for every \(\nu\)-Hölder continuous \(p \colon X \to \RR\) such that \(0 < \nu < r - 1\), the hypothesis of \cref{cor:decay-implies-summable} is satisfied, and therefore the results in \cref{thm:decomposition-existence} apply.
+\end{corollary}
+
+\begin{proof}
+  This is a consequence of exponential decay of correlations for this class of maps and observables. For a proof, see~\cite[Proposition 2.7]{vianaStochasticDynamicsDeterministic1997}.
+\end{proof}
 
 \subsection{Invertible case}
 
@@ -591,12 +597,12 @@ For some intuition, suppose \(X = \set{0,1}^{\ZZ}\) and \(g\) was the shift \(g(
 \end{lemma}
 
 \begin{proof}
-  This is~\cite[Proposition 4.14]{vianaStochasticDynamicsDeterministic2021}.
+  This is~\cite[Proposition 4.14]{vianaStochasticDynamicsDeterministic1997}.
 \end{proof}
 
-\section{Recent developments}
+% \section{Recent developments}
 
-  \todo{Conclude with an overview of the recent work of Kiriri, Soma, Vargas et al.}
+%   \todo{Conclude with an overview of the recent work of Kiriri, Soma, Vargas et al.}
 
 % \begin{theorem}
 %   Under the same hypothesis as \cref{thm:wip-historical}, for every \(y \in (0,1)\),
