@@ -1,11 +1,21 @@
 \usetheme{default}
 \usecolortheme{crane}
 
-\definecolor{tyellow}{HTML}{FFCC5B}
+\definecolor{tyellow}{HTML}{ffcc5b}
 \definecolor{tpink}{HTML}{F5A9B8}
-\setbeamercolor{title}{bg=tyellow}
-\setbeamercolor{frametitle}{bg=tyellow}
-\setbeamercolor{secondary}{bg=tpink}
+\setbeamercolor{primary}{bg=tyellow}
+\setbeamercolor{title}{parent=primary}
+% \setbeamercolor{block title}{use=primary, bg=primary.bg}
+\setbeamercolor{frametitle}{parent=primary}
+\setbeamercolor{footnav}{parent=primary}
+
+% \setbeamertemplate{mini frames}{}
+% \setbeamertemplate{footline}{
+%   \leavevmode%
+%   \begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1.3ex,center]{footnav}%
+%     \insertnavigation{\paperwidth}
+%   \end{beamercolorbox}%
+% }
 
 % \addtobeamertemplate{frametitle}{}{
 %     \nointerlineskip

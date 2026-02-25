@@ -118,13 +118,13 @@ Pushing the measures to the product along the isomorphism, have the same ingredi
 
 Fix \(x \in X\), and let \(\mathcal{P}\) be a partition of finite entropy for \(\mu^{cu}_x\). We have (see \cref{sec:entropy})
 \begin{equation*}
-  H_{\mu_x^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} I(\mu_x^{cu}(P)),
+  H_{\mu_x^{cu}}(\mathcal{P}) = \sum_{P \in \mathcal{P}} \phi(\mu_x^{cu}(P)),
 \end{equation*}
 and also the conditional entropy
 \begin{equation*}
   H_{\mu_x^{cu}}(\mathcal{P} \mid \mathcal{F}^u)
   = \int H_{\mu^{u}_y}(\mathcal{P}) \;d\mu_x^{cu}(y)
-  = \int \sum_{P \in \mathcal{P}} I(\mu_y^{u}(P)) \;d\mu_x^{cu}(y).
+  = \int \sum_{P \in \mathcal{P}} \phi(\mu_y^{u}(P)) \;d\mu_x^{cu}(y).
 \end{equation*}
 
 \begin{figure}[h]
@@ -148,9 +148,9 @@ and also the conditional entropy
 %   Moreover, if \(\varphi\) is strictly concave, the equality holds if, and only if, \(\psi\) is constant almost everywhere.
 % \end{proposition}
 
-Applying \cref{prop:jensen} to \(\Prob = \mu_x^{cu}\), \(\varphi(x) = I(x) =  - x\log x\) (which is strictly concave) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\) we have
+Applying \cref{prop:jensen} to \(\Prob = \mu_x^{cu}\), \(\varphi(x) = \phi(x) =  - x\log x\) (which is strictly concave) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\) we have
 \begin{equation*}
-  \int I(\mu_p^u(P))\;d\mu_x^{cu}(p)\le I\rpar[\bigg]{\int \mu_p^u(P)\;d\mu_x^{cu}(p) } = I(\mu_x^{cu}(P)),
+  \int \phi(\mu_p^u(P))\;d\mu_x^{cu}(p)\le \phi\rpar[\bigg]{\int \mu_p^u(P)\;d\mu_x^{cu}(p) } = \phi(\mu_x^{cu}(P)),
 \end{equation*}
 so summing over \(P \in \mathcal{P}\),
 \begin{equation}\label{eq:5}
