@@ -9,6 +9,14 @@
 \setbeamercolor{frametitle}{parent=primary}
 \setbeamercolor{footnav}{parent=primary}
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \usebeamerfont{title}\insertsectionhead\par%
+  \vfill
+  \end{frame}
+}
 % \setbeamertemplate{mini frames}{}
 % \setbeamertemplate{footline}{
 %   \leavevmode%

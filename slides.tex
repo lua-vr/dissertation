@@ -9,6 +9,7 @@
 \usepackage{dinamica}
 \usepackage{categorias}
 \usepackage{liberdade}
+\usepackage{animate}
 \input{preamble/tikz}
 \input{preamble/macros}
 
@@ -20,21 +21,128 @@
     \maketitle
 \end{frame}
 
-\begin{frame}{test}
-  aaaaaaaa \(\Leb\), \(\dim E_i\)
+\section{What is a dynamical system?}
+
+\begin{frame}
+  \frametitle{A space and a map?}
+  
 \end{frame}
 
 \begin{frame}
-  \frametitle{Positive Schwarzian}
+  \frametitle{Many maps?}
   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Iterated function systems?}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Markov kernels?}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{A nice definition}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ergodic theory}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Empirical measures}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Basins}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conjectures on the basins}
+  
+\end{frame}
+
+\section{Schwarzian derivatives and cylinder maps}
+
+\begin{frame}
+  \frametitle{Dividing by zero}
+  
+\end{frame}
+
+\begin{frame}{Cross ratio and Schwarzian derivative}
+  \begin{definition}[Cross ratio]
+    \begin{equation*}
+      \rho(x_0,x_1,x_2,x_3) = \frac{(x_2 - x_0)(x_3 - x_1)}{(x_1 - x_0)(x_3 - x_2)}
+    \end{equation*}
+  \end{definition}
+  \begin{definition}
+    Let \(\f \colon I \to I'\) be a \(\Cs[d = 3]\) diffeomorphism between two intervals of the real line.
+    The \emph{Schwarzian derivative} of \(\f\) is the function
+    \begin{equation*}
+      \SchD\f = \frac{\f[der = 3]}{\f[der = 1]} - \frac{3}{2}\rpar*{\frac{\f[der = 2]}{\f[der = 1]}}^2.
+    \end{equation*}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intermingled basins}
+  
+\end{frame}
+
+\begin{frame}{Cross ratio and Schwarzian derivative}
+  \begin{lemma}\label{prop:schwarzian}
+    The Schwarzian derivative has the following properties:
+    \begin{enumerate}
+    \item\label{prop:schwarzian:item:1}
+      If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
+    \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
+    \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+    \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
+    \end{enumerate}
+  \end{lemma}
 \end{frame}
 
 \begin{frame}
   \frametitle{Negative Schwarzian}
-  
+  \begin{theorem}\label{thm:neg-schwarz-sep-graph}
+    If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
+    \begin{equation*}
+      (x,y) \in \Basin{\mu_0} \text{ whenever } y < \sigma(x) \quad \text{and} \quad (x,y) \in \Basin{\mu_1} \text{ whenever }y > \sigma(x).
+    \end{equation*}
+    Consequently, the union \(\Basin{\mu_0} \cup \Basin{\mu_1}\) has total \(\mu \otimes \Leb\) measure.
+  \end{theorem}
 \end{frame}
 
-\section{PH dynamics}
+% \begin{frame}
+%   \frametitle{Proof of existence of separating graph}
+%   We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that bound the basins in the following sense:
+%   \begin{equation*}
+%     \xi_0(x) = \sup \{ y \in I : (x,y) \in \Basin{\mu_0} \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \Basin{\mu_1} \}.
+%   \end{equation*}
+%   If \(y < \xi_0(x)\) or \(y > \xi_1(x)\), the empirical measures \(e_n(x,y)\) converge to \(\mu_0 = \mu \otimes \delta_0\) or to \(\mu_1 = \mu \otimes \delta_1\), and if \(\xi_0(x) < y < \xi_1(x)\), they do not converge to either \(\mu_0\) or \(\mu_1\).
+  
+%   It is sufficient to show that \(A = \{ x \in X : \xi_0(x) \neq \xi_1(x) \}\) has measure zero, since in this case we can define \(\sigma\) as the common value of the two functions. Suppose by contradiction that this set does not have measure zero. Since the \(f_x\) are bijective, \(A\) is an invariant set under \(g\), so the ergodicity of \(\mu\) implies that \(A\) has full measure.
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Positive Schwarzian}
+  \begin{theorem}\label{thm:pos-schwarz-asymptotic}
+    If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
+  \end{theorem}
+  \begin{proof}[Idea]
+    Consider the inverse of the natural extension \(\tilde{F}^{-1}\). It satisfies \(\SchD f_{\tilde x}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, and therefore has a separating graph \(\sigma\) that is repelling.\\[1em]
+
+    The orbits for \(\tilde{F}\) will be attracted by the graph, and \(\tilde \nu = (\graph \sigma)_*\tilde \mu\) is asymptotic for \(\tilde{F}\). Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
+  \end{proof}
+\end{frame}
+
+\section{Partially hyperbolic dynamics}
 
 \begin{frame}{Invariance principle}
 \begin{definition}
@@ -231,7 +339,6 @@
   \begin{lemma}\label{lem:entropy-eq}
     For \(\mu\)-almost every \(x\), \(H_{\mu_{x}^u}(f^{-1}(\xi^u)) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu})) \).
   \end{lemma}
-
   \begin{figure}
     \centering
     \includegraphics[page=4,scale=0.5]{../figures/invp}
@@ -239,18 +346,86 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{A small property}
-\begin{proof}
-  Since \(\xi^u \prec f^{-1}(\xi^u)\) and by definition, the elements of \(f^{-1}(\xi^u)\) have the form
-  \[f^{-1}(\xi^u)(y) = f^{-1}(\xi^{cu})(y) \cap \mathcal{F}^u(y) = f^{-1}(\xi^{cu})(y) \cap \xi^u(y).\]
-  By definition of a disintegration, for \(\mu\)-almost every \(x\) and \(\mu_x^u\)-almost every \(y\), \(\mu_y^u(\xi^u(y)) = 1\), so
+% Aqui tinha um erro na versão depositada.
+% \begin{frame}{A small property}
+% \begin{proof}
+%   Since \(\xi^u \prec f^{-1}(\xi^u)\) and by definition, the elements of \(f^{-1}(\xi^u)\) have the form
+%   \[f^{-1}(\xi^u)(y) = f^{-1}(\xi^{cu})(y) \cap \mathcal{F}^u(y) = f^{-1}(\xi^{cu})(y) \cap \xi^u(y).\]
+%   By definition of a disintegration, for \(\mu\)-almost every \(x\) and \(\mu_x^u\)-almost every \(y\), \(\mu_y^u(\xi^u(y)) = 1\), so
+%   \begin{align*}
+%     H_{\mu_{x}^u}(f^{-1}(\xi^u))
+%     &= - \int \log \mu^u_x(f^{-1}(\xi^u)(y)) \;d\mu_x^u(y)\\
+%     &= - \int \log \mu^u_x(f^{-1}(\xi^{cu})(y) \cap \xi^u(y)) \;d\mu_x^u(y)\\
+%     &= - \int \log \mu^u_x(f^{-1}(\xi^{cu})(y)) \;d\mu_x^u(y) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu})).
+%   \end{align*}
+% \end{proof}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Proof of the invariance principle}
+  By the last results,
   \begin{align*}
-    H_{\mu_{x}^u}(f^{-1}(\xi^u))
-    &= - \int \log \mu^u_x(f^{-1}(\xi^u)(y)) \;d\mu_x^u(y)\\
-    &= - \int \log \mu^u_x(f^{-1}(\xi^{cu})(y) \cap \xi^u(y)) \;d\mu_x^u(y)\\
-    &= - \int \log \mu^u_x(f^{-1}(\xi^{cu})(y)) \;d\mu_x^u(y) = H_{\mu_{x}^u}(f^{-1}(\xi^{cu})).
+    h_{\mu}^u(f)
+    = \int H_{\mu_{x}^u}(f^{-1}(\xi^u))\;d\mu(x)
+    &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+    &= \int H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u)\;d\mu(x)\\
+    &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+    &=  \int H_{\nu^{u}_{\pi(x)}}(f_c^{-1}(\xi_c))\;d\mu(x)\\
+    &=  \int H_{\nu^{u}_{y}}(f_c^{-1}(\xi_c))\;d\nu(y)\\
+    &= h^u_{\nu}(f_c) = h_{\nu}(f_c)
   \end{align*}
-\end{proof}
+  with equality if, and only if, \(H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u) = H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\) for \(\mu\)-almost every \(x\).
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proof of the invariance principle}
+  The inequality above equally applies to \(f = f^n\), and since the diameter of \(f^{-n}(\xi_c)\) shrinks to zero, \(\sigma\rpar*{\bigcup_nf^{-n}(\xi_c)}\) is finer than the Borel algebra.\\[1em]
+
+  Now, since \((f^n_c, \nu)\) is a factor of \((f^n,\mu)\), we have \(h_{\nu}(f_c^n) \le h_{\mu}(f^n)\). If \(\lambda^c(\mu) \le 0\), then the Ledrappier-Young formula tells us that \(h_{\mu}^u(f^n) = n h_{\mu}^u(f) = n h_{\mu}(f) = h_{\mu}(f^n)\), so we have equality in the equation above.\hfill$\square$
+  \begin{theorem}[Ledrappier-Young formula]\label{thm:leddrappier-young}
+    Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\), and let \(\delta_i\) be the dimension of \(\mu\) on \(W^i\)-manifolds. Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that
+    \begin{equation*}
+      h_{\mu}(f) = \sum_{i \le u} \lambda_i\gamma_i.
+    \end{equation*}
+  \end{theorem}
+  
+\end{frame}
+
+\section{Historical behavior}
+
+\begin{frame}
+  \frametitle{History}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Skew products}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Brownian motion}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Weak invariance principle}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{(Reverse) Martingale difference sequences}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{A decomposition theorem}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recent developments}
+  
 \end{frame}
 
 \setbeamercolor{primary}{bg=tpink}

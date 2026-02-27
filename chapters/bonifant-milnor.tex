@@ -15,7 +15,7 @@ Our new space \(P^1(\mathbb{K})\) has an interesting property: given \(z \in P^1
 
 A second way to construct \(P^1(\mathbb{K})\), which makes the role of the group of homographies as a symmetry group of this space even clearer, is to think of the space of ``formal fractions'', that is, pairs of numbers \((x,y)\), where \(x, y \in \mathbb{K}\) are not both zero, where we identify ``equivalent fractions'', in the sense that \((\lambda x, \lambda y) \sim (x, y)\) for every \(\lambda \in \mathbb{K} \setminus \{ 0 \}\). The quotient by this equivalence relation gives us \(P^1(\mathbb{K})\) as the space of lines passing through the origin of the vector space \(\mathbb{K}^2\), and the operations are like fraction operations: \((x,y) + (z,w) = (wx + yz, yw)\), \((x,y) \cdot (z,w) = (xz, yw)\), and \((x,y)^{-1} = (y,x)\). Despite being seemingly more complicated, the interesting fact about this construction is that it emphasizes how the symmetry group of the space \(\mathbb{K}^2\), the linear group \(\GL_2(\mathbb{K})\), naturally induces a symmetry group on the quotient, the projective group \(\PGL_2(\mathbb{K})\), which is precisely the group of homographies.
 
-This group is a quotient of \(\GL_2(\mathbb{K})\) by a subgroup of dimension \(1\), so it has dimension \(3\). Furthermore, it is \(3\)-transitive: given two sets of three distinct points in \(P^1(\mathbb{K})\), there exists an element \(g \in \PGL_2(\mathbb{K})\) that takes the first set to the second. But not only that, \(P^1(\mathbb{K})\) has three special points: \(0\), \(1\), and \(\infty\). Thus, given \(x_1,x_2, x_3 \in P^1(\mathbb{K})\) distinct, we can ask which \(g \in \PGL_2(\mathbb{K})\) such that \(g(x_1) = \infty\), \(g(x_2) = 0\), and \(g(x_3) = 1\). With some calculations, we arrive at
+This group is a quotient of \(\GL_2(\mathbb{K})\) by a subgroup of dimension \(1\), so it has dimension \(3\). Furthermore, it is \(3\)-transitive: given two sets of three distinct points in \(P^1(\mathbb{K})\), there exists an element \(g \in \PGL_2(\mathbb{K})\) that takes the first set to the second. But not only that, \(P^1(\mathbb{K})\) has three special points: \(0\), \(1\), and \(\infty\). Thus, given \(x_1,x_2, x_3 \in P^1(\mathbb{K})\) distinct, we can ask which \(g \in \PGL_2(\mathbb{K})\) is such that \(g(x_1) = \infty\), \(g(x_2) = 0\), and \(g(x_3) = 1\). With some calculations, we arrive at
 \begin{equation*}
   g(z) = \frac{(x_2 - z)(x_3 - x_1)}{(x_1 - z)(x_3 - x_2)}
 \end{equation*}
@@ -477,19 +477,19 @@ The idea of the proof is to pass to the invertible extension of the system and o
 \begin{example}
   Let \(X = S^1\), \(g(x) = kx \pmod{1}\) and \(f_x(y) = q_{p(x)}^{-1}(y)\), where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) are defined as in \cref{ex:intermingled}. We claim that the Lebesgue measure \(\lambda\) on \(S^1\times I\) is the asymptotic measure for \(F\). To see this, notice that for every \(x \in X\), there is a small neighborhood \(U\) of \(x\) in which \(g\) has \(k\) inverse branches, which we label \(g_i^{-1} \colon U \to X\) for \(1 \le i \le k\). Therefore, for each branch, we have a local inverse
   \begin{equation*}
-    F^{-1}_i(x,y) = (g_i^{-1}(x), y + \varepsilon \cos(2 \pi g^{-1}_i(x))(1 - y)).
+    F^{-1}_i(x,y) = (g_i^{-1}(x), y + \varepsilon \cos(2 \pi g^{-1}_i(x))y(1 - y)).
   \end{equation*}
   Since \((g_i^{-1})'(x) = k^{-1}\), the determinant of the Jacobian is given by
   \begin{equation*}
     \abs{d(F^{-1}_i)_{(x,y)}} =
-      k^{-1} \cdot (1 - \varepsilon \cos (2\pi g_i^{-1}(x)))
+      k^{-1} \cdot (1 + \varepsilon \cos (2\pi g_i^{-1}(x))(1 - 2y))
   \end{equation*}
   which across all branches, sums to
   \begin{equation*}
     \sum_{i = 1}^k
     \abs{d(F^{-1}_i)_{(x,y)}} =
     \frac{1}{k}\sum_{i = 1}^k
-    (1 - \varepsilon \cos (2\pi g_i^{-1}(x))) = 1.
+    (1 + \varepsilon \cos (2\pi g_i^{-1}(x))(1 - 2y)) = 1.
   \end{equation*}
   By the change of variables formula, this means that \(\lambda\) is preserved by \(F\).
 
