@@ -1,4 +1,4 @@
-[submodule "packages"]
-	path = packages
-	url = https://github.com/soficshift/meus-pacotes/
+[submodule "git-packages"]
+	path = git-packages
+	url = https://github.com/lua-vr/meus-pacotes/
 	branch = main
