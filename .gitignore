@@ -25,7 +25,8 @@ _region_.*
 # *.pdf
 
 *.pdf
-!main.pdf
+# !main.pdf
+!thesis.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

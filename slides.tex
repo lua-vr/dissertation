@@ -90,22 +90,22 @@
   \end{definition}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Intermingled basins}
-  
-\end{frame}
-
 \begin{frame}{Cross ratio and Schwarzian derivative}
   \begin{lemma}\label{prop:schwarzian}
     The Schwarzian derivative has the following properties:
     \begin{enumerate}
     \item\label{prop:schwarzian:item:1}
-      If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
+      If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g \cdot (g')^2\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
     \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
     \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
     \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
     \end{enumerate}
   \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intermingled basins}
+  
 \end{frame}
 
 \begin{frame}
@@ -144,6 +144,40 @@
 
 \section{Partially hyperbolic dynamics}
 
+\begin{frame}
+  \frametitle{Dominated splittings}
+  \begin{definition}
+    We say \(TM = E_1\oplus \cdots \oplus E_n\) is a \emph{splitting} of \(TM\) if at each \(x \in M\), \(T_xM = E_1(x)\oplus \cdots \oplus E_n(x)\) and \(\dim E_i(x)\) does not depend on \(x\).
+  \end{definition}
+  \begin{definition}
+    We say a splitting \(TM = E_1\oplus \cdots \oplus E_n\) is \emph{dominated} for a diffeomorphism \(f \colon M \to M\) if:
+    \begin{enumerate}
+    \item the splitting is \(df\)-\emph{invariant}, that is, \(df_x(E_i(x)) = E_i(f(x))\) for all \(i,x\);
+    \item there exists constants \(c > 0\) and \(\lambda \in (0,1)\) such that for all \(1 \le i \le n - 1\), \(x \in M\) \(u \in E_i(x) \setminus \set{0}\), \(v \in E_{i + 1}(x) \setminus \set{0}\) and \(k \ge 0\),
+      \begin{equation*}
+        \frac{\norm{df^k_x(u)}}{\norm{u}} \le c \lambda^k \frac{\norm{df^k_x(v)}}{\norm{v}}.
+      \end{equation*}
+    \end{enumerate}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Partial hyperbolicity}
+  \begin{definition}
+    A subbundle \(E \subseteq TM\) is \emph{uniformly contracted} by \(df\) if there exists \(c > 0\) and \(\lambda \in (0,1)\) such that for all \(x \in M\), \(u \in E(x)\) and \(k \ge 0\),
+    \begin{equation*}
+      \norm{df^k_x(u)} \le c \lambda^k \norm{u}.
+    \end{equation*}
+  \end{definition}
+
+  \begin{definition}
+    Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists a dominated splitting \(TM = E^s \oplus E^c \oplus E^u\) such that \(E^s\) is uniformly contracted by \(df\) and \(E^u\) is uniformly contracted by \(df ^{-1}\).
+  \end{definition}
+\end{frame}
+
+
+
+
 \begin{frame}{Invariance principle}
 \begin{definition}
   Consider the quotient map \(\pi \colon X \to X/\mathcal{F}^c\). We say that a partially hyperbolic diffeomorphism \(f \colon X \to X\) has \emph{global unstable holonomies} if for every \(p_1,p_2 \in X/\mathcal{F}^c\) that are in the same leaf of \(\pi(\mathcal{F}^{u})\), there exists an homeomorphism \(h^u_{p_1,p_2}\colon \mathcal{F}^c(p_1) \to \mathcal{F}^c(p_2)\) with the property that \(h^u_{p_1,p_2}(x) \in \mathcal{F}^u(p_1) \cap \mathcal{F}^c(p_2)\).
@@ -162,7 +196,7 @@
 
 \begin{frame}
   \frametitle{A trick in a box}
-  Assume we work locally in a leaf of \(\mathcal{F}^{cu}\), in a local coordinate system parametrized by a box \(B = [0,1]^{u} \times [0,1]^{c}\).
+  Assume we work locally in a leaf of \(\mathcal{F}^{cu}\), parametrized by a box \(B = [0,1]^{u} \times [0,1]^{c}\).
   \begin{figure}
     \centering
     \includegraphics[page=1,scale=0.6]{figures/invp}
@@ -176,8 +210,6 @@
     \forall p,\;\pi^u_*\mu^u_p = \pi^u_*\mu^{cu}.
   \end{equation*}
 \end{frame}
-
-\section{bar}
 
 \begin{frame}
   \frametitle{From the box to a leaf}
@@ -211,7 +243,6 @@
     = \int \sum_{P \in \mathcal{P}} \phi(\mu_y^{u}(P)) \;d\mu_x^{cu}(y).
   \end{equation*}
 \end{frame}
-\section{booz}
 
 \begin{frame}
   \frametitle{Jensen's inequality}
@@ -231,7 +262,6 @@
     H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu_x^{cu}}(\mathcal{P})
   \end{equation*}
   with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu_x^{cu}\)-every \(p\) and all \(P\).
-  
 \end{frame}
 
 \begin{frame}
@@ -410,6 +440,13 @@
 
 \begin{frame}
   \frametitle{Weak invariance principle}
+  \begin{theorem}\label{thm:wip-historical}
+    If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
+    \begin{equation}\label{eq:emp-closure}
+      \set{\mu_0, \mu_1} \subseteq \set{e_n(x,y)}[n \in \NN, ']
+    \end{equation}
+    where \(\mu_0 = \mu \otimes \delta_{0}\) and \(\mu_1 = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
+  \end{theorem}
   
 \end{frame}
 
@@ -460,14 +497,14 @@
 \end{frame}
 
 {
-  \setbeamertemplate{background canvas}{%
-    \begin{tikzpicture}[remember picture, overlay]
-      % FIGURE 1: Rotated and Scaled in the Center
-      \node[xshift=3cm, yshift=-2cm, opacity=1] at (current page.center) {
-        \includegraphics[width=4cm, angle=10]{figures/castle}
-      };
-    \end{tikzpicture}%
-  }
+  % \setbeamertemplate{background canvas}{%
+  %   \begin{tikzpicture}[remember picture, overlay]
+  %     % FIGURE 1: Rotated and Scaled in the Center
+  %     \node[xshift=3cm, yshift=-2cm, opacity=1] at (current page.center) {
+  %       \includegraphics[width=4cm, angle=10]{figures/castle}
+  %     };
+  %   \end{tikzpicture}%
+  % }
   \begin{frame}
     \begin{center}
       {\Huge Thank you!}
