@@ -200,7 +200,7 @@ Thus, by the ergodicity of \(\mu\)  for \(g\) and the Birkhoff ergodic theorem, 
 \end{equation}
 and we shall denote this common value by \(\Lyap(\mathcal{A}_i)\).
 
-The statement below assumes less regularity than the corresponding one in~\cite[lemma A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). Also, the second part of the proof (when the Lyapunov exponent is positive) is original, because the basins of the original article are topological instead of measure-theoretic. In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
+The statement below assumes less regularity than the corresponding one in~\cite[lemma A.1]{bonifantSchwarzianDerivativesCylinder2008}, that asks for \(F\) to be \(C^2\). The second part of the proof (when the Lyapunov exponent is positive) is also more general, because the basins of the original article are topological instead of measure-theoretic. In our context, \(F(x,y) = (g(x),f_x(y))\) where \(g\) is an ergodic map for \(\mu\) and \(f_x \in C^1[0,1]\) for all \(x\). In particular, if \((x,y) \mapsto f'_x(y)\) is continuous, the following equicontinuity hypothesis is satisfied. 
 \begin{lemma}\label{lem:lyap-basin-posmeas}
   If the family \(\{ f_x' \}_{x \in X}\) is equicontinuous at \(i \in \{ 0,1 \}\) and \(\Lyap(\mathcal{A}_i) < 0\), then the basin of \(\mu \otimes \delta_i\) has positive \(\mu \otimes \Leb\) measure.  Conversely, if \(\Lyap(\mathcal{A}_i) > 0\), then the corresponding basin has null measure.
 \end{lemma}
@@ -274,10 +274,10 @@ The statement below assumes less regularity than the corresponding one in~\cite[
 
 \section{Intermingled basins}\label{sec:intermingled-basins}
 
-The basins of the examples we saw before are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
+The basins of the examples we generally imagine are continuity sets for the volume measure --- that is, they are open sets modulo a zero volume set --- and the union of all basins have full Lebesgue measure. But should basins of attractors constitute well-behaved sets in general? In some cases, such as for uniformly hyperbolic diffeomorphisms, this indeed the case, and there is a finite number of physical measures whose basins are continuity sets, and their union has full volume~\cite{uresNonrobustnessIntermingledBasins2018}. Outside the realm uniform hyperbolicity, though, this may not be the case --- \textcite{kanOpenSetsDiffeomorphisms1994} gave the first example of a partially hyperbolic endomorphism on a surface with two physical measures whose basins are intermingled, in the sense that for every open set \(U\), the intersection of this set with either basin has positive volume \cite{uresNonrobustnessIntermingledBasins2018}. This implies both basins are dense in the surface, and therefore not continuity sets.
 
 \begin{definition}
-  Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say a measure \(\nu \in \Meas[f](X)\) has an intermingled basin if for each nonempty open set \(U \subseteq X\), we have \(\mu(\Basin{\nu} \cap U) > 0\) and \(\mu(\Basin{\nu}^{\complement} \cap U) > 0\). Similarly, for set of measures \(\set{\nu_i}_i\), we say that their basins are intermingled if for each nonempty open \(U \subseteq X\), \(\mu(\Basin{\nu_i} \cap U) > 0\) for all \(i\).
+  Let \(X\) be a compact metric space, \(f \colon X \to X\) and \(\mu\) be a reference Borel measure. We say a measure \(\nu \in \Meas[f](X)\) has an intermingled basin if for each nonempty open set \(U \subseteq X\), we have \(\mu(\Basin{\nu} \cap U) > 0\) and \(\mu(\Basin{\nu}^{\complement} \cap U) > 0\). Similarly, for a set of measures \(\set{\nu_i}_i\), we say that their basins are intermingled if for each nonempty open \(U \subseteq X\), \(\mu(\Basin{\nu_i} \cap U) > 0\) for all \(i\).
 \end{definition}
 
 For this section, let \(X\) be a compact manifold, \(g \colon X \to X\) be ergodic for \(\mu \in \Meas[1]{X}\) and \(F \colon X \times I \to X \times I\) a continuous skew-product endomorphism of the form \(F(x,y) = (g(x), f_x(y))\). We shall understand by  ``volume'' the reference measure \(m = \mu \otimes \Leb\). As mentioned in \cref{lem:lyap-basin-posmeas}, under some mild hypothesis for \(F\), if the transverse Lyapunov exponents at the invariant boundaries \(\mathcal{A}_i = X \times \set{i}\), given by
@@ -298,7 +298,7 @@ Assuming this, the main property that will produce the intermingled phenomenon i
 
 Let's define the measures \(\beta_i(A) = m(A \cap \Basin{\mu_i})\). Then the basins are intermingled if, and only if, \(\supp \beta_i = X \times I\) for both \(i = 0,1\). Indeed, both supports being equal to the whole space means precisely that for every open set \(U \subseteq X \times I\), the measures \(\beta_i(U) = m(U \cap \Basin{\mu_i})\) are both positive for the reference measure \(m = \mu \otimes \Leb\).
 
-We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) follows by symmetry. First, we shall collect some lemmas. 
+We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) follows by symmetry. First, we will collect some lemmas.
 
 \begin{lemma}\label{lem:supp-segment}
   If \((x, y_1) \in \supp \beta_0\), then \((x,y_2) \in \supp \beta_0\) for all \(y_2 \leq y_1\).
@@ -326,7 +326,7 @@ We will show this is the case for \(\supp \beta_0\), as the proof for \(i = 1\) 
 \end{lemma}
 
 \begin{proof}
-  The last value is positive by \cref{hip:basins-support-nonempty}, and the first and last equalities are, respectively, by subadditivity and definition. To show the second equality, let \(C = (\supp \beta_0)^{\complement}\). By definition, for each \(x \in C\), there exists an open neighborhood \(U_x \ni x\) for which \(\beta_0(U_x) = 0\). Since \(X \times I\) is Lindelöf, we can extract a countable subcover \(U_{x_1} \cup U_{x_2} \cup \cdots\) of \(C\). By subadditivity, this shows \(\mu(C) = 0\).
+  The last value is positive by \cref{hip:basins-support-nonempty}, and the first and last equalities are, respectively, by subadditivity and definition. To show the second equality, let \(C = (\supp \beta_0)^{\complement}\). By definition, for each \(x \in C\), there exists an open neighborhood \(U_x \ni x\) for which \(\beta_0(U_x) = 0\). Since \(X \times I\) is Lindelöf, we can extract a countable subcover \(U_{x_1} \cup U_{x_2} \cup \cdots\) of \(C\). By subadditivity, this shows \(\beta_0(C) = 0\).
 \end{proof}
 
 \begin{lemma}\label{lem:basin-pos-full}
@@ -454,11 +454,11 @@ The idea of the proof is to pass to the invertible extension of the system and o
   \newcommand{\eBu}{\tilde{\mathcal{B}}_1}
   \newcommand{\eBl}{\tilde{\mathcal{B}}_0}
 
-  Let \((\eX, \eg, \emu)\) be the invertible extension of \((X, g, \mu)\), \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) the associated conjugation, and \(\eF \colon \eX \times I \to \eX \times I\) given by
+  Let \((\eX, \eg, \emu)\) be the invertible extension of \((X, g, \mu)\), \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) be the associated factor map, and \(\eF \colon \eX \times I \to \eX \times I\) be given by
   \begin{equation*}
     \eF(\ex, y) = (\eg(\ex), f_{\pi(\ex)}(y)).
   \end{equation*}
-  Note that \(\eF^{-1}(x, y) = (\eg^{-1}(x), f_{\pi(\eg^{-1}(x))}^{-1}(y))\). Since \(\pi_* \emu = \mu\) and \(\eg_* \emu = \emu\), by \cref{prop:schwarzian} we have \(f_{\pi(\eg^{-1}(\ex))}^{-1} \prec 0\) for almost every \(\ex \in \eX\). Also, by \cref{lem:inv-ext-ergodic}, \(\tilde{\mu}\) is ergodic for \(F\) (and therefore, also for \(F ^{-1}\)). Thus, we can apply \cref{thm:neg-schwarz-sep-graph} to \(F^{-1}\) and obtain a function \(\sigma \colon \eX \to I\) that separates the basins \(\eBu\) and \(\eBl\).
+  Notice that \(\eF^{-1}(x, y) = (\eg^{-1}(x), f_{\pi(\eg^{-1}(x))}^{-1}(y))\). Since \(\pi_* \emu = \mu\) and \(\eg_* \emu = \emu\), by \cref{prop:schwarzian} we have \(f_{\pi(\eg^{-1}(\ex))}^{-1} \prec 0\) for almost every \(\ex \in \eX\). Also, by \cref{lem:inv-ext-ergodic}, \(\tilde{\mu}\) is ergodic for \(F\) (and therefore, also for \(F ^{-1}\)). Thus, we can apply \cref{thm:neg-schwarz-sep-graph} to \(F^{-1}\) and obtain a function \(\sigma \colon \eX \to I\) that separates the basins \(\eBu\) and \(\eBl\).
 
   The hyperbolic metric (which coincides with the Hilbert metric) on \((0, 1)\) is given by
   \[d_H(r, s) = \log \lvert \rho(0, r, s, 1) \rvert.\]

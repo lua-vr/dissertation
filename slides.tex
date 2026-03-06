@@ -5,6 +5,7 @@
 
 \usepackage{thmtools}
 \declaretheorem[style=definition]{hypothesis}
+\declaretheorem[style=definition]{question}
 \usepackage{graphicx}
 \usepackage{dinamica}
 \usepackage{categorias}
@@ -12,6 +13,7 @@
 \usepackage{animate}
 \input{preamble/tikz}
 \input{preamble/macros}
+\input{preamble/bibliography}
 
 \input{slides/customization}
 
@@ -22,94 +24,197 @@
 \end{frame}
 
 \section{What is a dynamical system?}
-
 \begin{frame}
   \frametitle{A space and a map?}
-  
+  \[f \colon X \to X\]
+  \[f^n(x)\text{ as }n \to \infty?\]
 \end{frame}
 
 \begin{frame}
   \frametitle{Many maps?}
-  
+  \[f_1,f_2 \colon X \to X\]
+  \[f_1 \circ f_2 \circ f_2 \circ \cdots \circ f_1 \circ f_1 (x)?\]
 \end{frame}
 
 \begin{frame}
   \frametitle{Iterated function systems?}
-  
+  \[H \colon X \to 2^X\]
+  \[H(x) = \bigcup_{i = 1}^k \set{f_i(x)}\]
 \end{frame}
 
 \begin{frame}
   \frametitle{Markov kernels?}
-  
+  \[f \colon X \to \Meas[1]{X}\]
+  \[(f \circ f)(x) = \int f(y) \;d(f(x))\set{y}\]
 \end{frame}
 
 \begin{frame}
   \frametitle{A nice definition}
+  A dynamical system is...\\[2em]
+  \[\text{a functor } \set{\star} \to \mathcal{C}\]\\[2em]
   
+  where \(M = \set{\star}\) is a monoid and \(\mathcal{C}\) can have any objects or compositions you like.
 \end{frame}
 
 \begin{frame}
   \frametitle{Ergodic theory}
-  
+  The study of dynamical systems for which...
+  \[\mathcal{C} = \text{ category of measure spaces and measure-preserving maps}\]
+  \begin{theorem}\label{thm:birkhoff}
+    Let  \(\mu\) be an invariant probability measure and \(\phi \colon X \to \mathbb{R}\) an integrable function. Then, for \(\mu\)-almost every \(x \in X\),
+    \begin{equation}\label{eq:birkhoff}
+      \frac{1}{n}\sum_{i = 0}^{n - 1} \phi (f^i(x)) \to \CE[\mu]{\phi, \mathcal{I}}(x),
+    \end{equation}
+    where \(\mathcal{I}\) is the sub-\(\sigma\)-algebra of (strictly) invariant sets.
+  \end{theorem}
+  \begin{definition}
+    We say that a measure \(\mu\) is \emph{ergodic} for \(f\) if the algebra \(\mathcal{I}\) is trivial modulo \(\mu\): for every \(A \in \mathcal{I}\), either \(\mu(A) = 0\) or \(\mu(A^{\complement}) = 0\).
+  \end{definition}
 \end{frame}
 
 \begin{frame}
   \frametitle{Empirical measures}
-  
+  Given \(f \colon X \to X\) and a point \(x \in X\), we can define a sequence of \emph{empirical measures}
+  \[\Emp[n](x) = \frac{1}{n} \sum_{i = 0}^{n - 1} \delta_{f^i(x)},\]
+  or in other words, for all \(\phi \colon X \to \RR\),
+  \begin{equation*}
+    \int \phi \;d(\Emp[n](x)) = \frac{1}{n}\sum_{i = 0}^{n - 1} \phi(f^i(x)).
+  \end{equation*}
+  \begin{question}
+    Given \(x\), do the \(e_n(x) \weakto \mu\) weakly for some \(\mu\)?
+  \end{question}
+  \begin{question}
+    Given \(\mu\), what are the \(x \in X\) for which \(e_n(x) \weakto \mu\)?
+  \end{question}
 \end{frame}
 
 \begin{frame}
   \frametitle{Basins}
-  
-\end{frame}
+  The set \(\mathcal{B}(\mu) \subseteq X\) of points for which \(e_n(x) \weakto \mu\) is called the \emph{basin} of \(\mu\).\\[2em]
 
-\begin{frame}
-  \frametitle{Conjectures on the basins}
-  
+  What do the basins generally look like?\\[2em]
+
+  Conjecture (Palis): for a \(C^r\)-dense set of diffeomorphisms \(f \colon M \to M\) of a compact manifold \(M\), \(f\) should have a finite number of physical measures (measures with basins of positive volume), such that their basins cover the entire manifold up to a subset of zero volume.
 \end{frame}
 
 \section{Schwarzian derivatives and cylinder maps}
 
 \begin{frame}
+  \frametitle{Schwarzian derivatives and cylinder maps}
+  \textcite{bonifantSchwarzianDerivativesCylinder2008}:
+  \begin{gather*}
+    F \colon X \times I \to X \times I\\
+    F(x,y) = (g(x), f_x(y))
+  \end{gather*}
+  where the \(f_x \colon I \to I\) are orientation-preserving \(C^3\) diffeomorphisms.\\[1em]
+
+  The behavior of the basins of \(\mu_0 = \mu \otimes \delta_0\) and \(\mu_1 = \mu \otimes \delta_1\) depend on the sign of the \emph{Schwarzian derivative} of the \(f_x\).
+\end{frame}
+
+\begin{frame}
   \frametitle{Dividing by zero}
-  
+  Consider a field \(\mathbb{K}\). We can add a point \(\infty\) at infinity to get \(P^1(\mathbb{K})\), which has the same operations except that now \(0^{-1} = \infty\), \(\infty ^{-1} = 0\), \(x \cdot \infty = \infty\) if \(x \neq 0\), and \(x + \infty = \infty\) if \(x \neq \infty\).\\[1em]
+
+  \(P^1(\mathbb{K})\) has a special symmetry group given by an action of \(\begin{bsmallmatrix}a&b\\c&d\end{bsmallmatrix} \in \PGL_2(\mathbb{K})\):
+  \begin{equation*}
+    \gamma_{a,b,c,d}(z) = \frac{az + b}{cz + d}.
+  \end{equation*}
+  What is the fractional linear \(\rho\) for which \(\rho(x_1) = \infty\), \(\rho(x_2) = 0\), and \(\rho(x_3) = 1\)?
+  \begin{definition}[Cross ratio]
+    \begin{equation*}
+      \rho(x_0,x_1,x_2,x_3) = \frac{(x_2 - x_0)(x_3 - x_1)}{(x_1 - x_0)(x_3 - x_2)}.
+    \end{equation*}
+  \end{definition}
 \end{frame}
 
 \begin{frame}{Cross ratio and Schwarzian derivative}
-  \begin{definition}[Cross ratio]
-    \begin{equation*}
-      \rho(x_0,x_1,x_2,x_3) = \frac{(x_2 - x_0)(x_3 - x_1)}{(x_1 - x_0)(x_3 - x_2)}
-    \end{equation*}
-  \end{definition}
   \begin{definition}
     Let \(\f \colon I \to I'\) be a \(\Cs[d = 3]\) diffeomorphism between two intervals of the real line.
     The \emph{Schwarzian derivative} of \(\f\) is the function
     \begin{equation*}
       \SchD\f = \frac{\f[der = 3]}{\f[der = 1]} - \frac{3}{2}\rpar*{\frac{\f[der = 2]}{\f[der = 1]}}^2.
     \end{equation*}
+    We write \(\SchD f \prec 0\) if \(\SchD f < 0\) in an open dense set, and analogously \(\SchD f \succ 0\).
   \end{definition}
-\end{frame}
-
-\begin{frame}{Cross ratio and Schwarzian derivative}
-  \begin{lemma}\label{prop:schwarzian}
-    The Schwarzian derivative has the following properties:
-    \begin{enumerate}
-    \item\label{prop:schwarzian:item:1}
-      If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g \cdot (g')^2\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
-    \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
-    \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
-    \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
-    \end{enumerate}
+  \begin{lemma}\label{lem:sch-cross-increase}
+    If \(f \colon I \to I'\) is \(C^3\), then \(\SchD f \prec 0\) if, and only if, \(f\) increases cross ratios, in the sense that \[\rho(f(y_{1}),f(y_2),f(y_3),f(y_4)) > \rho(y_{1},y_2,y_3,y_4)\] for all \(y_1 < y_2 < y_3 < y_{4}\).
   \end{lemma}
+  % \begin{lemma}\label{prop:schwarzian}
+  %   The Schwarzian derivative has the following properties:
+  %   \begin{enumerate}
+  %   \item\label{prop:schwarzian:item:1}
+  %     If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g \cdot (g')^2\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
+  %   \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
+  %   \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+  %   \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
+  %   \end{enumerate}
+  % \end{lemma}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Intermingled basins}
+  \frametitle{Transversal Lyapunov exponents}
+  Let \(\mu\) ergodic for \(g \colon X \to X\), and \(\mathcal{A}_i = X \times \set{i}\) for \(i = 0,1\).
+  \begin{definition}[Transversal Lyapunov exponent]
+    \begin{equation*}
+      \Lyap_{\mathcal{A}_i} = \int \log f_{x}'(i) \;d \mu(x).
+    \end{equation*}
+  \end{definition}
+  \begin{lemma}\label{lem:lyap-basin-posmeas}
+    If the family \(\{ f_x' \}_{x \in X}\) is equicontinuous at \(i \in \{ 0,1 \}\) and \(\Lyap(\mathcal{A}_i) < 0\), then the basin of \(\mu_i\) has positive \(\mu \otimes \Leb\) measure.  Conversely, if \(\Lyap(\mathcal{A}_i) > 0\), then the corresponding basin has null measure.
+  \end{lemma}
+  \begin{corollary}\label{cor:schwarz-basin-pos-meas}
+    If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) for \(\mu\)-\almostevery \(x \in X\), then \(\Lyap(\mathcal{A}_0) + \Lyap(\mathcal{A}_1) < 0\).
+    In particular, at least one of the basins has positive measure.
+  \end{corollary}
   
 \end{frame}
 
 \begin{frame}
+  \frametitle{Intermingled basins}
+  \begin{definition}
+    Let \(M\) be a space with a reference measure \(\mu\). For a set of measures \(\set{\nu_i}_i\) invariant for \(f \colon M \to M\), we say that their basins are intermingled if for each nonempty open \(U \subseteq X\), \(\mu(\Basin{\nu_i} \cap U) > 0\) for all \(i\).
+  \end{definition}
+\end{frame}
+\begin{frame}
+  \frametitle{Intermingled basins}
+  Remember: \(F(x,y) = (g(x),f_x(y))\).\\[1em]
+  Assume:
+  \begin{hypothesis}\label{hip:basins-support-nonempty}
+    The basins \(\Basin{\mu_{0}}\) and \(\Basin{\mu_{1}}\) have positive volume \(\mu \otimes \Leb\).
+  \end{hypothesis}
+
+  \begin{hypothesis}\label{hip:elevators}
+    The map \(g\) is topologically exact, in the sense that for each nonempty open set \(U\), there exists \(n\) for which \(g^n(U) = X\). Moreover, there exists two expanding periodic points \(x^+\) and \(x^-\) in \(X\), of periods \(n^+, n^-\), such that for every \(y \in (0,1)\), \(f_{x^+}^{n^+}(y) > y\) and \(f_{x^-}^{n^-}(y) < y\).
+  \end{hypothesis}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intermingled basins}
+  \begin{theorem}
+    Under the two hypothesis, the basins of \(\mu_0\) and \(\mu_1\) are intermingled.
+  \end{theorem}
+  \begin{proof}[Idea]
+    If we define \(\beta_i(A) = m(A \cap \Basin{\mu_i})\), it suffices to show \(\supp \beta_i = X \times I\) for \(i = 0,1\).\\[1em]
+
+    Consider \(i = 0\). The first hypothesis ensures there is \((x_0,y_0) \in \supp \beta_0\) with \(y_0 \in (0,1)\). The second ensures there is a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) with \(x_{-n}\to \Orbit{x^-}\). By closedness and invariance of \(\supp \beta_0\), \((x^-, 1) \in \supp \beta_0\). The preimages of \((x^-, 1)\) are dense in \(\mathcal{A}_1\), so \(\mathcal{A}_1 \subseteq \supp \beta_0\). But \(\supp \beta_0\) is made of vertical segments starting at \(\mathcal{A}_0\), therefore we must have \(\supp \beta_0 = X \times I\).
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Intermingled basins}
+  \begin{example}
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../figures/intermingled}
+  \end{figure} 
+    \small
+    Figure: Basins for \(F \colon S^1 \times I \to S^1 \times I\), \[F(x) = (3x, q_{p(x)}(y)),\] where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\).
+  \end{example}
+\end{frame}
+
+\begin{frame}
   \frametitle{Negative Schwarzian}
+  Is there something between the two basins?
   \begin{theorem}\label{thm:neg-schwarz-sep-graph}
     If \((x,y) \mapsto \SchD f_x(y)\) is continuous and \(\SchD f_x \prec 0\) almost everywhere in \(x \in X\), then there exists a measurable function \(\sigma \colon X \to I\) defined almost everywhere such that
     \begin{equation*}
@@ -117,8 +222,14 @@
     \end{equation*}
     Consequently, the union \(\Basin{\mu_0} \cup \Basin{\mu_1}\) has total \(\mu \otimes \Leb\) measure.
   \end{theorem}
+  The original article also assumes both \(\Basin{\mu_0}\), \(\Basin{\mu_1}\) have positive measure, but this is not necessary.
 \end{frame}
-
+\begin{frame}
+  \frametitle{Negative Schwarzian}
+  \begin{proof}[Idea]
+    
+  \end{proof}
+\end{frame}
 % \begin{frame}
 %   \frametitle{Proof of existence of separating graph}
 %   We start by defining functions \(\xi_0, \xi_1 \colon X \to I\) that bound the basins in the following sense:
@@ -421,6 +532,14 @@
   
 \end{frame}
 
+\begin{frame}
+  \frametitle{Applications to Bonifant-Milnor}
+  If \(g \colon X \to X\) is hyperbolic, any skew-product diffeomorphism \(F \colon X \times I \to X \times I\) is partially hyperbolic.
+  \begin{corollary}
+    If \(F\) displays intermingled basins and has a separating graph \(\sigma \colon X \to I\), then \(\sigma\) is not continuous, while the unstable holonomies are. This means we cannot have \(\lambda^c(\nu)\le 0\), where \(\nu = (\graph \sigma)_*\mu\).
+  \end{corollary}
+\end{frame}
+
 \section{Historical behavior}
 
 \begin{frame}
@@ -467,34 +586,34 @@
 
 \setbeamercolor{primary}{bg=tpink}
 
-\begin{frame}{Special thanks}
-  \begin{itemize}
-  \item For my friends, many of whom are watching (thank you!)
-  \end{itemize}
-\end{frame}
+% \begin{frame}{Special thanks}
+%   \begin{itemize}
+%   \item For my friends, many of whom are watching (thank you!)
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame}{Special thanks}
-  For the OpenAPS community. DIY automated insulin delivery!
-  \begin{figure}
-    \centering
-    \includegraphics[height=3cm]{figures/Dana-Lewis_desk-with-OpenAPS-parts.jpg} 
-    \includegraphics[height=3cm]{figures/AAPS_preparing_overview_01.png}
-    \caption{Dana is type 1 diabetic and the creator of OpenAPS (left)}
-  \end{figure}
+% \begin{frame}{Special thanks}
+%   For the OpenAPS community. DIY automated insulin delivery!
+%   \begin{figure}
+%     \centering
+%     \includegraphics[height=3cm]{figures/Dana-Lewis_desk-with-OpenAPS-parts.jpg} 
+%     \includegraphics[height=3cm]{figures/AAPS_preparing_overview_01.png}
+%     \caption{Dana is type 1 diabetic and the creator of OpenAPS (left)}
+%   \end{figure}
   
-  \structure{Special \textbf{non-}thanks for\dots}
-  \begin{itemize}
-  \item big pharmaceutical companies for profiting over a chronic illness; I lost days with their faulty products and dehumanized costumer support.
-  \item my insurance company for fighting coverage of my treatment in court.
-  \end{itemize}
-\end{frame}
+%   \structure{Special \textbf{non-}thanks for\dots}
+%   \begin{itemize}
+%   \item big pharmaceutical companies for profiting over a chronic illness; I lost days with their faulty products and dehumanized costumer support.
+%   \item my insurance company for fighting coverage of my treatment in court.
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame}{Special thanks}
-  \begin{itemize}
-  \item During my short journey as a master student, two fellow graduate students with disabilities passed away in the math departments I've belonged to (IMECC and ICMC). This is hard to accept.
-  \item I feel I must repeat the obvious fact that not all disabilities are visible or physical, and the disabled person has no obligation of disclosing it to you. Be kind to people. Be patient with people. Let everyone have their own time to achieve their potential.
-  \end{itemize}
-\end{frame}
+% \begin{frame}{Special thanks}
+%   \begin{itemize}
+%   \item During my short journey as a master student, two fellow graduate students with disabilities passed away in the math departments I've belonged to (IMECC and ICMC). This is hard to accept.
+%   \item I feel I must repeat the obvious fact that not all disabilities are visible or physical, and the disabled person has no obligation of disclosing it to you. Be kind to people. Be patient with people. Let everyone have their own time to achieve their potential.
+%   \end{itemize}
+% \end{frame}
 
 {
   % \setbeamertemplate{background canvas}{%
@@ -507,7 +626,7 @@
   % }
   \begin{frame}
     \begin{center}
-      {\Huge Thank you!}
+      {\Huge Thank you}
 
       % \\[1em]
       

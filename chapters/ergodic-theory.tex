@@ -338,7 +338,7 @@ Now, we conclude our tour around the zoo and focus on our beloved species, measu
 
 \begin{proof}
   Suppose \(A \subseteq Y\) is measurable and invariant for \(g\). Then, \(p^{-1}(A)\) is an invariant set for \(f\), because \[f^{-1}(p^{-1}(A)) = p^{-1}(g^{-1}(A)) = p^{-1}(A).\]
-  Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) = 0\).
+  Therefore, \(p_*\mu(A) = \mu(p^{-1}(A)) \in \set{0,1}\).
 \end{proof}
 
 % \todo{``For Borel standard systems, extensions are classified by invariant sub-$\sigma$-algebras''}
@@ -408,13 +408,13 @@ Now, we conclude our tour around the zoo and focus on our beloved species, measu
 \end{lemma}
 
 \begin{proof}
-  Suppose \(\mu\) is ergodic but \(\tilde{\mu}\) is not; then, we can write \(\tilde{\mu} = \lambda\mu_0 + (1 - \lambda)\mu_1\) for \(\mu_0 \neq \mu_1\). Let \(\nu_0 = \pi_*\mu_0\) and \(\nu_1 = \pi_*\mu_1\), so that \(\mu = \lambda\nu_0 + (1 - \lambda)\nu_1\) by linearity. By ergodicity, \(\nu_0 = \nu_1 = \mu\), contradicting the uniqueness of the measure \(\tilde{\mu}\) such that \(\pi_*\tilde{\mu} = \mu\).
+  Suppose \(\mu\) is ergodic but \(\tilde{\mu}\) is not; then, by the characterization of ergodic measures as extremal points~\cite[Proposition 4.3.2.]{vianaFoundationsErgodicTheory2016}, we can write \(\tilde{\mu} = \lambda\mu_0 + (1 - \lambda)\mu_1\) for two different invariant measures \(\mu_0 \neq \mu_1\). Let \(\nu_0 = \pi_*\mu_0\) and \(\nu_1 = \pi_*\mu_1\), so that \(\mu = \lambda\nu_0 + (1 - \lambda)\nu_1\) by linearity. By ergodicity, \(\nu_0 = \nu_1 = \mu\), contradicting the uniqueness of the measure \(\tilde{\mu}\) such that \(\pi_*\tilde{\mu} = \mu\).
 \end{proof}
 
 Invertible extensions may not exist for non-Borel spaces. The following example of non-existence of the natural extension expands on an exercise of~\cite{przytyckiConformalFractalsErgodic2010}, and relies on the Axiom of Choice.
 
 \begin{example}[Non-existence of the natural extension]
-  Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus \(m^*(E) > 0\).
+  Let \(X = \circl^1\) be the circle with the Borel \(\sigma\)-algebra \(\mathcal{B}\) and \(f \colon \circl^1 \to \circl^1\) be an irrational rotation. With the Axiom of Choice, we can form a set \(E\) with exactly one point from each orbit of \(f\). Since \(f\) is a Lebesgue measure-preserving bijection, \(E_n = f^n(E)\) are disjoint, have the same outer measure and \(\bigcup_{n \in \mathbb{Z}} E_n = \circl^1\). In particular, the \(E_n\) cannot be measurable, thus its exterior Lebesgue measure \(m^*(E) > 0\) is positive.
 
   If \(K\) is a subset of positive outer measure and \(\mathcal{E} = \sigma(\set{K} \cup \mathcal{B})\), and if we define \(\mu^* \colon 2^X \to [0,1]\) as
   \[\mu^*(A) = \frac{m^*(A \cap K)}{m^*(K)},\]
@@ -704,7 +704,7 @@ We also have a notion of \emph{conditional entropy}.
 \end{definition}
 
 \begin{proposition}
-  If \((X,\mathcal{B},\mu,f)\) if a measure-preserving system and \(\xi\) is a partition of \(X\) with finite entropy, the entropy of \(f\) with respect to \(\xi\) is equivalently equal to
+  If \((X,\mathcal{B},\mu,f)\) is a measure-preserving system and \(\xi\) is a partition of \(X\) with finite entropy, the entropy of \(f\) with respect to \(\xi\) is equivalently equal to
   \begin{equation*}
     h_{\mu}(f,\xi) =
     \lim_{n \to \infty} \frac{1}{n}H_{\mu}\rpar*{\xi \mathrel{\bigg|} \bigvee_{1 \le k \le n}f^{-k}(\xi)}.
@@ -744,7 +744,7 @@ and
   See~\cite{ledrappierMetricEntropyDiffeomorphisms1985a}.
 \end{proof}
 
-The number \(\delta_i\) is called the \emph{dimension of \(\mu\) on \(W^i\)-manifolds}.
+The numbers \(\delta_i\) are called the \emph{dimension of \(\mu\) on \(W^i\)-manifolds}.
 
 \begin{theorem}[Ledrappier-Young formula]\label{thm:leddrappier-young}
   Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\), and let \(\delta_i\) be the dimension of \(\mu\) on \(W^i\)-manifolds. Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that

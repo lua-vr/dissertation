@@ -2,7 +2,7 @@
 
 \begin{document}
 
-\chapter{Partially hyperbolic dynamics}
+\chapter{Partially hyperbolic dynamics}\label{cha:part-hyperb-dynam}
 
 \section{Partial hyperbolicity}
 
@@ -291,8 +291,7 @@ The following proof is expanded from~\cite[lemma 3.1.2]{ledrappierMetricEntropyD
     &= H_{\mu}(\xi_1 \mid f(\xi_1) \vee f^{n + 1}(\xi_2))
     +  H_{\mu}(\xi_2 \mid f^{-n + 1}(\xi_1) \vee f(\xi_2)).
   \end{align*}
-  Therefore,
-  Now, we let \(n \to \infty\). Since \(\xi_2 \prec \bigvee_n f^{-n + 1}(\xi_1)\), the second term goes to zero. For the first term, define the set \(D_n = \set{x \in X \where f(\xi_1)(x) \subseteq f^{n + 1}(\xi_2)(x)}\).
+  Now, let \(n \to \infty\). Since \(\xi_2 \prec \bigvee_n f^{-n + 1}(\xi_1)\), the second term goes to zero. For the first term, define the set \(D_n = \set{x \in X \where f(\xi_1)(x) \subseteq f^{n + 1}(\xi_2)(x)}\).
 
   \begin{claim}
     \(\mu(D_n) \to 1\).
@@ -381,7 +380,7 @@ Consider the skew-product map \(F(x,y) = (g(x),f_x(y))\) on \(X \times I\) of \c
 
 \subsection{Center exponent of intermingled basins}
 
-In \cref{sec:intermingled-basins}, we saw conditions for the basins of the two measures \(\mu_0,\mu_1\), supported at the boundaries \(X \times \set{0}\) and \(X \times \set{1}\), to be intermingled. Combined with \cref{thm:neg-schwarz-sep-graph}, we have the existence of a measurable function \(\sigma \colon X \to I\) whose graph separates the intermingled basins. Since the basins are intermingled, \(\sigma\) cannot be continuous; however, the \(u\)-holonomy maps \emph{are} continuous, so the ergodic measure \(\nu = (\graph \sigma)_*\mu\) supported at the graph cannot be invariant by unstable holonomies. The contrapositive of \cref{thm:invariance-principle} then implies its center Lyapunov exponent must be positive. This observation is borrowed from~\cite[Section 4.2]{duarteMeasuresMaximalEntropy2022}.
+In \cref{sec:intermingled-basins}, we saw conditions for the basins of the two measures \(\mu_0,\mu_1\), supported at the boundaries \(X \times \set{0}\) and \(X \times \set{1}\), to be intermingled. Combined with \cref{thm:neg-schwarz-sep-graph}, we have the existence of a measurable function \(\sigma \colon X \to I\) whose graph separates the intermingled basins. Since the basins are intermingled, \(\sigma\) cannot be continuous; however, the \(u\)-holonomy maps \emph{are} continuous, so the ergodic measure \(\nu = (\graph \sigma)_*\mu\) supported at the graph cannot be invariant by unstable holonomies. The contrapositive of \cref{thm:invariance-principle} then implies its center Lyapunov exponent must be positive. This observation is sourced from~\cite[Section 4.2]{duarteMeasuresMaximalEntropy2022}.
 
 % \begin{corollary}
 %   Suppose \(g \colon X \to X\) is hyperbolic, \(F\) is a diffeomorphism and basins of \(\mu_0\) and \(\mu_1\) are intermingled for \(F\), and 

@@ -98,12 +98,12 @@ Since the \(t_x\) are translations, there is no loss of generality in assuming \
   \end{equation*}
   Therefore, if \(\int p \;d\mu \neq 0\), then either \(\gamma(f_x^n(y)) \to \infty\) or \(\gamma(f_x^n(y)) \to - \infty\), so all orbits in \(X \times (0,1)\) converge to one of the boundaries, which one depending only on the sign of \(\Lyap{\mathcal{A}_0}\).
   
-  The interesting case, therefore, is when \(\int p \;d\mu = 0\). In the article, it is shown that this case displays historical behavior, but only for the very particular case of \(g = kx \pmod 1\) and \(p\) being constant on each branch \(\interval[open right]{i/k}{(i + 1)/k}\). It is then conjectured that historical behavior would still be present for the same \(g\) but a continuous \(p \colon X \to \RR\) with zero mean, in general. For the rest of the section, we explain how results already present in the literature, namely weak or almost sure invariance principles, answer their question in the affirmative.
+  The interesting case, therefore, is when \(\int p \;d\mu = 0\). In the article, it is shown that this case displays historical behavior, but only for the very particular case of \(g = kx \pmod 1\) and \(p\) being constant on each branch \(\interval[open right]{i/k}{(i + 1)/k}\). It is then conjectured that historical behavior would still be present for the same \(g\) but a continuous \(p \colon X \to \RR\) with zero mean, in general. For the rest of the section, we explain how results already present in the literature, namely weak or almost sure invariance principles (not related to the one in \cref{cha:part-hyperb-dynam}), answer their question in the affirmative.
 \end{example}
 
 At this point, we recommend that the reader has familiarized themselves with \cref{sec:brownian-motion}, but we can briefly remind ourselves of some notions defined in there. Let \(\xi = (p \circ g^{i})_{i \geq 0}\). We can see \(\xi\) as a sequence of random variables defined on the probability space \((X,\mu)\). Accordingly, we have their partial sums \(\PSum[n,rv=\xi] = \sum_{i = 1}^n\xi_i\) and the sequence of processes \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) given by
 \[\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}},\]
-as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wiener measure, and that we say \(\xi\) satisfies an \emph{weak invariance principle} the processes \(\DProc[n,rv = \xi]\) converge (weakly) in distribution to \(\sigma W\) for some \(\sigma > 0\). The theorem below shows that if we assume this condition for \(g\) and \(p\), we have historical behavior.
+as explained in that section. We recall that \(W \in \Meas[1]{\CWPS}\) is the Wiener measure, and that we say \(\xi\) satisfies an \emph{weak invariance principle} if the processes \(\DProc[n,rv = \xi]\) converge in distribution (weakly) to \(\sigma W\) for some \(\sigma > 0\). The theorem below shows that if we assume this condition for \(g\) and \(p\), we have historical behavior.
 
 \begin{theorem}\label{thm:wip-historical}
   If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
@@ -294,7 +294,7 @@ In particular, since \(\DProc[n,rv = \beta,spar,pf]\Prob \weakto \sigma W\) by \
   and therefore \(A_n \to 0\) almost surely.
 \end{proof}
 
-  The almost sure invariance principle (ASIP) holds for a large class of dynamics and observables. Here, we highlight the Theorem 2.1 of~\cite{korepanovRatesAlmostSure2018}, where it is shown that the ASIP holds for every \(\delta > 0\) when \(g\) is a nonuniformly expanding map and \(p\) is a Hölder continuous function with \(\int p \;d\mu = 0\). This includes the original example of \citeauthor{bonifantSchwarzianDerivativesCylinder2008} in which \(g(x) = kx \pmod 1\).
+  The almost sure invariance principle (ASIP) holds for a large class of dynamics and observables. Here, we highlight the Theorem 2.1 of~\cite{korepanovRatesAlmostSure2018}, where it is shown that the ASIP holds for every \(\delta > 0\) when \(g\) is a nonuniformly expanding map and \(p\) is a Hölder continuous function with \(\int p \;d\mu = 0\). This includes the original example of \textcite{bonifantSchwarzianDerivativesCylinder2008} in which \(g(x) = kx \pmod 1\).
 
 \begin{question}
   Is \cref{thm:avoid-compacts-asip} true for the sharp case \(\abs{\PSum[n,rv = \zeta]{\omega} - \PSum[n,rv = \beta]{\omega}} = o(\sqrt{n})\)?
