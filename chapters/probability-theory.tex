@@ -14,7 +14,7 @@ A fact that is not always covered in measure theory courses and literature is th
 \end{theorem}
 
 \begin{proof}
-  See~\cite[section 3.5]{bogachevMeasureTheory2007}.
+  See~\cite[Section 3.5]{bogachevMeasureTheory2007}.
 \end{proof}
 
 \subsection{The Kolmogorov Extension Theorem}
@@ -38,7 +38,7 @@ From this finitary specification, when is it possible to construct a measure on 
 \end{theorem}
 
 \begin{proof}
-  See~\cite[theorem 7.7.1]{bogachevMeasureTheory2007}.
+  See~\cite[Theorem 7.7.1]{bogachevMeasureTheory2007}.
 \end{proof}
 
 \begin{remark}
@@ -260,9 +260,9 @@ The motivation for looking into invariance principles is that they allow transfe
 Donsker's theorem is not the most general result of its kind. In our case, we are interested in a version of the weak invariance principle for ergodic martingale difference sequences. Intuitively, these are the sequences that behave as the time-one steps of a martingale, in the sense that even if the value of some previous steps are known, the expected value of the next step is still zero.
 
 \begin{definition}
-  A sequence \(\xi = (\xi_0,\xi_1\dots) \in L^1(\Prob)^{\NN}\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
+  A sequence \(\xi = (\xi_1,\xi_2\dots) \in L^1(\Prob)^{\NN}\) of random variables  is said to be a \emph{martingale difference sequence} if for all \(n\),
   \begin{equation*}
-    \CE[\Prob]{\xi_{n}, {\sigma(\xi_0,\dots,\xi_{n - 1})}} = 0.
+    \CE[\Prob]{\xi_{n}, {\sigma(\xi_1,\dots,\xi_{n - 1})}} = 0.
   \end{equation*}
 \end{definition}
 
@@ -316,7 +316,7 @@ In the previous definition we considered an one-sided sequence of random variabl
 \subsubsection{Invariance principle for ergodic sequences}
 
 \begin{definition}
-  A sequence \(\xi = (\xi_0,\xi_1\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
+  A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
 \end{definition}
 
 \begin{example}
@@ -329,7 +329,7 @@ In the previous definition we considered an one-sided sequence of random variabl
 \end{theorem}
 
 \begin{proof}
-  See~\cite[theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
+  See~\cite[Theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}.
 \end{proof}
 
 \subsection{Reverse martingale difference sequences}

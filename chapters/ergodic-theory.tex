@@ -221,7 +221,7 @@ The direct relation to Birkhoff averages also highlights these objects as having
   and let \(N \to \infty\).
 \end{proof}
 
-Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask what are the points of \(X\) whose empirical measures converge to it. The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
+Reciprocally, for each invariant measure \(\mu \in \Meas[f]{X}\), we can ask which points in \(X\) have empirical measures converging to \(\mu\). The set \(\mathcal{B}(\mu) \subseteq X\) of points with this property is called the \emph{basin} of the measure \(\mu\).
 
 \begin{lemma}\label{lem:erg-iff-basin-full-meas}
   If \(\mu\) is an invariant probability for \(f\), then \(\mu(\Basin{\mu}) \in \set{0,1}\). Moreover, \(\mu(\Basin{\mu}) = 1\) if, and only if, \(\mu\) is ergodic for \(f\).
@@ -594,7 +594,7 @@ We will not define disintegrations with respect for a partition here. Instead, w
 
 \subsection{Conditional measures}
 
-The following is~\cite[theorem 5.14]{einsiedlerErgodicTheoryView2011}. Also see~\cite[definition 10.4.1]{bogachevMeasureTheory2007} and related results for a definition of conditional measures in a more general setting of arbitrary measure spaces, and their existence in measurable spaces with a compact approximating class (\cref{def:approximating-class}).
+The following is~\cite[Theorem 5.14]{einsiedlerErgodicTheoryView2011}. Also see~\cite[Definition 10.4.1]{bogachevMeasureTheory2007} and related results for a definition of conditional measures in a more general setting of arbitrary measure spaces, and their existence in measurable spaces with a compact approximating class (\cref{def:approximating-class}).
 
 \begin{theorem}
   Let \((X,\mathcal{B},\mu)\) be a Borel probability space and let \(\mathcal{A} \subseteq \mathcal{B}\) be a sub-\(\sigma\)-algebra. Then, there exists a \(\mathcal{A}\)-measurable full-measure set \(X' \subseteq X\) and a family \(\set{\mu^{\mathcal{A}}_x}_{x \in X'} \subseteq \Meas{\mathcal{B}}\) of probability measures on \((X,\mathcal{B})\), called \emph{conditional measures}, such that:

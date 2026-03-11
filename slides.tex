@@ -6,6 +6,7 @@
 \usepackage{thmtools}
 \declaretheorem[style=definition]{hypothesis}
 \declaretheorem[style=definition]{question}
+\declaretheorem{proposition}
 \usepackage{graphicx}
 \usepackage{dinamica}
 \usepackage{categorias}
@@ -14,6 +15,7 @@
 \input{preamble/tikz}
 \input{preamble/macros}
 \input{preamble/bibliography}
+\usepackage[bblfile=./.tex-aux/thesis]{biblatex-readbbl}
 
 \input{slides/customization}
 
@@ -51,9 +53,11 @@
 \begin{frame}
   \frametitle{A nice definition}
   A dynamical system is...\\[2em]
-  \[\text{a functor } \set{\star} \to \mathcal{C}\]\\[2em]
+  \[\text{a functor } M \to \mathcal{C}\]\\[2em]
   
-  where \(M = \set{\star}\) is a monoid and \(\mathcal{C}\) can have any objects or compositions you like.
+  where \(M = \set{\star}\) is a monoid (seen as an one-object category) and \(\mathcal{C}\) is a category with any objects and compositions you like.\\[3em]
+
+  (for more about that, see \Textcite{mossCategorytheoreticProofErgodic2023}).
 \end{frame}
 
 \begin{frame}
@@ -97,6 +101,16 @@
   Conjecture (Palis): for a \(C^r\)-dense set of diffeomorphisms \(f \colon M \to M\) of a compact manifold \(M\), \(f\) should have a finite number of physical measures (measures with basins of positive volume), such that their basins cover the entire manifold up to a subset of zero volume.
 \end{frame}
 
+\begin{frame}
+  \frametitle{Overview}
+  This project is a report on interesting phenomena related to empirical measures and their basins.\\[1em]
+  \begin{enumerate}
+  \item On the first chapter, we analyze a family of skew products by \textcite{bonifantSchwarzianDerivativesCylinder2008} where we see either intermingled basins or a unique asymptotic measure depending on the Schwarzian derivative of the fibers. For that, we also show the existence of a graph that separates the basins.
+  \item We then prove an important theorem of partially hyperbolic dynamics, called the Invariance Principle. We discuss how this theorem implies some conditions on the Lyapunov exponent of the measure supported on the graph, and on the absolute continuity of the asymptotic measure.
+  \item Lastly, we look at an important open question about the empirical measures of diffeomorphisms, namely, the existence of robust historical behavior. We show this occurs non-robustly for skew products when some conditions ensure a sort of convergence to the Brownian motion along the fibers.
+  \end{enumerate}
+\end{frame}
+
 \section{Schwarzian derivatives and cylinder maps}
 
 \begin{frame}
@@ -124,6 +138,9 @@
     \begin{equation*}
       \rho(x_0,x_1,x_2,x_3) = \frac{(x_2 - x_0)(x_3 - x_1)}{(x_1 - x_0)(x_3 - x_2)}.
     \end{equation*}
+  \end{definition}
+  \begin{definition}[Poincaré metric]
+    The quantity \(d(x,y) = \log{\abs{\rho(0,x,y,1)}}\) defines a metric on \((0,1) \subseteq I\).
   \end{definition}
 \end{frame}
 
@@ -156,7 +173,7 @@
   Let \(\mu\) ergodic for \(g \colon X \to X\), and \(\mathcal{A}_i = X \times \set{i}\) for \(i = 0,1\).
   \begin{definition}[Transversal Lyapunov exponent]
     \begin{equation*}
-      \Lyap_{\mathcal{A}_i} = \int \log f_{x}'(i) \;d \mu(x).
+      \Lyap(\mathcal{A}_i) = \int \log f_{x}'(i) \;d \mu(x).
     \end{equation*}
   \end{definition}
   \begin{lemma}\label{lem:lyap-basin-posmeas}
@@ -222,12 +239,40 @@
     \end{equation*}
     Consequently, the union \(\Basin{\mu_0} \cup \Basin{\mu_1}\) has total \(\mu \otimes \Leb\) measure.
   \end{theorem}
-  The original article also assumes both \(\Basin{\mu_0}\), \(\Basin{\mu_1}\) have positive measure, but this is not necessary.
+  \Textcite[Theorem 3.2]{bonifantSchwarzianDerivativesCylinder2008} also assume both \(\Basin{\mu_0}\), \(\Basin{\mu_1}\) have positive volume, and leave open the question of whether this is necessary in a footnote. We showed this is not necessary.
 \end{frame}
 \begin{frame}
   \frametitle{Negative Schwarzian}
-  \begin{proof}[Idea]
-    
+  \begin{proofs}[Idea]
+    Start defining
+    \begin{equation*}
+      \xi_0(x) = \sup \{ y \in I : (x,y) \in \Basin{\mu_0} \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \Basin{\mu_1} \}.
+    \end{equation*}
+    It suffices to show \(A = \set{ x \in X : \xi_0(x) \neq \xi_1(x) }\) does not have positive measure.\\[1em]
+
+    By a past result, we can assume \(\xi_1(x) < 1\) for \(\mu\)-almost every \(x\). Thus, given \(k\), there exists \(\delta_k < 1\) such that
+    \begin{equation}\label{eq:time-small}
+      \lim_{n \to \infty} \frac{1}{n} \# \set{ 0 \leq i < n \where \xi_1(g^i(x)) < \delta_k} > 1 - 1/k
+    \end{equation}
+    for almost every \(x\).\\[1em]
+
+    Suppose there were \(x_0 \in A\) for which the above was valid, and let \(y_0 \in (\xi_0(x_0), \xi_1(x_0))\). By definition, \(e_n(x_0,y_0)\) converges to neither \(\mu_0\) nor \(\mu_1\), so by compactness, the sequence of empirical measures has a limit point \(\nu\) with \(\supp \nu \not\subset X \times \set{0}\).
+  \end{proofs}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Schwarzian}
+  \begin{proof}[Idea (cont.)]
+    Therefore, there exists \(\varepsilon > 0\) and \(k\) for which \(\nu(X \times \interval[open left]{\varepsilon}{1}) > 1/k\). Since \(\nu\) is a limit point, take a subsequence \(n_j \to \infty\) with
+    \begin{equation}\label{eq:time-big}
+      \liminf_{j \to \infty} \frac{1}{n_j} \# \set{ 0 \leq i < n_j \where f_{x_0}^i(y_0) > \varepsilon} > 1/k.
+    \end{equation}
+    In other words, we have just bounded \(f_{x_0}^i(y_0)\) in the interval \((\varepsilon, \delta_k)\) for a positive lower frequency of \(i\).\\[1em]
+
+    The sequence \(r_n = \rho(0, f_{x_0}^n(y_0), f_{x_0}^n(\xi_1(x_0)), 1)\) is well defined and increasing. Thus either \(r_n \to \infty\) or \(r_n \to r\).\\[1em]
+
+    But it's impossible for \(r_n \to \infty\) because we have just shown
+    \[0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\]
+    for arbitrarily large \(n\). And it's impossible for \(r_n \to r\), as it would imply in the existence of a third, different invariant graph. Thus, \(x_0\) does not exist in the first place.
   \end{proof}
 \end{frame}
 % \begin{frame}
@@ -246,11 +291,21 @@
   \begin{theorem}\label{thm:pos-schwarz-asymptotic}
     If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
   \end{theorem}
+  Generalizing \textcite[Lemma 5.4]{bonifantSchwarzianDerivativesCylinder2008}, we do not assume both \(\Lyap(\mathcal{A}_i)\) are strictly positive.
   \begin{proof}[Idea]
-    Consider the inverse of the natural extension \(\tilde{F}^{-1}\). It satisfies \(\SchD f_{\tilde x}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, and therefore has a separating graph \(\sigma\) that is repelling.\\[1em]
+    Consider the inverse of the natural extension \(\tilde{F}^{-1}\). It satisfies \(\SchD f_{\tilde x}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, and therefore by the last theorem has a separating graph \(\sigma\).\\[1em]
 
-    The orbits for \(\tilde{F}\) will be attracted by the graph, and \(\tilde \nu = (\graph \sigma)_*\tilde \mu\) is asymptotic for \(\tilde{F}\). Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
+    Since \(\SchD f_x \succ 0\) implies the \(f_x\) are contractions in the Poincaré metric, the orbits for \(\tilde{F}\) will be attracted by the graph, and \(\tilde \nu = (\graph \sigma)_*\tilde \mu\) is asymptotic for \(\tilde{F}\). Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
   \end{proof}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Asymptotic measure}
+  \begin{center}
+    \animategraphics[controls,autoplay,loop,width=6cm,poster=last,buttonsize=1em]{10}{scripts/out/asymptotic-}{0}{83}
+  \end{center}
 \end{frame}
 
 \section{Partially hyperbolic dynamics}
@@ -284,14 +339,24 @@
   \begin{definition}
     Let \(f \colon M \to M\) be a diffeomorphism. We say \(f\) is \emph{partially hyperbolic} if there exists a dominated splitting \(TM = E^s \oplus E^c \oplus E^u\) such that \(E^s\) is uniformly contracted by \(df\) and \(E^u\) is uniformly contracted by \(df ^{-1}\).
   \end{definition}
+  \begin{example}
+    If \(g \colon M \to M\) is an Anosov diffeomorphism, any skew product diffeomorphism \(F \colon M \times N \to M \times N\) over \(g\) is partially hyperbolic.
+  \end{example}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Dynamical coherence}
+  \begin{definition}
+    A partially hyperbolic diffeomorphism is \textit{dynamically coherent} if there exists invariant foliations \(\fF^{cs}\) and \(\fF^{cu}\) tangent to \(E^c \oplus E^s\) and \(E^c \oplus E^u\), respectively. In this case, we can also define \(\fF^c = \fF^{cs}\vee \fF^{cu}\).
+  \end{definition}
+  \begin{example}
+    For a skew product diffeomorphism \(F \colon M \times N \to M \times N\) over an Anosov \(g \colon M \to M\), \(g\) has stable and unstable foliations \(W^s\) and \(W^u\), and we have \(\fF^{cs} = \pi_M^{-1}(W^s)\) and \(\fF^{cu} = \pi_M^{-1}(W^u)\). Therefore, the center foliation is composed of sections \(\mathcal{F}^c(x) = \set{x} \times N\).
+  \end{example}
+\end{frame}
 
-
-
-\begin{frame}{Invariance principle}
+\begin{frame}{Global unstable holonomies}
 \begin{definition}
-  Consider the quotient map \(\pi \colon X \to X/\mathcal{F}^c\). We say that a partially hyperbolic diffeomorphism \(f \colon X \to X\) has \emph{global unstable holonomies} if for every \(p_1,p_2 \in X/\mathcal{F}^c\) that are in the same leaf of \(\pi(\mathcal{F}^{u})\), there exists an homeomorphism \(h^u_{p_1,p_2}\colon \mathcal{F}^c(p_1) \to \mathcal{F}^c(p_2)\) with the property that \(h^u_{p_1,p_2}(x) \in \mathcal{F}^u(p_1) \cap \mathcal{F}^c(p_2)\).
+  Consider the quotient map \(\pi \colon X \to X/\mathcal{F}^c\). We say that a dynamically coherent partially hyperbolic diffeomorphism \(f \colon X \to X\) has \emph{global unstable holonomies} if for every \(p_1,p_2 \in X/\mathcal{F}^c\) that are in the same leaf of \(\pi(\mathcal{F}^{u})\), there exists an homeomorphism \(h^u_{p_1,p_2}\colon \mathcal{F}^c(p_1) \to \mathcal{F}^c(p_2)\) with the property that \(h^u_{p_1,p_2}(x) \in \mathcal{F}^u(p_1) \cap \mathcal{F}^c(p_2)\).
 \end{definition}
 \begin{figure}
   \centering
@@ -300,8 +365,13 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Invariance principle}
+  \begin{definition}
+    We say that the dynamically coherent partially hyperbolic diffeomorphism \(f\) has \emph{compact center leaves} if all the leaves of \(\mathcal{F}^c\) are compact sets.
+\end{definition}
+
 \begin{theorem}
-  Let \(f \colon X \to X\) be a diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic. Let \(\mu\) be an ergodic invariant measure for \(f\), and also suppose \(f\) has global unstable holonomies. Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
+  Let \(f \colon X \to X\) be a PH diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic (Anosov). Let \(\mu\) be an ergodic invariant measure for \(f\), and also suppose \(f\) has global unstable holonomies. Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
 \end{theorem}
 \end{frame}
 
@@ -320,22 +390,6 @@
     \forall p,\;\pi^c_*\mu^c_p = \pi^c_*\mu^{cu} \iff
     \forall p,\;\pi^u_*\mu^u_p = \pi^u_*\mu^{cu}.
   \end{equation*}
-\end{frame}
-
-\begin{frame}
-  \frametitle{From the box to a leaf}
-  \begin{itemize}
-  \item Denote by \(\pi \colon X \to X/\mathcal{F}^c\) the quotient map, and let \(\set{\mu^c_p}_{p \in X}\) be the disintegration of \(\mu\) along the (measurable) foliation \(\mathcal{F}^c\).
-
-  \item Since \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic, the quotient also has stable and unstable foliations, which we denote by \(W^s\) and \(W^u\) respectively. Let \(\nu = \pi_*\mu\) be the pushforward measure on \(X/\mathcal{F}^c\).
-
-  \item We will work with a partition \(\xi_c\) of \(X/\mathcal{F}^c\) whose elements are compact sets and which is finer than the \(W^u\) foliation. We have an associated disintegration \(\set{\nu^u_x}_{x \in X/\mathcal{F}^c}\) of \(\nu\).
-
-  \item Denote \(\xi^{cu} = \pi ^{-1}(\xi_c)\), which by construction is finer than the foliation \(\mathcal{F}^u\). It is also disintegrates \(\mu\) to a family \(\set{\mu^{cu}_p}_{p \in X}\).
-  \end{itemize}
-  \begin{lemma}\label{lem:proj-implies-invariance}
-    For all \(x \in E_3\), if \(\pi_* \mu^u_p = \nu_{\pi(p)}^u\) for \(\mu_x^{cu}\)-almost all \(p\), then there is a full \(\mu_x^{cu}\)-measure set \(E_4(x) \subseteq \xi^{cu}(x)\) where \((h^u_{q_1,q_2})_*\mu^c_{q_1} = \mu^c_{q_2}\) for all \(q_1,q_2 \in E_4(x)\).
-  \end{lemma}
 \end{frame}
 
 \begin{frame}
@@ -358,7 +412,7 @@
 \begin{frame}
   \frametitle{Jensen's inequality}
   \begin{lemma}[Jensen's Inequality]
-    Suppose \(\varphi \colon \RR \to \RR\) is a concave function, and let \(\psi \colon \Omega \to \RR\) be a measurable function for a probability space \((\Omega,\mathcal{B},\Prob)\). Then
+    Suppose \(\varphi \colon \RR \to \RR\) is a concave function, and let \(\psi \colon \Omega \to \RR\) be an integrable function for a probability space \((\Omega,\mathcal{B},\Prob)\). Then
     \begin{equation*}
       \int \varphi \circ \psi \;d\Prob \le \varphi\rpar[\bigg]{\int \psi \;d\Prob}.
     \end{equation*}
@@ -374,17 +428,30 @@
   \end{equation*}
   with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu_x^{cu}\)-every \(p\) and all \(P\).
 \end{frame}
+\begin{frame}
+  \frametitle{From the box to a leaf}
+  \begin{itemize}
+  \item Denote by \(\pi \colon X \to X/\mathcal{F}^c\) the quotient map, and let \(\set{\mu^c_p}_{p \in X}\) be the disintegration of \(\mu\) along the (measurable) foliation \(\mathcal{F}^c\).
+
+  \item Since \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic, the quotient also has stable and unstable foliations, which we denote by \(W^s\) and \(W^u\) respectively. Let \(\nu = \pi_*\mu\) be the pushforward measure on \(X/\mathcal{F}^c\).
+
+  \item We will work with a partition \(\xi_c\) of \(X/\mathcal{F}^c\) whose elements are compact sets and which is finer than the \(W^u\) foliation. We have an associated disintegration \(\set{\nu^u_x}_{x \in X/\mathcal{F}^c}\) of \(\nu\).
+
+  \item Denote \(\xi^{cu} = \pi ^{-1}(\xi_c)\), which by construction is finer than the foliation \(\mathcal{F}^u\). It is also disintegrates \(\mu\) to a family \(\set{\mu^{cu}_p}_{p \in X}\).
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Jensen's inequality}
   \begin{lemma}\label{lem:almost-there}
   For \(\mu\)-almost every \(x\), if \(\mathcal{P} = \pi ^{-1}(\xi_c)\) is a partition with finite entropy for \(\mu^{cu}_x\) and \(H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P})\), then for \(\mu^{cu}_x\)-almost all \(p\), \(\pi_*\mu^u_p\) and \(\nu^u_p\) coincide in the \(\sigma\)-algebra \(\sigma(\xi_c)\).
 \end{lemma}
-\begin{lemma}\label{cor:gen-implies-inv}
-  Fix \(\xi_c\) and suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\). Let \(\mathcal{P}_n = \pi ^{-1}(f_c^{-n}(\xi_c))\). For all \(x \in E_3\), if \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\), then there exists a full \(\mu_x^{cu}\)-measure set \(E_4(x)\), such that for all \(p_1, p_2 \in E_4(x)\), \((h^u_{p_1,p_2})_*\mu^c_{p_1} = \mu^c_{p_2}\).
-\end{lemma}
+
+\[\cdots\]\\[1em]
+
 \begin{lemma}\label{cor:gen-implies-inv-ae}
-  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E_5 \subseteq X\) such that for all \(x,y \in E_5\), if \(y \in \xi^{cu}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E \subseteq X\) such that for all \(x,y \in E\), if \(y \in \xi^{cu}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
 \end{lemma}
 \end{frame}
 
@@ -410,14 +477,8 @@
   \begin{lemma}\label{cor:cond-invprin}
   Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E \subseteq X\) such that for all \(x,y \in E\), if \(y \in \mathcal{F}^{u}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
 \end{lemma}
-\begin{proof}
-    Choose a full-measure \(E\) such that
-  \begin{enumerate}
-  \item \(\mu^c_{f^k(x)} = f^k_*\mu^c_x\) for all \(k \in \ZZ\), for all \(x \in E\) (by invariance of \(\mu\));
-  \item \(f^{-n}(x) \in S\) for infinitely many \(n > 0\), for all \(x \in E\) (by ergodicity);
-  \item \(E \subseteq \bigcap_{k \in \NN} f^{k}(E_5)\), where \(E_5\) is the full \(\mu\)-measure set where invariance holds in the plaques.
-  \end{enumerate}
-  Let \(x,y \in E\) such that \(y \in \mathcal{F}^u(x)\). We know \(d^u(f^{-n}(x),f^{-n}(y)) \to 0\), so there exists some \(N\) for which \(d^u(f^{-N}(x),f^{-N}(y)) < \delta\) and \(f^{-N}(x) \in S\). By definition of \(S\), this implies \(f^{-N}(y) \in \xi^{cu}(f^{-N}(x))\). Since \(x, y \in f^N(E_5)\),
+\begin{proof}[Idea]
+  Given two \(x,y \in E\) in the same \(\mathcal{F}^u\) leaf, we know \(d^u(f^{-n}(x),f^{-n}(y)) \to 0\), and by ergodicity, \(f^{-n}(x) \in S\) for infinitely many \(n\) for almost all \(x\). Fix such \(x\) and let \(N\) be such that \(d^u(f^{-N}(x),f^{-N}(y)) < \delta\) and  \(f^{-N}(x) \in S\). Then, \(f^{-N}(x)\) and \(f^{-N}(y)\) are in the same element of \(\xi^{cu}\), so
   \[f^{-N}_*(h^u_{x,y})_*\mu^c_x = (h^u_{f^{-N}(x),f^{-N}(y)})_*\mu^c_{f^{-N}(x)} = \mu^c_{f^{-N}(y)} = f^{-N}_*\mu^c_y.\]
   Now, apply \(f^N_*\) to both sides to get \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
 \end{proof}
@@ -472,7 +533,7 @@
 
 \begin{frame}
   \frametitle{Construction of adapted partitions}
-  Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu} = \pi^{-1}(\xi_c)\) and \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\) as before. We claim \(\xi = \xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
+  Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu} = \pi^{-1}(\xi_c)\) and \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\) as before. We claim \(\xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
   so \(\xi^{u}(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\) of small diameter because \(\pi(x) \in \interior \mathcal{R}(\pi(x))\).
 \end{frame}
 
@@ -504,25 +565,29 @@
 
 \begin{frame}
   \frametitle{Proof of the invariance principle}
-  By the last results,
-  \begin{align*}
-    h_{\mu}^u(f)
-    = \int H_{\mu_{x}^u}(f^{-1}(\xi^u))\;d\mu(x)
-    &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
-    &= \int H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u)\;d\mu(x)\\
-    &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
-    &=  \int H_{\nu^{u}_{\pi(x)}}(f_c^{-1}(\xi_c))\;d\mu(x)\\
-    &=  \int H_{\nu^{u}_{y}}(f_c^{-1}(\xi_c))\;d\nu(y)\\
-    &= h^u_{\nu}(f_c) = h_{\nu}(f_c)
-  \end{align*}
-  with equality if, and only if, \(H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u) = H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\) for \(\mu\)-almost every \(x\).
+  \begin{proofs}
+    By the last results,
+    \begin{align*}
+      h_{\mu}^u(f)
+      = \int H_{\mu_{x}^u}(f^{-1}(\xi^u))\;d\mu(x)
+      &= \int H_{\mu_{x}^u}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+      &= \int H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u)\;d\mu(x)\\
+      &\le \int H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\;d\mu(x)\\
+      &=  \int H_{\nu^{u}_{\pi(x)}}(f_c^{-1}(\xi_c))\;d\mu(x)\\
+      &=  \int H_{\nu^{u}_{y}}(f_c^{-1}(\xi_c))\;d\nu(y)\\
+      &= h^u_{\nu}(f_c) = h_{\nu}(f_c)
+    \end{align*}
+    with equality if, and only if, \(H_{\mu_{x}^{cu}}(f^{-1}(\xi^{cu}) \mid \mathcal{F}^u) = H_{\mu^{cu}_x}(f^{-1}(\xi^{cu}))\) for \(\mu\)-almost every \(x\).
+  \end{proofs}
 \end{frame}
 
 \begin{frame}
   \frametitle{Proof of the invariance principle}
-  The inequality above equally applies to \(f = f^n\), and since the diameter of \(f^{-n}(\xi_c)\) shrinks to zero, \(\sigma\rpar*{\bigcup_nf^{-n}(\xi_c)}\) is finer than the Borel algebra.\\[1em]
+  \begin{proofs}[Proof (cont.)]
+    The inequality above equally applies to \(f = f^n\), and since the diameter of \(f_c^{-n}(\xi_c)\) shrinks to zero, \(\sigma\rpar*{\bigcup_nf_c^{-n}(\xi_c)}\) is finer than the Borel algebra.\\[1em]
 
-  Now, since \((f^n_c, \nu)\) is a factor of \((f^n,\mu)\), we have \(h_{\nu}(f_c^n) \le h_{\mu}(f^n)\). If \(\lambda^c(\mu) \le 0\), then the Ledrappier-Young formula tells us that \(h_{\mu}^u(f^n) = n h_{\mu}^u(f) = n h_{\mu}(f) = h_{\mu}(f^n)\), so we have equality in the equation above.\hfill$\square$
+    Now, since \((f^n_c, \nu)\) is a factor of \((f^n,\mu)\), we have \(h_{\nu}(f_c^n) \le h_{\mu}(f^n)\). If \(\lambda^c(\mu) \le 0\), then the Ledrappier-Young formula tells us that \(h_{\mu}^u(f^n) = n h_{\mu}^u(f) = n h_{\mu}(f) = h_{\mu}(f^n)\), so we have equality in the equation above.\hfill$\square$
+  \end{proofs}
   \begin{theorem}[Ledrappier-Young formula]\label{thm:leddrappier-young}
     Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\), and let \(\delta_i\) be the dimension of \(\mu\) on \(W^i\)-manifolds. Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that
     \begin{equation*}
@@ -534,10 +599,15 @@
 
 \begin{frame}
   \frametitle{Applications to Bonifant-Milnor}
-  If \(g \colon X \to X\) is hyperbolic, any skew-product diffeomorphism \(F \colon X \times I \to X \times I\) is partially hyperbolic.
   \begin{corollary}
-    If \(F\) displays intermingled basins and has a separating graph \(\sigma \colon X \to I\), then \(\sigma\) is not continuous, while the unstable holonomies are. This means we cannot have \(\lambda^c(\nu)\le 0\), where \(\nu = (\graph \sigma)_*\mu\).
+    If \(F(x,y) = (g(x),f_x(y))\) displays intermingled basins and has a separating graph \(\sigma \colon X \to I\), then \(\sigma\) is not continuous, while the unstable holonomies are. This means we cannot have \(\lambda^c(\nu)\le 0\), where \(\nu = (\graph \sigma)_*\mu\).
   \end{corollary}
+  \begin{question}
+    For the positive Schwarzian case, when there exists an asymptotic measure \(\nu\), when are the \(\set{\nu_x^c}_x\) equivalent to the Lebesgue measure on the fibers \(\set{x} \times I\)?
+  \end{question}
+  \begin{proposition}[{\textcite[Proposition 6.7]{crovisierInvariancePrincipleNoncompact2023}}]
+    Let \(f \colon M \to M\) be a partially hyperbolic, quasi-isometric in the center, accessible, center bunched, \(C^2\) diffeomorphism. For every ergodic measure \(\mu\) with local \(cs \times u\)-product structure, full support and satisfying \(h(f,\mu) = h^u(f,\mu) = h^s(f,\mu)\), the center disintegrations \(\set{\mu^c_x}\) are equivalent to the Lebesgue measures along center leaves.
+  \end{proposition}
 \end{frame}
 
 \section{Historical behavior}
@@ -548,35 +618,224 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Skew products}
-  
+  \frametitle{Brownian motion}
+  \begin{definition}
+    Let \(\mathcal{C}\) be the product \(\sigma\)-algebra on \(\CWPS\). The Wiener measure \(\WM\) is the unique measure on \((\CWPS, \mathcal{C})\) defined by the following properties: if we denote by \(\WM[t] \colon \CWPS \to \RR\) the evaluation at time \(t\), seen as a random variable on \((\CWPS, \mathcal{C}, \WM)\), then
+    \begin{enumerate}[(i)]
+    \item \(\WM[0] = 0\) almost surely;
+    \item for \(t > 0\), \(\WM[t] \sim \Normal[0][t]\);
+    \item if \(0 \leq t_1 < t_2 < \dots < t_n\), then the increments \(\WM[t_1], \WM[t_2] - \WM[t_1], \dots, \WM[t_n] - \WM[t_{n - 1}]\) are independent random variables.
+    \end{enumerate}
+  \end{definition}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Brownian motion}
-  
+  \frametitle{Skorohod space}
+  \begin{definition}[Skorohod topology]
+    Let \(\Lambda\) be the set of strictly increasing continuous functions from \([0,1]\) to itself. For \(f,g \in \WPS\), we define
+    \begin{equation}\label{eq:sko-metric}
+      d(f,g) = \inf_{\lambda \in \Lambda} \max\set[par = \big]{ \lVert \lambda - \Id \rVert_{\infty}, \lVert f - g \circ \lambda \rVert_{\infty}}.
+    \end{equation}
+  \end{definition}
+  Since \(d(f,g) \leq \lVert f - g \rVert_{\infty}\), the Skorohod topology is coarser than the uniform topology.
 \end{frame}
 
 \begin{frame}
   \frametitle{Weak invariance principle}
-  \begin{theorem}\label{thm:wip-historical}
-    If the weak invariance principle is valid for the pair \((g, p)\), in the sense \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\) and \(\xi = (p \circ g^{i})_{i \geq 0}\), then \(F\) has historical behavior. More specifically,
-    \begin{equation}\label{eq:emp-closure}
-      \set{\mu_0, \mu_1} \subseteq \set{e_n(x,y)}[n \in \NN, ']
-    \end{equation}
-    where \(\mu_0 = \mu \otimes \delta_{0}\) and \(\mu_1 = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
-  \end{theorem}
-  
+  Fix a probability space \((\Omega, \mathcal{F}, \Prob)\) and a sequence \(\xi = (\xi_0,\xi_1,\dots)\) of random variables.\\[1em]
+
+  Define \(\PSum[n,rv=\xi] \colon \Omega \to \RR\), \(\DProc[n,rv=\xi] \colon \Omega \to \WPS\) by
+  \[\PSum[n,rv=\xi] = \sum_{i = 0}^{n - 1}\xi_i \qquad \text{and} \qquad\DProc[n,rv=\xi]{\omega}{t} = \frac{\PSum[\floor{nt},rv=\xi]{\omega}}{\sqrt{n}}.\]
+  \begin{definition}
+    We say \(\xi\) satisfies an \emph{weak invariance principle} if \(\DProc[n,spar,pf]\Prob \weakto \sigma W\) for some \(\sigma > 0\). In other words, for every continuous function \(\varphi \colon \WPS \to \mathbb{R}\),
+    \[\int \varphi \circ \DProc[n] \;d\Prob \to \int \varphi \;dW.\]
+  \end{definition}
 \end{frame}
 
 \begin{frame}
-  \frametitle{(Reverse) Martingale difference sequences}
-  
+  \frametitle{Weak invariance principle}
+  Classic:
+  \begin{theorem}[Donsker]
+    If \(\xi \subseteq L^2(\Prob)\) is a sequence of \iid variables with mean zero and variance \(1\), then the measures \(\DProc[n,spar,pf] \Prob\) converge weakly to the Wiener measure.
+  \end{theorem}
+  But there are results more general than that!
+\end{frame}
+
+\begin{frame}
+  \frametitle{Weak invariance principle}
+  \begin{definition}
+    A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{stationary} if \(\xi_*\Prob\) is an invariant measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\).
+  \end{definition}
+  \begin{definition}
+    A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables taking values in \(Y\) is said to be \emph{ergodic} if \(\xi_*\Prob\) is an ergodic measure for the left shift \(\sigma \colon Y^{\NN} \to Y^{\NN}\). 
+  \end{definition}
+  \begin{definition}
+    A sequence \(\xi = (\xi_1,\xi_2\dots) \in L^1(\Prob)^{\NN}\) of integrable random variables taking values in \(\RR\)  is said to be a \emph{martingale difference sequence} if for all \(n\),
+    \begin{equation*}
+      \CE[\Prob]{\xi_{n}, {\sigma(\set{\xi_i \where i < n})}} = 0.
+    \end{equation*}
+  \end{definition}
+   Similarly, we have definitions for two-sided sequences by replacing \(\NN\) by \(\ZZ\).
+\end{frame}
+
+\begin{frame}
+  \frametitle{Weak invariance principle}
+  \begin{theorem}[{\textcite[Theorem 18.3]{billingsleyConvergenceProbabilityMeasures1999}}]
+    If \(\xi \subseteq L^2(\Prob)\) is a stationary ergodic martingale difference sequence for which \(\sigma = \norm{\xi_1}_2\) satisfies \(0 < \sigma < \infty\), then \(\DProc[n, spar, pf] \Prob \weakto \sigma W\).
+  \end{theorem}
+  \begin{definition}
+    A sequence \(\xi = (\xi_1,\xi_2\dots)\) of random variables is said to be a \textit{reverse} martingale difference sequence if for all \(n\),
+    \begin{equation*}
+      \CE[\Prob]{\xi_{n}, {\sigma(\set{\xi_i \where i > n})}} = 0.
+    \end{equation*}
+  \end{definition}
+  \begin{corollary}\label{cor:donsker-martingale}
+    If \(\xi \subseteq  L^2(\Prob)\) is a stationary ergodic reverse martingale difference sequence for which \(\sigma = \norm{\xi_1}_2 > 0\), then the measures \({(D^{\xi}_n)}_* \Prob \weakto \sigma W\).
+  \end{corollary}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Skew products}
+  Return to the dynamical setting where \(F \colon X \times I \to X \times I\) is given by \(F(x,y) = (g(x),f_x(y))\), and \(\mu\) is an ergodic probability for \(g\). Suppose there is a homeomorphism \(\gamma \colon I \to \RR[closure]\) and \(t_x(y) = y + p(x)\) for which
+  \[
+    \begin{tikzcd}
+      I \arrow[d, "\gamma"]\arrow[r, "f_{x}"] & I \arrow[d, "\gamma"]\\
+      \RR[closure] \arrow[r,"t_{x}"] & \RR[closure]
+    \end{tikzcd}
+  \]
+  commutes. The dynamic on the fiber is conjugated to a ``random'' walk by steps \(p(g^n(x))\).
+
+  \begin{example}
+    If all the fiber maps \(f_x\) satisfy \(\SchD f_x \equiv 0\), then \(f_x(y) = \frac{a_x y}{1 + (a_x - 1)y}\).\\[1em]
+
+    In this case, we can define \(p(x) = \log a_x\) and \(\gamma(y) = \log y - \log (1 - y)\) and we will have \(\gamma \circ f_x = t_x \circ \gamma\).
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Historical behavior}
+  \begin{theorem}\label{thm:wip-historical}
+    If \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\), then \(F\) has historical behavior. More specifically,
+    \begin{equation*}\label{eq:emp-closure}
+      \set{\mu_0, \mu_1} \subseteq \set{e_n(x,y)}[n \in \NN, ']
+    \end{equation*}
+    where \(\mu_0 = \mu \otimes \delta_{0}\) and \(\mu_1 = \mu \otimes \delta_{1}\) and the limit points are taken in the weak-\(\ast\) topology.
+  \end{theorem}
+  We use:
+  \begin{lemma}[Forgery Theorem, or Support Theorem]\label{thm:forgery}
+    If \(f \in \CWPS\) and \(f(0) = 0\), then every neighborhood of \(f\) has positive Wiener measure.
+  \end{lemma}
+  (There exists a proof using the arc-sine law instead.)
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Historical behavior}
+  \begin{proofs}[Idea]
+    Let \(\delta > 0\) and \(s_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(s_{\delta}(0) = 0\) and \(s_{\delta}(t) > 1 + \delta\) for \(t > \delta\).
+    \[
+      \begin{tikzpicture}[scale=2]
+        
+        % Parameters for the plot
+        \def\del{0.2}
+        \def\oneplusdel{1.1}
+        \def\sval{1.2} % A flat value strictly greater than 1 + \delta
+
+        % Shaded region where the function must be for t > \delta
+        \fill[blue!15,opacity=0.3] (\del, \oneplusdel) rectangle (1.05, 1.4);
+
+        % Axes
+        \draw[->, thick] (-0.1, 0) -- (1.15, 0) node[right] {$t$};
+        \draw[->, thick] (0, -0.1) -- (0, 1.4) node[above] {$y$};
+        
+        % Ticks and Dashed guidelines
+        \draw[dashed, gray] (\del, 0) node[below, text=black] {$\delta$} -- (\del, 1.4);
+        \draw[dashed, gray] (0, \oneplusdel) node[left, text=black] {$1+\delta$} -- (1.05, \oneplusdel);
+        \draw[thick] (1, 0.02) -- (1, -0.02) node[below] {$1$};
+        
+        % The piecewise linear function s_delta
+        \draw[very thick, blue] (0,0) -- (\del, \sval) -- (1, \sval);
+        
+        % Label the function
+        \node[blue, above] at (0.8, \sval) {$s_\delta(t)$};
+        
+        % Emphasize the origin point
+        \fill[blue] (0,0) circle (0.5pt) node[below left, text=black] {$0$};
+
+      \end{tikzpicture}
+    \]
+    Let \(U_{\delta} = B_{\delta}(s_{\delta})\) be an open ball of radius \(\delta\) around \(s_{\delta}\) in the uniform topology. We know \(W(U_{\delta}) > 0\), so
+    \begin{equation*}
+      \liminf_{n \to \infty}(\DProc[n,spar,pf]\mu)(U_{\delta}) \geq \sigma W(U_{\delta}) > 0.
+    \end{equation*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \begin{proof}[Idea]
+    Therefore,
+    \begin{equation*}
+      S_{\delta} = \limsup_{n \to \infty}\, \DProc[n,spar,inv]{U_{\delta}} \subseteq X
+    \end{equation*}
+    has measure \(\mu(S_{\delta}) > 0\). Since it is invariant, \(\mu(S_{\delta}) = 1\). If \(x \in S_{\delta}\), then there is \(n_k^+ \to \infty\) for which \(D_{n_k}^{\xi}(x) \in U_{\delta}\) for all \(k\). This in turn implies that
+    \begin{align*}
+      \#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \geq (1 - \delta)n_k^{+}.
+    \end{align*}
+    By diagonalization for \(\delta \to 0\), we find \(n^+_k \to \infty\) for which for \(\mu\)-\almostevery \(x\),
+    \begin{equation*}
+      \frac{1}{n_k^+}\#\set[par = auto]{ 0 \leq i < n_k^+ \where S_{i}^{\xi}(x) > \sqrt{\textstyle n^+_k} } \to 1.
+    \end{equation*}
+    This will imply
+    \[e_{n^+_k}(x,y) \weakto \mu_1\]
+    for all \(y \in (0,1)\), and similarly we find \(n^-_k \to \infty\) for which \(e_{n^-_k}(x,y) \weakto \mu_0\).
+  \end{proof}
+
 \end{frame}
 
 \begin{frame}
   \frametitle{A decomposition theorem}
-  
+  \begin{definition}
+    We say \(p \in L^2(\mu)\) has a reverse martingale-coboundary decomposition for \(g \colon X \to X\) if \(p\) can be written as
+    \begin{equation*}
+      p = q + s \circ g - s,
+    \end{equation*}
+    where \(q \in L^2(\mu)\) and \(\zeta = (q \circ g^i)_{i \geq 0}\) is a reverse martingale difference sequence.
+  \end{definition}
+  \begin{theorem}\label{thm:martingale-coboundary}
+    Suppose \(p \in L^2(\mu)\) has a reverse martingale-coboundary decomposition for \(g\). Let \(\sigma = \norm{q}_2 \). If \(\sigma > 0\), then \(\xi = (p \circ g^i)_{i \ge 0}\) is such that \(\DProc[n,spar,pf]\mu \weakto \sigma W\).
+  \end{theorem}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A decomposition theorem}
+  \begin{theorem}\label{thm:decomposition-existence}
+    Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-n}(\mathcal{F})\) are such that
+    \begin{equation*}
+      \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_j} \rVert_2 < \infty.
+    \end{equation*}
+    Then a reverse martingale-coboundary decomposition exists. Moreover, this implies that
+    \begin{equation*}
+      \int p \;d\mu = \int q \;d\mu = 0
+    \end{equation*}
+    and we have the equality
+    \begin{equation*}
+      \sigma ^2 = \lVert q \rVert^2_2 = \lVert p \rVert_2^2 + 2\sum_{n = 1}^{\infty} \int p \cdot p \circ g^n \;d\mu.
+    \end{equation*}
+  \end{theorem}
+  This gives a way to calculate \(\sigma\) in terms of \(p\).
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{A decomposition theorem}
+  \begin{proof}[Idea]
+    \[
+      \begin{tikzcd}
+        {L^2(\mathcal{F}_i)} & {L^2(\mathcal{F}_{i+1})}
+        \arrow["U", bend left, from=1-1, to=1-2]
+        \arrow["L", bend left, from=1-2, to=1-1].
+      \end{tikzcd}
+    \]
+  \end{proof}
 \end{frame}
 
 \begin{frame}
@@ -619,7 +878,7 @@
   % \setbeamertemplate{background canvas}{%
   %   \begin{tikzpicture}[remember picture, overlay]
   %     % FIGURE 1: Rotated and Scaled in the Center
-  %     \node[xshift=3cm, yshift=-2cm, opacity=1] at (current page.center) {
+  % \usepackage[bblfile=demo]{biblatex-readbbl}    \node[xshift=3cm, yshift=-2cm, opacity=1] at (current page.center) {
   %       \includegraphics[width=4cm, angle=10]{figures/castle}
   %     };
   %   \end{tikzpicture}%
@@ -634,5 +893,10 @@
     \end{center}
   \end{frame}
 }
+
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \printbibliography
+\end{frame}
 
 \end{document}

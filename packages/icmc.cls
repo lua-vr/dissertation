@@ -124,7 +124,7 @@
 \RequirePackage{eso-pic}        % Pacote para incluir imagem de fundo
 \RequirePackage{adjustbox}      % Pacote para ajuste do tamanho do nome do autor na capa
 \RequirePackage{translations}
-\RequirePackage{cleveref}
+\RequirePackage[capitalise]{cleveref}
 
 
 %================================================================================
