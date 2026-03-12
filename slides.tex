@@ -15,7 +15,8 @@
 \input{preamble/tikz}
 \input{preamble/macros}
 \input{preamble/bibliography}
-\usepackage[bblfile=./.tex-aux/thesis]{biblatex-readbbl}
+% \usepackage[bblfile=./.tex-aux/thesis]{biblatex-readbbl}
+% \addbibresource{mestrado.bib}
 
 \input{slides/customization}
 
@@ -98,16 +99,18 @@
 
   What do the basins generally look like?\\[2em]
 
-  Conjecture (Palis): for a \(C^r\)-dense set of diffeomorphisms \(f \colon M \to M\) of a compact manifold \(M\), \(f\) should have a finite number of physical measures (measures with basins of positive volume), such that their basins cover the entire manifold up to a subset of zero volume.
+  Conjecture (Palis): for a \(C^r\)-dense set of diffeomorphisms \(f \colon M \to M\) of a compact manifold \(M\), \(f\) should have a finite number of physical measures (measures with basins of positive volume), such that their basins cover the entire manifold up to a subset of zero volume.\\[1em]
+
+  (See e.g.\ \citetitle{pujalsPeixotosTheoremPaliss2011}.)
 \end{frame}
 
 \begin{frame}
   \frametitle{Overview}
-  This project is a report on interesting phenomena related to empirical measures and their basins.\\[1em]
+  This project reports on interesting phenomena related to empirical measures and their basins.\\[1em]
   \begin{enumerate}
   \item On the first chapter, we analyze a family of skew products by \textcite{bonifantSchwarzianDerivativesCylinder2008} where we see either intermingled basins or a unique asymptotic measure depending on the Schwarzian derivative of the fibers. For that, we also show the existence of a graph that separates the basins.
-  \item We then prove an important theorem of partially hyperbolic dynamics, called the Invariance Principle. We discuss how this theorem implies some conditions on the Lyapunov exponent of the measure supported on the graph, and on the absolute continuity of the asymptotic measure.
-  \item Lastly, we look at an important open question about the empirical measures of diffeomorphisms, namely, the existence of robust historical behavior. We show this occurs non-robustly for skew products when some conditions ensure a sort of convergence to the Brownian motion along the fibers.
+  \item We then present an important theorem of partially hyperbolic dynamics, called the Invariance Principle. We discuss how this theorem implies some conditions on the Lyapunov exponent of the measure supported on the graph, and on the absolute continuity of the asymptotic measure.
+  \item Lastly, we look at an important open question about the empirical measures of diffeomorphisms, namely, the existence of robust historical behavior. We show this occurs non-robustly for skew products when some conditions ensure a kind of convergence to the Brownian motion along the fibers.
   \end{enumerate}
 \end{frame}
 
@@ -210,7 +213,7 @@
   \begin{theorem}
     Under the two hypothesis, the basins of \(\mu_0\) and \(\mu_1\) are intermingled.
   \end{theorem}
-  \begin{proof}[Idea]
+  \begin{proof}[Proof sketch]
     If we define \(\beta_i(A) = m(A \cap \Basin{\mu_i})\), it suffices to show \(\supp \beta_i = X \times I\) for \(i = 0,1\).\\[1em]
 
     Consider \(i = 0\). The first hypothesis ensures there is \((x_0,y_0) \in \supp \beta_0\) with \(y_0 \in (0,1)\). The second ensures there is a backward orbit \(\cdots \mapsto x_{-2} \mapsto x_{-1} \mapsto x_0\) with \(x_{-n}\to \Orbit{x^-}\). By closedness and invariance of \(\supp \beta_0\), \((x^-, 1) \in \supp \beta_0\). The preimages of \((x^-, 1)\) are dense in \(\mathcal{A}_1\), so \(\mathcal{A}_1 \subseteq \supp \beta_0\). But \(\supp \beta_0\) is made of vertical segments starting at \(\mathcal{A}_0\), therefore we must have \(\supp \beta_0 = X \times I\).
@@ -243,7 +246,7 @@
 \end{frame}
 \begin{frame}
   \frametitle{Negative Schwarzian}
-  \begin{proofs}[Idea]
+  \begin{proofs}[Proof sketch]
     Start defining
     \begin{equation*}
       \xi_0(x) = \sup \{ y \in I : (x,y) \in \Basin{\mu_0} \}, \qquad \xi_1(x) = \inf \{ y \in I : (x,y) \in \Basin{\mu_1} \}.
@@ -261,7 +264,7 @@
 \end{frame}
 \begin{frame}
   \frametitle{Negative Schwarzian}
-  \begin{proof}[Idea (cont.)]
+  \begin{proof}[Proof sketch (cont.)]
     Therefore, there exists \(\varepsilon > 0\) and \(k\) for which \(\nu(X \times \interval[open left]{\varepsilon}{1}) > 1/k\). Since \(\nu\) is a limit point, take a subsequence \(n_j \to \infty\) with
     \begin{equation}\label{eq:time-big}
       \liminf_{j \to \infty} \frac{1}{n_j} \# \set{ 0 \leq i < n_j \where f_{x_0}^i(y_0) > \varepsilon} > 1/k.
@@ -292,7 +295,7 @@
     If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
   \end{theorem}
   Generalizing \textcite[Lemma 5.4]{bonifantSchwarzianDerivativesCylinder2008}, we do not assume both \(\Lyap(\mathcal{A}_i)\) are strictly positive.
-  \begin{proof}[Idea]
+  \begin{proof}[Proof sketch]
     Consider the inverse of the natural extension \(\tilde{F}^{-1}\). It satisfies \(\SchD f_{\tilde x}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, and therefore by the last theorem has a separating graph \(\sigma\).\\[1em]
 
     Since \(\SchD f_x \succ 0\) implies the \(f_x\) are contractions in the Poincaré metric, the orbits for \(\tilde{F}\) will be attracted by the graph, and \(\tilde \nu = (\graph \sigma)_*\tilde \mu\) is asymptotic for \(\tilde{F}\). Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
@@ -371,7 +374,7 @@
 \end{definition}
 
 \begin{theorem}
-  Let \(f \colon X \to X\) be a PH diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic (Anosov). Let \(\mu\) be an ergodic invariant measure for \(f\), and also suppose \(f\) has global unstable holonomies. Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
+  Let \(f \colon X \to X\) be a PH diffeomorphism with compact center leaves and such that the quotient \(f_c \colon X/\mathcal{F}^c \to X/\mathcal{F}^c\) is hyperbolic (Anosov), and suppose \(f\) has global unstable holonomies. Let \(\mu\) be an ergodic invariant measure for \(f\). Then, \(\lambda^c(\mu) \le 0\) implies that the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies, meaning that there exists a full measure subset \(E \subseteq X\) in which \((h^u_{p_1,p_2})_*\mu_{p_1}^c = \mu^c_{p_2}\) for all \(p_1,p_2 \in E\) that are in the same \(\mathcal{F}^{cu}\) leaf.
 \end{theorem}
 \end{frame}
 
@@ -412,22 +415,22 @@
 \begin{frame}
   \frametitle{Jensen's inequality}
   \begin{lemma}[Jensen's Inequality]
-    Suppose \(\varphi \colon \RR \to \RR\) is a concave function, and let \(\psi \colon \Omega \to \RR\) be an integrable function for a probability space \((\Omega,\mathcal{B},\Prob)\). Then
+    Suppose \(\varphi \colon \RR \to \RR\) is a strictly concave function, and \(\psi \colon \Omega \to \RR\) is an integrable function for a probability space \((\Omega,\Prob)\). Then
     \begin{equation*}
-      \int \varphi \circ \psi \;d\Prob \le \varphi\rpar[\bigg]{\int \psi \;d\Prob}.
+      \int \varphi \circ \psi \;d\Prob \le \varphi\rpar[\bigg]{\int \psi \;d\Prob}
     \end{equation*}
-    Moreover, if \(\varphi\) is strictly concave, the equality holds if, and only if, \(\psi\) is constant almost everywhere.
+    and the equality holds if, and only if, \(\psi\) is constant almost everywhere.
   \end{lemma}
-  Applying to \(\Prob = \mu_x^{cu}\), \(\varphi(x) = \phi(x) =  - x\log x\) and \(\psi_P(y) = \mu^u_p(P)\), for each \(P \in \mathcal{P}\)
-  \begin{equation*}
-    \int \phi(\mu_p^u(P))\;d\mu_x^{cu}(p)\le \phi\rpar[\bigg]{\int \mu_p^u(P)\;d\mu_x^{cu}(p) } = \phi(\mu_x^{cu}(P)),
-  \end{equation*}
-  so summing over \(P \in \mathcal{P}\),
+  Applying to \(\Prob = \mu_x^{cu}\), \(\varphi(x) = - x\log x\) and \(\psi_P(y) = \mu^u_p(P)\), and summing over \(P \in \mathcal{P}\),
   \begin{equation*}
     H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u)\le H_{\mu_x^{cu}}(\mathcal{P})
   \end{equation*}
   with equality if, and only if, \(p \mapsto \mu^u_p(P)\) is constant for \(\mu_x^{cu}\)-every \(p\) and all \(P\).
+  \begin{lemma}\label{lem:almost-there}
+    For \(\mu\)-almost every \(x\), if \(\mathcal{P} = \pi ^{-1}(\xi_c)\) is a partition with finite entropy for \(\mu^{cu}_x\) and \(H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P})\), then for \(\mu^{cu}_x\)-almost all \(p\), \(\pi_*\mu^u_p\) and \(\nu^u_p\) coincide in the \(\sigma\)-algebra \(\sigma(\xi_c)\).
+  \end{lemma}
 \end{frame}
+
 \begin{frame}
   \frametitle{From the box to a leaf}
   \begin{itemize}
@@ -439,49 +442,10 @@
 
   \item Denote \(\xi^{cu} = \pi ^{-1}(\xi_c)\), which by construction is finer than the foliation \(\mathcal{F}^u\). It is also disintegrates \(\mu\) to a family \(\set{\mu^{cu}_p}_{p \in X}\).
   \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Jensen's inequality}
-  \begin{lemma}\label{lem:almost-there}
-  For \(\mu\)-almost every \(x\), if \(\mathcal{P} = \pi ^{-1}(\xi_c)\) is a partition with finite entropy for \(\mu^{cu}_x\) and \(H_{\mu_x^{cu}}(\mathcal{P}\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P})\), then for \(\mu^{cu}_x\)-almost all \(p\), \(\pi_*\mu^u_p\) and \(\nu^u_p\) coincide in the \(\sigma\)-algebra \(\sigma(\xi_c)\).
-\end{lemma}
-
-\[\cdots\]\\[1em]
-
-\begin{lemma}\label{cor:gen-implies-inv-ae}
-  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E \subseteq X\) such that for all \(x,y \in E\), if \(y \in \xi^{cu}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
-\end{lemma}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Patching the leaves together}
-  We have a condition to showing invariance in the same \(\xi^{cu}\)-plaque (element of the partition). How to make that into a condition for the \emph{entire \(\mathcal{F}^{cu}\) leaf}?\\[1em]
-
-  Assume
-  \begin{hypothesis}
-    For \(\mu\)-almost every \(x\), \(\xi^u(x) = \xi^{cu}(x) \cap \mathcal{F}^u(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\).
-  \end{hypothesis}
-  Then
   \begin{lemma}
-    There exists \(\delta > 0\) such that the set
-    \begin{equation*}
-      S = S_{\delta} = \set{x \in X \where d^u(x, X \setminus \xi^{u}(x)) > \delta}
-    \end{equation*}
-    has positive measure.
-  \end{lemma}
-\end{frame}
-
-\begin{frame}
-  \begin{lemma}\label{cor:cond-invprin}
-  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, there is a full \(\mu\)-measure set \(E \subseteq X\) such that for all \(x,y \in E\), if \(y \in \mathcal{F}^{u}(x)\), then \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
+  Suppose that \(\sigma(\bigcup_n f_c^{-n}(\xi_c))\) is finer than the Borel algebra of \(X/\mathcal{F}^c\), and \(H_{\mu_x^{cu}}(\mathcal{P}_n\mid \mathcal{F}^u) = H_{\mu_x^{cu}}(\mathcal{P}_n)\) for all \(n\) and \(\mu\)-almost every \(x\). Then, the disintegration \(\set{\mu^c_x}_{x \in M}\) is invariant by unstable holonomies.
 \end{lemma}
-\begin{proof}[Idea]
-  Given two \(x,y \in E\) in the same \(\mathcal{F}^u\) leaf, we know \(d^u(f^{-n}(x),f^{-n}(y)) \to 0\), and by ergodicity, \(f^{-n}(x) \in S\) for infinitely many \(n\) for almost all \(x\). Fix such \(x\) and let \(N\) be such that \(d^u(f^{-N}(x),f^{-N}(y)) < \delta\) and  \(f^{-N}(x) \in S\). Then, \(f^{-N}(x)\) and \(f^{-N}(y)\) are in the same element of \(\xi^{cu}\), so
-  \[f^{-N}_*(h^u_{x,y})_*\mu^c_x = (h^u_{f^{-N}(x),f^{-N}(y)})_*\mu^c_{f^{-N}(x)} = \mu^c_{f^{-N}(y)} = f^{-N}_*\mu^c_y.\]
-  Now, apply \(f^N_*\) to both sides to get \((h^u_{x,y})_*\mu^c_x = \mu^c_y\).
-\end{proof}
+  
 \end{frame}
 
 \begin{frame}
@@ -519,22 +483,19 @@
 \begin{frame}
   \frametitle{Construction of adapted partitions}
   \begin{definition}
-    We say a set \(R \subseteq X/\mathcal{F}^c\) is a \emph{proper rectangle} if \(R\) is closed, \(R = \closure{\interior{R}}\) and \([x,y] \in R\) whenever \(x, y \in R\). The bracket \([x,y]\) is defined as the unique point in \(W^s_{\varepsilon}(x)\cap W^u_{\varepsilon}(y)\) for all \(x,y\) such that \(d(x,y) < \delta\) for some \(0 < \delta < \varepsilon\). For that to make sense, we also require that \(\diam R < \delta\).
+    We say a set \(R \subseteq X/\mathcal{F}^c\) is a \emph{proper rectangle} if \(R\) is closed, \(R = \closure{\interior{R}}\) and \([x,y] \in R\) whenever \(x, y \in R\). The bracket \([x,y]\) is defined as the unique point in \(W^s_{\varepsilon}(x)\cap W^u_{\varepsilon}(y)\) for all \(x,y\) such that \(d(x,y) < \delta\) for some \(0 < \delta < \varepsilon\).
   \end{definition}
 
   \begin{definition}
     A \emph{Markov partition} is a finite partition \(\mathcal{R} = \set{R_1,\dots,R_m}\) of \(X/\mathcal{F}^c\) by proper rectangles such that for all \(x \in X\) with \(x, f(x) \notin \bigcup_{i = 1}^m \partial R_i\),
     \begin{enumerate}
-    \item\label{item:6} \(W^u(f(x)) \cap \mathcal{R}(f(x)) \subseteq f(W^u(x)\cap \mathcal{R}(x))\) and
-    \item \(W^s(f(x)) \cap \mathcal{R}(f(x)) \supseteq f(W^s(x)\cap \mathcal{R}(x))\).
+    \item \(W^s(f(x)) \cap \mathcal{R}(f(x)) \supseteq f(W^s(x)\cap \mathcal{R}(x))\) and
+    \item \(W^u(f(x)) \cap \mathcal{R}(f(x)) \subseteq f(W^u(x)\cap \mathcal{R}(x))\).
     \end{enumerate}
   \end{definition}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Construction of adapted partitions}
-  Given a Markov partition \(\mathcal{R}\), we define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Now, construct \(\xi^{cu} = \pi^{-1}(\xi_c)\) and \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\) as before. We claim \(\xi^{u}\) is \(\mu\)-adapted to \(\mathcal{F}^u\). Indeed, we have \(\xi^{u} \prec f^{-1}(\xi^{u})\), and outside the zero-measure set \(\pi ^{-1}\rpar*{\bigcup_{i = 1}^m \partial R_i}\), we have \[\xi^{u}(x) = \mathcal{F}^u(x) \cap \pi^{-1}(W^u(\pi(x)) \cap \mathcal{R}(\pi(x))),\]
-  so \(\xi^{u}(x)\) is a neighborhood of \(x\) in \(\mathcal{F}^u(x)\) of small diameter because \(\pi(x) \in \interior \mathcal{R}(\pi(x))\).
+  \begin{lemma}
+    Given a Markov partition \(\mathcal{R}\) for \(f_c\), define \(\xi_c(x) = W^u(x) \cap \mathcal{R}(x)\). Let \(\xi^{cu} = \pi^{-1}(\xi_c)\) and \(\xi^u = \xi^{cu} \vee \mathcal{F}^u\). Then, \(\xi^u\) is \(\mu\)-adapted to \(\mathcal{F}^u\).
+  \end{lemma}
 \end{frame}
 
 \begin{frame}{A small property}
@@ -589,7 +550,7 @@
     Now, since \((f^n_c, \nu)\) is a factor of \((f^n,\mu)\), we have \(h_{\nu}(f_c^n) \le h_{\mu}(f^n)\). If \(\lambda^c(\mu) \le 0\), then the Ledrappier-Young formula tells us that \(h_{\mu}^u(f^n) = n h_{\mu}^u(f) = n h_{\mu}(f) = h_{\mu}(f^n)\), so we have equality in the equation above.\hfill$\square$
   \end{proofs}
   \begin{theorem}[Ledrappier-Young formula]\label{thm:leddrappier-young}
-    Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\), and let \(\delta_i\) be the dimension of \(\mu\) on \(W^i\)-manifolds. Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that
+    Let \(\lambda_1 > \cdots > \lambda_u > 0\) be the distinct positive Lyapunov exponents of \(f\) for \(\mu\). Then, for all \(1 \le i \le u\) there exist real numbers \(0 \le \gamma_i \le \dim V^i - \dim V^{i - 1}\) such that
     \begin{equation*}
       h_{\mu}(f) = \sum_{i \le u} \lambda_i\gamma_i.
     \end{equation*}
@@ -614,13 +575,19 @@
 
 \begin{frame}
   \frametitle{History}
-  
+  \begin{definition}
+    We say \(f \colon X \to X\) has \emph{historical behavior} for a reference volume measure if for \(x\) in a set of positive volume, the sequence \((e_n(x))_n\) does not converge.
+  \end{definition}
+  \begin{question}[open]
+    Is there a compact manifold \(M\) and a \(C^r\)-open set of diffeomorphisms \(f \colon M \to M\) with historical behavior?
+  \end{question}
+  This has been asked by \textcite{ruelleHistoricalBehaviourSmooth2001}, and later Floris Takens exposed the problem in~\textcite{takensOrbitsHistoricBehaviour2008}. For this reason and his work in related matters, the open question also became known as \textit{Taken's Last Problem}.
 \end{frame}
 
 \begin{frame}
   \frametitle{Brownian motion}
   \begin{definition}
-    Let \(\mathcal{C}\) be the product \(\sigma\)-algebra on \(\CWPS\). The Wiener measure \(\WM\) is the unique measure on \((\CWPS, \mathcal{C})\) defined by the following properties: if we denote by \(\WM[t] \colon \CWPS \to \RR\) the evaluation at time \(t\), seen as a random variable on \((\CWPS, \mathcal{C}, \WM)\), then
+    Let \(\mathcal{C}\) be the product \(\sigma\)-algebra on \(\CWPS\). The Wiener measure \(\WM\) is the unique measure on \((\CWPS, \mathcal{C})\) defined by the following properties: if we denote by \(\WM[t] \colon \CWPS \to \RR\) the evaluation at time \(t\), then
     \begin{enumerate}[(i)]
     \item \(\WM[0] = 0\) almost surely;
     \item for \(t > 0\), \(\WM[t] \sim \Normal[0][t]\);
@@ -631,6 +598,13 @@
 
 \begin{frame}
   \frametitle{Skorohod space}
+  \begin{definition}[Skorohod space]
+    The space of functions \([0,1] \to \RR\) whose discontinuities are of the \textit{first kind}, that is, both lateral limits exist and values at a point equal the right limit:
+    \begin{equation*}
+      \Sko{[0,1]} = \set[par=\Big]{\, f \colon [0,1] \to \RR \where \forall t, \lim_{s \to t^-}x(s) \text{ exists and} \lim_{s \to t^+}x(s) = x(t) \,}.
+    \end{equation*}
+    
+  \end{definition}
   \begin{definition}[Skorohod topology]
     Let \(\Lambda\) be the set of strictly increasing continuous functions from \([0,1]\) to itself. For \(f,g \in \WPS\), we define
     \begin{equation}\label{eq:sko-metric}
@@ -715,8 +689,9 @@
 
 \begin{frame}
   \frametitle{Historical behavior}
+  Define \(\xi = (p \circ g^{i})_{i \geq 0}\).
   \begin{theorem}\label{thm:wip-historical}
-    If \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\), then \(F\) has historical behavior. More specifically,
+    If \(\DProc[n,rv = \xi,spar,pf]\mu \weakto \sigma W\) for \(\sigma > 0\), then \(F\) has historical behavior. More specifically, for \(\mu\)-almost every \(x\) and every \(y \in (0,1)\),
     \begin{equation*}\label{eq:emp-closure}
       \set{\mu_0, \mu_1} \subseteq \set{e_n(x,y)}[n \in \NN, ']
     \end{equation*}
@@ -731,7 +706,7 @@
 
 \begin{frame}[fragile]
   \frametitle{Historical behavior}
-  \begin{proofs}[Idea]
+  \begin{proofs}[Proof sketch]
     Let \(\delta > 0\) and \(s_{\delta} \colon [0,1] \to \RR\) be any continuous function such that \(s_{\delta}(0) = 0\) and \(s_{\delta}(t) > 1 + \delta\) for \(t > \delta\).
     \[
       \begin{tikzpicture}[scale=2]
@@ -772,7 +747,7 @@
 \end{frame}
 
 \begin{frame}
-  \begin{proof}[Idea]
+  \begin{proof}[Proof sketch (cont.)]
     Therefore,
     \begin{equation*}
       S_{\delta} = \limsup_{n \to \infty}\, \DProc[n,spar,inv]{U_{\delta}} \subseteq X
@@ -799,21 +774,22 @@
     \begin{equation*}
       p = q + s \circ g - s,
     \end{equation*}
-    where \(q \in L^2(\mu)\) and \(\zeta = (q \circ g^i)_{i \geq 0}\) is a reverse martingale difference sequence.
+    where \(q,s \in L^2(\mu)\) and \(\zeta = (q \circ g^i)_{i \geq 0}\) is a reverse martingale difference sequence.
   \end{definition}
-  \begin{theorem}\label{thm:martingale-coboundary}
+  \begin{lemma}\label{thm:martingale-coboundary}
     Suppose \(p \in L^2(\mu)\) has a reverse martingale-coboundary decomposition for \(g\). Let \(\sigma = \norm{q}_2 \). If \(\sigma > 0\), then \(\xi = (p \circ g^i)_{i \ge 0}\) is such that \(\DProc[n,spar,pf]\mu \weakto \sigma W\).
-  \end{theorem}
+  \end{lemma}
 \end{frame}
 
 \begin{frame}
   \frametitle{A decomposition theorem}
-  \begin{theorem}\label{thm:decomposition-existence}
-    Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_j = g^{-n}(\mathcal{F})\) are such that
+  For non-invertible \(g\):
+  \begin{theorem}[{\textcite[Theorem 2.11]{vianaStochasticDynamicsDeterministic1997}}]\label{thm:decomposition-existence}
+    Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_n = g^{-n}(\mathcal{F})\) are such that
     \begin{equation*}
-      \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_j} \rVert_2 < \infty.
+      \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_n} \rVert_2 < \infty.
     \end{equation*}
-    Then a reverse martingale-coboundary decomposition exists. Moreover, this implies that
+    Then a reverse martingale-coboundary decomposition \(p = q + s \circ g - s\) exists. Moreover, this implies that
     \begin{equation*}
       \int p \;d\mu = \int q \;d\mu = 0
     \end{equation*}
@@ -827,7 +803,8 @@
 
 \begin{frame}[fragile]
   \frametitle{A decomposition theorem}
-  \begin{proof}[Idea]
+  \begin{proofs}[Proof sketch]
+    Let \(U \colon L^2(\mu) \to L^2(\mu)\) be the Koopman operator \(U(\varphi) = \varphi \circ g\). Let \(L \colon L^2(\mu) \to L^2(\mu)\) be its adjoint.
     \[
       \begin{tikzcd}
         {L^2(\mathcal{F}_i)} & {L^2(\mathcal{F}_{i+1})}
@@ -835,44 +812,54 @@
         \arrow["L", bend left, from=1-2, to=1-1].
       \end{tikzcd}
     \]
+    Define
+    \begin{equation*}
+      s = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i})\quad\text{ and }\quad
+      q = \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}}).
+    \end{equation*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{A decomposition theorem}
+  \begin{proof}[Proof sketch (cont.)]
+    \vspace{-1.5em}
+    \begin{align*}
+      q &= \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}}) \\
+        &=
+          \CE[\mu]{p,\mathcal{F}_0} + 
+          \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+          \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p, \mathcal{F}_{i + 1}})\\
+        &=
+          p +
+          \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+          \sum_{i = 0}^{\infty} UL(L^i(\CE[\mu]{p, \mathcal{F}_{i + 1}}))\\
+        &=
+          p +
+          \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{F}_i}) - 
+          \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p, \mathcal{F}_{i}}) \circ g\\
+        &=
+          p + s - s \circ g.
+    \end{align*}
+    Also, \(L^i(\CE[\mu]{p,\mathcal{F}_i} - \CE[\mu]{p, \mathcal{F}_{i + 1}}) \in L^2(\mathcal{F}_1)^{\bot}\). Therefore, \(\CE[\mu]{q,\mathcal{F}_1} = 0\).
   \end{proof}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Recent developments}
-  
+  \frametitle{A decomposition theorem}
+  For invertible \(g\):
+  \begin{theorem}[{\textcite[Theorem 4.13]{vianaStochasticDynamicsDeterministic1997}}]
+    Suppose \(p \in L^2(\mu)\), the inverse of \(g\) is measurable and there is a smaller \(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\mathcal{G}_n = g^{-n}(\mathcal{G})\) satisfies
+    \begin{equation*}
+      \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{G}_n} \rVert_2 < \infty\quad \text{ and }
+      \quad \sum_{n = 0}^{\infty} \norm{p - \CE[\mu]{p,\mathcal{G}_{-n}}}_2 < \infty.
+    \end{equation*}
+    Then a reverse martingale-coboundary decomposition \(p = q + s \circ g - s\) exists.
+  \end{theorem}
 \end{frame}
 
+
 \setbeamercolor{primary}{bg=tpink}
-
-% \begin{frame}{Special thanks}
-%   \begin{itemize}
-%   \item For my friends, many of whom are watching (thank you!)
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}{Special thanks}
-%   For the OpenAPS community. DIY automated insulin delivery!
-%   \begin{figure}
-%     \centering
-%     \includegraphics[height=3cm]{figures/Dana-Lewis_desk-with-OpenAPS-parts.jpg} 
-%     \includegraphics[height=3cm]{figures/AAPS_preparing_overview_01.png}
-%     \caption{Dana is type 1 diabetic and the creator of OpenAPS (left)}
-%   \end{figure}
-  
-%   \structure{Special \textbf{non-}thanks for\dots}
-%   \begin{itemize}
-%   \item big pharmaceutical companies for profiting over a chronic illness; I lost days with their faulty products and dehumanized costumer support.
-%   \item my insurance company for fighting coverage of my treatment in court.
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}{Special thanks}
-%   \begin{itemize}
-%   \item During my short journey as a master student, two fellow graduate students with disabilities passed away in the math departments I've belonged to (IMECC and ICMC). This is hard to accept.
-%   \item I feel I must repeat the obvious fact that not all disabilities are visible or physical, and the disabled person has no obligation of disclosing it to you. Be kind to people. Be patient with people. Let everyone have their own time to achieve their potential.
-%   \end{itemize}
-% \end{frame}
 
 {
   % \setbeamertemplate{background canvas}{%
@@ -897,6 +884,35 @@
 \begin{frame}[allowframebreaks]
   \frametitle{References}
   \printbibliography
+\end{frame}
+
+\begin{frame}{Special thanks}
+  \begin{itemize}
+  \item For my friends and family, many of whom are watching (thank you!)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Special thanks}
+  For the OpenAPS community. DIY automated insulin delivery!
+  \begin{figure}
+    \centering
+    \includegraphics[height=3cm]{figures/Dana-Lewis_desk-with-OpenAPS-parts.jpg} 
+    \includegraphics[height=3cm]{figures/AAPS_preparing_overview_01.png}
+    \caption{Dana is type 1 diabetic and the creator of OpenAPS (left)}
+  \end{figure}
+  
+  \structure{Special \textbf{non-}thanks for\dots}
+  \begin{itemize}
+  \item big pharmaceutical companies for profiting over a chronic illness; I lost days with their faulty products and dehumanized costumer support.
+  \item my insurance company for fighting coverage of my treatment in court.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Special thanks}
+  \begin{itemize}
+  \item During my short journey as a master student, two fellow graduate students with disabilities passed away in the math departments I've belonged to (IMECC and ICMC). This is hard to accept.
+  \item I feel I must repeat the obvious fact that not all disabilities are visible or physical, and the disabled person has no obligation of disclosing it to you. Be kind to people. Be patient with people. Let everyone have their own time to achieve their potential.
+  \end{itemize}
 \end{frame}
 
 \end{document}
