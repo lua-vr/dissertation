@@ -143,7 +143,7 @@
     \end{equation*}
   \end{definition}
   \begin{definition}[Poincaré metric]
-    The quantity \(d(x,y) = \log{\abs{\rho(0,x,y,1)}}\) defines a metric on \((0,1) \subseteq I\).
+    The quantity \(d_H(x,y) = \log{\abs{\rho(0,x,y,1)}}\) defines a metric on \((0,1) \subseteq I\).
   \end{definition}
 \end{frame}
 
@@ -169,6 +169,20 @@
   %   \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
   %   \end{enumerate}
   % \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Properties of the Schwarzian}
+  \begin{proposition}\label{prop:schwarzian}
+    The Schwarzian derivative has the following properties:
+    \begin{enumerate}
+    \item\label{prop:schwarzian:item:1}
+      If \(\mathcal{S}f \succ 0\) and \(\mathcal{S}g \succ 0\), then \(\mathcal{S}(f \circ g) \succ 0\), and similarly for \(\prec 0\). Moreover, if \(\mathcal{S}f \equiv 0\), then \(\SchD{f \circ g} = \SchD g \cdot (g')^2\), and if \(\SchD g \equiv 0\), then \(\SchD{f \circ g} = (\SchD f) \circ g\).
+    \item If \(\mathcal{S}f \prec 0\), then \(\mathcal{S}f^{-1} \succ 0\). 
+    \item\label{prop:schwarzian:item:3} \(\SchD f \prec 0\) if, and only if, \(\varphi(y) = 1/ \sqrt{\lvert f'(y) \rvert}\) is strictly convex.
+    \item \(\SchD f \equiv 0\) if, and only if, \(f\) is a fractional linear transformation.
+    \end{enumerate}
+  \end{proposition}
 \end{frame}
 
 \begin{frame}
@@ -228,7 +242,7 @@
     \includegraphics[width=0.35\textwidth]{../figures/intermingled}
   \end{figure} 
     \small
-    Figure: Basins for \(F \colon S^1 \times I \to S^1 \times I\), \[F(x) = (3x, q_{p(x)}(y)),\] where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for some \(0 < \varepsilon < 1\).
+    Figure: Basins for \(F \colon S^1 \times I \to S^1 \times I\), \[F(x,y) = (3x, q_{p(x)}(y)),\] where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for \(\varepsilon = 1/2\).
   \end{example}
 \end{frame}
 
@@ -275,7 +289,7 @@
 
     But it's impossible for \(r_n \to \infty\) because we have just shown
     \[0 < \varepsilon < f^n_{x_0}(y_0) < f^n_{x_0}(\xi_1(x_0)) < \delta_k < 1\]
-    for arbitrarily large \(n\). And it's impossible for \(r_n \to r\), as it would imply in the existence of a third, different invariant graph. Thus, \(x_0\) does not exist in the first place.
+    for arbitrarily large \(n\). And it's impossible for \(r_n \to r\), as it would imply in the existence of an invariant graph strictly between \(\xi_0\) and \(\xi_1\). Thus, \(x_0\) does not exist in the first place.
   \end{proof}
 \end{frame}
 % \begin{frame}
@@ -288,6 +302,17 @@
   
 %   It is sufficient to show that \(A = \{ x \in X : \xi_0(x) \neq \xi_1(x) \}\) has measure zero, since in this case we can define \(\sigma\) as the common value of the two functions. Suppose by contradiction that this set does not have measure zero. Since the \(f_x\) are bijective, \(A\) is an invariant set under \(g\), so the ergodicity of \(\mu\) implies that \(A\) has full measure.
 % \end{frame}
+\newcommand{\ex}{\tilde x}
+\newcommand{\eX}{\tilde X}
+\newcommand{\emu}{\tilde \mu}
+\newcommand{\enu}{\tilde \nu}
+\newcommand{\eg}{\tilde g}
+\newcommand{\eF}{\tilde F}
+\newcommand{\ef}{\tilde f}
+\newcommand{\eAu}{\tilde\mathcal{A}_1}
+\newcommand{\eAl}{\tilde\mathcal{A}_0}
+\newcommand{\eBu}{\tilde{\mathcal{B}}_1}
+\newcommand{\eBl}{\tilde{\mathcal{B}}_0}
 
 \begin{frame}
   \frametitle{Positive Schwarzian}
@@ -295,20 +320,33 @@
     If \(\SchD f_x \succ 0\) almost everywhere, then \(F\) has a unique asymptotic measure \(\nu\) for \(\mu \otimes \Leb\)-almost every point. Furthermore, for each \(i \in \{ 0,1 \}\), \(\Lyap(\mathcal{A}_i) > 0\) implies \(\nu(\mathcal{A}_i) = 0\).
   \end{theorem}
   Generalizing \textcite[Lemma 5.4]{bonifantSchwarzianDerivativesCylinder2008}, we do not assume both \(\Lyap(\mathcal{A}_i)\) are strictly positive.
-  \begin{proof}[Proof sketch]
-    Consider the inverse of the natural extension \(\tilde{F}^{-1}\). It satisfies \(\SchD f_{\tilde x}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, and therefore by the last theorem has a separating graph \(\sigma\).\\[1em]
-
-    Since \(\SchD f_x \succ 0\) implies the \(f_x\) are contractions in the Poincaré metric, the orbits for \(\tilde{F}\) will be attracted by the graph, and \(\tilde \nu = (\graph \sigma)_*\tilde \mu\) is asymptotic for \(\tilde{F}\). Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
-  \end{proof}
+  \begin{proofs}[Proof sketch]
+    Let \(\pi \colon (\eX, \eg, \emu) \to (X, g, \mu)\) be the invertible extension of \(g\), and 
+    \begin{equation*}
+      \eF(\ex, y) = (\eg(\ex), f_{\pi(\ex)}(y)).
+    \end{equation*}
+    
+    The inverse \(\tilde{F}^{-1}\) satisfies \(\SchD f_{\pi(\ex)}^{-1} \prec 0\) \(\tilde \mu\)-almost everywhere, so it has a separating graph \(\sigma\) by the last theorem.
+  \end{proofs}
 
 \end{frame}
 
+\begin{frame}
+  \begin{proof}[Proof sketch (cont.)]
+    For \(\ex\) in the basin of \(\emu\) and \(y \in (0,1)\), consider  \(r_n = d_H(f_{\pi(\ex)}^n(y), \sigma(\eg^n(\ex)))\). Since \(\SchD f_x \succ 0\), \(r_n > 0\) is decreasing, and therefore converges to \(r_n \to r \ge 0\).\\[1em]
+
+    If \(r > 0\), there would exist another invariant graph with finite distance from \(\sigma\), which is not possible. So \(r = 0\), and \(\tilde{F}^n(\ex,y)\) converges in distance to \(\graph \sigma\). Therefore \[e_n(\ex, y) \to \enu = (\graph \sigma)_*\tilde \mu.\]
+    Pushing it to the base via \(\pi\), we have the asymptotic measure \(\nu = \pi_*\tilde \nu\).
+  \end{proof}
+\end{frame}
 
 \begin{frame}
   \frametitle{Asymptotic measure}
   \begin{center}
-    \animategraphics[controls,autoplay,loop,width=6cm,poster=last,buttonsize=1em]{10}{scripts/out/asymptotic-}{0}{83}
+    \animategraphics[controls,autoplay,loop,width=6cm,poster=last,buttonsize=1em]{10}{scripts/asymptotic/asymptotic-}{0}{83}
   \end{center}
+  \small
+  Figure: Histogram for the orbit of a random initial point for \(F \colon S^1 \times I \to S^1 \times I\), \(F(x,y) = (2x, q_{p(x)}^{-1}(y))\), where \(q_a(y) = y + ay(1 - y)\) and \(p(x) = \varepsilon \cos(2 \pi x)\) for \(\varepsilon = 1/2\). The \(x\) coordinate is internally represented as a random sequence of bits to avoid floating-point artifacts.
 \end{frame}
 
 \section{Partially hyperbolic dynamics}
@@ -785,7 +823,7 @@
   \frametitle{A decomposition theorem}
   For non-invertible \(g\):
   \begin{theorem}[{\textcite[Theorem 2.11]{vianaStochasticDynamicsDeterministic1997}}]\label{thm:decomposition-existence}
-    Suppose \(p \in L^2(\mu)\) and \(\mathcal{F}_n = g^{-n}(\mathcal{F})\) are such that
+    Suppose \(p \in L^2(\mu)\) is \(\mathcal{F}\)-measurable and \(\mathcal{F}_n = g^{-n}(\mathcal{F})\) are such that
     \begin{equation*}
       \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{F}_n} \rVert_2 < \infty.
     \end{equation*}
@@ -849,7 +887,7 @@
   \frametitle{A decomposition theorem}
   For invertible \(g\):
   \begin{theorem}[{\textcite[Theorem 4.13]{vianaStochasticDynamicsDeterministic1997}}]
-    Suppose \(p \in L^2(\mu)\), the inverse of \(g\) is measurable and there is a smaller \(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\mathcal{G}_n = g^{-n}(\mathcal{G})\) satisfies
+    Suppose \(p \in L^2(\mu)\), \(p\), \(g\) and \(g^{-1}\) are \(\mathcal{F}\)-measurable and there is a smaller \(\sigma\)-algebra \(\mathcal{G} \subseteq \mathcal{F}\) for which \(\mathcal{G}_n = g^{-n}(\mathcal{G})\) satisfies
     \begin{equation*}
       \sum_{n = 0}^{\infty} \lVert \CE[\mu]{p, \mathcal{G}_n} \rVert_2 < \infty\quad \text{ and }
       \quad \sum_{n = 0}^{\infty} \norm{p - \CE[\mu]{p,\mathcal{G}_{-n}}}_2 < \infty.
@@ -858,6 +896,97 @@
   \end{theorem}
 \end{frame}
 
+\NewObject\Notation{\OP}{\mathbb{P}}[
+output=\RandomVariable,
+set arg sep={\where}
+]
+
+\begin{frame}[fragile]
+  \frametitle{A decomposition theorem}
+  \begin{proofs}[Proof sketch]
+    Let \(U,L \colon L^2(\mu) \to L^2(\mu)\) be adjoint to each other as before:
+    \[
+      \begin{tikzcd}
+        {L^2(\mathcal{G}_i)} & {L^2(\mathcal{G}_{i+1})}
+        \arrow["U", bend left, from=1-1, to=1-2]
+        \arrow["L", bend left, from=1-2, to=1-1].
+      \end{tikzcd}
+    \]
+    Introduce \(\OP[\mu]{\phi,\mathcal{A}} = \phi - \CE[\mu]{\phi,\mathcal{A}}\), the orthogonal projection onto \(L^2(\mathcal{A})^{\bot}\), and define
+    \begin{equation*}
+      s^+ = \sum_{i = 1}^{\infty} L^i(\CE[\mu]{p,\mathcal{G}_i})\quad\text{ and }\quad
+      q^+ = \sum_{i = 0}^{\infty} L^i(\CE[\mu]{p,\mathcal{G}_i} - \CE[\mu]{p, \mathcal{G}_{i + 1}}),
+    \end{equation*}
+    \begin{equation*}
+      s^- = - \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p,\mathcal{G}_{-i}})\quad\text{ and }\quad
+      q^- = - \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p, \mathcal{G}_{-i}} - \OP[\mu]{p,\mathcal{G}_{-i + 1}}).
+    \end{equation*}
+    Like before, the \(q^+\) and \(q^-\) are reverse martingale difference sequences because each term in the series is in \(L^2(\mathcal{G}_1)^{\bot}\).
+  \end{proofs}
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{A decomposition theorem}
+  \begin{proof}[Proof sketch (cont.)]
+    With the same calculation as before, we arrive at \(q^+ = p^+ + s^+ - s^+ \circ g\), and
+    \begin{align*}
+      q^- &=
+            \OP[\mu]{p,\mathcal{G}_0} + 
+            \sum_{i = 1}^{\infty} U^i(\OP[\mu]{p,\mathcal{G}_{-i + 1}}) - 
+            \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p, \mathcal{G}_{-i}})\\
+          &=
+            p^- +
+            \sum_{i = 0}^{\infty} U(U^i(\OP[\mu]{p,\mathcal{G}_{-i}})) - 
+            \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p, \mathcal{G}_{-i}})\\
+          &=
+            p^- +
+            \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p,\mathcal{G}_{-i}}) \circ g - 
+            \sum_{i = 0}^{\infty} U^i(\OP[\mu]{p, \mathcal{G}_{-i}})\\
+          &=
+            p^- + s^- - s^- \circ g.
+    \end{align*}
+    So \(p = q + s \circ g - s\) for \(q = q^+ + q^-\) and \(s = s^+ + s^-\).
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A decomposition theorem}
+  \begin{lemma}
+    Suppose that for a \(\mathcal{F}\)-measurable \(p \in L^{2}(\mu)\), there exists a summable sequence \(c_n > 0\) satisfying
+    \begin{equation*}
+      \int p \cdot (\psi \circ g^n) \;d\mu \leq \lVert \psi \rVert_2c_n
+    \end{equation*}
+    for all \(\psi \in L^2(\mathcal{F})\). Then
+    \begin{equation*}
+      \sum_{n = 0}^{\infty} \lVert \CE{p, g^{-n}(\mathcal{F})} \rVert_2 < \infty.
+    \end{equation*}
+  \end{lemma}
+  \begin{proofs}
+    Since \(\CE{\cdot, \mathcal{A}}\) is the orthogonal projection onto \(L^2(\mathcal{A})\),
+    \begin{align*}
+      \CE{p, g^{-n}(\mathcal{F})}
+      &= \sup \set[par = \Big]{\int p \cdot \xi \;d\mu \where \xi \in L^2(g^{-n}(\mathcal{F})),\;\norm{\xi}_2 = 1}\\
+      &= \sup \set[par = \Big]{\int p \cdot (\psi \circ g^n) \;d\mu \where \psi \in L^2(\mathcal{F}),\;\norm{\psi}_2 = 1}
+      \le \norm{\psi}_2 c_n.
+    \end{align*}\vspace*{-1em}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Historic behavior}
+  \begin{center}
+    \animategraphics[controls,autoplay,loop,width=11cm,poster=last,buttonsize=1em]{10}{scripts/raw-walk/walk-}{0}{341}
+  \end{center}
+  \small
+  Figure: Histogram and \(t\)-coordinate \(t(y) = \gamma(y)\) for the orbit of a random initial point for \(F \colon S^1 \times I \to S^1 \times I\), \(F(x,y) = (2x, f_x(y))\), where \((\gamma \circ f_x \circ \gamma ^{-1})(t) = t + \cos (2 \pi x)\). The \(x\)-coordinate is internally represented as a random sequence of bits to avoid floating-point artifacts.
+\end{frame}
+\begin{frame}
+  \frametitle{Historic behavior}
+  \begin{center}
+    \animategraphics[controls,autoplay,loop,width=12cm,poster=last,buttonsize=1em]{10}{scripts/ensemble/ensemble-}{0}{282}
+  \end{center}
+  \small
+  Figure: Histogram and scaled processes for an ensemble of random initial points for \(F(x,y) = (2x, f_x(y))\), where \((\gamma \circ f_x \circ \gamma ^{-1})(t) = t + \cos (2 \pi x)\). The \(x\)-coordinate is internally represented as a random sequence of bits to avoid floating-point artifacts.
+\end{frame}
 
 \setbeamercolor{primary}{bg=tpink}
 
